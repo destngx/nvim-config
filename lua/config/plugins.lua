@@ -437,13 +437,7 @@ return {
       require("plugins.colorizer")
     end,
   },
-  {
-    "zbirenbaum/copilot.lua",
-    disable = not EcoVim.plugins.copilot.enabled,
-    event = "InsertEnter",
-    config = true,
-  },
-  -- Git
+   -- Git
   {
     "lewis6991/gitsigns.nvim",
     event = "BufReadPre",
