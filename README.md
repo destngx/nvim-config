@@ -5,3 +5,5 @@
 - better-escape
 - pylsp
 - dockerls
+
+!!!require: fd, fzf, git > 2.30 and more.

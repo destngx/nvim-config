@@ -147,6 +147,10 @@ function check_system_deps() {
     print_missing_dep_msg "fzf"
     exit 1
   fi
+  if ! command -v fzf &>/dev/null; then
+    print_missing_dep_msg "fd"
+    exit 1
+  fi
 }
 
 function backup_old_config() {
@@ -219,7 +223,7 @@ function setup() {
 
 function finish () {
   touch /tmp/first-ecovim-run
-  msg "${BOLD}${GREEN}Thank you for installing my ${BLUE}Ecovim${NC}${BOLD}${GREEN} config! Please support me by giving a star :)${NC}" 1
+  msg "${BOLD}${GREEN}Thank you for installing my ${BLUE}nvim config${NC}${BOLD}${GREEN} config! Please support me by giving a star :)${NC}" 1
   echo -e "${BOLD}${GREEN}Do not forget to use a font with glyphs (icons) support [https://github.com/ryanoasis/nerd-fonts].\nI recommend Fira Code for Ecovim setup.${NC}"
 }
 
@@ -227,14 +231,14 @@ function finish () {
 function print_logo() {
   echo -e "${BLUE}"
   cat <<'EOF' 
-       ████████                           ██            
-      ░██░░░░░                           ░░             
-      ░██        █████   ██████  ██    ██ ██ ██████████ 
-      ░███████  ██░░░██ ██░░░░██░██   ░██░██░░██░░██░░██
-      ░██░░░░  ░██  ░░ ░██   ░██░░██ ░██ ░██ ░██ ░██ ░██
-      ░██      ░██   ██░██   ░██ ░░████  ░██ ░██ ░██ ░██
-      ░████████░░█████ ░░██████   ░░██   ░██ ███ ░██ ░██
-      ░░░░░░░░  ░░░░░   ░░░░░░     ░░    ░░ ░░░  ░░  ░░ 
+  ████████▄     ▄████████    ▄████████     ███     ███▄▄▄▄      ▄██████▄  ▀████    ▐████▀ 
+  ███   ▀███   ███    ███   ███    ███ ▀█████████▄ ███▀▀▀██▄   ███    ███   ███▌   ████▀ 
+  ███    ███   ███    █▀    ███    █▀     ▀███▀▀██ ███   ███   ███    █▀     ███  ▐███    
+  ███    ███  ▄███▄▄▄       ███            ███   ▀ ███   ███  ▄███           ▀███▄███▀    
+  ███    ███ ▀▀███▀▀▀     ▀███████████     ███     ███   ███ ▀▀███ ████▄     ████▀██▄     
+  ███    ███   ███    █▄           ███     ███     ███   ███   ███    ███   ▐███  ▀███    
+  ███   ▄███   ███    ███    ▄█    ███     ███     ███   ███   ███    ███  ▄███     ███▄  
+  ████████▀    ██████████  ▄████████▀     ▄████▀    ▀█   █▀    ████████▀  ████       ███▄ 
 EOF
   echo -e "${NC}"
 }

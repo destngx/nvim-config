@@ -65,6 +65,7 @@ require('telescope').setup {
   },
   extensions = {
     fzf = {
+      fuzzy = true,
       override_generic_sorter = false,
       override_file_sorter = true,
       case_mode = "smart_case",
@@ -117,7 +118,7 @@ M.edit_neovim = function()
     require('telescope.themes').get_dropdown({
       color_devicons   = true,
       cwd              = "~/.config/nvim",
-      previewer        = false,
+      previewer        = true,
       prompt_title     = "Ecovim Dotfiles",
       sorting_strategy = "ascending",
       winblend         = 4,

@@ -17,7 +17,7 @@ EcoVim = {
 	},
 	plugins = {
 		completion = {
-			select_first_on_enter = false,
+			select_first_on_enter = true,
 		},
 		rooter = {
 			-- Removing package.json from list in Monorepo Frontend Project can be helpful
@@ -31,7 +31,7 @@ EcoVim = {
 	},
 	icons = icons,
 	statusline = {
-		path_enabled = false,
+		path_enabled = true,
 		path = "relative", -- absolute/relative
 	},
 	lsp = {
