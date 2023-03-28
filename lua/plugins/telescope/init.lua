@@ -4,7 +4,6 @@ local builtin    = require('telescope.builtin')
 local icons      = EcoVim.icons;
 
 require('telescope').load_extension('fzf')
-require('telescope').load_extension('repo')
 require("telescope").load_extension("git_worktree")
 
 local git_icons = {
@@ -69,10 +68,20 @@ require('telescope').setup {
       override_generic_sorter = false,
       override_file_sorter = true,
       case_mode = "smart_case",
+    },
+    repo = {
+      cached_list = {
+      },
+      list = {
+         search_dirs = {
+          "~/projects",
+        },
+      },
     }
   }
 }
 
+require('telescope').load_extension('repo')
 -- Implement delta as previewer for diffs
 
 local M = {}
