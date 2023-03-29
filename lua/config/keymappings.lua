@@ -108,6 +108,9 @@ keymap("v", "X", '"_X', silent)
 -- Don't yank on visual paste
 keymap("v", "p", '"_dP', silent)
 
+-- Copy entire buffer.
+keymap("n", "<leader>y", "<cmd>%yank<cr>", { desc = "yank entire buffer" })
+
 -- Avoid issues because of remapping <c-a> and <c-x> below
 vim.cmd [[
   nnoremap <Plug>SpeedDatingFallbackUp <c-a>
