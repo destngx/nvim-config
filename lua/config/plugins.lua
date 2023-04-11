@@ -49,6 +49,16 @@ return {
   },
 
   -- Navigating (Telescope/Tree/Refactor)
+  {
+	"Pocco81/auto-save.nvim",
+	config = function()
+		 require("auto-save").setup {
+      enabled = true,
+			-- your config goes here
+			-- or just leave it empty :)
+		 }
+	end,
+  },
   -- better escape
   {
     "max397574/better-escape.nvim",
