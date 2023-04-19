@@ -183,16 +183,18 @@ return {
     end,
   },
   { "nvim-lua/popup.nvim" },
-  -- {
-  --   "ChristianChiarulli/nvim-gps",
-  --   branch = "text_hl",
-  --   config = function()
-  --     require("plugins.gps")
-  --   end,
-  -- },
   {
+  "utilyre/barbecue.nvim",
+  lazy = false,
+  name = "barbecue",
+  version = "*",
+  dependencies = {
     "SmiteshP/nvim-navic",
-    dependencies = "neovim/nvim-lspconfig",
+    "nvim-tree/nvim-web-devicons", -- optional dependency
+  },
+  opts = {
+    -- configurations go here
+  },
   },
   { "jose-elias-alvarez/typescript.nvim" },
   {
