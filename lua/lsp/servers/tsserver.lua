@@ -37,6 +37,7 @@ capabilities.textDocument.foldingRange = {
 	dynamicRegistration = false,
 	lineFoldingOnly = true,
 }
+local navic = require("nvim-navic")
 
 local on_attach = function(client, bufnr)
 	-- Modifying a server's capabilities is not recommended and is no longer
@@ -45,6 +46,9 @@ local on_attach = function(client, bufnr)
 
 	-- client.server_capabilities.documentFormattingProvider = false
 	-- client.server_capabilities.documentRangeFormattingProvider = false
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
+  end
 
 	local function buf_set_option(...)
 		vim.api.nvim_buf_set_option(bufnr, ...)

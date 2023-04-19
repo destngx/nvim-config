@@ -200,7 +200,7 @@ require("nvim-tree").setup({
 			-- if true, it will only use your list to set the mappings
 			custom_only = true,
 			-- list of mappings to set on the tree manually
-			list = keymappings,
+			-- list = keymappings,
 		},
 		number = false,
 		relativenumber = false,
@@ -214,10 +214,10 @@ vim.api.nvim_set_keymap(
 	{ noremap = true, silent = true }
 )
 
--- nvim_tree_events._dispatch_on_tree_open(function()
--- 	bufferline_api.set_offset(TREE_WIDTH + 1, utils.add_whitespaces(13) .. "File Explorer")
--- end)
---
--- nvim_tree_events._dispatch_on_tree_close(function()
--- 	bufferline_api.set_offset(0)
--- end)
+nvim_tree_events._dispatch_on_tree_open(function()
+	bufferline_api.set_offset(TREE_WIDTH + 1, utils.add_whitespaces(13) .. "File Explorer")
+end)
+
+nvim_tree_events._dispatch_on_tree_close(function()
+	bufferline_api.set_offset(0)
+end)

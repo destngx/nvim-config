@@ -54,9 +54,12 @@ local handlers = {
     { virtual_text = EcoVim.lsp.virtual_text }
   ),
 }
-
+local navic = require("nvim-navic")
 local function on_attach(client, bufnr)
   -- set up buffer keymaps, etc.
+  if client.server_capabilities.documentSymbolProvider then
+        navic.attach(client, bufnr)
+  end
 end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()

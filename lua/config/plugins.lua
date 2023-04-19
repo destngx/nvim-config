@@ -183,6 +183,17 @@ return {
     end,
   },
   { "nvim-lua/popup.nvim" },
+  -- {
+  --   "ChristianChiarulli/nvim-gps",
+  --   branch = "text_hl",
+  --   config = function()
+  --     require("plugins.gps")
+  --   end,
+  -- },
+  {
+    "SmiteshP/nvim-navic",
+    dependencies = "neovim/nvim-lspconfig",
+  },
   { "jose-elias-alvarez/typescript.nvim" },
   {
     "axelvc/template-string.nvim",
