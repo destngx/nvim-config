@@ -10,7 +10,13 @@ return {
       require("config.colorscheme")
     end,
   },
-
+  {
+		"SmiteshP/nvim-navic",
+		config = function()
+			require("plugins.navic")
+		end,
+		dependencies = "neovim/nvim-lspconfig",
+	},
   { "nvim-lua/plenary.nvim" },
   {
     "nvim-tree/nvim-web-devicons",
@@ -177,13 +183,6 @@ return {
     end,
   },
   { "nvim-lua/popup.nvim" },
-  {
-    "ChristianChiarulli/nvim-gps",
-    branch = "text_hl",
-    config = function()
-      require("plugins.gps")
-    end,
-  },
   { "jose-elias-alvarez/typescript.nvim" },
   {
     "axelvc/template-string.nvim",
