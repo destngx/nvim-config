@@ -19,15 +19,19 @@ keymap("n", "<leader>q", "<cmd>x<cr>", { silent = true, desc = "quit current win
 -- Quit all opened buffers
 keymap("n", "<leader>Q", "<cmd>qa!<cr>", { silent = true, desc = "quit nvim" })
 
+-- Paste non-linewise text above or below current line, see https://stackoverflow.com/a/1346777/6064933
+keymap("n", "<leader>P", "m`o<ESC>p``", { desc = "paste below current line" })
+-- keymap("n", "<leader>P", "m`O<ESC>p``", { desc = "paste above current line" })
+
 -- Better window movement
 keymap("n", "<C-h>", "<C-w>h", silent)
 keymap("n", "<C-j>", "<C-w>j", silent)
 keymap("n", "<C-k>", "<C-w>k", silent)
 keymap("n", "<C-l>", "<C-w>l", silent)
 
--- H to move to the first non-blank character of the line
-keymap("n", "H", "^", silent)
-keymap("n", "L", "g_", silent)
+---- Go to start or end of line easier
+keymap({ "n", "x" }, "H", "^")
+keymap({ "n", "x" }, "L", "g_")
 -- Go to the beginning and end of current line in insert mode quickly
 keymap("i", "<C-A>", "<HOME>")
 keymap("i", "<C-E>", "<END>")
@@ -45,8 +49,14 @@ keymap("n", "J", "", {
 })
 
 -- Move selected line / block of text in visual mode
-keymap("x", "K", ":move '<-2<CR>gv-gv", silent)
 keymap("x", "J", ":move '>+1<CR>gv-gv", silent)
+keymap("x", "K", ":move '<-2<CR>gv-gv", silent)
+
+-- Always use very magic mode for searching
+keymap("n", "/", [[/\v]])
+
+-- insert semicolon in the end
+keymap("i", "<A-;>", "<Esc>miA;<Esc>`ii")
 
 -- Keep visual mode indenting
 keymap("v", "<", "<gv", silent)
