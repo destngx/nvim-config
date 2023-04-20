@@ -32,7 +32,7 @@ EcoVim = {
       tabnine = { enable = true },
     },
     experimental_noice = {
-			enabled = false,
+			enabled = true,
     },
   },
   icons = icons,
