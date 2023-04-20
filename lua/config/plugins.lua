@@ -11,12 +11,20 @@ return {
     end,
   },
   {
-		"SmiteshP/nvim-navic",
-		config = function()
-			require("plugins.navic")
-		end,
-		dependencies = "neovim/nvim-lspconfig",
-	},
+    "folke/noice.nvim",
+    cond = EcoVim.plugins.experimental_noice.enabled,
+    lazy = false,
+    config = function()
+      require("plugins.noice")
+    end,
+  },
+  {
+    "SmiteshP/nvim-navic",
+    config = function()
+      require("plugins.navic")
+    end,
+    dependencies = "neovim/nvim-lspconfig",
+  },
   { "nvim-lua/plenary.nvim" },
   {
     "nvim-tree/nvim-web-devicons",
@@ -56,15 +64,15 @@ return {
 
   -- Navigating (Telescope/Tree/Refactor)
   {
-	"Pocco81/auto-save.nvim",
-  lazy = false,
-	config = function()
-		 require("auto-save").setup {
-      enabled = true,
-			-- your config goes here
-			-- or just leave it empty :)
-		 }
-	end,
+    "Pocco81/auto-save.nvim",
+    lazy = false,
+    config = function()
+      require("auto-save").setup {
+        enabled = true,
+        -- your config goes here
+        -- or just leave it empty :)
+      }
+    end,
   },
   -- better escape
   {
@@ -90,6 +98,13 @@ return {
   },
   {
     "nvim-tree/nvim-tree.lua",
+    cmd = {
+      "NvimTreeOpen",
+      "NvimTreeClose",
+      "NvimTreeToggle",
+      "NvimTreeFindFile",
+      "NvimTreeFindFileToggle",
+    },
     keys = {
       { "<C-e>", "<cmd>lua require('nvim-tree.api').tree.toggle()<CR>", desc = "NvimTree" },
     },
@@ -155,8 +170,12 @@ return {
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-calc",
       "saadparwaiz1/cmp_luasnip",
-      { "L3MON4D3/LuaSnip",    dependencies = "rafamadriz/friendly-snippets" },
-      { "tzachar/cmp-tabnine", build = "./install.sh" },
+      { "L3MON4D3/LuaSnip", dependencies = "rafamadriz/friendly-snippets" },
+      {
+        cond = EcoVim.plugins.ai.tabnine.enabled,
+        "tzachar/cmp-tabnine",
+        build = "./install.sh"
+      },
       {
         "David-Kunz/cmp-npm",
         config = function()
@@ -217,23 +236,27 @@ return {
     end,
   },
   -- Python indent (follows the PEP8 style)
-  { "Vimjas/vim-python-pep8-indent",     ft = { "python" } },
+  { "Vimjas/vim-python-pep8-indent",   ft = { "python" } },
   -- Python-related text object
-  { "jeetsukumaran/vim-pythonsense",     ft = { "python" } },
-  { "machakann/vim-swap",                event = "VimEnter" },
+  { "jeetsukumaran/vim-pythonsense",   ft = { "python" } },
+  { "machakann/vim-swap",              event = "VimEnter" },
   -- Add indent object for vim (useful for languages like Python)
   { "michaeljsmith/vim-indent-object",   event = "VimEnter" },
   -- General
-  { "AndrewRadev/switch.vim",            lazy = false },
+  { "AndrewRadev/switch.vim",          lazy = false },
   -- { "AndrewRadev/splitjoin.vim", lazy = false },
   {
     "Wansmer/treesj",
     lazy = true,
     cmd = { "TSJToggle", "TSJSplit", "TSJJoin" },
     keys = {
-      { "gJ", "<cmd>TSJToggle<CR>", desc = "Trigger Toggle Split/Join" },
+      { "gJ", "<cmd>TSJToggle<CR>", desc = "Toggle Split/Join" },
     },
-    config = true,
+    config = function()
+      require("treesj").setup({
+        use_default_keymaps = false,
+      })
+    end,
   },
   {
     "numToStr/Comment.nvim",
@@ -291,12 +314,12 @@ return {
     config = function()
       require("plugins.zen")
     end,
-    disable = not EcoVim.plugins.zen.enabled,
+    cond = EcoVim.plugins.zen.enabled,
   },
   {
     "folke/twilight.nvim",
     config = true,
-    disable = not EcoVim.plugins.zen.enabled,
+    cond = EcoVim.plugins.zen.enabled,
   },
   {
     "ggandor/lightspeed.nvim",
@@ -320,12 +343,13 @@ return {
     end,
     event = "VeryLazy",
   },
-  {"echasnovski/mini.bufremove",
-		version = "*",
-		config = function()
-			require("mini.bufremove").setup({
-				silent = true,
-			})
+  {
+    "romgrk/barbar.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    event = "BufAdd",
+    version = "^1.0.0",
+    config = function()
+      require("plugins.barbar")
     end,
   },
   {
@@ -378,13 +402,6 @@ return {
       vim.g.mkdp_filetypes = { "markdown" }
     end,
     ft = { "markdown" },
-  },
-  {
-    "declancm/cinnamon.nvim",
-    disable = true,
-    config = function()
-      require("plugins.cinnamon")
-    end,
   },
   {
     "airblade/vim-rooter",
@@ -460,7 +477,7 @@ return {
       require("plugins.colorizer")
     end,
   },
-   -- Git
+  -- Git
   {
     "lewis6991/gitsigns.nvim",
     event = "BufReadPre",
