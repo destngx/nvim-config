@@ -1,4 +1,16 @@
 return {
+  -- AI
+  {
+    "jcdickinson/codeium.nvim",
+    cond = EcoVim.plugins.ai.codeium.enabled,
+    event = "InsertEnter",
+    cmd = "Codeium",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "hrsh7th/nvim-cmp",
+    },
+    config = true,
+  },
   -- Themes
   {
     "folke/tokyonight.nvim",
@@ -416,7 +428,10 @@ return {
       require("plugins.session-manager")
     end,
   },
-  { "kylechui/nvim-surround",         lazy = false, config = true },
+  { "kylechui/nvim-surround",
+    lazy = false,
+    config = true
+  },
   {
     "sunjon/shade.nvim",
     config = function()

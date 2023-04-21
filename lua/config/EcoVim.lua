@@ -29,10 +29,11 @@ EcoVim = {
       enabled = true, -- sync after change
     },
     ai = {
+      codeium = { enable = true },
       tabnine = { enable = true },
     },
     experimental_noice = {
-			enabled = true,
+      enabled = true,
     },
   },
   icons = icons,
