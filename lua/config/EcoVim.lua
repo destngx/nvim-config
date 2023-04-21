@@ -30,7 +30,7 @@ EcoVim = {
     },
     ai = {
       codeium = { enable = true },
-      tabnine = { enable = true },
+      tabnine = { enable = false },
     },
     experimental_noice = {
       enabled = true,
