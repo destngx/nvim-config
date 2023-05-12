@@ -24,6 +24,7 @@ EcoVim = {
       -- By that your live_grep will work related to whole project, not specific package
       patterns = { ".git", "package.json", "_darcs", ".bzr", ".svn", "Makefile" }, -- Default
     },
+    -- <leader>z
     zen = {
       kitty_enabled = true,
       enabled = true, -- sync after change
@@ -35,8 +36,14 @@ EcoVim = {
     experimental_noice = {
       enabled = true,
     },
+    -- Enables moving by subwords and skips significant punctuation with w, e, b motions
+    jump_by_subwords = {
+      enabled = false,
+    },
   },
+  -- Please keep it
   icons = icons,
+  -- Status line configuration
   statusline = {
     path_enabled = true,
     path = "relative", -- absolute/relative
