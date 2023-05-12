@@ -271,7 +271,34 @@ return {
   { "jeetsukumaran/vim-pythonsense",   ft = { "python" } },
   { "machakann/vim-swap",              event = "VimEnter" },
   -- Add indent object for vim (useful for languages like Python)
-  { "michaeljsmith/vim-indent-object",   event = "VimEnter" },
+  { "michaeljsmith/vim-indent-object", event = "VimEnter" },
+  {
+		"dmmulroy/tsc.nvim",
+		cmd = { "TSC" },
+		config = true,
+	},
+  {
+		"dnlhc/glance.nvim",
+		config = true,
+		opts = {
+			hooks = {
+				before_open = function(results, open, jump, method)
+					if #results == 1 then
+						jump(results[1]) -- argument is optional
+					else
+						open(results) -- argument is optional
+					end
+				end,
+			},
+		},
+		cmd = { "Glance" },
+		keys = {
+			{ "gd", "<cmd>Glance definitions<CR>", desc = "LSP Definition" },
+			{ "gr", "<cmd>Glance references<CR>", desc = "LSP References" },
+			{ "gm", "<cmd>Glance implementations<CR>", desc = "LSP Implementations" },
+			{ "gy", "<cmd>Glance type_definitions<CR>", desc = "LSP Type Definitions" },
+		},
+	},
   -- General
   { "AndrewRadev/switch.vim",          lazy = false },
   -- { "AndrewRadev/splitjoin.vim", lazy = false },

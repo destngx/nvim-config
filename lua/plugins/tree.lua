@@ -1,6 +1,6 @@
 local utils = require("utils")
-local nvim_tree_events = require("nvim-tree.events")
 local bufferline_api = require("bufferline.api")
+local api = require("nvim-tree.api")
 local Event = api.events.Event
 
 local TREE_WIDTH = 40
@@ -216,10 +216,18 @@ vim.api.nvim_set_keymap(
 	{ noremap = true, silent = true }
 )
 
-nvim_tree_events._dispatch_on_tree_open(function()
-	bufferline_api.set_offset(TREE_WIDTH + 1, utils.add_whitespaces(13) .. "File Explorer")
+api.events.subscribe(Event.TreeOpen, function()
+	bufferline_api.set_offset(
+		current_size or TREE_WIDTH + 1,
+		utils.add_whitespaces(((current_size or TREE_WIDTH + 1) - 13) / 2) .. "File Explorer"
+	)
 end)
 
-nvim_tree_events._dispatch_on_tree_close(function()
+api.events.subscribe(Event.Resize, function(size)
+	bufferline_api.set_offset(size + 1, utils.add_whitespaces((size + 1 - 13) / 2) .. "File Explorer")
+	current_size = size + 1
+end)
+
+api.events.subscribe(Event.TreeClose, function(data)
 	bufferline_api.set_offset(0)
 end)
