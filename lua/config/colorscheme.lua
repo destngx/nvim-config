@@ -36,7 +36,7 @@ tokyonight.setup({
   --- You can override specific highlights to use other groups or a hex color
   --- function will be called with a Highlights and ColorScheme table
   -- on_highlights = function(highlights, colors) end,
-  on_highlights = function(hl, c)
+  on_highlights = function(hl, _color)
     local prompt = "#FFA630"
     local text = "#488dff"
     local none = "NONE"
@@ -75,6 +75,7 @@ vim.api.nvim_set_hl(0, "EcovimHeader", { bold = true, fg = "#488DFF" })
 vim.api.nvim_set_hl(0, "EcovimHeaderInfo", { bold = true, fg = "#FFA630" })
 vim.api.nvim_set_hl(0, "EcovimFooter", { bold = true, fg = "#FFA630" })
 
+vim.api.nvim_set_hl(0, "EcovimNvimTreeTitle", { bold = true, fg = "#FFA630", bg = "#16161e" })
 -- Tokyonight Colorscheme Specific Config
 if EcoVim.colorscheme == "tokyonight" then
   -- Lines
@@ -89,6 +90,7 @@ if EcoVim.colorscheme == "tokyonight" then
   vim.api.nvim_set_hl(0, "VertSplit", { bg = "#16161e", fg = "#16161e" })
   vim.api.nvim_set_hl(0, "BqfPreviewBorder", { link = "FloatBorder" })
   vim.api.nvim_set_hl(0, "BufferInactiveIndex", { link = "BufferInactive" })
+  vim.api.nvim_set_hl(0, "LspInfoBorder", { link = "FloatBorder" })
 
   -- Tree
   vim.api.nvim_set_hl(0, "NvimTreeFolderIcon", { bg = "None", fg = "None" })
@@ -103,6 +105,12 @@ if EcoVim.colorscheme == "tokyonight" then
   vim.api.nvim_set_hl(0, "Boolean", { fg = "#F7768E" })
   vim.api.nvim_set_hl(0, "BufferOffset", { link = "EcovimSecondary" })
 
+-- Bufferline
+  vim.api.nvim_set_hl(0, "BufferCurrentSign", { fg = c.cyan0 })
+  vim.api.nvim_set_hl(0, "BufferInactiveSign", { bg = "#202331", fg = c.dark3 })
+  vim.api.nvim_set_hl(0, "BufferInactiveMod", { bg = "NONE", fg = c.yellow })
+
+  vim.api.nvim_set_hl(0, "BufferLineOffsetSeparator", { bg = "#16161e", fg = "#16161e" })
   -- Completion Menu Colors
   local highlights = {
     CmpItemAbbr = { fg = c.dark3, bg = "NONE" },

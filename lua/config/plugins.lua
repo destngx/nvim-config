@@ -401,12 +401,12 @@ return {
     event = "VeryLazy",
   },
   {
-    "romgrk/barbar.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    event = "BufAdd",
-    version = "^1.0.0",
-    config = function()
-      require("plugins.barbar")
+    "echasnovski/mini.bufremove",
+		version = "*",
+		config = function()
+			require("mini.bufremove").setup({
+				silent = true,
+			})
     end,
   },
   {
@@ -634,6 +634,18 @@ return {
     dependencies = {
       "theHamsta/nvim-dap-virtual-text",
       "rcarriga/nvim-dap-ui",
+			"mxsdev/nvim-dap-vscode-js",
     },
   },
+  {
+		"LiadOz/nvim-dap-repl-highlights",
+		config = true,
+		dependencies = {
+			"mfussenegger/nvim-dap",
+		},
+		build = {
+			":TSInstall dap_repl",
+			":TSUpdate dap_repl",
+		},
+	},
 }

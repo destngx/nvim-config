@@ -118,9 +118,9 @@ local normal_mode_mappings = {
   a = {
     name = 'Actions',
     c = { 'comment box' },
-    n = { '<cmd>set nonumber!<CR>',                      'line numbers' },
-    r = { '<cmd>set norelativenumber!<CR>',              'relative number' },
-    t = { '<cmd>ToggleTerm direction=float<CR>',         'terminal float' },
+    n = { '<cmd>set nonumber!<CR>',                             'line numbers' },
+    r = { '<cmd>set norelativenumber!<CR>',                     'relative number' },
+    t = { '<cmd>ToggleTerm direction=float<CR>',                'terminal float' },
   },
 
   b = {
@@ -133,6 +133,13 @@ local normal_mode_mappings = {
     r = { '<cmd>BufferCloseBuffersRight<CR>',            'Close Right' },
     n = { '<cmd>BufferMoveNext<CR>',                     'Move next' },
     p = { '<cmd>BufferPick<CR>',                         'Pick Buffer' },
+    P = { '<cmd>BufferLineTogglePin<CR>',                       'Pin/Unpin Buffer' },
+    s = {
+      name = 'Sort',
+      d = { '<cmd>BufferLineSortByDirectory<CR>',               'Sort by directory' },
+      e = { '<cmd>BufferLineSortByExtension<CR>',               'Sort by extension' },
+      r = { '<cmd>BufferLineSortByRelativeDirectory<CR>',       'Sort by relative dir' },
+    },
   },
 
   c = {

@@ -143,6 +143,12 @@ dap.adapters.node2 = {
   args = { vim.fn.stdpath("data") .. "/mason/packages/node-debug2-adapter/out/src/nodeDebug.js" },
 }
 
+-- VSCODE JS
+require("dap-vscode-js").setup({
+  debugger_path = vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter",
+  debugger_cmd = { "js-debug-adapter" },
+  adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" },
+})
 -- Chrome
 dap.adapters.chrome = {
   type = "executable",
@@ -207,7 +213,7 @@ dap.configurations.typescriptreact = {
     webRoot = "${workspaceFolder}",
   },
   {
-    name = "React Native (8081)",
+    name = "React Native (8081) (Node2)",
     type = "node2",
     request = "attach",
     program = "${file}",
@@ -216,5 +222,17 @@ dap.configurations.typescriptreact = {
     protocol = "inspector",
     console = "integratedTerminal",
     port = 8081,
-  }
+  },
+  {
+    name = "Attach React Native (8081)",
+    type = "pwa-node",
+    request = "attach",
+    processId = require('dap.utils').pick_process,
+    cwd = vim.fn.getcwd(),
+    rootPath = '${workspaceFolder}',
+    skipFiles = { "<node_internals>/**", "node_modules/**" },
+    sourceMaps = true,
+    protocol = "inspector",
+    console = "integratedTerminal",
+  },
 }
