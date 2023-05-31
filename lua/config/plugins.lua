@@ -63,6 +63,11 @@ return {
     end,
   },
   {
+    'yamatsum/nvim-nonicons',
+    lazy = false,
+    requires = { 'nvim-tree/nvim-web-devicons' }
+  },
+  {
     "goolord/alpha-nvim",
     lazy = false,
     config = function()
@@ -273,34 +278,34 @@ return {
   -- Add indent object for vim (useful for languages like Python)
   { "michaeljsmith/vim-indent-object", event = "VimEnter" },
   {
-		"dmmulroy/tsc.nvim",
-		cmd = { "TSC" },
-		config = true,
-	},
+    "dmmulroy/tsc.nvim",
+    cmd = { "TSC" },
+    config = true,
+  },
   {
-		"dnlhc/glance.nvim",
-		config = true,
-		opts = {
-			hooks = {
-				before_open = function(results, open, jump, method)
-					if #results == 1 then
-						jump(results[1]) -- argument is optional
-					else
-						open(results) -- argument is optional
-					end
-				end,
-			},
-		},
-		cmd = { "Glance" },
-		keys = {
-			{ "gd", "<cmd>Glance definitions<CR>", desc = "LSP Definition" },
-			{ "gr", "<cmd>Glance references<CR>", desc = "LSP References" },
-			{ "gm", "<cmd>Glance implementations<CR>", desc = "LSP Implementations" },
-			{ "gy", "<cmd>Glance type_definitions<CR>", desc = "LSP Type Definitions" },
-		},
-	},
+    "dnlhc/glance.nvim",
+    config = true,
+    opts = {
+      hooks = {
+        before_open = function(results, open, jump, method)
+          if #results == 1 then
+            jump(results[1]) -- argument is optional
+          else
+            open(results)    -- argument is optional
+          end
+        end,
+      },
+    },
+    cmd = { "Glance" },
+    keys = {
+      { "gd", "<cmd>Glance definitions<CR>",      desc = "LSP Definition" },
+      { "gr", "<cmd>Glance references<CR>",       desc = "LSP References" },
+      { "gm", "<cmd>Glance implementations<CR>",  desc = "LSP Implementations" },
+      { "gy", "<cmd>Glance type_definitions<CR>", desc = "LSP Type Definitions" },
+    },
+  },
   -- General
-  { "AndrewRadev/switch.vim",          lazy = false },
+  { "AndrewRadev/switch.vim",      lazy = false },
   -- { "AndrewRadev/splitjoin.vim", lazy = false },
   {
     "Wansmer/treesj",
@@ -332,9 +337,9 @@ return {
       require("plugins.toggleterm")
     end,
   },
-  { "tpope/vim-repeat",            lazy = false },
-  { "tpope/vim-speeddating",       lazy = false },
-  { "dhruvasagar/vim-table-mode",  ft = { "markdown" } },
+  { "tpope/vim-repeat",           lazy = false },
+  { "tpope/vim-speeddating",      lazy = false },
+  { "dhruvasagar/vim-table-mode", ft = { "markdown" } },
   {
     "mg979/vim-visual-multi",
     keys = {
@@ -402,32 +407,30 @@ return {
   },
   {
     "echasnovski/mini.bufremove",
-		version = "*",
-		config = function()
-			require("mini.bufremove").setup({
-				silent = true,
-			})
+    version = "*",
+    config = function()
+      require("mini.bufremove").setup({
+        silent = true,
+      })
     end,
   },
   {
-		"akinsho/bufferline.nvim",
-		event = "VeryLazy",
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-			"echasnovski/mini.bufremove",
-		},
-		version = "*",
-		config = function()
-			require("plugins.bufferline")
-		end,
-	},
+    "akinsho/bufferline.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      'yamatsum/nvim-nonicons',
+      "echasnovski/mini.bufremove",
+    },
+    version = "*",
+    config = function()
+      require("plugins.bufferline")
+    end,
+  },
   { "antoinemadec/FixCursorHold.nvim" }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
   {
     "rcarriga/nvim-notify",
     config = function()
-      require("notify").setup({
-        background_colour = "#000000",
-      })
+      require("plugins.nvim-notify")
     end,
     init = function()
       local banned_messages = {
@@ -473,7 +476,8 @@ return {
       require("plugins.session-manager")
     end,
   },
-  { "kylechui/nvim-surround",
+  {
+    "kylechui/nvim-surround",
     lazy = false,
     config = true
   },
@@ -634,18 +638,20 @@ return {
     dependencies = {
       "theHamsta/nvim-dap-virtual-text",
       "rcarriga/nvim-dap-ui",
-			"mxsdev/nvim-dap-vscode-js",
+      "mxsdev/nvim-dap-vscode-js",
     },
   },
   {
-		"LiadOz/nvim-dap-repl-highlights",
-		config = true,
-		dependencies = {
-			"mfussenegger/nvim-dap",
-		},
-		build = {
-			":TSInstall dap_repl",
-			":TSUpdate dap_repl",
-		},
-	},
+    "LiadOz/nvim-dap-repl-highlights",
+    config = true,
+    dependencies = {
+      "mfussenegger/nvim-dap",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    build = function()
+      if not require("nvim-treesitter.parsers").has_parser("dap_repl") then
+        vim.cmd(":TSInstall dap_repl")
+      end
+    end,
+  },
 }
