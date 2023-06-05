@@ -28,7 +28,6 @@ mason_lsp.setup({
     "tailwindcss",
     "tsserver",
     "volar",
-    "prismals",
   },
   -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
   -- This setting has no relation with the `ensure_installed` setting.
@@ -130,7 +129,7 @@ lspconfig.pylsp.setup({
     },
     capabilities = capabilities,
   })
-for _, server in ipairs({ "bashls", "emmet_ls", "graphql", "html", "volar", "prismals" }) do
+for _, server in ipairs({ "bashls", "emmet_ls", "graphql", "html", "volar" }) do
   lspconfig[server].setup({
     on_attach = on_attach,
     capabilities = capabilities,

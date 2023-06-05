@@ -146,13 +146,6 @@ return {
           require("plugins.cmp-npm")
         end,
       },
-      {
-        "zbirenbaum/copilot-cmp",
-        disable = not EcoVim.plugins.copilot.enabled,
-        config = function()
-          require("copilot_cmp").setup()
-        end,
-      },
     },
   },
 
@@ -201,12 +194,12 @@ return {
     end,
   },
   -- Python indent (follows the PEP8 style)
-  { "Vimjas/vim-python-pep8-indent", ft = { "python" } },
+  { "Vimjas/vim-python-pep8-indent",     ft = { "python" } },
   -- Python-related text object
-  { "jeetsukumaran/vim-pythonsense", ft = { "python" } },
-  { "machakann/vim-swap", event = "VimEnter" },
+  { "jeetsukumaran/vim-pythonsense",     ft = { "python" } },
+  { "machakann/vim-swap",                event = "VimEnter" },
   -- Add indent object for vim (useful for languages like Python)
-  { "michaeljsmith/vim-indent-object", event = "VimEnter" },
+  { "michaeljsmith/vim-indent-object",   event = "VimEnter" },
   -- General
   { "AndrewRadev/switch.vim",            lazy = false },
   -- { "AndrewRadev/splitjoin.vim", lazy = false },
@@ -438,17 +431,6 @@ return {
     event = "InsertEnter",
     config = true,
   },
-  {
-    "jackMort/ChatGPT.nvim",
-    config = function()
-      require("plugins.chat-gpt")
-    end,
-    cmd = {
-      "ChatGPT",
-      "ChatGPTEditWithInstructions",
-    },
-  },
-
   -- Git
   {
     "lewis6991/gitsigns.nvim",
