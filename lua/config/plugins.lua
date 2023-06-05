@@ -297,14 +297,26 @@ return {
     end,
     event = "VeryLazy",
   },
-  {
-    "romgrk/barbar.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    event = "BufAdd",
-    config = function()
-      require("plugins.barbar")
+  {"echasnovski/mini.bufremove",
+		version = "*",
+		config = function()
+			require("mini.bufremove").setup({
+				silent = true,
+			})
     end,
   },
+  {
+		"akinsho/bufferline.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			"echasnovski/mini.bufremove",
+		},
+		version = "*",
+		config = function()
+			require("plugins.bufferline")
+		end,
+	},
   { "antoinemadec/FixCursorHold.nvim" }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
   {
     "rcarriga/nvim-notify",

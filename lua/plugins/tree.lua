@@ -1,7 +1,7 @@
-local utils = require("utils")
-local nvim_tree_events = require("nvim-tree.events")
-local bufferline_api = require("bufferline.api")
-
+-- local utils = require("utils")
+-- local nvim_tree_events = require("nvim-tree.events")
+-- local bufferline_api = require("bufferline.api")
+--
 local TREE_WIDTH = 40
 
 local git_icons = {
@@ -214,10 +214,10 @@ vim.api.nvim_set_keymap(
 	{ noremap = true, silent = true }
 )
 
-nvim_tree_events._dispatch_on_tree_open(function()
-	bufferline_api.set_offset(TREE_WIDTH + 1, utils.add_whitespaces(13) .. "File Explorer")
-end)
-
-nvim_tree_events._dispatch_on_tree_close(function()
-	bufferline_api.set_offset(0)
-end)
+-- nvim_tree_events._dispatch_on_tree_open(function()
+-- 	bufferline_api.set_offset(TREE_WIDTH + 1, utils.add_whitespaces(13) .. "File Explorer")
+-- end)
+--
+-- nvim_tree_events._dispatch_on_tree_close(function()
+-- 	bufferline_api.set_offset(0)
+-- end)
