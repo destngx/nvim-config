@@ -89,7 +89,7 @@ keymap("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", silent)
 keymap("n", "gp", ":bp<CR>", silent)
 keymap("n", "<S-q>", ":lua require('mini.bufremove').delete(0, false)<CR>", silent)
 
--- Move between barbar buffers
+-- Move between bufferline buffers
 keymap("n", "<Space>1", ":BufferLineGoToBuffer 1<CR>", silent)
 keymap("n", "<Space>2", ":BufferLineGoToBuffer 2<CR>", silent)
 keymap("n", "<Space>3", ":BufferLineGoToBuffer 3<CR>", silent)
