@@ -1,6 +1,7 @@
-local utils = require("utils")
-local api = require("nvim-tree.api")
-local TREE_WIDTH = 40
+-- local utils = require("utils")
+-- local nvim_tree_events = require("nvim-tree.events")
+-- local bufferline_api = require("bufferline.api")
+--
 
 local nonicons_extention = require("nvim-nonicons.extentions.nvim-tree")
 
@@ -13,6 +14,11 @@ local git_icons = {
   deleted = "",
   ignored = "◌",
 }
+local api = require("nvim-tree.api")
+local TREE_WIDTH = 40
+
+local nonicons_extention = require("nvim-nonicons.extentions.nvim-tree")
+
 local function on_attach(bufnr)
   local function opts(desc)
     return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }

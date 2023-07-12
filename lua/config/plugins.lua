@@ -173,22 +173,7 @@ return {
   },
 
   -- Formatters
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    event = "BufNewFile",
-    dependencies = { "mason.nvim" },
-  },
-  {
-    "jay-babu/mason-null-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      "williamboman/mason.nvim",
-      "jose-elias-alvarez/null-ls.nvim",
-    },
-    config = function()
-      require("plugins.null-ls")
-    end,
-  },
+  
 
   -- LSP Cmp
   {
@@ -260,7 +245,7 @@ return {
     },
     config = true, -- run require("template-string").setup()
   },
-   -- Python indent (follows the PEP8 style)
+  -- Python indent (follows the PEP8 style)
   { "Vimjas/vim-python-pep8-indent",   ft = { "python" } },
   -- Python-related text object
   { "jeetsukumaran/vim-pythonsense",   ft = { "python" } },
@@ -284,6 +269,17 @@ return {
       { "gm", "<cmd>Glance implementations<CR>",  desc = "LSP Implementations" },
       { "gy", "<cmd>Glance type_definitions<CR>", desc = "LSP Type Definitions" },
     },
+  },
+  {
+    "antosha417/nvim-lsp-file-operations",
+    event = "LspAttach",
+    requires = {
+      { "nvim-lua/plenary.nvim" },
+      { "kyazdani42/nvim-tree.lua" },
+    },
+    config = function()
+      require("lsp-file-operations").setup()
+    end
   },
   -- General
   { "AndrewRadev/switch.vim",      lazy = false },
@@ -552,6 +548,12 @@ return {
   {
     "js-everts/cmp-tailwind-colors",
     config = true,
+  },
+  {
+    "razak17/tailwind-fold.nvim",
+    opts = {},
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    ft = { "html", "svelte", "astro", "vue", "typescriptreact" },
   },
   -- Git
   {
