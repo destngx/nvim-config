@@ -282,7 +282,7 @@ return {
     end
   },
   -- General
-  { "AndrewRadev/switch.vim",      lazy = false },
+  -- { "AndrewRadev/switch.vim",      lazy = false },
   -- { "AndrewRadev/splitjoin.vim", lazy = false },
   {
     "Wansmer/treesj",
