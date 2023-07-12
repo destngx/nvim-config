@@ -83,7 +83,7 @@ return {
       require("plugins.treesitter")
     end,
     dependencies = {
-      "mrjones2014/nvim-ts-rainbow",
+      "hiphish/rainbow-delimiters.nvim",
       "JoosepAlviste/nvim-ts-context-commentstring",
       "nvim-treesitter/nvim-treesitter-textobjects",
       "RRethy/nvim-treesitter-textsubjects",
@@ -156,7 +156,7 @@ return {
   -- LSP Base
   {
     "neovim/nvim-lspconfig",
-    event = "BufReadPre",
+    lazy = false,
     dependencies = {
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
@@ -239,19 +239,16 @@ return {
   },
   { "nvim-lua/popup.nvim" },
   {
-  "utilyre/barbecue.nvim",
-  lazy = false,
-  name = "barbecue",
-  version = "*",
-  dependencies = {
-    "SmiteshP/nvim-navic",
-    "nvim-tree/nvim-web-devicons", -- optional dependency
+    "pmizio/typescript-tools.nvim",
+    ft = { "typescript", "typescriptreact" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "neovim/nvim-lspconfig",
+    },
+    config = function()
+      require("plugins.typescript-tools")
+    end,
   },
-  opts = {
-    -- configurations go here
-  },
-  },
-  { "jose-elias-alvarez/typescript.nvim" },
   {
     "axelvc/template-string.nvim",
     event = "InsertEnter",
@@ -263,14 +260,7 @@ return {
     },
     config = true, -- run require("template-string").setup()
   },
-  {
-    "lvimuser/lsp-inlayhints.nvim",
-    branch = "main", -- or "anticonceal"
-    config = function()
-      require("plugins.inlay-hints")
-    end,
-  },
-  -- Python indent (follows the PEP8 style)
+   -- Python indent (follows the PEP8 style)
   { "Vimjas/vim-python-pep8-indent",   ft = { "python" } },
   -- Python-related text object
   { "jeetsukumaran/vim-pythonsense",   ft = { "python" } },
@@ -284,18 +274,9 @@ return {
   },
   {
     "dnlhc/glance.nvim",
-    config = true,
-    opts = {
-      hooks = {
-        before_open = function(results, open, jump, method)
-          if #results == 1 then
-            jump(results[1]) -- argument is optional
-          else
-            open(results)    -- argument is optional
-          end
-        end,
-      },
-    },
+    config = function()
+      require("plugins.glance")
+    end,
     cmd = { "Glance" },
     keys = {
       { "gd", "<cmd>Glance definitions<CR>",      desc = "LSP Definition" },
@@ -384,11 +365,18 @@ return {
     cond = EcoVim.plugins.zen.enabled,
   },
   {
-    "ggandor/lightspeed.nvim",
-    keys = "s",
-    config = function()
-      require("plugins.lightspeed")
-    end,
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = {},
+    keys = {
+      {
+        "s",
+        mode = { "n", "x", "o" },
+        function()
+          require("flash").jump()
+        end,
+      },
+    },
   },
   {
     "folke/which-key.nvim",
@@ -419,6 +407,18 @@ return {
     event = "VeryLazy",
     dependencies = {
       'yamatsum/nvim-nonicons',
+      "echasnovski/mini.bufremove",
+    },
+    version = "*",
+    config = function()
+      require("plugins.bufferline")
+    end,
+  },
+  {
+    "akinsho/bufferline.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
       "echasnovski/mini.bufremove",
     },
     version = "*",
@@ -500,9 +500,17 @@ return {
   {
     "echasnovski/mini.align",
     lazy = false,
-    version = false,
+    version = "*",
     config = function()
       require("mini.align").setup()
+    end,
+  },
+  {
+    "echasnovski/mini.ai",
+    lazy = false,
+    version = "*",
+    config = function()
+      require("mini.ai").setup()
     end,
   },
   {
@@ -541,10 +549,14 @@ return {
       require("plugins.colorizer")
     end,
   },
+  {
+    "js-everts/cmp-tailwind-colors",
+    config = true,
+  },
   -- Git
   {
     "lewis6991/gitsigns.nvim",
-    event = "BufReadPre",
+    event = "BufRead",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("plugins.git.signs")

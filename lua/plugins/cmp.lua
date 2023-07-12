@@ -83,7 +83,7 @@ local function get_lsp_completion_context(completion, source)
   if not ok then
     return nil
   end
-  if source_name == "tsserver" then
+  if source_name == "tsserver" or source_name == "typescript-tools" then
     return completion.detail
   elseif source_name == "pyright" then
     if completion.labelDetails ~= nil then
@@ -228,6 +228,14 @@ cmp.setup({
         item_with_kind.menu = item_with_kind.menu .. [[ -> ]] .. completion_context
       end
 
+      if string.find(vim_item.kind, "Color") then
+        -- Override for plugin purposes
+        vim_item.kind = "Color"
+        local tailwind_item = require("cmp-tailwind-colors").format(entry, vim_item)
+        item_with_kind.menu = lspkind.symbolic("Color", { with_text = false }) .. " Color"
+        item_with_kind.kind = " " .. tailwind_item.kind
+      end
+
       return item_with_kind
     end,
   },
@@ -244,6 +252,14 @@ cmp.setup({
     { name = "cmp_tabnine", priority = 7, max_num_results = 3 },
     { name = "luasnip",     priority = 7, max_item_count = 5 },
     { name = "buffer",      priority = 7, keyword_length = 5, option = buffer_option, max_item_count = 5 },
+    { name = "cmp_tabnine", priority = 7 },
+    { name = "luasnip",     priority = 7  },
+    {
+      name = "buffer",
+      priority = 7,
+      keyword_length = 5,
+      option = buffer_option,
+    },
     { name = "nvim_lua",    priority = 5 },
     { name = "path",        priority = 4 },
     { name = "calc",        priority = 3 },
