@@ -364,6 +364,9 @@ return {
     "folke/flash.nvim",
     event = "VeryLazy",
     opts = {},
+    config = function()
+      require("plugins.flash-jump")
+    end,
     keys = {
       {
         "s",
@@ -615,22 +618,22 @@ return {
       require("plugins.neotest")
     end,
   },
-  {
-    "andythigpen/nvim-coverage",
-    dependencies = "nvim-lua/plenary.nvim",
-    cmd = {
-      "Coverage",
-      "CoverageSummary",
-      "CoverageLoad",
-      "CoverageShow",
-      "CoverageHide",
-      "CoverageToggle",
-      "CoverageClear",
-    },
-    config = function()
-      require("coverage").setup()
-    end,
-  },
+  -- {
+  --   "andythigpen/nvim-coverage",
+  --   dependencies = "nvim-lua/plenary.nvim",
+  --   cmd = {
+  --     "Coverage",
+  --     "CoverageSummary",
+  --     "CoverageLoad",
+  --     "CoverageShow",
+  --     "CoverageHide",
+  --     "CoverageToggle",
+  --     "CoverageClear",
+  --   },
+  --   config = function()
+  --     require("coverage").setup()
+  --   end,
+  -- },
 
   -- DAP
   {
