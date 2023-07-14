@@ -1,4 +1,4 @@
-ocal filter = require("lsp.utils.filter").filter
+local filter = require("lsp.utils.filter").filter
 local filterReactDTS = require("lsp.utils.filterReactDTS").filterReactDTS
 
 require("glance").setup({

@@ -149,7 +149,7 @@ return {
   },
   {
     "gbprod/stay-in-place.nvim",
-    lazy = false,
+    lazy = "BufRead",
     config = true, -- run require("stay-in-place").setup()
   },
 
@@ -173,7 +173,6 @@ return {
   },
 
   -- Formatters
-  
 
   -- LSP Cmp
   {
@@ -222,7 +221,7 @@ return {
       require("plugins.trouble")
     end,
   },
-  { "nvim-lua/popup.nvim" },
+  -- { "nvim-lua/popup.nvim" },
   {
     "pmizio/typescript-tools.nvim",
     ft = { "typescript", "typescriptreact" },
@@ -413,19 +412,7 @@ return {
       require("plugins.bufferline")
     end,
   },
-  {
-    "akinsho/bufferline.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-      "echasnovski/mini.bufremove",
-    },
-    version = "*",
-    config = function()
-      require("plugins.bufferline")
-    end,
-  },
-  { "antoinemadec/FixCursorHold.nvim" }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
+  -- { "antoinemadec/FixCursorHold.nvim" }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
   {
     "rcarriga/nvim-notify",
     config = function()
@@ -606,18 +593,18 @@ return {
   },
 
   -- Testing
-  {
-    "rcarriga/neotest",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "antoinemadec/FixCursorHold.nvim",
-      "haydenmeade/neotest-jest",
-    },
-    config = function()
-      require("plugins.neotest")
-    end,
-  },
+  -- {
+  --   "rcarriga/neotest",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-treesitter/nvim-treesitter",
+  --     "antoinemadec/FixCursorHold.nvim",
+  --     "haydenmeade/neotest-jest",
+  --   },
+  --   config = function()
+  --     require("plugins.neotest")
+  --   end,
+  -- },
   -- {
   --   "andythigpen/nvim-coverage",
   --   dependencies = "nvim-lua/plenary.nvim",

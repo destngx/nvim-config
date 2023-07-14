@@ -40,7 +40,7 @@ EcoVim = {
     },
     -- Enables moving by subwords and skips significant punctuation with w, e, b motions
     jump_by_subwords = {
-      enabled = false,
+      enabled = true,
     },
   },
   -- Please keep it
