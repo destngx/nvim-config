@@ -1,6 +1,5 @@
 local present, wk = pcall(require, "which-key")
-if not present then
-  return
+if not present then return
 end
 
 wk.setup {
@@ -108,38 +107,19 @@ local normal_mode_mappings = {
     u = { '<cmd>Lazy update<CR>', 'update plugins' },
     s = {
       name = 'Session',
-      c = { '<cmd>SessionManager load_session<CR>', 'choose session' },
-      r = { '<cmd>SessionManager delete_session<CR>', 'remove session' },
-      d = { '<cmd>SessionManager load_current_dir_session<CR>', 'load current dir session' },
-      l = { '<cmd>SessionManager load_last_session<CR>', 'load last session' },
-      s = { '<cmd>SessionManager save_current_session<CR>', 'save session' },
     },
   },
 
   a = {
     name = 'Actions',
-    c = { 'comment box' },
     n = { '<cmd>set nonumber!<CR>', 'line numbers' },
     r = { '<cmd>set norelativenumber!<CR>', 'relative number' },
-    t = { '<cmd>ToggleTerm direction=float<CR>', 'terminal float' },
   },
 
   b = {
     name = 'Buffer',
-    b = { '<cmd>BufferMovePrevious<CR>', 'Move back' },
-    c = { 'lua require("utils").closeOtherBuffers()', 'Close but current' },
-    d = { '<cmd>BufferOrderByDirectory<CR>', 'Order by directory' },
-    f = { '<cmd>bfirst<CR>', 'First buffer' },
-    l = { '<cmd>BufferCloseBuffersLeft<CR>', 'Close Left' },
-    r = { '<cmd>BufferCloseBuffersRight<CR>', 'Close Right' },
-    n = { '<cmd>BufferMoveNext<CR>', 'Move next' },
-    p = { '<cmd>BufferPick<CR>', 'Pick Buffer' },
-    P = { '<cmd>BufferLineTogglePin<CR>', 'Pin/Unpin Buffer' },
     s = {
       name = 'Sort',
-      d = { '<cmd>BufferLineSortByDirectory<CR>', 'Sort by directory' },
-      e = { '<cmd>BufferLineSortByExtension<CR>', 'Sort by extension' },
-      r = { '<cmd>BufferLineSortByRelativeDirectory<CR>', 'Sort by relative dir' },
     },
   },
 
@@ -182,24 +162,9 @@ local normal_mode_mappings = {
     B = { '<cmd>Telescope git_branches<CR>', 'branches' },
     c = {
       name = 'Conflict',
-      b = { '<cmd>GitConflictChooseBoth<CR>', 'choose both' },
-      n = { '<cmd>GitConflictNextConflict<CR>', 'move to next conflict' },
-      o = { '<cmd>GitConflictChooseOurs<CR>', 'choose ours' },
-      p = { '<cmd>GitConflictPrevConflict<CR>', 'move to prev conflict' },
-      t = { '<cmd>GitConflictChooseTheirs<CR>', 'choose theirs' },
     },
-    d = { '<cmd>lua require("plugins.git.diffview").toggle_file_history()<CR>', 'diff file' },
-    g = { '<cmd>LazyGit<CR>', 'lazygit' },
     h = {
       name = 'Hunk',
-      d = 'diff hunk',
-      p = 'preview',
-      R = 'reset buffer',
-      r = 'reset hunk',
-      s = 'stage hunk',
-      S = 'stage buffer',
-      t = 'toggle deleted',
-      u = 'undo stage',
     },
     l = {
       name = 'Log',
@@ -209,7 +174,6 @@ local normal_mode_mappings = {
       c = { '<cmd>LazyGitFilterCurrentFile<CR>', 'buffer commits' },
     },
     m = { 'blame line' },
-    s = { '<cmd>lua require("plugins.git.diffview").toggle_status()<CR>', 'status' },
     S = { '<cmd>Telescope git_status<CR>', 'telescope status' },
     w = {
       name = 'Worktree',
@@ -253,7 +217,6 @@ local visual_mode_mappings = {
 
   a = {
     name = "Actions",
-    c = { 'comment box' },
   },
 
   c = {

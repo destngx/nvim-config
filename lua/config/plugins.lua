@@ -117,7 +117,23 @@ return {
       require("plugins.better-escape")
     end,
   },
-  { "nvim-pack/nvim-spectre" },
+  {
+    "nvim-pack/nvim-spectre",
+    lazy = true,
+    keys = {
+      {
+        "<Leader>pr",
+        "<cmd>lua require('spectre').open_visual({select_word=true})<CR>",
+        desc = "refactor",
+      },
+      {
+        "<Leader>pr",
+        "<cmd>lua require('spectre').open_visual()<CR>",
+        mode = "v",
+        desc = "refactor",
+      }
+    }
+  },
   {
     "nvim-telescope/telescope.nvim",
     lazy = false,
@@ -304,7 +320,14 @@ return {
       require("plugins.comment")
     end,
   },
-  { "LudoPinelli/comment-box.nvim" },
+  {
+    "LudoPinelli/comment-box.nvim",
+    lazy = false,
+    keys = {
+      { "<leader>ac", "<cmd>lua require('comment-box').lbox()<CR>", desc = "comment box" },
+      { "<leader>ac", "<cmd>lua require('comment-box').lbox()<CR>", mode = "v",          desc = "comment box" },
+    }
+  },
   {
     "akinsho/nvim-toggleterm.lua",
     lazy = false,
@@ -312,24 +335,39 @@ return {
     config = function()
       require("plugins.toggleterm")
     end,
-  },
-  { "tpope/vim-repeat",           lazy = false },
-  { "tpope/vim-speeddating",      lazy = false },
-  { "dhruvasagar/vim-table-mode", ft = { "markdown" } },
-  {
-    "mg979/vim-visual-multi",
     keys = {
-      "<C-n>",
-      "<C-Up>",
-      "<C-Down>",
-      "<S-Up>",
-      "<S-Down>",
-      "<S-Left>",
-      "<S-Right>",
+      { "<Leader>at", "<cmd>ToggleTerm direction=float<CR>", desc = "terminal float" }
+    }
+  },
+  { "tpope/vim-repeat",            lazy = false },
+  { "tpope/vim-speeddating",       lazy = false },
+  { "dhruvasagar/vim-table-mode",  ft = { "markdown" } },
+  {
+    "smoka7/multicursors.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'smoka7/hydra.nvim',
     },
-    config = function()
-      vim.g.VM_leader = ";"
-    end,
+    config = true,
+    keys = {
+      {
+        '<LEADER>m',
+        '<CMD>MCstart<CR>',
+        desc = 'multicursor',
+      },
+      {
+        '<LEADER>m',
+        '<CMD>MCvisual<CR>',
+        mode = "v",
+        desc = 'multicursor',
+      },
+      {
+        '<C-Down>',
+        '<CMD>MCunderCursor<CR>',
+        desc = 'multicursor down',
+      },
+    },
   },
   {
     "nacro90/numb.nvim",
@@ -411,6 +449,35 @@ return {
     config = function()
       require("plugins.bufferline")
     end,
+    keys = {
+      { "<Space>1",    "<cmd>BufferLineGoToBuffer 1<CR>" },
+      { "<Space>2",    "<cmd>BufferLineGoToBuffer 2<CR>" },
+      { "<Space>3",    "<cmd>BufferLineGoToBuffer 3<CR>" },
+      { "<Space>4",    "<cmd>BufferLineGoToBuffer 4<CR>" },
+      { "<Space>5",    "<cmd>BufferLineGoToBuffer 5<CR>" },
+      { "<Space>6",    "<cmd>BufferLineGoToBuffer 6<CR>" },
+      { "<Space>7",    "<cmd>BufferLineGoToBuffer 7<CR>" },
+      { "<Space>8",    "<cmd>BufferLineGoToBuffer 8<CR>" },
+      { "<Space>9",    "<cmd>BufferLineGoToBuffer 9<CR>" },
+      { "<A-1>",       "<cmd>BufferLineGoToBuffer 1<CR>" },
+      { "<A-2>",       "<cmd>BufferLineGoToBuffer 2<CR>" },
+      { "<A-3>",       "<cmd>BufferLineGoToBuffer 3<CR>" },
+      { "<A-4>",       "<cmd>BufferLineGoToBuffer 4<CR>" },
+      { "<A-5>",       "<cmd>BufferLineGoToBuffer 5<CR>" },
+      { "<A-6>",       "<cmd>BufferLineGoToBuffer 6<CR>" },
+      { "<A-7>",       "<cmd>BufferLineGoToBuffer 7<CR>" },
+      { "<A-8>",       "<cmd>BufferLineGoToBuffer 8<CR>" },
+      { "<A-9>",       "<cmd>BufferLineGoToBuffer 9<CR>" },
+      { "<Leader>bb",  "<cmd>BufferLineMovePrev<CR>",                desc = "Move back" },
+      { "<Leader>bl",  "<cmd>BufferLineCloseLeft<CR>",               desc = "Close Left" },
+      { "<Leader>br",  "<cmd>BufferLineCloseRight<CR>",              desc = "Close Right" },
+      { "<Leader>bn",  "<cmd>BufferLineMoveNext<CR>",                desc = "Move next" },
+      { "<Leader>bp",  "<cmd>BufferLinePick<CR>",                    desc = "Pick Buffer" },
+      { "<Leader>bP",  "<cmd>BufferLineTogglePin<CR>",               desc = "Pin/Unpin Buffer" },
+      { "<Leader>bsd", "<cmd>BufferLineSortByDirectory<CR>",         desc = "Sort by directory" },
+      { "<Leader>bse", "<cmd>BufferLineSortByExtension<CR>",         desc = "Sort by extension" },
+      { "<Leader>bsr", "<cmd>BufferLineSortByRelativeDirectory<CR>", desc = "Sort by relative dir" },
+    }
   },
   -- { "antoinemadec/FixCursorHold.nvim" }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
   {
@@ -451,8 +518,11 @@ return {
   },
   {
     "airblade/vim-rooter",
-    setup = function()
+    event = "VeryLazy",
+    config = function()
       vim.g.rooter_patterns = EcoVim.plugins.rooter.patterns
+      vim.g.rooter_silent_chdir = 1
+      vim.g.rooter_resolve_links = 1
     end,
   },
   {
@@ -461,6 +531,13 @@ return {
     config = function()
       require("plugins.session-manager")
     end,
+    keys = {
+      { "<Leader>/sc", "<cmd>SessionManager load_session<CR>",             desc = "choose session" },
+      { "<Leader>/sr", "<cmd>SessionManager delete_session<CR>",           desc = "remove session" },
+      { "<Leader>/sd", "<cmd>SessionManager load_current_dir_session<CR>", desc = "load current dir session" },
+      { "<Leader>/sl", "<cmd>SessionManager load_last_session<CR>",        desc = "load last session" },
+      { "<Leader>/ss", "<cmd>SessionManager save_current_session<CR>",     desc = "save session" },
+    }
   },
   {
     "kylechui/nvim-surround",
@@ -541,7 +618,9 @@ return {
   },
   {
     "razak17/tailwind-fold.nvim",
-    opts = {},
+    opts = {
+      min_chars = 50,
+    },
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     ft = { "html", "svelte", "astro", "vue", "typescriptreact" },
   },
@@ -553,14 +632,29 @@ return {
     config = function()
       require("plugins.git.signs")
     end,
+    keys = {
+            { "<Leader>ghd", desc = "diff hunk" },
+            { "<Leader>ghp", desc = "preview" },
+            { "<Leader>ghR", desc = "reset buffer" },
+            { "<Leader>ghr", desc = "reset hunk" },
+            { "<Leader>ghs", desc = "stage hunk" },
+            { "<Leader>ghS", desc = "stage buffer" },
+            { "<Leader>ght", desc = "toggle deleted" },
+            { "<Leader>ghu", desc = ""}
+    }
   },
   {
     "sindrets/diffview.nvim",
     lazy = false,
+    enabled = true,
     event = "BufRead",
     config = function()
       require("plugins.git.diffview")
     end,
+    keys = {
+      { "<Leader>gd", "<cmd>lua require('plugins.git.diffview').toggle_file_history()<CR>", desc = "diff file" },
+      { "<Leader>gs", "<cmd>lua require('plugins.git.diffview').toggle_status()<CR>",       desc = "status" }
+    },
   },
   {
     "akinsho/git-conflict.nvim",
@@ -568,6 +662,13 @@ return {
     config = function()
       require("plugins.git.conflict")
     end,
+    keys = {
+      { "<Leader>gcb", '<cmd>GitConflictChooseBoth<CR>',   desc = 'choose both' },
+      { "<Leader>gcn", '<cmd>GitConflictNextConflict<CR>', desc = 'move to next conflict' },
+      { "<Leader>gco", '<cmd>GitConflictChooseOurs<CR>',   desc = 'choose ours' },
+      { "<Leader>gcp", '<cmd>GitConflictPrevConflict<CR>', desc = 'move to prev conflict' },
+      { "<Leader>gct", '<cmd>GitConflictChooseTheirs<CR>', desc = 'choose theirs' },
+    }
   },
   {
     "ThePrimeagen/git-worktree.nvim",
@@ -590,6 +691,9 @@ return {
     config = function()
       vim.g.lazygit_floating_window_scaling_factor = 1
     end,
+    keys = {
+      { "<Leader>gg", "<cmd>LazyGit<CR>", desc = "lazygit" },
+    },
   },
 
   -- Testing

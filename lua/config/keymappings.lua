@@ -89,25 +89,6 @@ keymap("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", silent)
 keymap("n", "gp", ":bp<CR>", silent)
 keymap("n", "<S-q>", ":lua require('mini.bufremove').delete(0, false)<CR>", silent)
 
--- Move between bufferline buffers
-keymap("n", "<Space>1", ":BufferLineGoToBuffer 1<CR>", silent)
-keymap("n", "<Space>2", ":BufferLineGoToBuffer 2<CR>", silent)
-keymap("n", "<Space>3", ":BufferLineGoToBuffer 3<CR>", silent)
-keymap("n", "<Space>4", ":BufferLineGoToBuffer 4<CR>", silent)
-keymap("n", "<Space>5", ":BufferLineGoToBuffer 5<CR>", silent)
-keymap("n", "<Space>6", ":BufferLineGoToBuffer 6<CR>", silent)
-keymap("n", "<Space>7", ":BufferLineGoToBuffer 7<CR>", silent)
-keymap("n", "<Space>8", ":BufferLineGoToBuffer 8<CR>", silent)
-keymap("n", "<Space>9", ":BufferLineGoToBuffer 9<CR>", silent)
-keymap("n", "<A-1>", ":BufferLineGoToBuffer 1<CR>", silent)
-keymap("n", "<A-2>", ":BufferLineGoToBuffer 2<CR>", silent)
-keymap("n", "<A-3>", ":BufferLineGoToBuffer 3<CR>", silent)
-keymap("n", "<A-4>", ":BufferLineGoToBuffer 4<CR>", silent)
-keymap("n", "<A-5>", ":BufferLineGoToBuffer 5<CR>", silent)
-keymap("n", "<A-6>", ":BufferLineGoToBuffer 6<CR>", silent)
-keymap("n", "<A-7>", ":BufferLineGoToBuffer 7<CR>", silent)
-keymap("n", "<A-8>", ":BufferLineGoToBuffer 8<CR>", silent)
-keymap("n", "<A-9>", ":BufferLineGoToBuffer 9<CR>", silent)
 -- Don't yank on delete char
 keymap("n", "x", '"_x', silent)
 keymap("n", "X", '"_X', silent)
@@ -146,9 +127,6 @@ else
 end
 
 -- Refactor with spectre
-keymap("n", "<Leader>pr", "<cmd>lua require('spectre').open_visual({select_word=true})<CR>", silent)
-keymap("v", "<Leader>pr", "<cmd>lua require('spectre').open_visual()<CR>")
-
 -- LSP
 -- keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", silent)
 -- keymap("n", "gr", "<cmd>lua vim.lsp.buf.references({ includeDeclaration = false })<CR>", silent)
@@ -182,5 +160,4 @@ keymap("n", "K", function()
 end)
 
 -- Comment Box
-keymap("n", "<leader>ac", "<cmd>lua require('comment-box').lbox()<CR>", silent)
-keymap("v", "<leader>ac", "<cmd>lua require('comment-box').lbox()<CR>", silent)
+
