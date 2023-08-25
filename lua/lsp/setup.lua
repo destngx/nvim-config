@@ -1,5 +1,4 @@
 -- Setup installer & lsp configs
-local typescript_ok, typescript = pcall(require, "typescript")
 local mason_ok, mason = pcall(require, "mason")
 local mason_lsp_ok, mason_lsp = pcall(require, "mason-lspconfig")
 local ufo_config_handler = require("plugins.nvim-ufo").handler

@@ -198,13 +198,13 @@ require("nvim-tree").setup({
     hide_root_folder = false,
     -- side of the tree, can be one of 'left' | 'right' | 'top' | 'bottom'
     side = "left",
-    mappings = {
-      -- custom only false will merge the list with the default mappings
-      -- if true, it will only use your list to set the mappings
-      custom_only = true,
-      -- list of mappings to set on the tree manually
-      -- list = keymappings,
-    },
+    -- mappings = {
+    --   -- custom only false will merge the list with the default mappings
+    --   -- if true, it will only use your list to set the mappings
+    --   custom_only = true,
+    --   -- list of mappings to set on the tree manually
+    --   -- list = keymappings,
+    -- },
     number = false,
     relativenumber = false,
   },

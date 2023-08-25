@@ -22,13 +22,13 @@ EcoVim = {
     rooter = {
       -- Removing package.json from list in Monorepo Frontend Project can be helpful
       -- By that your live_grep will work related to whole project, not specific package
-      patterns = { ".git", "package.json", "_darcs", ".bzr", ".svn", "Makefile" }, -- Default
+      patterns = { ".git", "darcs", ".bzr", ".svn", "Makefile" }, -- Default
     },
     -- <leader>z
     zen = {
       alacritty_enabled = false,
-			kitty_enabled = false,
-			wezterm_enabled = true,
+			kitty_enabled = true,
+			wezterm_enabled = false,
       enabled = true, -- sync after change
     },
     ai = {
@@ -40,7 +40,7 @@ EcoVim = {
     },
     -- Enables moving by subwords and skips significant punctuation with w, e, b motions
     jump_by_subwords = {
-      enabled = true,
+      enabled = false,
     },
   },
   -- Please keep it

@@ -1,16 +1,4 @@
 return {
-  -- AI
-  {
-    "jcdickinson/codeium.nvim",
-    cond = EcoVim.plugins.ai.codeium.enabled,
-    event = "InsertEnter",
-    cmd = "Codeium",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "hrsh7th/nvim-cmp",
-    },
-    config = true,
-  },
   -- Themes
   {
     "folke/tokyonight.nvim",
@@ -165,7 +153,7 @@ return {
   },
   {
     "gbprod/stay-in-place.nvim",
-    lazy = "BufRead",
+    lazy = false,
     config = true, -- run require("stay-in-place").setup()
   },
 
@@ -188,7 +176,18 @@ return {
     },
   },
 
-  -- Formatters
+  -- AI
+  {
+    "jcdickinson/codeium.nvim",
+    cond = EcoVim.plugins.ai.codeium.enabled,
+    event = "InsertEnter",
+    cmd = "Codeium",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "hrsh7th/nvim-cmp",
+    },
+    config = true,
+  },
 
   -- LSP Cmp
   {
@@ -206,11 +205,6 @@ return {
       "hrsh7th/cmp-calc",
       "saadparwaiz1/cmp_luasnip",
       { "L3MON4D3/LuaSnip", dependencies = "rafamadriz/friendly-snippets" },
-      {
-        cond = EcoVim.plugins.ai.tabnine.enabled,
-        "tzachar/cmp-tabnine",
-        build = "./install.sh"
-      },
       {
         "David-Kunz/cmp-npm",
         config = function()
@@ -442,7 +436,7 @@ return {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
     dependencies = {
-      'yamatsum/nvim-nonicons',
+      'nvim-tree/nvim-web-devicons',
       "echasnovski/mini.bufremove",
     },
     version = "*",
@@ -640,12 +634,12 @@ return {
             { "<Leader>ghs", desc = "stage hunk" },
             { "<Leader>ghS", desc = "stage buffer" },
             { "<Leader>ght", desc = "toggle deleted" },
-            { "<Leader>ghu", desc = ""}
+            { "<Leader>ghu", desc = "undo stage"}
     }
   },
   {
     "sindrets/diffview.nvim",
-    lazy = false,
+    lazy = true,
     enabled = true,
     event = "BufRead",
     config = function()

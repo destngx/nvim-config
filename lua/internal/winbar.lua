@@ -1,7 +1,7 @@
 local M = {}
 
-local status_navic, navic = pcall(require, "nvim-navic")
-if not status_navic then
+local status_navic_ok, navic = pcall(require, "nvim-navic")
+if not status_navic_ok then
   return
 end
 
@@ -40,7 +40,7 @@ M.filename = function()
     end
 
     -- Return filename if parent dir doesn't exist
-     if (parent_dir == nil or parent_dir == '') then
+    if (parent_dir == nil or parent_dir == '') then
       return " " .. "%#" .. hl_group .. "#" .. file_icon .. "%*" .. " " .. "%#LineNr#" .. filename .. "%*"
     end
 
@@ -66,7 +66,7 @@ M.gps = function()
   else
     if not isempty(navic_location) then
       local hl_group = "LineNr"
-      return retval .. " " .. "%#" .. hl_group .. "#" .. EcoVim.icons.caretRight .. "%*" .. navic_location
+      return retval .. " " .. "%#" .. hl_group .. "#" .. EcoVim.icons.caretRight .. "%*" .. " " .. navic_location
     else
       return retval
     end
