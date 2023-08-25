@@ -1,5 +1,3 @@
--- Setup installer & lsp configs
-local mason_ok, mason = pcall(require, "mason")
 local mason_lsp_ok, mason_lsp = pcall(require, "mason-lspconfig")
 local ufo_config_handler = require("plugins.nvim-ufo").handler
 
@@ -19,7 +17,7 @@ mason_lsp.setup({
   ensure_installed = {
     "bashls",
     "cssls",
-    "eslint",
+    "eslint-lsp",
     "graphql",
     "html",
     "jsonls",
