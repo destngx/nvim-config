@@ -34,6 +34,7 @@ EcoVim = {
     ai = {
       codeium = { enable = true },
       tabnine = { enable = false },
+      chatgpt = { enable = true}
     },
     experimental_noice = {
       enabled = true,
