@@ -123,7 +123,7 @@ lspconfig.pylsp.setup({
     },
     capabilities = capabilities,
   })
-for _, server in ipairs({ "bashls", "emmet_ls", "graphql", "html", "prismals" }) do
+for _, server in ipairs({ "bashls", "emmet_ls", "graphql", "html", "tsserver" }) do
   lspconfig[server].setup({
     on_attach = on_attach,
     capabilities = capabilities,
