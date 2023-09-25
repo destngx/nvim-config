@@ -16,6 +16,7 @@ require("lazy").setup("config.plugins", {
   install = { colorscheme = { "tokyonight" } },
   checker = { enabled = false },
   change_detection = { enabled = true, notify = false },
+  concurrency = 5,
   performance = {
     rtp = {
       disabled_plugins = {
