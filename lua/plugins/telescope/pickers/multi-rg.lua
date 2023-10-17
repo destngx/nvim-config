@@ -33,6 +33,7 @@ return function(opts)
         ["stories"] = "{stories.tsx,stories.ts,stories.js,*.stories.tsx,*.stories.ts,*.stories.js}",
         ["test"] = "*{.test.tsx,.test.ts,.test.js,-test.tsx,-test.ts,-test.js}",
         ["tests"] = "*{.test.tsx,.test.ts,.test.js,-test.tsx,-test.ts,-test.js}",
+        ["typescript"] = "*.ts",
         ["ts"] = {
           "*.{ts,tsx}",
           "!*{.test.tsx,.test.ts,.test.js,-test.tsx,-test.ts,-test.js}"
@@ -89,7 +90,7 @@ return function(opts)
 
       return flatten {
         args,
-        { "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case" },
+        { "-F", "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case" },
       }
     end,
     entry_maker = make_entry.gen_from_vimgrep(opts),

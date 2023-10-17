@@ -5,13 +5,23 @@ local _, tabnine = pcall(require, "cmp_tabnine.config")
 
 local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
+  P("Failed to load cmp")
   return
 end
 
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then
+  P("Failed to load luasnip")
   return
 end
+
+local cmp_git_ok, cmp_git = pcall(require, "cmp_git")
+if not cmp_git_ok then
+  P("Failed to load cmp_git")
+  return
+end
+
+cmp_git.setup()
 
 require("luasnip/loaders/from_vscode").lazy_load()
 
@@ -244,7 +254,7 @@ cmp.setup({
     {
       name = "nvim_lsp",
       priority = 10,
-      -- Limits LSP results to specific types based on line context (FIelds, Methods, Variables)
+      -- Limits LSP results to specific types based on line context (Fields, Methods, Variables)
       entry_filter = limit_lsp_types,
     },
     { name = "npm",         priority = 9 },
@@ -253,7 +263,7 @@ cmp.setup({
     { name = "luasnip",     priority = 7, max_item_count = 5 },
     { name = "buffer",      priority = 7, keyword_length = 5, option = buffer_option, max_item_count = 5 },
     { name = "cmp_tabnine", priority = 7 },
-    { name = "luasnip",     priority = 7  },
+    { name = "git",     priority = 7  },
     {
       name = "buffer",
       priority = 7,

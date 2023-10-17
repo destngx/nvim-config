@@ -156,6 +156,24 @@ return {
     lazy = false,
     config = true, -- run require("stay-in-place").setup()
   },
+  {
+    "ThePrimeagen/refactoring.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    cmd = "Refactor",
+    keys = {
+      { "<leader>re", ":Refactor extract ",              mode = "x",          desc = "Extract function" },
+      { "<leader>rf", ":Refactor extract_to_file ",      mode = "x",          desc = "Extract function to file" },
+      { "<leader>rv", ":Refactor extract_var ",          mode = "x",          desc = "Extract variable" },
+      { "<leader>ri", ":Refactor inline_var",            mode = { "x", "n" }, desc = "Inline variable" },
+      { "<leader>rI", ":Refactor inline_func",           mode = "n",          desc = "Inline function" },
+      { "<leader>rb", ":Refactor extract_block",         mode = "n",          desc = "Extract block" },
+      { "<leader>rf", ":Refactor extract_block_to_file", mode = "n",          desc = "Extract block to file" },
+    },
+    config = true
+  },
 
   -- LSP Base
   {
@@ -236,6 +254,7 @@ return {
           require("plugins.cmp-npm")
         end,
       },
+      "petertriho/cmp-git"
     },
   },
 
@@ -358,9 +377,9 @@ return {
       { "<Leader>at", "<cmd>ToggleTerm direction=float<CR>", desc = "terminal float" }
     }
   },
-  { "tpope/vim-repeat",            lazy = false },
-  { "tpope/vim-speeddating",       lazy = false },
-  { "dhruvasagar/vim-table-mode",  ft = { "markdown" } },
+  { "tpope/vim-repeat",           lazy = false },
+  { "tpope/vim-speeddating",      lazy = false },
+  { "dhruvasagar/vim-table-mode", ft = { "markdown" } },
   {
     "smoka7/multicursors.nvim",
     event = "VeryLazy",
@@ -368,7 +387,13 @@ return {
       'nvim-treesitter/nvim-treesitter',
       'smoka7/hydra.nvim',
     },
-    config = true,
+    opts = {
+      hint_config = {
+        border = EcoVim.ui.float.border or "rounded",
+        position = 'bottom',
+        show_name = false,
+      }
+    },
     keys = {
       {
         '<LEADER>m',
@@ -419,7 +444,11 @@ return {
   {
     "folke/flash.nvim",
     event = "VeryLazy",
-    opts = {},
+    opts = {
+      char = {
+        keys = { "f", "F", "t", "T" },
+      }
+    },
     config = function()
       require("plugins.flash-jump")
     end,
@@ -612,6 +641,7 @@ return {
   {
     "lukas-reineke/indent-blankline.nvim",
     event = "BufReadPre",
+    main = "ibl",
     config = function()
       require("plugins.indent")
     end,
@@ -643,6 +673,26 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     ft = { "html", "svelte", "astro", "vue", "typescriptreact" },
   },
+  {
+    "MaximilianLloyd/tw-values.nvim",
+    keys = {
+      { "<Leader>cv", "<CMD>TWValues<CR>", desc = "Tailwind CSS values" },
+    },
+    opts = {
+      border = EcoVim.ui.float.border or "rounded", -- Valid window border style,
+      show_unknown_classes = true                   -- Shows the unknown classes popup
+    }
+  },
+  {
+    "laytan/tailwind-sorter.nvim",
+    cmd = {
+      "TailwindSort",
+      "TailwindSortOnSaveToggle"
+    },
+    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-lua/plenary.nvim" },
+    build = "cd formatter && npm i && npm run build",
+    config = true,
+  },
   -- Git
   {
     "lewis6991/gitsigns.nvim",
@@ -652,14 +702,14 @@ return {
       require("plugins.git.signs")
     end,
     keys = {
-            { "<Leader>ghd", desc = "diff hunk" },
-            { "<Leader>ghp", desc = "preview" },
-            { "<Leader>ghR", desc = "reset buffer" },
-            { "<Leader>ghr", desc = "reset hunk" },
-            { "<Leader>ghs", desc = "stage hunk" },
-            { "<Leader>ghS", desc = "stage buffer" },
-            { "<Leader>ght", desc = "toggle deleted" },
-            { "<Leader>ghu", desc = "undo stage"}
+      { "<Leader>ghd", desc = "diff hunk" },
+      { "<Leader>ghp", desc = "preview" },
+      { "<Leader>ghR", desc = "reset buffer" },
+      { "<Leader>ghr", desc = "reset hunk" },
+      { "<Leader>ghs", desc = "stage hunk" },
+      { "<Leader>ghS", desc = "stage buffer" },
+      { "<Leader>ght", desc = "toggle deleted" },
+      { "<Leader>ghu", desc = "undo stage" }
     }
   },
   {
@@ -672,7 +722,7 @@ return {
     end,
     keys = {
       { "<Leader>gd", "<cmd>lua require('plugins.git.diffview').toggle_file_history()<CR>", desc = "diff file" },
-      { "<Leader>gs", "<cmd>lua require('plugins.git.diffview').toggle_status()<CR>",       desc = "status" }
+      { "<Leader>gS", "<cmd>lua require('plugins.git.diffview').toggle_status()<CR>",       desc = "status" }
     },
   },
   {
@@ -684,9 +734,9 @@ return {
     keys = {
       { "<Leader>gcb", '<cmd>GitConflictChooseBoth<CR>',   desc = 'choose both' },
       { "<Leader>gcn", '<cmd>GitConflictNextConflict<CR>', desc = 'move to next conflict' },
-      { "<Leader>gco", '<cmd>GitConflictChooseOurs<CR>',   desc = 'choose ours' },
+      { "<Leader>gcc", '<cmd>GitConflictChooseOurs<CR>',   desc = 'choose current' },
       { "<Leader>gcp", '<cmd>GitConflictPrevConflict<CR>', desc = 'move to prev conflict' },
-      { "<Leader>gct", '<cmd>GitConflictChooseTheirs<CR>', desc = 'choose theirs' },
+      { "<Leader>gci", '<cmd>GitConflictChooseTheirs<CR>', desc = 'choose incoming' },
     }
   },
   {
@@ -708,11 +758,25 @@ return {
       "LazyGitFilter",
     },
     config = function()
-      vim.g.lazygit_floating_window_scaling_factor = 1
+      vim.g.lazygit_floating_window_scaling_factor = 0.9
     end,
     keys = {
       { "<Leader>gg", "<cmd>LazyGit<CR>", desc = "lazygit" },
     },
+  },
+   {
+    "pwntester/octo.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+      "nvim-tree/nvim-web-devicons",
+    },
+    cmd = {
+      "Octo",
+    },
+    config = function()
+      require('plugins.git.octo')
+    end
   },
 
   -- Testing
@@ -721,7 +785,6 @@ return {
   --   dependencies = {
   --     "nvim-lua/plenary.nvim",
   --     "nvim-treesitter/nvim-treesitter",
-  --     "antoinemadec/FixCursorHold.nvim",
   --     "haydenmeade/neotest-jest",
   --   },
   --   config = function()

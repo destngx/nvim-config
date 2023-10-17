@@ -1,5 +1,6 @@
 local present, wk = pcall(require, "which-key")
-if not present then return
+if not present then
+  return
 end
 
 wk.setup {
@@ -9,16 +10,16 @@ wk.setup {
     -- the presets plugin, adds help for a bunch of default keybindings in Neovim
     -- No actual key bindings are created
     spelling = {
-      enabled = true,              -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-      suggestions = 20,            -- how many suggestions should be shown in the list?
+      enabled = true,   -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+      suggestions = 20, -- how many suggestions should be shown in the list?
     },
     presets = {
-      operators = false,           -- adds help for operators like d, y, ... and registers them for motion / text object completion
-      motions = false,             -- adds help for motions text_objects = false, -- help for text objects triggered after entering an operator
-      windows = false,             -- default bindings on <c-w>
-      nav = false,                 -- misc bindings to work with windows
-      z = false,                   -- bindings for folds, spelling and others prefixed with z
-      g = false,                   -- bindings for prefixed with g
+      operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
+      motions = false,   -- adds help for motions text_objects = false, -- help for text objects triggered after entering an operator
+      windows = false,   -- default bindings on <c-w>
+      nav = false,       -- misc bindings to work with windows
+      z = false,         -- bindings for folds, spelling and others prefixed with z
+      g = false,         -- bindings for prefixed with g
     },
   },
   -- add operators that will trigger motion and text object completion
@@ -34,7 +35,7 @@ wk.setup {
   icons = {
     breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
     separator = "➜", -- symbol used between a key and it's label
-    group = "+",      -- symbol prepended to a group
+    group = "+", -- symbol prepended to a group
   },
   window = {
     border = EcoVim.ui.float.border or "rounded", -- none, single, double, shadow, rounded
@@ -43,16 +44,16 @@ wk.setup {
     padding = { 2, 2, 2, 2 },                     -- extra window padding [top, right, bottom, left]
   },
   layout = {
-    height = { min = 4, max = 25 },                                            -- min and max height of the columns
-    width = { min = 20, max = 50 },                                            -- min and max width of the columns
-    spacing = 4,                                                               -- spacing between columns
-    align = "left",                                                            -- align columns left, center or right
+    height = { min = 4, max = 25 },                                             -- min and max height of the columns
+    width = { min = 20, max = 50 },                                             -- min and max width of the columns
+    spacing = 4,                                                                -- spacing between columns
+    align = "left",                                                             -- align columns left, center or right
   },
-  ignore_missing = false,                                                      -- enable this to hide mappings for which you didn't specify a label
+  ignore_missing = false,                                                       -- enable this to hide mappings for which you didn't specify a label
   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
-  show_help = true,                                                            -- show help message on the command line when the popup is visible
+  show_help = true,                                                             -- show help message on the command line when the popup is visible
   -- triggers = "auto", -- automatically setup triggers
-  triggers = { "<leader>" },                                                   -- or specify a list manually
+  triggers = { "<leader>", "<LocalLeader" },                                                    -- or specify a list manually
   triggers_blacklist = {
     -- list of mode / prefixes that should never be hooked by WhichKey
     -- this is mostly relevant for key maps that start with a native binding
@@ -72,7 +73,7 @@ local opts = {
 }
 
 local visual_opts = {
-  mode = "v",     -- NORMAL mode
+  mode = "v",     -- VISUAL mode
   prefix = "<leader>",
   buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
   silent = true,  -- use `silent` when creating keymaps
@@ -149,6 +150,7 @@ local normal_mode_mappings = {
     r = { 'repl' },
     s = { 'scopes' },
     t = { 'terminate' },
+    U = { 'open UI' },
     v = { 'log variable' },
     V = { 'log variable above' },
     w = { 'watches' },
@@ -156,16 +158,17 @@ local normal_mode_mappings = {
 
   g = {
     name = 'Git',
-    a = { '<cmd>!git add %:p<CR>', 'add current' },
-    A = { '<cmd>!git add .<CR>', 'add all' },
-    b = { '<cmd>lua require("internal.blame").open()<CR>', 'blame' },
-    B = { '<cmd>Telescope git_branches<CR>', 'branches' },
+    a = { '<cmd>!git add %:p<CR>',                                        'add current' },
+    A = { '<cmd>!git add .<CR>',                                          'add all' },
+    b = { '<cmd>lua require("internal.blame").open()<CR>',                'blame' },
+    B = { '<cmd>Telescope git_branches<CR>',                              'branches' },
     c = {
       name = 'Conflict',
     },
     h = {
       name = 'Hunk',
     },
+    i = { '<cmd>Octo issue list<CR>', 'Issues List' },
     l = {
       name = 'Log',
       A = { '<cmd>lua require("plugins.telescope").my_git_commits()<CR>', 'commits (Telescope)' },
@@ -175,6 +178,8 @@ local normal_mode_mappings = {
     },
     m = { 'blame line' },
     S = { '<cmd>Telescope git_status<CR>', 'telescope status' },
+    p = { '<cmd>Octo pr list<CR>', 'Pull Requests List' },
+    s = { '<cmd>Telescope git_status<CR>', 'telescope status' },
     w = {
       name = 'Worktree',
       w = 'worktrees',
@@ -193,6 +198,10 @@ local normal_mode_mappings = {
     r = { 'refactor' },
     s = { "<cmd>SessionManager save_current_session<CR>", 'save session' },
     t = { "<cmd>TodoTrouble<CR>", 'todo' },
+  },
+
+  r = {
+    name = 'Refactor',
   },
 
   s = {
@@ -237,6 +246,10 @@ local visual_mode_mappings = {
   p = {
     name = "Project",
     r = { 'refactor' },
+  },
+
+  r = {
+    name = "Refactor",
   },
 
   t = {
