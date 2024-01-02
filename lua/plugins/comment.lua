@@ -29,7 +29,7 @@ require('Comment').setup({
     ---line-comment keymap
     line = 'gcc',
     ---block-comment keymap
-    block = 'gbc',
+    -- block = 'gbc',
   },
 
   ---LHS of operator-pending mapping in NORMAL + VISUAL mode

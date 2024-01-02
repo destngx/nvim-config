@@ -376,8 +376,8 @@ end
 
 local function attach_nvim_tree(bufnr)
   wk.register({
-    ["="] = { "<cmd>NvimTreeResize +5<CR>", "resize +5" },
-    ["-"] = { "<cmd>NvimTreeResize -5<CR>", "resize +5" },
+    -- ["="] = { "<cmd>NvimTreeResize +5<CR>", "resize +5" },
+    -- ["-"] = { "<cmd>NvimTreeResize -5<CR>", "resize +5" },
   }, {
     buffer = bufnr,
     mode = "n",     -- NORMAL mode

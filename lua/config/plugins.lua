@@ -3,7 +3,7 @@ return {
   "epwalsh/obsidian.nvim",
   version = "*", -- recommended, use latest release instead of latest commit
   lazy = true,
-  ft = "markdown",
+  ft = { "markdown" },
   -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
   -- event = {
   --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
@@ -23,6 +23,16 @@ return {
         name = "Persona",
         path = "/home/destnguyxn/projects/github/obsidian-vaults/Persona",
       },
+    },
+    completion = {
+      nvim_cmp = true,
+      min_chars = 2,
+      new_notes_location = "Zettelkasten",
+    },
+    templates = {
+      subdir = "Templates",
+      date_format = "%Y-%m-%d-%a",
+      time_format = "%H:%M",
     },
 
     -- see below for full list of options 👇
