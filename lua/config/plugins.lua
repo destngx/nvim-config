@@ -15,29 +15,10 @@ return {
     dependencies = {
       -- Required.
       "nvim-lua/plenary.nvim",
-
-      -- see below for full list of optional dependencies 👇
     },
-    opts = {
-      workspaces = {
-        {
-          name = "Persona",
-          path = "/home/destnguyxn/projects/github/obsidian-vaults/Persona",
-        },
-      },
-      completion = {
-        nvim_cmp = true,
-        min_chars = 2,
-        new_notes_location = "Zettelkasten",
-      },
-      templates = {
-        subdir = "Templates",
-        date_format = "%Y-%m-%d-%a",
-        time_format = "%H:%M",
-      },
-
-      -- see below for full list of options 👇
-    },
+    config = function()
+      require("plugins.obsidian")
+    end,
   },
   -- Themes
   {
