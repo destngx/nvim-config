@@ -39,7 +39,7 @@ local options = {
   backspace      = "indent,eol,start",      --- Making sure backspace works
   backup         = false,                   --- Recommended by coc
     --- Concealed text is completely hidden unless it has a custom replacement character defined (needed for dynamically showing tailwind classes)
-  conceallevel   = 2,
+  conceallevel   = 1,
   concealcursor  = "",---Set to an empty string to expand tailwind class when on cursorline
   encoding       = "utf-8",                 --- The encoding displayed
   errorbells     = false,                   --- Disables sound effect for errors

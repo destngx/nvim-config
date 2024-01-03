@@ -13,8 +13,8 @@ require('obsidian').setup({
   },
   templates = {
     subdir = "Templates",
-    date_format = "YYYYMMDD",
-    time_format = "HH:mm",
+    date_format = "%d-%m-%Y",
+    time_format = "%H:%m",
   },
   attachments = { img_folder = "Zettelkasten/Attachments" },
   mappings = {
