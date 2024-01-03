@@ -187,16 +187,21 @@ local normal_mode_mappings = {
     }
   },
 
+  m = {
+    name = "Markdown",
+    p = { '<cmd>MarkdownPreviewToggle<CR>', 'MarkdownPreview' },
+  },
+
   o = {
     name = 'Obsidian',
-    o = { '<cmd>ObsidianOpen<CR>', 'open note' },
+    -- o = { '<cmd>ObsidianOpen<CR>', 'open note' },
     n = { '<cmd>ObsidianNew<CR>', 'new note' },
     t = { '<cmd>ObsidianTemplate<CR>', 'template' },
     p = {
       name = "paste",
       i = { '<cmd>ObsidianPasteImg<CR>', 'paste image from clipboard'},
     },
-    r = { '<cmd>ObsidianRename<Cr>', 'rename note' },
+    -- r = { '<cmd>ObsidianRename<Cr>', 'rename note' },
   },
 
   p = {

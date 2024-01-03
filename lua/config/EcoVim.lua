@@ -1,7 +1,7 @@
 ------------------------------------------------
 --                                            --
---    This is a main configuration file for    --
---                    EcoVim                  --
+--    This is a main configuration file for   --
+--          EcoVim modified by DestNgx        --
 --      Change variables which you need to    --
 --                                            --
 ------------------------------------------------
@@ -27,21 +27,21 @@ EcoVim = {
     -- <leader>z
     zen = {
       alacritty_enabled = false,
-			kitty_enabled = true,
-			wezterm_enabled = false,
+      kitty_enabled = true,
+      wezterm_enabled = false,
       enabled = true, -- sync after change
     },
     ai = {
       codeium = { enable = false },
       tabnine = { enable = false },
-      chatgpt = { enable = true}
+      chatgpt = { enable = true }
     },
     experimental_noice = {
       enabled = true,
     },
     -- Enables moving by subwords and skips significant punctuation with w, e, b motions
     jump_by_subwords = {
-      enabled = false,
+      enabled = true,
     },
   },
   -- Please keep it

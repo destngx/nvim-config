@@ -2,7 +2,7 @@ require('obsidian').setup({
   workspaces = {
     {
       name = "Persona",
-      path = "/home/destnguyxn/projects/github/obsidian-vaults/Persona",
+      path = "~/projects/obsidian-vaults/Persona",
     },
   },
   notes_subdir = "Zettelkasten",
@@ -18,7 +18,7 @@ require('obsidian').setup({
   },
   attachments = { img_folder = "Zettelkasten/Attachments" },
   mappings = {
-    -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
+    -- Overrides the 'gd' mapping to work on markdown/wiki links within your vault.
     ["gd"] = {
       action = function()
         return require("obsidian").util.gf_passthrough()
@@ -33,9 +33,10 @@ require('obsidian').setup({
       opts = { buffer = true },
     },
   },
+  disable_frontmatter = true,
   note_frontmatter_func = function(note)
     -- This is equivalent to the default frontmatter function.
-    local out = { id = note.id, aliases = note.aliases, tags = note.tags }
+    local out = { id = note.id, tags = note.tags }
     -- `note.metadata` contains any manually added fields in the frontmatter.
     -- So here we just make sure those fields are kept in the frontmatter.
     if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
