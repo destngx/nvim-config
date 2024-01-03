@@ -1,5 +1,4 @@
 local mason_ok, mason = pcall(require, "mason")
-local typescript_ok, typescript = pcall(require, "typescript")
 local mason_lsp_ok, mason_lsp = pcall(require, "mason-lspconfig")
 local ufo_config_handler = require("plugins.nvim-ufo").handler
 
@@ -44,12 +43,12 @@ mason_lsp.setup({
 local lspconfig = require("lspconfig")
 
 local handlers = {
-      ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-          silent = true,
-          border = EcoVim.ui.float.border,
-        }),
-      ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = EcoVim.ui.float.border }),
-      ["textDocument/publishDiagnostics"] = vim.lsp.with(
+  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+    silent = true,
+    border = EcoVim.ui.float.border,
+  }),
+  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = EcoVim.ui.float.border }),
+  ["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics,
     { virtual_text = EcoVim.lsp.virtual_text }
   ),
@@ -58,7 +57,7 @@ local navic = require("nvim-navic")
 local function on_attach(client, bufnr)
   -- set up buffer keymaps, etc.
   if client.server_capabilities.documentSymbolProvider then
-        navic.attach(client, bufnr)
+    navic.attach(client, bufnr)
   end
 end
 
@@ -116,13 +115,18 @@ lspconfig.vuels.setup({
   settings = require("lsp.servers.vuels").settings,
 })
 lspconfig.pylsp.setup({
-    on_attach = on_attach,
-    settings = require("lsp.servers.python").settings,
-    flags = {
-      debounce_text_changes = 200,
-    },
-    capabilities = capabilities,
-  })
+  on_attach = on_attach,
+  settings = require("lsp.servers.python").settings,
+  flags = {
+    debounce_text_changes = 200,
+  },
+  capabilities = capabilities,
+})
+-- lspconfig.remark_ls.setup({
+--   settings = {
+--     requireConfig = false,
+--   }
+-- })
 for _, server in ipairs({ "bashls", "emmet_ls", "graphql", "html" }) do
   lspconfig[server].setup({
     on_attach = on_attach,
@@ -135,4 +139,3 @@ require("ufo").setup({
   fold_virt_text_handler = ufo_config_handler,
   close_fold_kinds = { "imports" },
 })
-

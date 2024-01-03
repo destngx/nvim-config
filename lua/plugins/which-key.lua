@@ -53,7 +53,7 @@ wk.setup {
   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
   show_help = true,                                                             -- show help message on the command line when the popup is visible
   -- triggers = "auto", -- automatically setup triggers
-  triggers = { "<leader>", "<LocalLeader" },                                                    -- or specify a list manually
+  triggers = { "<leader>", "<LocalLeader" },                                    -- or specify a list manually
   triggers_blacklist = {
     -- list of mode / prefixes that should never be hooked by WhichKey
     -- this is mostly relevant for key maps that start with a native binding
@@ -158,10 +158,10 @@ local normal_mode_mappings = {
 
   g = {
     name = 'Git',
-    a = { '<cmd>!git add %:p<CR>',                                        'add current' },
-    A = { '<cmd>!git add .<CR>',                                          'add all' },
-    b = { '<cmd>lua require("internal.blame").open()<CR>',                'blame' },
-    B = { '<cmd>Telescope git_branches<CR>',                              'branches' },
+    a = { '<cmd>!git add %:p<CR>', 'add current' },
+    A = { '<cmd>!git add .<CR>', 'add all' },
+    b = { '<cmd>lua require("internal.blame").open()<CR>', 'blame' },
+    B = { '<cmd>Telescope git_branches<CR>', 'branches' },
     c = {
       name = 'Conflict',
     },
@@ -199,8 +199,9 @@ local normal_mode_mappings = {
     t = { '<cmd>ObsidianTemplate<CR>', 'template' },
     p = {
       name = "paste",
-      i = { '<cmd>ObsidianPasteImg<CR>', 'paste image from clipboard'},
+      i = { '<cmd>ObsidianPasteImg<CR>', 'paste image from clipboard' },
     },
+    c = { 'toggle check box' },
     -- r = { '<cmd>ObsidianRename<Cr>', 'rename note' },
   },
 
