@@ -32,6 +32,18 @@ require('obsidian').setup({
       end,
       opts = { buffer = true },
     },
+    ["<leader>on"] = {
+      action = function()
+        return "<expr>:ObsidianNew " .. vim.fn.input('file name: ') .. "<cr>"
+      end,
+      opts = { expr = true, buffer = false },
+    },
+    -- ["<leader>or"] = {
+    --   action = function()
+    --     return ":ObsidianRename " .. vim.fn.input('file name: ') .. "<cr>"
+    --   end,
+    --   opts = { expr = true, buffer = true },
+    -- },
   },
   disable_frontmatter = false,
   note_frontmatter_func = function(note)

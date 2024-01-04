@@ -86,6 +86,10 @@ return {
 
   -- Treesitter
   {
+    "Mohammed-Taher/AdvancedNewFile.nvim",
+    lazy = false,
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
     event = "BufReadPre",
     config = function()
@@ -578,25 +582,25 @@ return {
       require("plugins.package-info")
     end,
   },
-  -- {
-  --   "iamcco/markdown-preview.nvim",
-  --   build = "cd app && npm install",
-  --   init = function()
-  --     vim.g.mkdp_filetypes = { "markdown" }
-  --   end,
-  --   ft = { "markdown" },
-  -- },
   {
-    '0x00-ketsu/markdown-preview.nvim',
-    ft = { 'md', 'markdown', 'mkd', 'mkdn', 'mdwn', 'mdown', 'mdtxt', 'mdtext', 'rmd', 'wiki' },
-    config = function()
-      require('markdown-preview').setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the setup section below
-      }
-    end
+    "iamcco/markdown-preview.nvim",
+    build = "cd app && npm install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
   },
+  -- {
+  --   '0x00-ketsu/markdown-preview.nvim',
+  --   ft = { 'md', 'markdown', 'mkd', 'mkdn', 'mdwn', 'mdown', 'mdtxt', 'mdtext', 'rmd', 'wiki' },
+  --   config = function()
+  --     require('markdown-preview').setup {
+  --       -- your configuration comes here
+  --       -- or leave it empty to use the default settings
+  --       -- refer to the setup section below
+  --     }
+  --   end
+  -- },
   {
     "airblade/vim-rooter",
     event = "VeryLazy",

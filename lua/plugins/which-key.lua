@@ -186,16 +186,17 @@ local normal_mode_mappings = {
       c = 'create worktree',
     }
   },
-  --
+
   -- m = {
   --   name = "Markdown",
-  --   p = { '<cmd>MPToggle<CR>', 'MarkdownPreview' },
+  --   P = { '<cmd>MarkdownPreviewToggle<CR>', 'MarkdownPreview In Browser' },
   -- },
-  --
+
   o = {
     name = 'Obsidian',
     -- o = { '<cmd>ObsidianOpen<CR>', 'open note' },
-    n = { '<cmd>ObsidianNew<CR>', 'new note' },
+    -- n = { '<cmd>AdvancedNewFile<CR>', 'new note' },
+    -- n = { '<cmd>lua vim.cmd('ObsidianNew vim.fn.input('file name: ')')<CR>', 'new note' },
     t = { '<cmd>ObsidianTemplate<CR>', 'template' },
     p = {
       name = "paste",
@@ -287,7 +288,8 @@ local function attach_markdown(bufnr)
   wk.register({
     m = {
       name = "Markdown",
-      p = { '<cmd>MPToggle<CR>', 'markdown preview' },
+      p = { '<cmd>MarkdownPreviewToggle<CR>', 'MarkdownPreview In Browser' },
+      P = { '<cmd>MPToggle<CR>', 'markdown preview' },
     }
   }, {
     buffer = bufnr,
@@ -323,7 +325,7 @@ end
 local function attach_npm(bufnr)
   wk.register({
     n = {
-     name = "NPM",
+      name = "NPM",
       c = { '<cmd>lua require("package-info").change_version()<CR>', 'change version' },
       d = { '<cmd>lua require("package-info").delete()<CR>', 'delete package' },
       h = { "<cmd>lua require('package-info').hide()<CR>", 'hide' },
