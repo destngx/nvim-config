@@ -38,7 +38,7 @@ require('Comment').setup({
     ---line-comment keymap
     line = 'gc',
     ---block-comment keymap
-    block = 'gb',
+    -- block = 'gb',
   },
 
   ---Pre-hook, called before commenting the line

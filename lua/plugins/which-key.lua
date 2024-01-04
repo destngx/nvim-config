@@ -186,12 +186,12 @@ local normal_mode_mappings = {
       c = 'create worktree',
     }
   },
-
-  m = {
-    name = "Markdown",
-    p = { '<cmd>MarkdownPreviewToggle<CR>', 'MarkdownPreview' },
-  },
-
+  --
+  -- m = {
+  --   name = "Markdown",
+  --   p = { '<cmd>MPToggle<CR>', 'MarkdownPreview' },
+  -- },
+  --
   o = {
     name = 'Obsidian',
     -- o = { '<cmd>ObsidianOpen<CR>', 'open note' },
@@ -285,9 +285,9 @@ wk.register(visual_mode_mappings, visual_opts)
 
 local function attach_markdown(bufnr)
   wk.register({
-    a = {
+    m = {
       name = "Actions",
-      m = { '<cmd>MarkdownPreviewToggle<CR>', 'markdown preview' },
+      m = { '<cmd>MPToggle<CR>', 'markdown preview' },
     }
   }, {
     buffer = bufnr,
@@ -323,7 +323,7 @@ end
 local function attach_npm(bufnr)
   wk.register({
     n = {
-      name = "NPM",
+     name = "NPM",
       c = { '<cmd>lua require("package-info").change_version()<CR>', 'change version' },
       d = { '<cmd>lua require("package-info").delete()<CR>', 'delete package' },
       h = { "<cmd>lua require('package-info').hide()<CR>", 'hide' },

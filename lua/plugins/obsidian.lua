@@ -33,10 +33,10 @@ require('obsidian').setup({
       opts = { buffer = true },
     },
   },
-  disable_frontmatter = true,
+  disable_frontmatter = false,
   note_frontmatter_func = function(note)
     -- This is equivalent to the default frontmatter function.
-    local out = { id = note.id, tags = note.tags }
+    local out = { tags = note.tags }
     -- `note.metadata` contains any manually added fields in the frontmatter.
     -- So here we just make sure those fields are kept in the frontmatter.
     if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then

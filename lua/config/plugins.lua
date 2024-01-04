@@ -74,7 +74,7 @@ return {
   {
     'yamatsum/nvim-nonicons',
     lazy = false,
-    requires = { 'nvim-tree/nvim-web-devicons' }
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
   {
     "goolord/alpha-nvim",
@@ -98,7 +98,6 @@ return {
       "RRethy/nvim-treesitter-textsubjects",
       {
         "m-demare/hlargs.nvim",
-        disable = true,
         config = function()
           require("hlargs").setup({ color = "#F7768E" })
         end,
@@ -108,13 +107,16 @@ return {
 
   -- Navigating (Telescope/Tree/Refactor)
   {
-    "Pocco81/auto-save.nvim",
+    "0x00-ketsu/autosave.nvim",
     lazy = false,
     config = function()
-      require("auto-save").setup {
+      require("autosave").setup {
         enabled = true,
         -- your config goes here
         -- or just leave it empty :)
+        conditions = {
+          filetype_is_not = { "markdown", "gitcommit" },
+        },
       }
     end,
   },
@@ -576,13 +578,24 @@ return {
       require("plugins.package-info")
     end,
   },
+  -- {
+  --   "iamcco/markdown-preview.nvim",
+  --   build = "cd app && npm install",
+  --   init = function()
+  --     vim.g.mkdp_filetypes = { "markdown" }
+  --   end,
+  --   ft = { "markdown" },
+  -- },
   {
-    "iamcco/markdown-preview.nvim",
-    build = "cd app && npm install",
-    setup = function()
-      vim.g.mkdp_filetypes = { "markdown" }
-    end,
-    ft = { "markdown" },
+    '0x00-ketsu/markdown-preview.nvim',
+    ft = { 'md', 'markdown', 'mkd', 'mkdn', 'mdwn', 'mdown', 'mdtxt', 'mdtext', 'rmd', 'wiki' },
+    config = function()
+      require('markdown-preview').setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the setup section below
+      }
+    end
   },
   {
     "airblade/vim-rooter",

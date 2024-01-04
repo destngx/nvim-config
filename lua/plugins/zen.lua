@@ -5,7 +5,7 @@ require("zen-mode").setup({
     -- * an absolute number of cells when > 1
     -- * a percentage of the width / height of the editor when <= 1
     width = 0.8, -- width of the Zen window
-    height = 1, -- height of the Zen window
+    height = 1,  -- height of the Zen window
     -- by default, no options are changed for the Zen window
     -- uncomment any of the options below, or add other vim.wo options you want to apply
     options = {
@@ -23,12 +23,12 @@ require("zen-mode").setup({
     -- comment the lines to not apply the options
     options = {
       enabled = true,
-      ruler = false,             -- disables the ruler text in the cmd line area
-      showcmd = false,           -- disables the command in the last line of the screen
+      ruler = false,                -- disables the ruler text in the cmd line area
+      showcmd = false,              -- disables the command in the last line of the screen
     },
     twilight = { enabled = false }, -- enable to start Twilight when zen mode opens
-    gitsigns = { enabled = true }, -- disables git signs
-    tmux = { enabled = false },  -- disables the tmux statusline
+    gitsigns = { enabled = true },  -- disables git signs
+    tmux = { enabled = false },     -- disables the tmux statusline
     alacritty = {
       enabled = EcoVim.plugins.zen.alacritty_enabled or false,
       font = "14", -- font size
@@ -50,7 +50,7 @@ require("zen-mode").setup({
   -- callback where you can add custom code when the Zen window opens
   on_open = function()
     require("gitsigns.actions").toggle_current_line_blame()
-    require("indent_blankline.commands").disable()
+    require("ibl").setup({ enabled = false } )
     vim.opt.relativenumber = false
     vim.opt.signcolumn = "no"
     require("gitsigns.actions").refresh()
@@ -58,7 +58,7 @@ require("zen-mode").setup({
   -- callback where you can add custom code when the Zen window closes
   on_close = function()
     require("gitsigns.actions").toggle_current_line_blame()
-    require("indent_blankline.commands").enable()
+    require("ibl").setup({ enabled = true } )
     vim.opt.relativenumber = true
     vim.opt.signcolumn = "yes:2"
     require("gitsigns.actions").refresh()
