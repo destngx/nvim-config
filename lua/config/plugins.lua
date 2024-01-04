@@ -419,12 +419,12 @@ return {
     },
     keys = {
       {
-        '<LEADER>m',
+        '<LEADER>M',
         '<CMD>MCstart<CR>',
         desc = 'multicursor',
       },
       {
-        '<LEADER>m',
+        '<LEADER>M',
         '<CMD>MCvisual<CR>',
         mode = "v",
         desc = 'multicursor',

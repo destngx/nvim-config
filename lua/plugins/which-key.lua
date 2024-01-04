@@ -286,8 +286,8 @@ wk.register(visual_mode_mappings, visual_opts)
 local function attach_markdown(bufnr)
   wk.register({
     m = {
-      name = "Actions",
-      m = { '<cmd>MPToggle<CR>', 'markdown preview' },
+      name = "Markdown",
+      p = { '<cmd>MPToggle<CR>', 'markdown preview' },
     }
   }, {
     buffer = bufnr,
