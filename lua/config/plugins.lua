@@ -65,6 +65,7 @@ return {
     dependencies = "neovim/nvim-lspconfig",
   },
   { "nvim-lua/plenary.nvim" },
+  { "David-Kunz/markid" },
   {
     "nvim-tree/nvim-web-devicons",
     config = function()

@@ -66,6 +66,9 @@ keymap("v", ">", ">gv", silent)
 keymap("v", "`", "u", silent)
 keymap("v", "<A-`>", "U", silent)
 
+-- New file by CTRL-N
+keymap("n", "<C-n>", "<cmd>AdvancedNewFile<CR>", silent)
+
 -- Save file by CTRL-S
 keymap("n", "<C-s>", ":w<CR>", silent)
 keymap("i", "<C-s>", "<ESC> :w<CR>", silent)
