@@ -1,4 +1,5 @@
 return {
+  { "LunarVim/bigfile.nvim" },
   -- Obsidian
   {
     "epwalsh/obsidian.nvim",
