@@ -119,8 +119,8 @@ keymap("n", "<Space>.", ":cn<CR>", silent)
 
 -- Manually invoke speeddating in case switch.vim didn't work
 keymap("n", "<C-a>", ":if !switch#Switch() <bar> call speeddating#increment(v:count1) <bar> endif<CR>", silent)
-keymap("n", "<C-x>", ":if !switch#Switch({'reverse': 1}) <bar> call speeddating#increment(-v:count1) <bar> endif<CR>",
-  silent)
+-- keymap("n", "<C-x>", ":if !switch#Switch({'reverse': 1}) <bar> call speeddating#increment(-v:count1) <bar> endif<CR>",
+--  silent)
 
 -- Open links under cursor in browser with gx
 if vim.fn.has('macunix') == 1 then

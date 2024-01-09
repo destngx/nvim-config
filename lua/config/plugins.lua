@@ -1,4 +1,11 @@
 return {
+  {
+    "andrewferrier/wrapping.nvim",
+    lazy = false,
+    config = function()
+      require("plugins.wrapping")
+    end
+  },
   { "LunarVim/bigfile.nvim" },
   -- Obsidian
   {
