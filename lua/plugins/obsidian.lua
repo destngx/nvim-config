@@ -17,11 +17,11 @@ require('obsidian').setup({
     time_format = "%H:%m",
   },
   attachments = { img_folder = "Zettelkasten/Attachments" },
-  finder_mappings = {
-    -- Create a new note from your query with `:ObsidianSearch` and `:ObsidianQuickSwitch`.
-    -- Currently only telescope supports this.
-    new = "<C-x>",
-  },
+  -- finder_mappings = {
+  --   -- Create a new note from your query with `:ObsidianSearch` and `:ObsidianQuickSwitch`.
+  --   -- Currently only telescope supports this.
+  --   new = "<C-x>",
+  -- },
   mappings = {
     -- Overrides the 'gd' mapping to work on markdown/wiki links within your vault.
     ["gd"] = {
@@ -38,12 +38,12 @@ require('obsidian').setup({
       opts = { buffer = true },
     },
 
-    ["<leader>on"] = {
-      action = function()
-        return "<expr>:ObsidianNew " .. vim.fn.input('file name: ') .. "<cr>"
-      end,
-      opts = { expr = true, buffer = false },
-    },
+    -- ["<leader>on"] = {
+    --   action = function()
+    --     return "<expr>:ObsidianNew " .. vim.fn.input('file name: ') .. "<cr>"
+    --   end,
+    --   opts = { expr = true, buffer = false },
+    -- },
     -- ["<leader>or"] = {
     --   action = function()
     --     return ":ObsidianRename " .. vim.fn.input('file name: ') .. "<cr>"
