@@ -10,7 +10,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, { pattern = { "*.txt", 
   command = "setlocal spell" })
 -- Show `` in specific files
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, { pattern = { "*.txt", "*.md", "*.json" },
-  command = "setlocal conceallevel=1" })
+  command = "setlocal conceallevel=2" })
 
 -- Attach specific keybindings in which-key for specific filetypes
 local present, _ = pcall(require, "which-key")
