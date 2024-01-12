@@ -37,7 +37,12 @@ require('obsidian').setup({
       end,
       opts = { buffer = true },
     },
-
+    ["<leader>ob"] = {
+      action = function()
+        return "<cmd>ObsidianBacklinks<cr>"
+      end,
+      opts = { expr = true, buffer = false },
+    },
     -- ["<leader>on"] = {
     --   action = function()
     --     return "<expr>:ObsidianNew " .. vim.fn.input('file name: ') .. "<cr>"

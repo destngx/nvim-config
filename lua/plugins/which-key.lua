@@ -202,6 +202,7 @@ local normal_mode_mappings = {
       name = "paste",
       i = { '<cmd>ObsidianPasteImg<CR>', 'paste image from clipboard' },
     },
+    b = { 'View Backlinks' },
     c = { 'toggle check box' },
     -- r = { '<cmd>ObsidianRename<Cr>', 'rename note' },
   },
