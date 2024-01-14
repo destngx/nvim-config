@@ -144,7 +144,7 @@ local function footer()
   local plugins = require("lazy").stats().count
   local v = vim.version()
   local ecovim_version = line_from(config_dir .. "/.ecovim.version")
-  return string.format(" v%d.%d.%d   %d   %s", v.major, v.minor, v.patch, plugins, ecovim_version[1])
+  return string.format(" v%d.%d.%d   %d   %s ", v.major, v.minor, v.patch, plugins, ecovim_version[1])
 end
 
 dashboard.section.footer.val = {

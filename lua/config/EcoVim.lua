@@ -32,7 +32,7 @@ EcoVim = {
       enabled = true, -- sync after change
     },
     ai = {
-      codeium = { enable = false },
+      codeium = { enable = true },
       tabnine = { enable = false },
       chatgpt = { enable = true }
     },
