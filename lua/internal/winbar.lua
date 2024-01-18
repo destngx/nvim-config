@@ -16,7 +16,7 @@ M.filename = function()
   local extension = ""
   local file_icon = ""
   local file_icon_color = ""
-  local default_file_icon = ""
+  local default_file_icon = ""
   local default_file_icon_color = ""
 
   if not isempty(filename) then

@@ -1,6 +1,5 @@
 local keymap = vim.keymap.set
 local silent = { silent = true }
-
 -- Save key strokes (now we do not need to press shift to enter command mode).
 keymap({ "n", "x" }, ";", ":")
 
