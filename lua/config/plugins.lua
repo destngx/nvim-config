@@ -409,9 +409,6 @@ return {
     config = function()
       require("plugins.toggleterm")
     end,
-    keys = {
-      { "<Leader>at", "<cmd>ToggleTerm direction=float<CR>", desc = "terminal float" }
-    }
   },
   { "tpope/vim-repeat",           lazy = false },
   { "tpope/vim-speeddating",      lazy = false },

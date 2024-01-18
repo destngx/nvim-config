@@ -7,15 +7,15 @@ require("toggleterm").setup {
       return vim.o.columns * 0.4
     end
   end,
-  open_mapping = [[<C - `>]],
+  -- open_mapping = [[<C - `>]],
   ---@diagnostic disable-next-line: unused-local
-  on_open = function(term)
-    require('shade').toggle();
-  end,
+  -- on_open = function(term)
+  --   require('shade').toggle();
+  -- end,
   ---@diagnostic disable-next-line: unused-local
-  on_close = function(term)
-    require('shade').toggle();
-  end,
+  -- on_close = function(term)
+  --   require('shade').toggle();
+  -- end,
   highlights = {
     -- highlights which map to a highlight group name and a table of it's values
     -- NOTE: this is only a subset of values, any group placed here will be set for the terminal window split
