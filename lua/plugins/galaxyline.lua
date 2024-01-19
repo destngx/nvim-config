@@ -4,7 +4,6 @@
 local gl = require('galaxyline')
 local condition = require('galaxyline.condition')
 local package_info_present, package = pcall(require, 'package-info')
-
 -- Configuration {{{1
 
 -- Functions {{{2
@@ -50,8 +49,9 @@ end
 -- Settings {{{2
 local lineLengthWarning = 80
 local lineLengthError = 120
-local leftbracket = "" -- Curve.
-local rightbracket = "" -- Curve.
+local leftbracket = "" -- Curve.
+local rightbracket = "" -- Curve.
+-- local rightbracket = "" -- Curve.
 -- local leftbracket = u 'e0b2' -- Angle filled.
 -- local rightbracket = u 'e0b0' -- Angle filled.
 -- local leftbracket = u 'e0b3' -- Angle.
@@ -121,14 +121,14 @@ local colors = {
 }
 
 local mode_map = {
-  ['n']        = { '#569CD6', 'NORMAL' },
-  ['i']        = { '#D16969', 'INSERT' },
-  ['R']        = { '#D16969', 'REPLACE' },
-  ['c']        = { '#608B4E', 'COMMAND' },
-  ['v']        = { '#C586C0', 'VISUAL' },
+  ['n']        = { '#569CD6', ' NORMAL ' },
+  ['i']        = { '#D16969', ' INSERT ' },
+  ['R']        = { '#D16969', ' REPLACE ' },
+  ['c']        = { '#608B4E', ' COMMAND ' },
+  ['v']        = { '#C586C0', ' VISUAL ' },
   ['V']        = { '#C586C0', 'VIS-LN' },
   ['']        = { '#C586C0', 'VIS-BLK' },
-  ['s']        = { '#FF8800', 'SELECT' },
+  ['s']        = { '#FF8800', ' SELECT ' },
   ['S']        = { '#FF8800', 'SEL-LN' },
   ['']        = { '#DCDCAA', 'SEL-BLK' },
   ['t']        = { '#569CD6', 'TERMINAL' },
@@ -199,7 +199,7 @@ gls.left = {}
 -- Edit mode {{{2
 table.insert(gls.left, {
   ViModeSpaceOnFarLeft = {
-    provider = function() return " " end,
+    provider = function() return "" end,
     highlight = { colors.giticon, colors.bg }
   }
 })
@@ -207,7 +207,7 @@ table.insert(gls.left, {
   ViModeLeft = {
     provider = function()
       highlight('ViModeHighlight', mode_map[vim.fn.mode()][1], colors.bg)
-      return leftbracket
+      return ""
     end,
     highlight = 'ViModeHighlight'
   }
@@ -217,7 +217,7 @@ table.insert(gls.left, {
     provider = function()
       highlight('GalaxyViMode', colors.modetext, mode_map[vim.fn.mode()][1])
 
-      return icons['vim'] .. " " .. mode_map[vim.fn.mode()][2]
+      return " " .. mode_map[vim.fn.mode()][2]
     end,
     highlight = 'GalaxyViMode'
   }
@@ -225,7 +225,7 @@ table.insert(gls.left, {
 table.insert(gls.left, {
   ViModeRight = {
     provider = function()
-      return rightbracket
+      return ""
     end,
     separator = ' ',
     separator_highlight = 'ViModeHighlight',
@@ -247,7 +247,7 @@ table.insert(gls.left, {
 table.insert(gls.left, {
   GitIcon = {
     provider = function()
-      return ' '
+      return '  '
     end,
     condition = condition.check_git_workspace,
     separator = '',
@@ -327,7 +327,7 @@ table.insert(gls.left, {
       if gl.lspclient ~= nil then
         name = gl.lspclient()
       end
-      return '' .. name
+      return '  ' .. name
     end,
     highlight = { colors.lspbg, colors.lspicon }
   }
@@ -431,8 +431,8 @@ table.insert(gls.right, {
 table.insert(gls.right, {
   TypeFileFormatIcon = {
     provider = function()
-      local icon = icons[vim.bo.fileformat] or ''
-      return string.format(' %s', icon)
+      local icon = icons[vim.bo.fileformat] or ' '
+      return string.format('  %s ', icon)
     end,
     highlight = { colors.typebg, colors.typeicon }
   }
@@ -467,6 +467,7 @@ end
 table.insert(gls.right, {
   FileIcon = {
     provider = 'FileIcon',
+    separator = ' ',
     highlight = { colors.typeicon, colors.typebg }
   }
 })
@@ -516,7 +517,7 @@ table.insert(gls.right, {
 table.insert(gls.right, {
   StatsIcon = {
     provider = function()
-      return '⅑'
+      return ' '
     end,
     highlight = { colors.statsbg, colors.statsicon }
   }
@@ -548,7 +549,7 @@ table.insert(gls.right, {
     provider = function()
       return leftbracket
     end,
-    separator = ' ',
+    separator = '',
     separator_highlight = { colors.statsicon, colors.statsbg },
     highlight = 'LinePosHighlightStart'
   }
@@ -591,9 +592,9 @@ table.insert(gls.right, {
     provider = function()
       if vim.bo.expandtab
       then
-        return '  '
+        return ' 󰋘 '
       else
-        return '  '
+        return ' 󰋘 '
       end
     end,
     condition = condition.hide_in_width,
@@ -616,7 +617,7 @@ table.insert(gls.right, {
 })
 table.insert(gls.right, {
   StatsSpcSectionEnd = {
-    provider = function() return rightbracket .. " " end,
+    provider = function() return "" end,
     highlight = { colors.statsbg, colors.bg }
   }
 })
