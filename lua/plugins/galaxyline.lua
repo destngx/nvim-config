@@ -5,7 +5,6 @@ local gl = require('galaxyline')
 local condition = require('galaxyline.condition')
 local package_info_present, package = pcall(require, 'package-info')
 -- Configuration {{{1
-
 -- Functions {{{2
 local function u(code)
   if type(code) == 'string' then
@@ -485,14 +484,14 @@ table.insert(gls.right, {
     highlight = { colors.typetext, colors.typebg }
   }
 })
-table.insert(gls.right, {
-  FileEncode = {
-    provider = 'FileEncode',
-    separator = '',
-    separator_highlight = { colors.typeicon, colors.typebg },
-    highlight = { colors.typetext, colors.typebg }
-  }
-})
+-- table.insert(gls.right, {
+--   FileEncode = {
+--     provider = 'FileEncode',
+--     separator = '',
+--     separator_highlight = { colors.typeicon, colors.typebg },
+--     highlight = { colors.typetext, colors.typebg }
+--   }
+-- })
 table.insert(gls.right, {
   TypeSectionEnd = {
     provider = function() return rightbracket end,
@@ -517,7 +516,7 @@ table.insert(gls.right, {
 table.insert(gls.right, {
   StatsIcon = {
     provider = function()
-      return ' '
+      return ''
     end,
     highlight = { colors.statsbg, colors.statsicon }
   }
@@ -537,7 +536,7 @@ table.insert(gls.right, {
 table.insert(gls.right, {
   VerticalPosAndSize = {
     provider = function()
-      return string.format(" %s /%4i ", vim.fn.line('.'), vim.fn.line('$'))
+      return string.format("%s/%4i ", vim.fn.line('.'), vim.fn.line('$'))
     end,
     separator = '',
     separator_highlight = { colors.statsicon, colors.statsbg },
@@ -558,7 +557,7 @@ table.insert(gls.right, {
   CursorColumn = {
     provider = function()
       setLineWidthColours()
-      return "" .. string.format("%3i", vim.fn.col('.')) .. " /"
+      return string.format("%3i", vim.fn.col('.')) .. "/"
     end,
     highlight = 'LinePosHighlightColNum'
   }
@@ -566,7 +565,7 @@ table.insert(gls.right, {
 table.insert(gls.right, {
   LineLengthStart = {
     provider = function()
-      return " " .. leftbracket
+      return "" .. leftbracket
     end,
     highlight = 'LinePosHighlightMid'
   }
@@ -574,7 +573,7 @@ table.insert(gls.right, {
 table.insert(gls.right, {
   LineLength = {
     provider = function()
-      return ' ' .. string.format("%3i", string.len(vim.fn.getline('.')))
+      return '' .. string.format("%3i", string.len(vim.fn.getline('.')))
     end,
     highlight = 'LineLenHighlightLenNum'
   }
@@ -582,7 +581,7 @@ table.insert(gls.right, {
 table.insert(gls.right, {
   LineLengthEnd = {
     provider = function()
-      return " " .. rightbracket .. " "
+      return "" .. rightbracket .. ""
     end,
     highlight = 'LinePosHighlightEnd'
   }
@@ -592,9 +591,9 @@ table.insert(gls.right, {
     provider = function()
       if vim.bo.expandtab
       then
-        return ' 󰋘 '
+        return '  ' .. tostring(vim.fn.wordcount().words) .. '  '
       else
-        return ' 󰋘 '
+        return '  ' .. tostring(vim.fn.wordcount().words) .. '  '
       end
     end,
     condition = condition.hide_in_width,
