@@ -71,4 +71,125 @@ sudo install lazygit /usr/local/bin
 - *git-worktree
 - lazygit
 - *debug with nvim-dap, nvim-dap-repl-highlights
-# Custom key set thta support fullstack
+# Custom key set that support fullstack
+
+1. Search and Navigation:
+
+diffview.nvim
+telescope-fzf-native.nvim
+telescope-repo.nvim
+telescope.nvim
+
+2.Markdown and Preview:
+
+markdown-preview.nvim
+
+3. Version Control:
+
+git-conflict.nvim
+git-worktree.nvim
+gitsigns.nvim
+octo.nvim
+
+4. Debugging:
+
+nvim-dap
+nvim-dap-repl-highlights
+nvim-dap-ui
+nvim-dap-virtual-text
+nvim-dap-vscode-js
+
+5. Project Management:
+
+neovim-session-manager
+nvim-rooter
+
+6. Appearance Themes:
+
+tokyonight.nvim
+
+7. Colors and Syntax Highlighting:
+
+nvim-colorizer.lua
+twilight.nvim
+
+8. Snippets:
+
+friendly-snippets
+
+9. LSP (Language Server Protocol):
+
+nvim-lsp-file-operations
+nvim-lspconfig
+nvim-treesitter
+nvim-treesitter-textobjects
+nvim-treesitter-textsubjects
+nvim-ts-context-commentstring
+
+
+
+10. Code Formatting, Indentation, and Auto-pairing:
+
+nvim-autopairs
+vim-indent-object
+vim-python-pep8-indent
+vim-pythonsense
+
+11. Git Integration:
+
+git-conflict.nvim
+git-worktree.nvim
+gitsigns.nvim
+octo.nvim
+
+12. Popup and Notifications:
+
+popup.nvim
+nvim-notify
+
+13. Performance and Speed:
+
+lazy.nvim
+lazygit.nvim
+
+14. File Operations:
+
+nvim-lsp-file-operations
+
+15. Quality of Life:
+
+stay-in-place.nvim
+vim-repeat
+vim-speeddating
+vim-swap
+
+16. User Interface:
+
+alpha-nvim
+bufferline.nvim
+galaxyline.nvim
+indent-blankline.nvim
+nvim-tree.lua
+popup.nvim
+
+17. Utility:
+
+bigfile.nvim
+glance.nvim
+noice.nvim
+nui.nvim
+numb.nvim
+promise-async
+refactoring.nvim
+shade.nvim
+tailwind-fold.nvim
+tailwind-sorter.nvim
+template-string.nvim
+todo-comments.nvim
+treesj
+trouble.nvim
+tsc.nvim
+tw-values.nvim
+vim-rooter
+wrapping.nvim
+
