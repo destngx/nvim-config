@@ -1,9 +1,16 @@
+---@diagnostic disable: different-requires
 return {
+  -- {
+  --   "m4xshen/hardtime.nvim",
+  --   lazy = false,
+  --   dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+  --   opts = {}
+  -- },
   {
-    "m4xshen/hardtime.nvim",
-    lazy = false,
-    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-    opts = {}
+    'declancm/cinnamon.nvim',
+    config = function()
+      require('cinnamon').setup()
+    end
   },
   {
     "andrewferrier/wrapping.nvim",
@@ -279,6 +286,7 @@ return {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     config = function()
+      ---@diagnostic disable-next-line: different-requires
       require("plugins.cmp")
     end,
     dependencies = {
@@ -708,7 +716,7 @@ return {
   {
     "NvChad/nvim-colorizer.lua",
     config = function()
-      require("plugins.colorizer")
+      require("plugins.nvchad-colorizer")
     end,
   },
   {

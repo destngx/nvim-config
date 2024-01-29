@@ -17,7 +17,6 @@ local git_icons = {
 local api = require("nvim-tree.api")
 local TREE_WIDTH = 40
 
-local nonicons_extention = require("nvim-nonicons.extentions.nvim-tree")
 
 local function on_attach(bufnr)
   local function opts(desc)
@@ -25,13 +24,6 @@ local function on_attach(bufnr)
   end
 
 
-  -- Default mappings not inserted as:
-  --  remove_keymaps = true
-  --  OR
-  --  view.mappings.custom_only = true
-
-
-  -- Mappings migrated from view.mappings.list
   --
   -- You will need to insert "your code goes here" for any mappings with a custom action_cb
   vim.keymap.set('n', '<CR>', api.node.open.edit, opts('Open'))
@@ -73,45 +65,6 @@ local function on_attach(bufnr)
   vim.keymap.set('n', 'W', api.tree.collapse_all, opts('Collapse'))
   vim.keymap.set('n', 'S', api.tree.search_node, opts('Search'))
 end
-local keymappings = {
-  { key = { "<CR>", "o", "<2-LeftMouse>" }, action = "edit" },
-  -- <C-e> keymapping cannot be set because it's used for toggling nvim-tree
-  -- { key = "<C-e>",                        action = "edit_in_place" },
-  { key = { "O" },                          action = "edit_no_picker" },
-  { key = { "<2-RightMouse>", "<C-]>" },    action = "cd" },
-  { key = "<C-v>",                          action = "vsplit" },
-  { key = "<C-x>",                          action = "split" },
-  { key = "<C-t>",                          action = "tabnew" },
-  { key = "<",                              action = "prev_sibling" },
-  { key = ">",                              action = "next_sibling" },
-  { key = "P",                              action = "parent_node" },
-  { key = "<BS>",                           action = "close_node" },
-  { key = "<Tab>",                          action = "preview" },
-  { key = "K",                              action = "first_sibling" },
-  { key = "J",                              action = "last_sibling" },
-  { key = "I",                              action = "toggle_ignored" },
-  { key = "H",                              action = "toggle_dotfiles" },
-  { key = "R",                              action = "refresh" },
-  { key = "a",                              action = "create" },
-  { key = "d",                              action = "remove" },
-  { key = "D",                              action = "trash" },
-  { key = "r",                              action = "rename" },
-  { key = "<C-r>",                          action = "full_rename" },
-  { key = "x",                              action = "cut" },
-  { key = "c",                              action = "copy" },
-  { key = "p",                              action = "paste" },
-  { key = "y",                              action = "copy_name" },
-  { key = "Y",                              action = "copy_path" },
-  { key = "gy",                             action = "copy_absolute_path" },
-  { key = "[c",                             action = "prev_git_item" },
-  { key = "]c",                             action = "next_git_item" },
-  { key = "-",                              action = "dir_up" },
-  { key = "s",                              action = "system_open" },
-  { key = "q",                              action = "close" },
-  { key = "g?",                             action = "toggle_help" },
-  { key = "W",                              action = "collapse_all" },
-  { key = "S",                              action = "search_node" },
-}
 
 require("nvim-tree").setup({
   on_attach = on_attach,
@@ -121,7 +74,8 @@ require("nvim-tree").setup({
   respect_buf_cwd = true,
   -- show lsp diagnostics in the signcolumn
   diagnostics = {
-    enable = false,
+    enable = true,
+    show_on_dirs = true,
     icons = {
       hint = "",
       info = "",
@@ -130,7 +84,7 @@ require("nvim-tree").setup({
     },
   },
   renderer = {
-    group_empty = true,
+    group_empty = false,
     highlight_git = true,
     highlight_opened_files = "none",
     root_folder_label = ":~",
