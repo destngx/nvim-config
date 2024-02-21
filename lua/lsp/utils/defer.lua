@@ -1,6 +1,7 @@
 -- Source: https://gist.github.com/runiq/31aa5c4bf00f8e0843cd267880117201
 -- This function is used in lsp/documentcolors to make them work in tailwindcss
 
+require('table')
 local M = {}
 
 --- Debounces a function on the trailing edge. Automatically
@@ -22,7 +23,7 @@ function M.debounce_trailing(fn, ms, first)
       local argc = select('#', ...)
 
       timer:start(ms, 0, function()
-        pcall(vim.schedule_wrap(fn), table.unpack(argv, 1, argc))
+        pcall(vim.schedule_wrap(fn), unpack(argv, 1, argc))
       end)
     end
   else
@@ -32,7 +33,7 @@ function M.debounce_trailing(fn, ms, first)
       argc = argc or select('#', ...)
 
       timer:start(ms, 0, function()
-        pcall(vim.schedule_wrap(fn), table.unpack(argv, 1, argc))
+        pcall(vim.schedule_wrap(fn), unpack(argv, 1, argc))
       end)
     end
   end

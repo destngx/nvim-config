@@ -138,8 +138,8 @@ keymap("v", "<leader>ca", "<cmd>'<,'>lua vim.lsp.buf.code_action()<CR>", silent)
 keymap("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<CR>", silent)
 keymap("n", "<leader>cf", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", silent)
 keymap("v", "<leader>cf", function()
-  local start_row, _ = table.unpack(vim.api.nvim_buf_get_mark(0, "<"))
-  local end_row, _ = table.unpack(vim.api.nvim_buf_get_mark(0, ">"))
+  local start_row, _ = unpack(vim.api.nvim_buf_get_mark(0, "<"))
+  local end_row, _ = unpack(vim.api.nvim_buf_get_mark(0, ">"))
 
   vim.lsp.buf.format({
     range = {
