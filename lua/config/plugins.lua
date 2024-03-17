@@ -255,9 +255,33 @@ return {
     lazy = false,
     cond = os.getenv "OPENAI_API_KEY" ~= nil or os.getenv "PERPLEXITY_API_KEY" ~= nil,
     config = function()
-      require("parrot").setup {
-              }
+      require("plugins.parrot")
     end,
+    keys = {
+      -- Normal and Insert mode mappings
+      { "<C-g>c", "<cmd>PrtChatNew<cr>", mode = { "n", "i" }, desc = "New Chat" },
+      { "<C-g>t", "<cmd>PrtChatToggle tabnew<cr>", mode = { "n", "i" }, desc = "Toggle Popup Chat" },
+      { "<C-g>f", "<cmd>PrtChatFinder<cr>", mode = { "n", "i" }, desc = "Chat Finder" },
+      { "<C-g>r", "<cmd>PrtRewrite<cr>", mode = { "n", "i" }, desc = "Inline Rewrite" },
+      { "<C-g>a", "<cmd>PrtAppend<cr>", mode = { "n", "i" }, desc = "Append" },
+      { "<C-g>o", "<cmd>PrtPrepend<cr>", mode = { "n", "i" }, desc = "Prepend" },
+
+      -- Visual mode mappings
+      { "<C-g>c", "<cmd>PrtChatNew<cr>", mode = "v", desc = "Visual Chat New" },
+      { "<C-g>r", "<cmd>PrtRewrite<cr>", mode = "v", desc = "Visual Rewrite" },
+      { "<C-g>a", "<cmd>PrtAppend<cr>", mode = "v", desc = "Visual Append" },
+      { "<C-g>o", "<cmd>PrtPrepend<cr>", mode = "v", desc = "Visual Prepend" },
+      { "<C-g>e", "<cmd>PrtEnew<cr>", mode = "v", desc = "Visual Enew" },
+
+      -- Additional mappings
+      { "<C-g>s", "<cmd>PrtStop<cr>", mode = { "n", "i", "v", "x" }, desc = "Stop" },
+      { "<C-g>i", "<cmd>PrtComplete<cr>", mode = { "n", "i", "v", "x" }, desc = "Complete the visual selection" },
+
+      -- Context and agent/provider selection mappings
+      { "<C-g>x", "<cmd>PrtContext<cr>", mode = "n", desc = "Open file with custom context" },
+      { "<C-g>n", "<cmd>PrtAgent<cr>", mode = "n", desc = "Select agent or show info" },
+      { "<C-g>p", "<cmd>PrtProvider<cr>", mode = "n", desc = "Select provider or show info" },
+    },
   },
   -- LSP Cmp
   {
