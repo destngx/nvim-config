@@ -72,7 +72,8 @@ keymap("n", "<C-n>", "<cmd>AdvancedNewFile<CR>", silent)
 keymap("n", "<C-s>", ":w<CR>", silent)
 keymap("i", "<C-s>", "<ESC> :w<CR>", silent)
 
--- Telescope
+-- telescope
+
 keymap("n", "<C-p>", "<CMD>lua require('plugins.telescope').project_files()<CR>")
 keymap("n", "<S-p>", "<CMD>lua require('plugins.telescope.pickers.multi-rg')()<CR>")
 

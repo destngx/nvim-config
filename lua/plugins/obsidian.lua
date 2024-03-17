@@ -9,8 +9,8 @@ require('obsidian').setup({
   completion = {
     nvim_cmp = true,
     min_chars = 2,
-    new_notes_location = "notes_subdir",
   },
+  new_notes_location = "notes_subdir",
   templates = {
     subdir = "Templates",
     date_format = "%d-%m-%Y",
@@ -24,6 +24,13 @@ require('obsidian').setup({
   -- },
   mappings = {
     -- Overrides the 'gd' mapping to work on markdown/wiki links within your vault.
+    -- vim.keymap.set("n", "<C-p>", "<CMD>ObsidianSearch<CR>")
+    ["<C-p>"] = {
+      action = function()
+        return "<CMD>ObsidianSearch<CR>"
+      end,
+      opts = { noremap = false, expr = true, buffer = true },
+    },
     ["gd"] = {
       action = function()
         return require("obsidian").util.gf_passthrough()

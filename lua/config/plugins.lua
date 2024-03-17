@@ -19,14 +19,14 @@ return {
     "epwalsh/obsidian.nvim",
     version = "*", -- recommended, use latest release instead of latest commit
     lazy = true,
-    ft = { "markdown" },
+    -- ft = { "markdown" },
     -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-    -- event = {
-    --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-    --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
-    --   "BufReadPre path/to/my-vault/**.md",
-    --   "BufNewFile path/to/my-vault/**.md",
-    -- },
+    event = {
+      -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+      -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
+      "BufReadPre /Users/destnguyxn/projects/obsidian-vaults/**.md",
+      "BufNewFile /Users/destnguyxn/projects/obsidian-vaults/**.md",
+    },
     dependencies = {
       -- Required.
       "nvim-lua/plenary.nvim",
@@ -249,58 +249,16 @@ return {
     },
     config = true,
   },
-  -- {
-  --   "Bryley/neoai.nvim",
-  --   cond = EcoVim.plugins.ai.chatgpt.enabled,
-  --   dependencies = {
-  --     "MunifTanjim/nui.nvim",
-  --   },
-  --   cmd = {
-  --     "NeoAI",
-  --     "NeoAIOpen",
-  --     "NeoAIClose",
-  --     "NeoAIToggle",
-  --     "NeoAIContext",
-  --     "NeoAIContextOpen",
-  --     "NeoAIContextClose",
-  --     "NeoAIInject",
-  --     "NeoAIInjectCode",
-  --     "NeoAIInjectContext",
-  --     "NeoAIInjectContextCode",
-  --   },
-  --   keys = {
-  --     { "<leader>as", desc = "summarize text" },
-  --     { "<leader>ag", desc = "generate git message" },
-  --   },
-  --   config = true,
-  -- },
   {
     "frankroeder/parrot.nvim",
-    -- OPTIONAL
-    -- dependencies = { "fzf-lua" },
+    dependencies = { "ibhagwan/fzf-lua" },
     lazy = false,
+    cond = os.getenv "OPENAI_API_KEY" ~= nil or os.getenv "PERPLEXITY_API_KEY" ~= nil,
     config = function()
       require("parrot").setup {
-        providers = {
-          -- pplx = {
-          --   api_key = os.getenv "PERPLEXITY_API_KEY",
-          --   -- OPTIONAL
-          --   -- gpg command
-          --   -- api_key = { "gpg", "--decrypt", vim.fn.expand("$HOME") .. "/pplx_api_key.txt.gpg"  },
-          --   -- macOS security tool
-          --   -- api_key = { "/usr/bin/security", "find-generic-password", "-s pplx-api-key", "-w" },
-          -- },
-          openai = {
-            api_key = os.getenv "OPENAI_API_KEY",
-          },
-          anthropic = {
-            api_key = os.getenv "ANTHROPIC_API_KEY",
-          },
-        },
-      }
+              }
     end,
   },
-
   -- LSP Cmp
   {
     "hrsh7th/nvim-cmp",
