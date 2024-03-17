@@ -137,5 +137,6 @@ end
 
 require("ufo").setup({
   fold_virt_text_handler = ufo_config_handler,
-  close_fold_kinds = { "imports" },
+  close_fold_kinds_for_ft = {
+    default = { "import", "comment" } },
 })

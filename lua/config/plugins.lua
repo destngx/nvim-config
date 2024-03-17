@@ -1,11 +1,5 @@
 ---@diagnostic disable: different-requires
 return {
-  -- {
-  --   "m4xshen/hardtime.nvim",
-  --   lazy = false,
-  --   dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-  --   opts = {}
-  -- },
   {
     'declancm/cinnamon.nvim',
     config = function()
@@ -255,38 +249,55 @@ return {
     },
     config = true,
   },
+  -- {
+  --   "Bryley/neoai.nvim",
+  --   cond = EcoVim.plugins.ai.chatgpt.enabled,
+  --   dependencies = {
+  --     "MunifTanjim/nui.nvim",
+  --   },
+  --   cmd = {
+  --     "NeoAI",
+  --     "NeoAIOpen",
+  --     "NeoAIClose",
+  --     "NeoAIToggle",
+  --     "NeoAIContext",
+  --     "NeoAIContextOpen",
+  --     "NeoAIContextClose",
+  --     "NeoAIInject",
+  --     "NeoAIInjectCode",
+  --     "NeoAIInjectContext",
+  --     "NeoAIInjectContextCode",
+  --   },
+  --   keys = {
+  --     { "<leader>as", desc = "summarize text" },
+  --     { "<leader>ag", desc = "generate git message" },
+  --   },
+  --   config = true,
+  -- },
   {
-    "Bryley/neoai.nvim",
-    cond = EcoVim.plugins.ai.chatgpt.enabled,
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-    },
-    cmd = {
-      "NeoAI",
-      "NeoAIOpen",
-      "NeoAIClose",
-      "NeoAIToggle",
-      "NeoAIContext",
-      "NeoAIContextOpen",
-      "NeoAIContextClose",
-      "NeoAIInject",
-      "NeoAIInjectCode",
-      "NeoAIInjectContext",
-      "NeoAIInjectContextCode",
-    },
-    keys = {
-      { "<leader>as", desc = "summarize text" },
-      { "<leader>ag", desc = "generate git message" },
-    },
-    config = function ()
-      require("neoai").setup({
-        models = {
-          {
-            name = "openai",
-            model = "gpt-4",
+    "frankroeder/parrot.nvim",
+    -- OPTIONAL
+    -- dependencies = { "fzf-lua" },
+    lazy = false,
+    config = function()
+      require("parrot").setup {
+        providers = {
+          -- pplx = {
+          --   api_key = os.getenv "PERPLEXITY_API_KEY",
+          --   -- OPTIONAL
+          --   -- gpg command
+          --   -- api_key = { "gpg", "--decrypt", vim.fn.expand("$HOME") .. "/pplx_api_key.txt.gpg"  },
+          --   -- macOS security tool
+          --   -- api_key = { "/usr/bin/security", "find-generic-password", "-s pplx-api-key", "-w" },
+          -- },
+          openai = {
+            api_key = os.getenv "OPENAI_API_KEY",
+          },
+          anthropic = {
+            api_key = os.getenv "ANTHROPIC_API_KEY",
           },
         },
-      })
+      }
     end,
   },
 

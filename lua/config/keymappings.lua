@@ -37,7 +37,7 @@ keymap("i", "<C-E>", "<END>")
 -- Go to beginning of command in command-line mode
 keymap("c", "<C-A>", "<HOME>")
 -- Do not move my cursor when joining lines.
-keymap("n", "J", "", {
+keymap("n", "<Leader>j", "", {
   desc = "join line",
   callback = function()
     vim.cmd([[

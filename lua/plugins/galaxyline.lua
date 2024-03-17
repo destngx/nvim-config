@@ -591,9 +591,9 @@ table.insert(gls.right, {
     provider = function()
       if vim.bo.expandtab
       then
-        return '  ' .. tostring(vim.fn.wordcount().words) .. '  '
+        return '  ' .. tostring(vim.fn.wordcount().words) .. '  '
       else
-        return '  ' .. tostring(vim.fn.wordcount().words) .. '  '
+        return '  ' .. tostring(vim.fn.wordcount().words) .. '  '
       end
     end,
     condition = condition.hide_in_width,
