@@ -237,8 +237,8 @@ local normal_mode_mappings = {
   },
 
   t = {
-    name = 'Toggle',
-    m = { 'toggle table mode markdown' },
+    name = 'Table Mode',
+    -- m = { 'toggle' },
     -- t = { 'tableize' },
     t = { "<cmd>ToggleTerm direction=float<CR>", "terminal float" }
   },

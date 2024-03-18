@@ -160,5 +160,5 @@ require("parrot").setup {
         agent.provider
       )
     end,
-  }
+  },
 }

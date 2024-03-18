@@ -1,11 +1,13 @@
 ---@diagnostic disable: different-requires
 return {
+  -- Smooth scolling for any movement command or string of commands
   {
     'declancm/cinnamon.nvim',
     config = function()
       require('cinnamon').setup()
     end
   },
+  -- handling soft and hard line wrapping in text-like files
   {
     "andrewferrier/wrapping.nvim",
     lazy = false,
@@ -13,6 +15,7 @@ return {
       require("plugins.wrapping")
     end
   },
+  -- Automatically turn off some features of neovim when working with large files
   { "LunarVim/bigfile.nvim" },
   -- Obsidian
   {
@@ -24,12 +27,13 @@ return {
     event = {
       -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
       -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
+      -- "BufReadPre" .. vim.fn.expand "~" .. "/obsidian-vaults/**.md",
+      -- "BufNewFile" .. vim.fn.expand "~" .. "/obsidian-vaults/**.md",
       "BufReadPre /Users/destnguyxn/projects/obsidian-vaults/**.md",
       "BufNewFile /Users/destnguyxn/projects/obsidian-vaults/**.md",
     },
     dependencies = {
-      -- Required.
-      "nvim-lua/plenary.nvim",
+      "nvim-lua/plenary.nvim", -- Required.
     },
     config = function()
       require("plugins.obsidian")
@@ -46,6 +50,7 @@ return {
       require("config.colorscheme")
     end,
   },
+  -- experimental interface for messages, command-line and the popup menu
   {
     "folke/noice.nvim",
     cond = EcoVim.plugins.experimental_noice.enabled,
@@ -54,6 +59,7 @@ return {
       require("plugins.noice")
     end,
   },
+  -- move by subwords and skip insignificant punctuation
   {
     "chrisgrieser/nvim-spider",
     cond = EcoVim.plugins.jump_by_subwords.enabled,
@@ -72,6 +78,7 @@ return {
       )
     end,
   },
+  -- show the current context of file in winbar
   {
     "SmiteshP/nvim-navic",
     config = function()
@@ -87,11 +94,13 @@ return {
       require("nvim-web-devicons").setup({ default = true })
     end,
   },
+  -- alternative icon pack
   {
     'yamatsum/nvim-nonicons',
     lazy = false,
     dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
+  -- dashboard for neovim
   {
     "goolord/alpha-nvim",
     lazy = false,
@@ -100,11 +109,12 @@ return {
     end,
   },
 
-  -- Treesitter
+  -- advanced new files and folders
   {
     "Mohammed-Taher/AdvancedNewFile.nvim",
     lazy = false,
   },
+  -- enhances syntax highlighting and code context
   {
     "nvim-treesitter/nvim-treesitter",
     event = "BufReadPre",
@@ -124,12 +134,7 @@ return {
       },
     },
   },
-  -- show context of current line
-  {
-    "nvim-treesitter/nvim-treesitter-context",
-    lazy = false,
-  },
-  -- Navigating (Telescope/Tree/Refactor)
+-- autosave config
   {
     "0x00-ketsu/autosave.nvim",
     lazy = false,
@@ -152,6 +157,7 @@ return {
       require("plugins.better-escape")
     end,
   },
+  -- refactor, replace, find
   {
     "nvim-pack/nvim-spectre",
     lazy = true,
@@ -169,6 +175,7 @@ return {
       }
     }
   },
+  -- fuzzy finder and searching for everything
   {
     "nvim-telescope/telescope.nvim",
     lazy = false,
@@ -182,6 +189,7 @@ return {
       { "cljoly/telescope-repo.nvim" },
     },
   },
+  -- a file explorer tree
   {
     "nvim-tree/nvim-tree.lua",
     cmd = {
@@ -198,11 +206,18 @@ return {
       require("plugins.tree")
     end,
   },
+  -- show context of current line
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    lazy = false,
+  },
+  -- maintaining the cursor position during various actions
   {
     "gbprod/stay-in-place.nvim",
     lazy = false,
     config = true, -- run require("stay-in-place").setup()
   },
+  -- refactoring like in Refactoring book by Martin Fowler
   {
     "ThePrimeagen/refactoring.nvim",
     dependencies = {
@@ -233,6 +248,7 @@ return {
     },
     servers = nil,
   },
+  -- manage LSP servers, DAP servers, linters, and formatters
   {
     "williamboman/mason.nvim",
     cmd = "Mason",
@@ -241,7 +257,7 @@ return {
     },
   },
 
-  -- AI
+  -- AI quick code completion (not very privacy)
   {
     "jcdickinson/codeium.nvim",
     cond = EcoVim.plugins.ai.codeium.enabled,
@@ -253,6 +269,7 @@ return {
     },
     config = true,
   },
+  -- AI Chat and code contex assistant
   {
     "frankroeder/parrot.nvim",
     dependencies = { "ibhagwan/fzf-lua" },
@@ -289,7 +306,7 @@ return {
     },
   },
 
-  -- LSP Addons
+  -- Neovim UI enhancements
   {
     "stevearc/dressing.nvim",
     event = "VeryLazy",
@@ -298,7 +315,9 @@ return {
       require("plugins.dressing")
     end,
   },
+  -- add vscode like pictogram to neovim lsp
   { "onsails/lspkind-nvim" },
+  --add pretty diagnostics, references, telescope result, quickfix and location list
   {
     "folke/trouble.nvim",
     cmd = { "TroubleToggle", "Trouble" },
@@ -306,7 +325,7 @@ return {
       require("plugins.trouble")
     end,
   },
-  -- { "nvim-lua/popup.nvim" },
+  -- enhance Typescipt LSP
   {
     "pmizio/typescript-tools.nvim",
     ft = { "typescript", "typescriptreact" },
@@ -318,6 +337,11 @@ return {
       require("plugins.typescript-tools")
     end,
   },
+-- ╭─────────────────────────────────────────────────────────╮
+-- │ As soon as this plugin detects you're trying to use     │
+-- │ template strings (adding ${}) the quotes will be        │
+-- │ changed to backticks                                    │
+-- ╰─────────────────────────────────────────────────────────╯
   {
     "axelvc/template-string.nvim",
     event = "InsertEnter",
@@ -333,14 +357,17 @@ return {
   { "Vimjas/vim-python-pep8-indent",   ft = { "python" } },
   -- Python-related text object
   { "jeetsukumaran/vim-pythonsense",   ft = { "python" } },
+  -- swap delitited items
   { "machakann/vim-swap",              event = "VimEnter" },
   -- Add indent object for vim (useful for languages like Python)
   { "michaeljsmith/vim-indent-object", event = "VimEnter" },
+  -- project wide async ts type-checking
   {
     "dmmulroy/tsc.nvim",
     cmd = { "TSC" },
     config = true,
   },
+  -- pretty window for previewing, navigating and changing lsp location
   {
     "dnlhc/glance.nvim",
     config = function()
@@ -354,6 +381,7 @@ return {
       { "gy", "<cmd>Glance type_definitions<CR>", desc = "LSP Type Definitions" },
     },
   },
+  -- enhances file operations using lsp
   {
     "antosha417/nvim-lsp-file-operations",
     event = "LspAttach",
@@ -368,6 +396,8 @@ return {
   -- General
   -- { "AndrewRadev/switch.vim",      lazy = false },
   -- { "AndrewRadev/splitjoin.vim", lazy = false },
+  -- splitting and joining block code efficiency
+  -- TODO: config and learn how to use
   {
     "Wansmer/treesj",
     lazy = true,
@@ -381,6 +411,7 @@ return {
       })
     end,
   },
+  -- quick comment with treesitter support
   {
     "numToStr/Comment.nvim",
     lazy = false,
@@ -389,14 +420,12 @@ return {
       require("plugins.comment")
     end,
   },
+  -- create comment box
   {
     "LudoPinelli/comment-box.nvim",
     lazy = false,
-    keys = {
-      { "<leader>ac", "<cmd>lua require('comment-box').lbox()<CR>", desc = "comment box" },
-      { "<leader>ac", "<cmd>lua require('comment-box').lbox()<CR>", mode = "v",          desc = "comment box" },
-    }
   },
+  -- toggle terminal
   {
     "akinsho/nvim-toggleterm.lua",
     lazy = false,
@@ -405,9 +434,15 @@ return {
       require("plugins.toggleterm")
     end,
   },
+  -- add dot repeat for non native command
   { "tpope/vim-repeat",           lazy = false },
+  -- speedy interact with date like text 28-02-2024
+  -- TODO: config and learn how to use
   { "tpope/vim-speeddating",      lazy = false },
+  -- better support when create table in markdown
   { "dhruvasagar/vim-table-mode", ft = { "markdown" } },
+  -- add multicursors features to neovim
+  -- TODO: config and learn how to use
   {
     "smoka7/multicursors.nvim",
     event = "VeryLazy",
@@ -441,6 +476,7 @@ return {
       },
     },
   },
+  -- Peak line at number when typing a number in command_palette
   {
     "nacro90/numb.nvim",
     lazy = false,
@@ -448,6 +484,7 @@ return {
       require("plugins.numb")
     end,
   },
+  --- highlight and search todo, hack, bug,... comments
   {
     "folke/todo-comments.nvim",
     lazy = false,
@@ -456,6 +493,7 @@ return {
       require("plugins.todo-comments")
     end,
   },
+  -- zen view mode feature
   {
     "folke/zen-mode.nvim",
     cmd = { "ZenMode" },
@@ -464,11 +502,13 @@ return {
     end,
     cond = EcoVim.plugins.zen.enabled,
   },
+  -- only light a main focus code part base on your cursor
   {
     "folke/twilight.nvim",
     config = true,
     cond = EcoVim.plugins.zen.enabled,
   },
+  -- navigate like flash
   {
     "folke/flash.nvim",
     event = "VeryLazy",
@@ -490,6 +530,7 @@ return {
       },
     },
   },
+  -- key guiding
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -498,6 +539,7 @@ return {
       require("plugins.which-key")
     end,
   },
+  -- galaxyline and status bar
   {
     "ecosse3/galaxyline.nvim",
     config = function()
@@ -505,6 +547,7 @@ return {
     end,
     event = "VeryLazy",
   },
+  -- wiping out buffer
   {
     "echasnovski/mini.bufremove",
     version = "*",
@@ -514,6 +557,7 @@ return {
       })
     end,
   },
+  -- add a tab like bar for buffers
   {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
@@ -555,6 +599,7 @@ return {
       { "<Leader>bsr", "<cmd>BufferLineSortByRelativeDirectory<CR>", desc = "Sort by relative dir" },
     }
   },
+  -- a fancy and configurable notifications manager
   {
     "rcarriga/nvim-notify",
     config = function()
@@ -576,6 +621,8 @@ return {
       end
     end,
   },
+  -- perform package.json commands and show details
+  -- TODO: config and learn how to use
   {
     "vuki656/package-info.nvim",
     event = "BufEnter package.json",
@@ -583,6 +630,7 @@ return {
       require("plugins.package-info")
     end,
   },
+  -- preview markdown in a web browser
   {
     "iamcco/markdown-preview.nvim",
     build = "cd app && npm install",
@@ -591,17 +639,7 @@ return {
     end,
     ft = { "markdown" },
   },
-  -- {
-  --   '0x00-ketsu/markdown-preview.nvim',
-  --   ft = { 'md', 'markdown', 'mkd', 'mkdn', 'mdwn', 'mdown', 'mdtxt', 'mdtext', 'rmd', 'wiki' },
-  --   config = function()
-  --     require('markdown-preview').setup {
-  --       -- your configuration comes here
-  --       -- or leave it empty to use the default settings
-  --       -- refer to the setup section below
-  --     }
-  --   end
-  -- },
+  -- autochange project root dir when open file
   {
     "airblade/vim-rooter",
     event = "VeryLazy",
@@ -611,6 +649,7 @@ return {
       vim.g.rooter_resolve_links = 1
     end,
   },
+  -- TODO: config and learn how to use
   {
     "Shatur/neovim-session-manager",
     lazy = false,
@@ -625,19 +664,24 @@ return {
       { "<Leader>/ss", "<cmd>SessionManager save_current_session<CR>",     desc = "save session" },
     }
   },
+  -- quickly make surround action
+  -- TODO: config and learn how to use
   {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
     config = true
   },
+  -- dim inactive windows
   {
     "sunjon/shade.nvim",
+    lazy = false,
     config = function()
       require("shade").setup()
       require("shade").toggle()
     end,
   },
+  -- fold your code
   {
     "kevinhwang91/nvim-ufo",
     dependencies = "kevinhwang91/promise-async",
@@ -647,6 +691,8 @@ return {
       vim.keymap.set("n", "zr", require("ufo").openFoldsExceptKinds)
     end,
   },
+  -- align text interactively
+  -- TODO: config and learn how to use
   {
     "echasnovski/mini.align",
     lazy = false,
@@ -655,6 +701,7 @@ return {
       require("mini.align").setup()
     end,
   },
+  -- extend and create a/i textobjects
   {
     "echasnovski/mini.ai",
     lazy = false,
@@ -663,6 +710,8 @@ return {
       require("mini.ai").setup()
     end,
   },
+  -- speedy add print debug line
+  -- TODO: config and learn how to use
   {
     "rareitems/printer.nvim",
     event = "BufEnter",
@@ -677,6 +726,7 @@ return {
       require("plugins.printer")
     end,
   },
+  -- auto add indent
   {
     "lukas-reineke/indent-blankline.nvim",
     event = "BufReadPre",
@@ -685,8 +735,7 @@ return {
       require("plugins.indent")
     end,
   },
-
-  -- Snippets & Language & Syntax
+  -- auto add close pair
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
@@ -694,16 +743,20 @@ return {
       require("plugins.autopairs")
     end,
   },
+  -- color highlighting in code
   {
     "NvChad/nvim-colorizer.lua",
     config = function()
       require("plugins.nvchad-colorizer")
     end,
   },
+  -- hint the tailwind color
   {
     "js-everts/cmp-tailwind-colors",
     config = true,
   },
+  -- conceal long class tailwind
+  -- TODO: config and learn how to use
   {
     "razak17/tailwind-fold.nvim",
     opts = {
@@ -712,6 +765,8 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     ft = { "html", "svelte", "astro", "vue", "typescriptreact" },
   },
+  -- view all apllied tailwind on an element
+  -- TODO: config and learn how to use
   {
     "MaximilianLloyd/tw-values.nvim",
     keys = {
@@ -722,6 +777,7 @@ return {
       show_unknown_classes = true                   -- Shows the unknown classes popup
     }
   },
+  -- sorting tailwind class
   {
     "laytan/tailwind-sorter.nvim",
     cmd = {
@@ -732,7 +788,8 @@ return {
     build = "cd formatter && npm i && npm run build",
     config = true,
   },
-  -- Git
+  -- Git sign for added, modified, and removed lines
+  -- TODO: config and learn how to use
   {
     "lewis6991/gitsigns.nvim",
     event = "BufRead",
@@ -751,6 +808,8 @@ return {
       { "<Leader>ghu", desc = "undo stage" }
     }
   },
+  -- view diff by git
+  -- TODO: config and learn how to use
   {
     "sindrets/diffview.nvim",
     lazy = true,
@@ -764,6 +823,8 @@ return {
       { "<Leader>gS", "<cmd>lua require('plugins.git.diffview').toggle_status()<CR>",       desc = "status" }
     },
   },
+  -- view git conflict visualize
+  -- TODO: config and learn how to use
   {
     "akinsho/git-conflict.nvim",
     lazy = false,
@@ -778,6 +839,8 @@ return {
       { "<Leader>gci", '<cmd>GitConflictChooseTheirs<CR>', desc = 'choose incoming' },
     }
   },
+  -- manage git worktree
+  -- TODO: config and learn how to use
   {
     "ThePrimeagen/git-worktree.nvim",
     keys = {
@@ -788,6 +851,7 @@ return {
       require("plugins.git.worktree")
     end,
   },
+  -- the best git integrate for neovim
   {
     "kdheepak/lazygit.nvim",
     cmd = {
@@ -803,6 +867,7 @@ return {
       { "<Leader>gg", "<cmd>LazyGit<CR>", desc = "lazygit" },
     },
   },
+  -- edit and review github issues and pull requests
   {
     "pwntester/octo.nvim",
     dependencies = {
@@ -819,6 +884,7 @@ return {
   },
 
   -- Testing
+  -- TODO: config and learn how to use
   -- {
   --   "rcarriga/neotest",
   --   dependencies = {
@@ -848,6 +914,7 @@ return {
   -- },
 
   -- DAP
+  -- TODO: config and learn how to use
   {
     "mfussenegger/nvim-dap",
     config = function()
