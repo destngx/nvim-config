@@ -124,7 +124,11 @@ return {
       },
     },
   },
-
+  -- show context of current line
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    lazy = false,
+  },
   -- Navigating (Telescope/Tree/Refactor)
   {
     "0x00-ketsu/autosave.nvim",
