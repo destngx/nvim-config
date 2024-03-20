@@ -1,4 +1,4 @@
-require('config.EcoVim')
+require('config.DestNgxVim')
 
 require('utils.globals')
 require('utils.functions')

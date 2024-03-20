@@ -9,7 +9,7 @@ end
 mason.setup({
   ui = {
     -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
-    border = EcoVim.ui.float.border or "rounded",
+    border = DestNgxVim.ui.float.border or "rounded",
   },
 })
 
@@ -45,12 +45,12 @@ local lspconfig = require("lspconfig")
 local handlers = {
   ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     silent = true,
-    border = EcoVim.ui.float.border,
+    border = DestNgxVim.ui.float.border,
   }),
-  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = EcoVim.ui.float.border }),
+  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = DestNgxVim.ui.float.border }),
   ["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics,
-    { virtual_text = EcoVim.lsp.virtual_text }
+    { virtual_text = DestNgxVim.lsp.virtual_text }
   ),
 }
 local navic = require("nvim-navic")

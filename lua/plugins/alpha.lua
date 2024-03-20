@@ -28,7 +28,7 @@ dashboard.section.header.type = "text";
 dashboard.section.header.val = header;
 dashboard.section.header.opts = {
   position = "center",
-  hl = "EcovimHeader",
+  hl = "DestNgxVimHeader",
 }
 
 -- ╭──────────────────────────────────────────────────────────╮
@@ -47,7 +47,7 @@ local hi_top_section = {
   val =  "┌────────────   Today is " .. date .. " ────────────┐",
   opts = {
     position = "center",
-    hl = "EcovimHeaderInfo"
+    hl = "DestNgxVimHeaderInfo"
   }
 }
 
@@ -56,7 +56,7 @@ local hi_middle_section = {
   val = "│                                                │",
   opts = {
     position = "center",
-    hl = "EcovimHeaderInfo"
+    hl = "DestNgxVimHeaderInfo"
   }
 }
 
@@ -65,7 +65,7 @@ local hi_bottom_section = {
   val = "└───══───══───══───  " .. datetime .. "  ───══───══───══────┘",
   opts = {
     position = "center",
-    hl = "EcovimHeaderInfo"
+    hl = "DestNgxVimHeaderInfo"
   }
 }
 
@@ -89,7 +89,7 @@ local function button(sc, txt, keybind, keybind_opts)
         cursor = 5,
         width = 50,
         align_shortcut = "right",
-        hl_shortcut = "EcovimPrimary",
+        hl_shortcut = "DestNgxVimPrimary",
     }
     if keybind then
         keybind_opts = if_nil(keybind_opts, { noremap = true, silent = true, nowait = true })
@@ -143,8 +143,8 @@ end
 local function footer()
   local plugins = require("lazy").stats().count
   local v = vim.version()
-  local ecovim_version = line_from(config_dir .. "/.ecovim.version")
-  return string.format(" v%d.%d.%d   %d   %s ", v.major, v.minor, v.patch, plugins, ecovim_version[1])
+  local DestNgxVim_version = line_from(config_dir .. "/.DestNgxVim.version")
+  return string.format(" v%d.%d.%d   %d   %s ", v.major, v.minor, v.patch, plugins, DestNgxVim_version[1])
 end
 
 dashboard.section.footer.val = {
@@ -152,7 +152,7 @@ dashboard.section.footer.val = {
 }
 dashboard.section.footer.opts = {
   position = "center",
-  hl = "EcovimFooter",
+  hl = "DestNgxVimFooter",
 }
 
 local section = {

@@ -4,7 +4,7 @@ local diffview = require("diffview")
 local M = {}
 
 -- ╭──────────────────────────────────────────────────────────╮
--- │ Custom Ecovim toggle file history function via <leader>gd│
+-- │ Custom DestNgxVim toggle file history function via <leader>gd│
 -- ╰──────────────────────────────────────────────────────────╯
 M.toggle_file_history = function ()
   local view = lib.get_current_view()
@@ -20,7 +20,7 @@ M.toggle_file_history = function ()
 end
 
 -- ╭──────────────────────────────────────────────────────────╮
--- │ Custom Ecovim toggle status function via <leader>gs      │
+-- │ Custom DestNgxVim toggle status function via <leader>gs      │
 -- ╰──────────────────────────────────────────────────────────╯
 M.toggle_status = function ()
   local view = lib.get_current_view()

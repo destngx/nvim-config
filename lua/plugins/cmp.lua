@@ -103,16 +103,16 @@ end
 -- │ Setup                                                    │
 -- ╰──────────────────────────────────────────────────────────╯
 local source_mapping = {
-  npm = EcoVim.icons.terminal .. "NPM",
-  Codeium = EcoVim.icons.codeium,
-  nvim_lsp = EcoVim.icons.stack .. "LSP",
-  buffer = EcoVim.icons.buffer .. "BUF",
-  nvim_lua = EcoVim.icons.bomb,
-  luasnip = EcoVim.icons.snippet .. "SNP",
-  calc = EcoVim.icons.calculator,
-  path = EcoVim.icons.folderOpen2,
-  treesitter = EcoVim.icons.tree,
-  zsh = EcoVim.icons.terminal .. "ZSH",
+  npm = DestNgxVim.icons.terminal .. "NPM",
+  Codeium = DestNgxVim.icons.codeium,
+  nvim_lsp = DestNgxVim.icons.stack .. "LSP",
+  buffer = DestNgxVim.icons.buffer .. "BUF",
+  nvim_lua = DestNgxVim.icons.bomb,
+  luasnip = DestNgxVim.icons.snippet .. "SNP",
+  calc = DestNgxVim.icons.calculator,
+  path = DestNgxVim.icons.folderOpen2,
+  treesitter = DestNgxVim.icons.tree,
+  zsh = DestNgxVim.icons.terminal .. "ZSH",
 }
 
 local buffer_option = {
@@ -146,7 +146,7 @@ cmp.setup({
     ["<CR>"] = cmp.mapping.confirm({
       -- this is the important line for Copilot
       behavior = cmp.ConfirmBehavior.Replace,
-      select = EcoVim.plugins.completion.select_first_on_enter,
+      select = DestNgxVim.plugins.completion.select_first_on_enter,
     }),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then

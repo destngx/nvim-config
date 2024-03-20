@@ -1,4 +1,4 @@
-## My personal neovim config that is inspired by [Ecovim](https://github.com/ecosse3/nvim) and [jdhao neovim config](https://github.com/jdhao/nvim-config).
+## My personal neovim config that is inspired by [EcoVim](https://github.com/ecosse3/nvim) and [jdhao neovim config](https://github.com/jdhao/nvim-config).
 
 ## Requirements:
 1. **[ripgrep](https://github.com/BurntSushi/ripgrep)**

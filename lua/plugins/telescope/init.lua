@@ -1,7 +1,7 @@
 local actions    = require('telescope.actions')
 local previewers = require('telescope.previewers')
 local builtin    = require('telescope.builtin')
-local icons      = EcoVim.icons
+local icons      = DestNgxVim.icons
 
 require('telescope').load_extension('fzf')
 require("telescope").load_extension("git_worktree")
@@ -129,7 +129,7 @@ M.edit_neovim = function()
       color_devicons   = true,
       cwd              = "~/.config/nvim",
       previewer        = true,
-      prompt_title     = "Ecovim Dotfiles",
+      prompt_title     = "DestNgxVim Dotfiles",
       sorting_strategy = "ascending",
       winblend         = 4,
       layout_config    = {

@@ -113,7 +113,7 @@ vim.diagnostic.config({
   underline = true,
   update_in_insert = false,
   virtual_text = {
-    prefix = EcoVim.icons.circle,
+    prefix = DestNgxVim.icons.circle,
   },
 })
 
@@ -130,4 +130,4 @@ if not lspui_ok then
   return
 end
 
-lspui.default_options.border = EcoVim.ui.float.border or 'rounded'
+lspui.default_options.border = DestNgxVim.ui.float.border or 'rounded'

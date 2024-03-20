@@ -19,7 +19,7 @@ bufferline.setup({
       {
         filetype = "NvimTree",
         text = "File Explorer",
-        highlight = "EcovimNvimTreeTitle",
+        highlight = "DestNgxVimNvimTreeTitle",
         text_align = "center",
         separator = true,
       },

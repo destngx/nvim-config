@@ -31,7 +31,7 @@ require("lazy").setup("config.plugins", {
   },
   debug = false,
   ui = {
-    border = EcoVim.ui.float.border,
+    border = DestNgxVim.ui.float.border,
   }
 })
 

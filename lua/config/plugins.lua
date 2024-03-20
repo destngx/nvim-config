@@ -47,7 +47,7 @@ return {
   },
   {
     "folke/noice.nvim",
-    cond = EcoVim.plugins.experimental_noice.enabled,
+    cond = DestNgxVim.plugins.experimental_noice.enabled,
     lazy = false,
     config = function()
       require("plugins.noice")
@@ -55,7 +55,7 @@ return {
   },
   {
     "chrisgrieser/nvim-spider",
-    cond = EcoVim.plugins.jump_by_subwords.enabled,
+    cond = DestNgxVim.plugins.jump_by_subwords.enabled,
     lazy = true,
     keys = { "w", "e", "b", "ge" },
     config = function()
@@ -243,7 +243,7 @@ return {
   -- AI
   {
     "jcdickinson/codeium.nvim",
-    cond = EcoVim.plugins.ai.codeium.enabled,
+    cond = DestNgxVim.plugins.ai.codeium.enabled,
     event = "InsertEnter",
     cmd = "Codeium",
     dependencies = {
@@ -415,7 +415,7 @@ return {
     },
     opts = {
       hint_config = {
-        border = EcoVim.ui.float.border or "rounded",
+        border = DestNgxVim.ui.float.border or "rounded",
         position = 'bottom',
         show_name = false,
       }
@@ -460,12 +460,12 @@ return {
     config = function()
       require("plugins.zen")
     end,
-    cond = EcoVim.plugins.zen.enabled,
+    cond = DestNgxVim.plugins.zen.enabled,
   },
   {
     "folke/twilight.nvim",
     config = true,
-    cond = EcoVim.plugins.zen.enabled,
+    cond = DestNgxVim.plugins.zen.enabled,
   },
   {
     "folke/flash.nvim",
@@ -604,7 +604,7 @@ return {
     "airblade/vim-rooter",
     event = "VeryLazy",
     config = function()
-      vim.g.rooter_patterns = EcoVim.plugins.rooter.patterns
+      vim.g.rooter_patterns = DestNgxVim.plugins.rooter.patterns
       vim.g.rooter_silent_chdir = 1
       vim.g.rooter_resolve_links = 1
     end,
@@ -716,7 +716,7 @@ return {
       { "<Leader>cv", "<CMD>TWValues<CR>", desc = "Tailwind CSS values" },
     },
     opts = {
-      border = EcoVim.ui.float.border or "rounded", -- Valid window border style,
+      border = DestNgxVim.ui.float.border or "rounded", -- Valid window border style,
       show_unknown_classes = true                   -- Shows the unknown classes popup
     }
   },

@@ -1,4 +1,4 @@
-local icons = EcoVim.icons
+local icons = DestNgxVim.icons
 
 require("trouble").setup {
   position = "bottom",           -- position of the list can be: bottom, top, left, right

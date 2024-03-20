@@ -66,7 +66,7 @@ M.gps = function()
   else
     if not isempty(navic_location) then
       local hl_group = "LineNr"
-      return retval .. " " .. "%#" .. hl_group .. "#" .. EcoVim.icons.caretRight .. "%*" .. " " .. navic_location
+      return retval .. " " .. "%#" .. hl_group .. "#" .. DestNgxVim.icons.caretRight .. "%*" .. " " .. navic_location
     else
       return retval
     end
@@ -100,31 +100,31 @@ vim.api.nvim_create_autocmd({ "CursorMoved", "BufWinEnter", "BufFilePost" }, {
     end
 
     if vim.bo.filetype == "dapui_watches" then
-      local hl_group = "EcovimSecondary"
+      local hl_group = "DestNgxVimSecondary"
       vim.opt_local.winbar = " " .. "%#" .. hl_group .. "#" .. require("utils.icons").watch .. "Watches" .. "%*"
       return
     end
 
     if vim.bo.filetype == "dapui_stacks" then
-      local hl_group = "EcovimSecondary"
+      local hl_group = "DestNgxVimSecondary"
       vim.opt_local.winbar = " " .. "%#" .. hl_group .. "#" .. require("utils.icons").git .. "Stacks" .. "%*"
       return
     end
 
     if vim.bo.filetype == "dapui_breakpoints" then
-      local hl_group = "EcovimSecondary"
+      local hl_group = "DestNgxVimSecondary"
       vim.opt_local.winbar = " " .. "%#" .. hl_group .. "#" .. require("utils.icons").bigCircle .. "Breakpoints" .. "%*"
       return
     end
 
     if vim.bo.filetype == "dapui_scopes" then
-      local hl_group = "EcovimSecondary"
+      local hl_group = "DestNgxVimSecondary"
       vim.opt_local.winbar = " " .. "%#" .. hl_group .. "#" .. require("utils.icons").telescope .. "Scopes" .. "%*"
       return
     end
 
     if vim.bo.filetype == "dap-repl" then
-      local hl_group = "EcovimSecondary"
+      local hl_group = "DestNgxVimSecondary"
       vim.opt_local.winbar = " "
           .. "%#"
           .. hl_group
@@ -136,7 +136,7 @@ vim.api.nvim_create_autocmd({ "CursorMoved", "BufWinEnter", "BufFilePost" }, {
     end
 
     if vim.bo.filetype == "dapui_console" then
-      local hl_group = "EcovimSecondary"
+      local hl_group = "DestNgxVimSecondary"
       vim.opt_local.winbar = " " .. "%#" .. hl_group .. "#" .. require("utils.icons").console .. "Console" .. "%*"
       return
     end
@@ -147,7 +147,7 @@ vim.api.nvim_create_autocmd({ "CursorMoved", "BufWinEnter", "BufFilePost" }, {
     end
 
     if vim.bo.filetype == "GitBlame" then
-      local hl_group = "EcovimSecondary"
+      local hl_group = "DestNgxVimSecondary"
       vim.opt_local.winbar = " " .. "%#" .. hl_group .. "#" .. require("utils.icons").git .. "Blame" .. "%*"
       return
     end

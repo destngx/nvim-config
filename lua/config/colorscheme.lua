@@ -62,24 +62,24 @@ tokyonight.setup({
 })
 
 -- Set Colorscheme
-vim.cmd("colorscheme " .. EcoVim.colorscheme)
+vim.cmd("colorscheme " .. DestNgxVim.colorscheme)
 
--- Ecovim Colors
-vim.api.nvim_set_hl(0, "EcovimPrimary", { fg = "#488dff" })
-vim.api.nvim_set_hl(0, "EcovimSecondary", { fg = "#FFA630" })
+-- DestNgxVim Colors
+vim.api.nvim_set_hl(0, "DestNgxVimPrimary", { fg = "#488dff" })
+vim.api.nvim_set_hl(0, "DestNgxVimSecondary", { fg = "#FFA630" })
 
-vim.api.nvim_set_hl(0, "EcovimPrimaryBold", { bold = true, fg = "#488DFF" })
-vim.api.nvim_set_hl(0, "EcovimSecondaryBold", { bold = true, fg = "#FFA630" })
+vim.api.nvim_set_hl(0, "DestNgxVimPrimaryBold", { bold = true, fg = "#488DFF" })
+vim.api.nvim_set_hl(0, "DestNgxVimSecondaryBold", { bold = true, fg = "#FFA630" })
 
-vim.api.nvim_set_hl(0, "EcovimHeader", { bold = true, fg = "#488DFF" })
-vim.api.nvim_set_hl(0, "EcovimHeaderInfo", { bold = true, fg = "#FFA630" })
-vim.api.nvim_set_hl(0, "EcovimFooter", { bold = true, fg = "#FFA630" })
+vim.api.nvim_set_hl(0, "DestNgxVimHeader", { bold = true, fg = "#488DFF" })
+vim.api.nvim_set_hl(0, "DestNgxVimHeaderInfo", { bold = true, fg = "#FFA630" })
+vim.api.nvim_set_hl(0, "DestNgxVimFooter", { bold = true, fg = "#FFA630" })
 
-vim.api.nvim_set_hl(0, "EcovimNvimTreeTitle", { bold = true, fg = "#FFA630", bg = "#16161e" })
+vim.api.nvim_set_hl(0, "DestNgxVimNvimTreeTitle", { bold = true, fg = "#FFA630", bg = "#16161e" })
 -- Tokyonight Colorscheme Specific Config
-if EcoVim.colorscheme == "tokyonight" then
+if DestNgxVim.colorscheme == "tokyonight" then
   -- Lines
-  vim.api.nvim_set_hl(0, "CursorLineNR", { link = "EcovimSecondary" })
+  vim.api.nvim_set_hl(0, "CursorLineNR", { link = "DestNgxVimSecondary" })
   vim.api.nvim_set_hl(0, "LineNr", { link = "Comment" })
 
   -- Floats/Windows
@@ -103,7 +103,7 @@ if EcoVim.colorscheme == "tokyonight" then
   vim.api.nvim_set_hl(0, "TSRainbowRed", { fg = c.blue, ctermfg = 9 })
   vim.api.nvim_set_hl(0, "RainbowDelimiterRed", { fg = c.blue, ctermfg = 9 })
   vim.api.nvim_set_hl(0, "Boolean", { fg = "#F7768E" })
-  vim.api.nvim_set_hl(0, "BufferOffset", { link = "EcovimSecondary" })
+  vim.api.nvim_set_hl(0, "BufferOffset", { link = "DestNgxVimSecondary" })
   vim.api.nvim_set_hl(0, "LspInlayHint", { link = "LspCodeLens" })
 
 
