@@ -59,6 +59,9 @@ local function on_attach(client, bufnr)
   if client.server_capabilities.documentSymbolProvider then
     navic.attach(client, bufnr)
   end
+  if client.name == "yamlls" then
+    client.resolved_capabilities.document_formatting = true
+  end
 end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -122,11 +125,13 @@ lspconfig.pylsp.setup({
   },
   capabilities = capabilities,
 })
--- lspconfig.remark_ls.setup({
---   settings = {
---     requireConfig = false,
---   }
--- })
+lspconfig.yamlls.setup({
+  handlers = handlers,
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = require("lsp.servers.yamlls").settings
+})
+
 for _, server in ipairs({ "bashls", "emmet_ls", "graphql", "html" }) do
   lspconfig[server].setup({
     on_attach = on_attach,
