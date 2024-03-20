@@ -4,19 +4,16 @@ local types = require("cmp.types")
 local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
   P("Failed to load cmp")
-  return
 end
 
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then
   P("Failed to load luasnip")
-  return
 end
 
 local cmp_git_ok, cmp_git = pcall(require, "cmp_git")
 if not cmp_git_ok then
   P("Failed to load cmp_git")
-  return
 end
 
 cmp_git.setup()

@@ -39,9 +39,9 @@ wk.setup {
   },
   window = {
     border = DestNgxVim.ui.float.border or "rounded", -- none, single, double, shadow, rounded
-    position = "bottom",                          -- bottom, top
-    margin = { 1, 0, 1, 0 },                      -- extra window margin [top, right, bottom, left]
-    padding = { 2, 2, 2, 2 },                     -- extra window padding [top, right, bottom, left]
+    position = "bottom",                              -- bottom, top
+    margin = { 1, 0, 1, 0 },                          -- extra window margin [top, right, bottom, left]
+    padding = { 2, 2, 2, 2 },                         -- extra window padding [top, right, bottom, left]
   },
   layout = {
     height = { min = 4, max = 25 },                                             -- min and max height of the columns
@@ -98,7 +98,6 @@ local normal_mode_mappings = {
   ['-'] = { '<cmd>vertical resize -5<CR>', 'resize +5' },
   ['v'] = { '<C-W>v', 'split right' },
   ['V'] = { '<C-W>s', 'split below' },
-  ['q'] = { 'quicklist' },
 
   ['/'] = {
     name = 'Extras',
@@ -219,7 +218,8 @@ local normal_mode_mappings = {
       'recently list' },
     a = { "<cmd>lua require'telescope'.extensions.repo.list{}<CR>", 'all in local' },
     r = { 'refactor' },
-    s = { "<cmd>SessionManager save_current_session<CR>", 'save session' },
+    s = { "<cmd>SessionManager available_commands<CR>", 'save session' },
+    S = { "<cmd>SessionManager save_current_session<CR>", 'save session' },
     t = { "<cmd>TodoTrouble<CR>", 'todo' },
   },
 
@@ -234,6 +234,7 @@ local normal_mode_mappings = {
     h = { '<cmd>Telescope oldfiles hidden=true<CR>', 'file history' },
     H = { '<cmd>lua require("plugins.telescope").command_history()<CR>', 'command history' },
     s = { '<cmd>Telescope search_history theme=dropdown<CR>', 'search history' },
+    q = { '<cmd>Telescope quickfix<CR>', 'quickfix list' },
   },
 
   t = {

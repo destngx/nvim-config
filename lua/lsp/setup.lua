@@ -16,6 +16,7 @@ mason.setup({
 mason_lsp.setup({
   -- A list of servers to automatically install if they're not already installed
   ensure_installed = {
+    "tsserver",
     "bashls",
     "cssls",
     "eslint",
@@ -55,7 +56,6 @@ local handlers = {
 }
 local navic = require("nvim-navic")
 local function on_attach(client, bufnr)
-  -- set up buffer keymaps, etc.
   if client.server_capabilities.documentSymbolProvider then
     navic.attach(client, bufnr)
   end
@@ -71,77 +71,87 @@ capabilities.textDocument.foldingRange = {
   lineFoldingOnly = true,
 }
 
--- Order matters
-
-lspconfig.tailwindcss.setup({
-  capabilities = require("lsp.servers.tailwindcss").capabilities,
-  filetypes = require("lsp.servers.tailwindcss").filetypes,
-  handlers = handlers,
-  init_options = require("lsp.servers.tailwindcss").init_options,
-  on_attach = require("lsp.servers.tailwindcss").on_attach,
-  settings = require("lsp.servers.tailwindcss").settings,
-})
-
-lspconfig.cssls.setup({
-  capabilities = capabilities,
-  handlers = handlers,
-  on_attach = require("lsp.servers.cssls").on_attach,
-  settings = require("lsp.servers.cssls").settings,
-})
-
-lspconfig.eslint.setup({
-  capabilities = capabilities,
-  handlers = handlers,
-  on_attach = require("lsp.servers.eslint").on_attach,
-  settings = require("lsp.servers.eslint").settings,
-})
-
-lspconfig.jsonls.setup({
-  capabilities = capabilities,
-  handlers = handlers,
-  on_attach = on_attach,
-  settings = require("lsp.servers.jsonls").settings,
-})
-
-lspconfig.lua_ls.setup({
-  capabilities = capabilities,
-  handlers = handlers,
-  on_attach = on_attach,
-  settings = require("lsp.servers.lua_ls").settings,
-})
-
-lspconfig.vuels.setup({
-  filetypes = require("lsp.servers.vuels").filetypes,
-  handlers = handlers,
-  init_options = require("lsp.servers.vuels").init_options,
-  on_attach = require("lsp.servers.vuels").on_attach,
-  settings = require("lsp.servers.vuels").settings,
-})
-lspconfig.pylsp.setup({
-  on_attach = on_attach,
-  settings = require("lsp.servers.python").settings,
-  flags = {
-    debounce_text_changes = 200,
-  },
-  capabilities = capabilities,
-})
-lspconfig.yamlls.setup({
-  handlers = handlers,
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = require("lsp.servers.yamlls").settings
-})
-
-for _, server in ipairs({ "bashls", "emmet_ls", "graphql", "html" }) do
-  lspconfig[server].setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-    handlers = handlers,
-  })
-end
+require("mason-lspconfig").setup_handlers {
+  function(server_name)
+    require("lspconfig")[server_name].setup {
+      on_attach = on_attach,
+      capabilities = capabilities,
+      handlers = handlers,
+    }
+  end,
+  ["tailwindcss"] = function()
+    lspconfig.tailwindcss.setup({
+      capabilities = require("lsp.servers.tailwindcss").capabilities,
+      filetypes = require("lsp.servers.tailwindcss").filetypes,
+      handlers = handlers,
+      init_options = require("lsp.servers.tailwindcss").init_options,
+      on_attach = require("lsp.servers.tailwindcss").on_attach,
+      settings = require("lsp.servers.tailwindcss").settings,
+    })
+  end,
+  ["cssls"] = function()
+    lspconfig.cssls.setup({
+      capabilities = capabilities,
+      handlers = handlers,
+      on_attach = require("lsp.servers.cssls").on_attach,
+      settings = require("lsp.servers.cssls").settings,
+    })
+  end,
+  ["eslint"] = function()
+    lspconfig.eslint.setup({
+      capabilities = capabilities,
+      handlers = handlers,
+      on_attach = require("lsp.servers.eslint").on_attach,
+      settings = require("lsp.servers.eslint").settings,
+    })
+  end,
+  ["jsonls"] = function()
+    lspconfig.jsonls.setup({
+      capabilities = capabilities,
+      handlers = handlers,
+      on_attach = on_attach,
+      settings = require("lsp.servers.jsonls").settings,
+    })
+  end,
+  ["lua_ls"] = function()
+    lspconfig.lua_ls.setup({
+      capabilities = capabilities,
+      handlers = handlers,
+      on_attach = on_attach,
+      settings = require("lsp.servers.lua_ls").settings,
+    })
+  end,
+  ["vuels"] = function()
+    lspconfig.vuels.setup({
+      filetypes = require("lsp.servers.vuels").filetypes,
+      handlers = handlers,
+      init_options = require("lsp.servers.vuels").init_options,
+      on_attach = require("lsp.servers.vuels").on_attach,
+      settings = require("lsp.servers.vuels").settings,
+    })
+  end,
+  ["pylsp"] = function()
+    lspconfig.pylsp.setup({
+      on_attach = on_attach,
+      settings = require("lsp.servers.python").settings,
+      flags = {
+        debounce_text_changes = 200,
+      },
+      capabilities = capabilities,
+    })
+  end,
+  ["yamlls"] = function()
+    lspconfig.yamlls.setup({
+      handlers = handlers,
+      on_attach = on_attach,
+      capabilities = capabilities,
+      settings = require("lsp.servers.yamlls").settings
+    })
+  end,
+}
 
 require("ufo").setup({
   fold_virt_text_handler = ufo_config_handler,
   close_fold_kinds_for_ft = {
-    default = { "import", "comment" } },
+    default = { "import" } },
 })

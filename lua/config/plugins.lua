@@ -182,6 +182,18 @@ return {
     },
   },
   {
+    "kevinhwang91/nvim-bqf",
+    ft = "qf",
+    init = function()
+      require('plugins.bqf-init')
+    end,
+  },
+  {
+    "chentoast/marks.nvim",
+    event = "BufEnter",
+    config = true,
+  },
+  {
     "nvim-tree/nvim-tree.lua",
     cmd = {
       "NvimTreeOpen",
@@ -239,7 +251,51 @@ return {
       { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" },
     },
   },
-
+  {
+    "johmsalas/text-case.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    -- Author's Note: If default keymappings fail to register (possible config issue in my local setup),
+    -- verify lazy loading functionality. On failure, disable lazy load and report issue
+    -- lazy = false,
+    config = function()
+      require("textcase").setup(
+        {
+          -- Set `default_keymappings_enabled` to false if you don't want automatic keymappings to be registered.
+          default_keymappings_enabled = true,
+          -- `prefix` is only considered if `default_keymappings_enabled` is true. It configures the prefix
+          -- of the keymappings, e.g. `gau ` executes the `current_word` method with `to_upper_case`
+          -- and `gaou` executes the `operator` method with `to_upper_case`.
+          prefix = "gu",
+          -- If `substitude_command_name` is not nil, an additional command with the passed in name
+          -- will be created that does the same thing as "Subs" does.
+          substitude_command_name = nil,
+          -- By default, all methods are enabled. If you set this option with some methods omitted,
+          -- these methods will not be registered in the default keymappings. The methods will still
+          -- be accessible when calling the exact lua function e.g.:
+          -- "<CMD>lua require('textcase').current_word('to_snake_case')<CR>"
+          enabled_methods = {
+            "to_upper_case",
+            "to_lower_case",
+            "to_snake_case",
+            "to_dash_case",
+            "to_title_dash_case",
+            "to_constant_case",
+            "to_dot_case",
+            "to_phrase_case",
+            "to_camel_case",
+            "to_pascal_case",
+            "to_title_case",
+            "to_path_case",
+            "to_upper_phrase_case",
+            "to_lower_phrase_case",
+          },
+        }
+      )
+      require("telescope").load_extension("textcase")
+    end,
+    cmd = { "TextCaseOpenTelescope", "Subs" },
+    keys = { "gu" }
+  },
   -- AI
   {
     "jcdickinson/codeium.nvim",
@@ -277,7 +333,6 @@ return {
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-calc",
       "saadparwaiz1/cmp_luasnip",
-      { "L3MON4D3/LuaSnip", dependencies = "rafamadriz/friendly-snippets" },
       {
         "David-Kunz/cmp-npm",
         config = function()
@@ -288,6 +343,14 @@ return {
     },
   },
 
+  {
+    "L3MON4D3/LuaSnip",
+    dependencies = "rafamadriz/friendly-snippets",
+    build = "make install_jsregexp",
+    config = function()
+      require("luasnip.loaders.from_vscode").lazy_load { paths = { vim.fn.stdpath("config") .. "/snippets" } }
+    end
+  },
   -- LSP Addons
   {
     "stevearc/dressing.nvim",
@@ -367,6 +430,14 @@ return {
   -- { "AndrewRadev/switch.vim",      lazy = false },
   -- { "AndrewRadev/splitjoin.vim", lazy = false },
   {
+    "mistricky/codesnap.nvim",
+    build = "make",
+    cmd = "CodeSnapPreviewOn",
+    opts = {
+      watermark = nil
+    }
+  },
+  {
     "Wansmer/treesj",
     lazy = true,
     cmd = { "TSJToggle", "TSJSplit", "TSJJoin" },
@@ -391,8 +462,8 @@ return {
     "LudoPinelli/comment-box.nvim",
     lazy = false,
     keys = {
-      { "<leader>ac", "<cmd>lua require('comment-box').lbox()<CR>", desc = "comment box" },
-      { "<leader>ac", "<cmd>lua require('comment-box').lbox()<CR>", mode = "v",          desc = "comment box" },
+      { "<leader>ac", "<cmd>lua require('comment-box').llbox()<CR>", desc = "comment box" },
+      { "<leader>ac", "<cmd>lua require('comment-box').llbox()<CR>", mode = "v",          desc = "comment box" },
     }
   },
   {
@@ -485,6 +556,15 @@ return {
         function()
           require("flash").jump()
         end,
+        desc = "Flash jump",
+      },
+      {
+        "r",
+        mode = "o",
+        function()
+          require("flash").remote()
+        end,
+        desc = "Remote Flash"
       },
     },
   },
@@ -583,7 +663,7 @@ return {
   },
   {
     "iamcco/markdown-preview.nvim",
-    build = "cd app && npm install",
+    build = "cd app && yarn install --immutable",
     init = function()
       vim.g.mkdp_filetypes = { "markdown" }
     end,
@@ -615,26 +695,12 @@ return {
     config = function()
       require("plugins.session-manager")
     end,
-    keys = {
-      { "<Leader>/sc", "<cmd>SessionManager load_session<CR>",             desc = "choose session" },
-      { "<Leader>/sr", "<cmd>SessionManager delete_session<CR>",           desc = "remove session" },
-      { "<Leader>/sd", "<cmd>SessionManager load_current_dir_session<CR>", desc = "load current dir session" },
-      { "<Leader>/sl", "<cmd>SessionManager load_last_session<CR>",        desc = "load last session" },
-      { "<Leader>/ss", "<cmd>SessionManager save_current_session<CR>",     desc = "save session" },
-    }
   },
   {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
     config = true
-  },
-  {
-    "sunjon/shade.nvim",
-    config = function()
-      require("shade").setup()
-      require("shade").toggle()
-    end,
   },
   {
     "kevinhwang91/nvim-ufo",
@@ -717,7 +783,7 @@ return {
     },
     opts = {
       border = DestNgxVim.ui.float.border or "rounded", -- Valid window border style,
-      show_unknown_classes = true                   -- Shows the unknown classes popup
+      show_unknown_classes = true                       -- Shows the unknown classes popup
     }
   },
   {
@@ -817,33 +883,33 @@ return {
   },
 
   -- Testing
-  -- {
-  --   "rcarriga/neotest",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --     "nvim-treesitter/nvim-treesitter",
-  --     "haydenmeade/neotest-jest",
-  --   },
-  --   config = function()
-  --     require("plugins.neotest")
-  --   end,
-  -- },
-  -- {
-  --   "andythigpen/nvim-coverage",
-  --   dependencies = "nvim-lua/plenary.nvim",
-  --   cmd = {
-  --     "Coverage",
-  --     "CoverageSummary",
-  --     "CoverageLoad",
-  --     "CoverageShow",
-  --     "CoverageHide",
-  --     "CoverageToggle",
-  --     "CoverageClear",
-  --   },
-  --   config = function()
-  --     require("coverage").setup()
-  --   end,
-  -- },
+  {
+    "rcarriga/neotest",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "haydenmeade/neotest-jest",
+    },
+    config = function()
+      require("plugins.neotest")
+    end,
+  },
+  {
+    "andythigpen/nvim-coverage",
+    dependencies = "nvim-lua/plenary.nvim",
+    cmd = {
+      "Coverage",
+      "CoverageSummary",
+      "CoverageLoad",
+      "CoverageShow",
+      "CoverageHide",
+      "CoverageToggle",
+      "CoverageClear",
+    },
+    config = function()
+      require("coverage").setup()
+    end,
+  },
 
   -- DAP
   {
@@ -879,6 +945,23 @@ return {
       if not require("nvim-treesitter.parsers").has_parser("dap_repl") then
         vim.cmd(":TSInstall dap_repl")
       end
+    end,
+  },
+  {
+    "stevearc/conform.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require('plugins.formatting')
+    end,
+  },
+  {
+    "mfussenegger/nvim-lint",
+    event = {
+      "BufReadPre",
+      "BufNewFile",
+    },
+    config = function()
+      require('plugins.linting')
     end,
   },
 }
