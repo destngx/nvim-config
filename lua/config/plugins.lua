@@ -429,14 +429,15 @@ return {
   -- General
   -- { "AndrewRadev/switch.vim",      lazy = false },
   -- { "AndrewRadev/splitjoin.vim", lazy = false },
-  {
-    "mistricky/codesnap.nvim",
-    build = "make",
-    cmd = "CodeSnapPreviewOn",
-    opts = {
-      watermark = nil
-    }
-  },
+  -- {
+  --   "mistricky/codesnap.nvim",
+  --   build = "make build_generator",
+  --   version = "^1",
+  --   cmd = "CodeSnapPreviewOn",
+  --   opts = {
+  --     watermark = nil
+  --   }
+  -- },
   {
     "Wansmer/treesj",
     lazy = true,
