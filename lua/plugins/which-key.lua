@@ -114,9 +114,8 @@ local normal_mode_mappings = {
 
   a = {
     name = 'AI',
-    t = { "<cmd>PrtChatToggle<cr>", "Toggle Popup Chat" },
-    f = { "<cmd>PrtChatFinder<cr>", "Chat Finder" },
-    r = { "<cmd>PrtRewrite<cr>", "Inline Rewrite" },
+    t = { "<cmd>ToggleTerm direction=float<CR>", "terminal float" },
+    i = { "<cmd>PrtChatToggle<cr>", "Toggle Parrot Popup Chat" },
   },
 
   b = {
@@ -241,7 +240,6 @@ local normal_mode_mappings = {
     name = 'Table Mode',
     -- m = { 'toggle' },
     -- t = { 'tableize' },
-    t = { "<cmd>ToggleTerm direction=float<CR>", "terminal float" }
   },
 }
 
@@ -413,6 +411,20 @@ local function attach_nvim_tree(bufnr)
     nowait = false, -- use `nowait` when creating keymaps
   })
 end
+
+wk.register({
+  c = {
+    c = {
+      name = "Copilot Chat",
+    }
+  }
+}, {
+  mode = "n",
+  prefix = "<leader>",
+  silent = true,
+  noremap = true,
+  nowait = false,
+})
 
 return {
   attach_markdown = attach_markdown,

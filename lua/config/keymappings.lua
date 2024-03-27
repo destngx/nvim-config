@@ -75,7 +75,7 @@ keymap("i", "<C-s>", "<ESC> :w<CR>", silent)
 -- telescope
 
 keymap("n", "<C-p>", "<CMD>lua require('plugins.telescope').project_files()<CR>")
-keymap("n", "<S-p>", "<CMD>lua require('plugins.telescope.pickers.multi-rg')()<CR>")
+keymap("n", "<S-p>", "<CMD>lua require('plugins.telescope.pickers.multi-rg')({ layout_strategy = 'vertical' })<CR>")
 
 -- Remove highlights
 keymap("n", "<CR>", ":noh<CR><CR>", silent)

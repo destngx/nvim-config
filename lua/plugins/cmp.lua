@@ -18,6 +18,11 @@ end
 
 cmp_git.setup()
 
+local copilot_comparators_status_ok, copilot_cmp_comparators = pcall(require, "copilot_cmp.comparators")
+if not copilot_comparators_status_ok then
+  P("Failed to load copilot_cmp.comparators")
+end
+
 require("luasnip/loaders/from_vscode").lazy_load()
 
 -- ╭──────────────────────────────────────────────────────────╮
@@ -101,6 +106,7 @@ end
 -- ╰──────────────────────────────────────────────────────────╯
 local source_mapping = {
   npm = DestNgxVim.icons.terminal .. "NPM",
+  Copilot = DestNgxVim.icons.copilot,
   Codeium = DestNgxVim.icons.codeium,
   nvim_lsp = DestNgxVim.icons.stack .. "LSP",
   buffer = DestNgxVim.icons.buffer .. "BUF",
@@ -236,16 +242,21 @@ cmp.setup({
   -- You should specify your *installed* sources.
   sources = {
     {
+      name = "copilot",
+      priority = 11,
+      max_item_count = 3,
+    },
+    {
       name = "nvim_lsp",
       priority = 10,
       -- Limits LSP results to specific types based on line context (Fields, Methods, Variables)
       entry_filter = limit_lsp_types,
     },
-    { name = "npm",         priority = 9 },
-    { name = "codeium",     priority = 9 },
-    { name = "luasnip",     priority = 7, max_item_count = 5 },
-    { name = "buffer",      priority = 7, keyword_length = 5, option = buffer_option, max_item_count = 5 },
-    { name = "git",     priority = 7  },
+    { name = "npm",     priority = 9 },
+    { name = "codeium", priority = 9 },
+    { name = "luasnip", priority = 7, max_item_count = 5 },
+    { name = "buffer",  priority = 7, keyword_length = 5, option = buffer_option, max_item_count = 5 },
+    { name = "git",     priority = 7 },
     {
       name = "buffer",
       priority = 7,
@@ -253,14 +264,15 @@ cmp.setup({
       max_item_count = 10,
       option = buffer_option,
     },
-    { name = "nvim_lua",    priority = 5 },
-    { name = "path",        priority = 4 },
-    { name = "calc",        priority = 3 },
+    { name = "nvim_lua", priority = 5 },
+    { name = "path",     priority = 4 },
+    { name = "calc",     priority = 3 },
   },
   sorting = {
     priority_weight = 2,
     comparators = {
       deprioritize_snippet,
+      copilot_cmp_comparators.prioritize or function() end,
       cmp.config.compare.exact,
       cmp.config.compare.locality,
       cmp.config.compare.score,
@@ -310,4 +322,3 @@ cmp.setup.cmdline(":", {
     { name = "cmdline" },
   }),
 })
-

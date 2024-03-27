@@ -30,7 +30,8 @@ DestNgxVim = {
       enabled = true, -- sync after change
     },
     ai = {
-      codeium = { enable = true },
+      codeium = { enable = false },
+      copilot = { enable = true },
       chatgpt = { enable = true }
     },
     experimental_noice = {
