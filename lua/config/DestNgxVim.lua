@@ -30,7 +30,7 @@ DestNgxVim = {
       enabled = true, -- sync after change
     },
     ai = {
-      codeium = { enable = false },
+      codeium = { enable = true },
       copilot = { enable = true },
       chatgpt = { enable = true }
     },
