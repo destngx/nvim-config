@@ -47,7 +47,7 @@ return {
   },
   {
     "folke/noice.nvim",
-    cond = DestNgxVim.plugins.experimental_noice.enabled,
+    enabled = DestNgxVim.plugins.experimental_noice.enabled,
     lazy = false,
     config = function()
       require("plugins.noice")
@@ -55,7 +55,7 @@ return {
   },
   {
     "chrisgrieser/nvim-spider",
-    cond = DestNgxVim.plugins.jump_by_subwords.enabled,
+    enabled = DestNgxVim.plugins.jump_by_subwords.enabled,
     lazy = true,
     keys = { "w", "e", "b", "ge" },
     config = function()
@@ -299,7 +299,7 @@ return {
   -- AI
   {
     "zbirenbaum/copilot.lua",
-    cond = DestNgxVim.plugins.ai.copilot.enabled,
+    enabled = DestNgxVim.plugins.ai.copilot.enabled,
     lazy = false,
     config = function()
       require("plugins.copilot")
@@ -307,7 +307,7 @@ return {
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    cond = DestNgxVim.plugins.ai.copilot.enabled,
+    enabled = DestNgxVim.plugins.ai.copilot.enabled,
     event = "VeryLazy",
     opts = {
       show_help = "no",
@@ -354,7 +354,7 @@ return {
   },
   {
     "jcdickinson/codeium.nvim",
-    cond = DestNgxVim.plugins.ai.codeium.enabled,
+    enabled = DestNgxVim.plugins.ai.codeium.enabled,
     event = "InsertEnter",
     cmd = "Codeium",
     dependencies = {
@@ -367,7 +367,7 @@ return {
     "frankroeder/parrot.nvim",
     dependencies = { "ibhagwan/fzf-lua" },
     lazy = false,
-    cond = os.getenv "OPENAI_API_KEY" ~= nil or os.getenv "PERPLEXITY_API_KEY" ~= nil,
+    enabled = os.getenv "OPENAI_API_KEY" ~= nil or os.getenv "PERPLEXITY_API_KEY" ~= nil,
     config = function()
       require("plugins.parrot")
     end,
@@ -396,7 +396,7 @@ return {
       },
       {
         "zbirenbaum/copilot-cmp",
-        cond = DestNgxVim.plugins.ai.copilot.enabled,
+        enabled = DestNgxVim.plugins.ai.copilot.enabled,
         config = function()
           require("copilot_cmp").setup()
         end,
@@ -594,12 +594,12 @@ return {
     config = function()
       require("plugins.zen")
     end,
-    cond = DestNgxVim.plugins.zen.enabled,
+    enabled = DestNgxVim.plugins.zen.enabled,
   },
   {
     "folke/twilight.nvim",
     config = true,
-    cond = DestNgxVim.plugins.zen.enabled,
+    enabled = DestNgxVim.plugins.zen.enabled,
   },
   {
     "folke/flash.nvim",
