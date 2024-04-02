@@ -19,7 +19,7 @@ conform.setup({
   },
 })
 
-vim.keymap.set({ "n" }, "<leader>f", function()
+vim.keymap.set({ "n" }, "<leader>cf", function()
   conform.format({
     lsp_fallback = true,
     async = false,
@@ -27,7 +27,7 @@ vim.keymap.set({ "n" }, "<leader>f", function()
   })
 end, { desc = "format file" })
 
-vim.keymap.set({ "v" }, "<leader>f", function()
+vim.keymap.set({ "v" }, "<leader>cf", function()
   conform.format({
     lsp_fallback = true,
     async = false,
