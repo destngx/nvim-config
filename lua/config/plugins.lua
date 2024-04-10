@@ -23,8 +23,8 @@ return {
     event = {
       -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
       -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
-      "BufReadPre /Users/destnguyxn/projects/obsidian-vaults/**.md",
-      "BufNewFile /Users/destnguyxn/projects/obsidian-vaults/**.md",
+      "BufReadPre /home/destnguyxn/projects/obsidian-vaults/**.md",
+      "BufNewFile /home/destnguyxn/projects/obsidian-vaults/**.md",
     },
     dependencies = {
       -- Required.
@@ -127,6 +127,11 @@ return {
   {
     "nvim-treesitter/nvim-treesitter-context",
     lazy = false,
+    config = function()
+      require("treesitter-context").setup {
+        max_lines = 4,
+      }
+    end,
   },
 
   -- Navigating (Telescope/Tree/Refactor)
