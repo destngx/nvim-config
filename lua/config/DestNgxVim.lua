@@ -31,7 +31,7 @@ DestNgxVim = {
     },
     ai = {
       codeium = { enable = true },
-      copilot = { enable = true },
+      copilot = { enable = os.getenv('COPILOT') },
       chatgpt = { enable = true }
     },
     experimental_noice = {
