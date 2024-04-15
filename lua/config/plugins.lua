@@ -1,5 +1,28 @@
 return {
   {
+    'FluxxField/bionic-reading.nvim',
+    lazy = false,
+    config = function()
+      require('bionic-reading').setup({
+        auto_highlight = true,
+        file_types = {
+          ["text"] = "any",
+          ["markdown"] = "any",
+          ["lua"] = {
+            "comment",
+          },
+        },
+        -- Please see :help nvim_set_hl() to see vals that can be passed
+        hl_group_value = {
+          bold = true
+        },
+        prompt_user = true,
+        treesitter = true,
+        update_in_insert_mode = true,
+      })
+    end,
+  },
+  {
     'declancm/cinnamon.nvim',
     config = function()
       require('cinnamon').setup()
