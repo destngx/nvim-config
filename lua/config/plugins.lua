@@ -389,7 +389,9 @@ return {
       "nvim-lua/plenary.nvim",
       "hrsh7th/nvim-cmp",
     },
-    config = true,
+    config = function()
+      require("codeium").setup({ enabled_chat = true })
+    end,
   },
   {
     "frankroeder/parrot.nvim",
