@@ -162,7 +162,7 @@ return {
   -- Navigating (Telescope/Tree/Refactor)
   {
     'stevearc/aerial.nvim',
-    lazy = "BufReadPre",
+    lazy = false,
     config = function()
       require("plugins.aerial")
     end,

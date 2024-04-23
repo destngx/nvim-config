@@ -187,7 +187,7 @@ local normal_mode_mappings = {
   },
   l = {
     name = "List",
-    S = { "<CMD>lua require('aerial').toggle()<CR>", 'Symbol Outline', }
+    S = { "<CMD>AerialToggle! left<CR>", 'Symbol Outline', }
   },
 
   -- m = {
