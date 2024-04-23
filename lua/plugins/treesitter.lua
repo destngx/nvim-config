@@ -35,6 +35,10 @@ require 'nvim-treesitter.configs'.setup {
     },
   },
 
+  autotag = {
+    enable = true
+  },
+
   markid = {
     enable = true
   },

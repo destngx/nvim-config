@@ -185,6 +185,10 @@ local normal_mode_mappings = {
       c = 'create worktree',
     }
   },
+  l = {
+    name = "List",
+    S = { "<CMD>lua require('aerial').toggle()<CR>", 'Symbol Outline', }
+  },
 
   -- m = {
   --   name = "Markdown",

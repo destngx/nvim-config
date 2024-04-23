@@ -24,6 +24,7 @@ return {
   },
   {
     'declancm/cinnamon.nvim',
+    lazy = false,
     config = function()
       require('cinnamon').setup()
     end
@@ -102,6 +103,7 @@ return {
     dependencies = "neovim/nvim-lspconfig",
   },
   { "nvim-lua/plenary.nvim" },
+  -- highlight same-name identifider with the same color
   { "David-Kunz/markid" },
   {
     "nvim-tree/nvim-web-devicons",
@@ -158,6 +160,13 @@ return {
   },
 
   -- Navigating (Telescope/Tree/Refactor)
+  {
+    'stevearc/aerial.nvim',
+    lazy = "BufReadPre",
+    config = function()
+      require("plugins.aerial")
+    end,
+  },
   {
     "0x00-ketsu/autosave.nvim",
     lazy = false,
@@ -567,8 +576,8 @@ return {
       require("plugins.toggleterm")
     end,
   },
-  { "tpope/vim-repeat",           lazy = false },
-  { "tpope/vim-speeddating",      lazy = false },
+  { "tpope/vim-repeat",      lazy = false },
+  { "tpope/vim-speeddating", lazy = false },
   -- { "dhruvasagar/vim-table-mode", ft = { "markdown" } },
   -- {
   --   "smoka7/multicursors.nvim",
@@ -844,6 +853,10 @@ return {
   },
 
   -- Snippets & Language & Syntax
+  {
+    "windwp/nvim-ts-autotag",
+    event = "InsertEnter",
+  },
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",

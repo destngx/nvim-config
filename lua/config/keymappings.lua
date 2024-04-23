@@ -37,7 +37,7 @@ keymap("i", "<C-E>", "<END>")
 -- Go to beginning of command in command-line mode
 keymap("c", "<C-A>", "<HOME>")
 -- Do not move my cursor when joining lines.
-keymap("n", "<Leader>j", "", {
+keymap("n", "J", "", {
   desc = "join line",
   callback = function()
     vim.cmd([[
@@ -73,8 +73,7 @@ keymap("n", "<C-s>", ":w<CR>", silent)
 keymap("i", "<C-s>", "<ESC> :w<CR>", silent)
 
 -- telescope
-
-keymap("n", "<C-p>", "<CMD>lua require('plugins.telescope').project_files()<CR>")
+keymap("n", "<C-p>", "<cmd>Telescope find_files<CR>")
 keymap("n", "<S-p>", "<CMD>lua require('plugins.telescope.pickers.multi-rg')({ layout_strategy = 'vertical' })<CR>")
 
 -- Remove highlights
