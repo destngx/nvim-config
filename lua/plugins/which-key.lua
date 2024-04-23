@@ -114,7 +114,6 @@ local normal_mode_mappings = {
 
   a = {
     name = 'AI',
-    t = { "<cmd>ToggleTerm direction=float<CR>", "terminal float" },
     i = { "<cmd>PrtChatToggle<cr>", "Toggle Parrot Popup Chat" },
   },
 
@@ -233,12 +232,14 @@ local normal_mode_mappings = {
     H = { '<cmd>lua require("plugins.telescope").command_history()<CR>', 'command history' },
     s = { '<cmd>Telescope search_history theme=dropdown<CR>', 'search history' },
     q = { '<cmd>Telescope quickfix<CR>', 'quickfix list' },
+    t = { '<cmd>TodoTelescope<CR>', 'todo comments' },
   },
 
   t = {
-    name = 'Table Mode',
-    -- m = { 'toggle' },
-    -- t = { 'tableize' },
+    name = 'Toggle',
+    m = { 'toggle table mode markdown' },
+    t = { "<cmd>ToggleTerm direction=float<CR>", "terminal float" },
+    p = { "<cmd>TermExec cmd='workon general' direction=float<CR>", "terminal python float" },
   },
 }
 

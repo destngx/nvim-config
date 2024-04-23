@@ -569,40 +569,40 @@ return {
   },
   { "tpope/vim-repeat",           lazy = false },
   { "tpope/vim-speeddating",      lazy = false },
-  { "dhruvasagar/vim-table-mode", ft = { "markdown" } },
-  {
-    "smoka7/multicursors.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-      'smoka7/hydra.nvim',
-    },
-    opts = {
-      hint_config = {
-        border = DestNgxVim.ui.float.border or "rounded",
-        position = 'bottom',
-        show_name = false,
-      }
-    },
-    keys = {
-      {
-        '<LEADER>M',
-        '<CMD>MCstart<CR>',
-        desc = 'multicursor',
-      },
-      {
-        '<LEADER>M',
-        '<CMD>MCvisual<CR>',
-        mode = "v",
-        desc = 'multicursor',
-      },
-      {
-        '<C-Down>',
-        '<CMD>MCunderCursor<CR>',
-        desc = 'multicursor down',
-      },
-    },
-  },
+  -- { "dhruvasagar/vim-table-mode", ft = { "markdown" } },
+  -- {
+  --   "smoka7/multicursors.nvim",
+  --   event = "VeryLazy",
+  --   dependencies = {
+  --     'nvim-treesitter/nvim-treesitter',
+  --     'smoka7/hydra.nvim',
+  --   },
+  --   opts = {
+  --     hint_config = {
+  --       border = DestNgxVim.ui.float.border or "rounded",
+  --       position = 'bottom',
+  --       show_name = false,
+  --     }
+  --   },
+  --   keys = {
+  --     {
+  --       '<LEADER>M',
+  --       '<CMD>MCstart<CR>',
+  --       desc = 'multicursor',
+  --     },
+  --     {
+  --       '<LEADER>M',
+  --       '<CMD>MCvisual<CR>',
+  --       mode = "v",
+  --       desc = 'multicursor',
+  --     },
+  --     {
+  --       '<C-Down>',
+  --       '<CMD>MCunderCursor<CR>',
+  --       desc = 'multicursor down',
+  --     },
+  --   },
+  -- },
   {
     "nacro90/numb.nvim",
     lazy = false,
