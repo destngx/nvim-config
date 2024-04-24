@@ -362,28 +362,28 @@ return {
       end, 3000)
     end,
     keys = {
-      { "<leader>ccb", ":CopilotChatBuffer<cr>",      desc = "CopilotChat - Buffer" },
-      { "<leader>cce", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
-      { "<leader>cct", "<cmd>CopilotChatTests<cr>",   desc = "CopilotChat - Generate tests" },
+      { "<leader>acb", ":CopilotChatBuffer<cr>",      desc = "CopilotChat - Buffer" },
+      { "<leader>ace", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
+      { "<leader>act", "<cmd>CopilotChatTests<cr>",   desc = "CopilotChat - Generate tests" },
       {
-        "<leader>ccT",
+        "<leader>acT",
         "<cmd>CopilotChatVsplitToggle<cr>",
         desc = "CopilotChat - Toggle Vsplit", -- Toggle vertical split
       },
       {
-        "<leader>ccv",
+        "<leader>acv",
         ":CopilotChatVisual",
         mode = "x",
         desc = "CopilotChat - Open in vertical split",
       },
       {
-        "<leader>ccc",
+        "<leader>acc",
         ":CopilotChatInPlace<cr>",
         mode = { "n", "x" },
         desc = "CopilotChat - Run in-place code",
       },
       {
-        "<leader>ccf",
+        "<leader>acf",
         "<cmd>CopilotChatFixDiagnostic<cr>", -- Get a fix for the diagnostic message under the cursor.
         desc = "CopilotChat - Fix diagnostic",
       },
@@ -564,8 +564,8 @@ return {
     "LudoPinelli/comment-box.nvim",
     lazy = false,
     keys = {
-      { "<leader>ac", "<cmd>lua require('comment-box').llbox()<CR>", desc = "comment box" },
-      { "<leader>ac", "<cmd>lua require('comment-box').llbox()<CR>", mode = "v",          desc = "comment box" },
+      { "<leader>cc", "<cmd>lua require('comment-box').llbox()<CR>", desc = "comment box" },
+      { "<leader>cc", "<cmd>lua require('comment-box').llbox()<CR>", mode = "v",          desc = "comment box" },
     }
   },
   {
@@ -973,20 +973,20 @@ return {
       { "<Leader>gg", "<cmd>LazyGit<CR>", desc = "lazygit" },
     },
   },
-  {
-    "pwntester/octo.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-      "nvim-tree/nvim-web-devicons",
-    },
-    cmd = {
-      "Octo",
-    },
-    config = function()
-      require('plugins.git.octo')
-    end
-  },
+  -- {
+  --   "pwntester/octo.nvim",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-telescope/telescope.nvim",
+  --     "nvim-tree/nvim-web-devicons",
+  --   },
+  --   cmd = {
+  --     "Octo",
+  --   },
+  --   config = function()
+  --     require('plugins.git.octo')
+  --   end
+  -- },
 
   -- Testing
   {

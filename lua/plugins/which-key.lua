@@ -115,6 +115,7 @@ local normal_mode_mappings = {
   a = {
     name = 'AI',
     i = { "<cmd>PrtChatToggle<cr>", "Toggle Parrot Popup Chat" },
+    c = { "<cmd>PrtChatToggle<cr>", "Toggle Parrot Popup Chat" },
   },
 
   b = {
@@ -136,7 +137,7 @@ local normal_mode_mappings = {
   },
 
   d = {
-    name = 'Debug',
+    name = 'Debugger',
     a = { 'attach' },
     b = { 'breakpoint' },
     c = { 'continue' },
