@@ -366,21 +366,9 @@ return {
       { "<leader>ace", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
       { "<leader>act", "<cmd>CopilotChatTests<cr>",   desc = "CopilotChat - Generate tests" },
       {
-        "<leader>acT",
-        "<cmd>CopilotChatVsplitToggle<cr>",
-        desc = "CopilotChat - Toggle Vsplit", -- Toggle vertical split
-      },
-      {
-        "<leader>acv",
-        ":CopilotChatVisual",
-        mode = "x",
-        desc = "CopilotChat - Open in vertical split",
-      },
-      {
-        "<leader>acc",
-        ":CopilotChatInPlace<cr>",
-        mode = { "n", "x" },
-        desc = "CopilotChat - Run in-place code",
+        "<leader>aca",
+        "<cmd>CopilotChat<cr>",
+        desc = "CopilotChat - Toggle ", -- Toggle vertical split
       },
       {
         "<leader>acf",

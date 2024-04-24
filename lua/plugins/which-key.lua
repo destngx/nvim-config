@@ -113,9 +113,9 @@ local normal_mode_mappings = {
   },
 
   a = {
-    name = 'AI',
+    name = 'AI assistant',
     i = { "<cmd>PrtChatToggle<cr>", "Toggle Parrot Popup Chat" },
-    c = { "<cmd>PrtChatToggle<cr>", "Toggle Parrot Popup Chat" },
+    c = { "Toggle Copilot Popup Chat" },
   },
 
   b = {
