@@ -12,7 +12,7 @@ require('cinnamon').setup {
 -- ╰──────────────────────────────────────────────────────────╯
 
 -- Half-window movements:
--- vim.keymap.set({ 'n', 'x', 'i' }, '<C-u>', "<Cmd>lua Scroll('<C-u>')<CR>zz")
+vim.keymap.set({ 'n', 'x', 'i' }, '<C-u>', "<Cmd>lua Scroll('<C-u>')<CR>zz")
 vim.keymap.set({ 'n', 'x', 'i' }, '<C-d>', "<Cmd>lua Scroll('<C-d>')<CR>zz")
 
 -- Page movements:

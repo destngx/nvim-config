@@ -6,6 +6,8 @@ keymap({ "n", "x" }, ";", ":")
 -- Turn the word under cursor to upper case
 keymap("i", "<c-u>", "<Esc>viwUea")
 
+-- disable the Q command
+vim.keymap.set("n", "Q", "<nop>")
 -- Turn the current word into title case
 keymap("i", "<c-t>", "<Esc>b~lea")
 
@@ -21,6 +23,10 @@ keymap("n", "<leader>Q", "<cmd>qa!<cr>", { silent = true, desc = "quit nvim" })
 -- Paste non-linewise text above or below current line, see https://stackoverflow.com/a/1346777/6064933
 keymap("n", "<leader>P", "m`o<ESC>p``", { desc = "paste below current line" })
 -- keymap("n", "<leader>P", "m`O<ESC>p``", { desc = "paste above current line" })
+
+-- Center the screen on the next/prev search result with n/N
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
 
 -- Better window movement
 keymap("n", "<C-h>", "<C-w>h", silent)
@@ -80,8 +86,8 @@ keymap("n", "<S-p>", "<CMD>lua require('plugins.telescope.pickers.multi-rg')({ l
 keymap("n", "<CR>", ":noh<CR><CR>", silent)
 
 -- Find word/file across project
-keymap("n", "<Leader>pf",
-  "<CMD>lua require('plugins.telescope').project_files({ default_text = vim.fn.expand('<cword>'), initial_mode = 'normal' })<CR>")
+-- keymap("n", "<Leader>pf",
+--  "<CMD>lua require('plugins.telescope').project_files({ default_text = vim.fn.expand('<cword>'), initial_mode = 'normal' })<CR>")
 keymap("n", "<Leader>pw", "<CMD>lua require('telescope.builtin').grep_string({ initial_mode = 'normal' })<CR>")
 
 -- Buffers
