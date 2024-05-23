@@ -41,6 +41,13 @@ require("typescript-tools").setup({
       includeInlayParameterNameHints = "all",
       includeCompletionsForModuleExports = true,
       quotePreference = "auto",
+      includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+      includeInlayFunctionParameterTypeHints = true,
+      includeInlayVariableTypeHints = true,
+      includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+      includeInlayPropertyDeclarationTypeHints = true,
+      includeInlayFunctionLikeReturnTypeHints = true,
+      includeInlayEnumMemberValueHints = true,
     },
   },
 })

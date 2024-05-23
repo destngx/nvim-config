@@ -48,14 +48,14 @@ end
 vim.api.nvim_create_user_command("LspToggleAutoFormat", 'lua require("lsp.functions").toggle_format_on_save()', {})
 
 -- Custom textDocument/hover LSP handler to colorize colors inside hover results - WIP
-function M.custom_hover_handler(_, result)
+function M.custom_hover_handler()
   local handler = function(_, result)
     if result then
       local colorizer = require("colorizer")
 
       local lines = vim.split(result.contents.value, "\n")
       local bufnr =
-          vim.lsp.util.open_floating_preview(lines, "markdown", { border = EcoVim.ui.float.border or "rounded" })
+          vim.lsp.util.open_floating_preview(lines, "markdown", { border = DestNgxVim.ui.float.border or "rounded" })
       colorizer.highlight_buffer(bufnr, nil, vim.list_slice(lines, 2, #lines), 0, colorizer.get_buffer_options(0))
     end
   end
