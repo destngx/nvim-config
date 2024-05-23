@@ -60,7 +60,8 @@ local function on_attach(client, bufnr)
     navic.attach(client, bufnr)
   end
   if client.name == "yamlls" then
-    client.resolved_capabilities.document_formatting = true
+    client.server_capabilities.documentFormattingProvider = true
+    client.server_capabilities.documentRangeFormattingProvider = true
   end
 end
 
