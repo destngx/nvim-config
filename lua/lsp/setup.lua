@@ -79,6 +79,9 @@ require("mason-lspconfig").setup_handlers {
       handlers = handlers,
     }
   end,
+  ["tsserver"] = function()
+    -- skip to use typescript-tools
+  end,
   ["tailwindcss"] = function()
     lspconfig.tailwindcss.setup({
       capabilities = require("lsp.servers.tailwindcss").capabilities,

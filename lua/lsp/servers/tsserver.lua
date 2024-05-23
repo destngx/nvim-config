@@ -22,7 +22,10 @@ local on_attach = function(client, bufnr)
 
   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
-  require("lsp-inlayhints").on_attach(client, bufnr)
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+  if not vim.fn.has("nvim-0.10") then
+    require("lsp-inlayhints").on_attach(client, bufnr)
+  end
 end
 
 local handlers = {

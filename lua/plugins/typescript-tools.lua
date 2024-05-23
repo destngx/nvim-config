@@ -27,14 +27,14 @@ local handlers = {
 require("typescript-tools").setup({
   on_attach = function(client, bufnr)
     -- client.server_capabilities.semanticTokensProvider = nil
-    require("lsp-inlayhints").on_attach(client, bufnr)
-    vim.lsp.inlay_hint.enable(bufnr, true)
-    -- if vim.fn.has("nvim-0.10") then
-    --   -- Enable inlay hints
-    --   vim.lsp.inlay_hint(bufnr, true)
-    -- end
+    -- Enable inlay hints
+    vim.lsp.inlay_hint.enable(true)
+    if not vim.fn.has("nvim-0.10") then
+      require("lsp-inlayhints").on_attach(client, bufnr)
+    end
   end,
   handlers = handlers,
+  code_lens = "off",
   settings = {
     separate_diagnostic_server = true,
     tsserver_file_preferences = {
