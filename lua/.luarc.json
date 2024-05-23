@@ -4,5 +4,9 @@
     "vim",
     "bit",
     "require"
-  ]
+  ],
+    "diagnostics.disable": [
+        "deprecated",
+        "different-requires"
+    ]
 }
