@@ -31,7 +31,7 @@ tokyonight.setup({
   --- You can override specific color groups to use other groups or a hex color
   --- function will be called with a ColorScheme table
   on_colors = function(colors)
-    colors.border = "#1A1B26"
+    colors.border = "#565f89"
   end,
   --- You can override specific highlights to use other groups or a hex color
   --- function will be called with a Highlights and ColorScheme table

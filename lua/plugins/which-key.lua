@@ -188,7 +188,8 @@ local normal_mode_mappings = {
   },
   l = {
     name = "List",
-    S = { "<CMD>AerialToggle! left<CR>", 'Symbol Outline', }
+    S = { "<CMD>AerialToggle! left<CR>", 'Symbol Outline', },
+    s = { "<CMD>AerialToggle! left<CR>", 'Symbol Outline', }
   },
 
   -- m = {
