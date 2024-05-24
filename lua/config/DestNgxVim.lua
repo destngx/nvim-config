@@ -26,7 +26,7 @@ DestNgxVim = {
     zen = {
       alacritty_enabled = false,
       kitty_enabled = true,
-      wezterm_enabled = false,
+      wezterm_enabled = true,
       enabled = true, -- sync after change
     },
     ai = {
