@@ -1,5 +1,9 @@
 return {
   {
+    'mrjones2014/smart-splits.nvim',
+    lazy = false,
+  },
+  {
     'stevearc/oil.nvim',
     lazy = false,
     opts = {},
