@@ -188,7 +188,6 @@ local normal_mode_mappings = {
   },
   l = {
     name = "List",
-    S = { "<CMD>AerialToggle! left<CR>", 'Symbol Outline', },
     s = { "<CMD>AerialToggle! left<CR>", 'Symbol Outline', }
   },
 
@@ -244,8 +243,6 @@ local normal_mode_mappings = {
   t = {
     name = 'Toggle',
     m = { 'toggle table mode markdown' },
-    t = { "<cmd>ToggleTerm direction=float<CR>", "terminal float" },
-    p = { "<cmd>TermExec cmd='workon general' direction=float<CR>", "terminal python float" },
   },
 }
 
@@ -297,8 +294,8 @@ local function attach_markdown(bufnr)
   wk.register({
     m = {
       name = "Markdown",
+      t = { '<cmd>RenderMarkdownToggle<CR>', 'Render Markdown Toggle' },
       p = { '<cmd>MarkdownPreviewToggle<CR>', 'MarkdownPreview In Browser' },
-      P = { '<cmd>MPToggle<CR>', 'markdown preview' },
     }
   }, {
     buffer = bufnr,

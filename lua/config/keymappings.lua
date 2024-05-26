@@ -79,6 +79,8 @@ keymap("n", "<C-s>", ":w<CR>", silent)
 keymap("i", "<C-s>", "<ESC> :w<CR>", silent)
 
 -- telescope
+keymap("n", "V", "<cmd>Telescope neoclip<CR>")
+keymap("n", "U", "<cmd>Telescope undo<CR>")
 keymap("n", "<C-p>", "<cmd>Telescope find_files<CR>")
 keymap("n", "<S-p>", "<CMD>lua require('plugins.telescope.pickers.multi-rg')({ layout_strategy = 'vertical' })<CR>")
 
@@ -187,3 +189,6 @@ keymap('n', '<C-l>', require('smart-splits').move_cursor_right)
 -- keymap('n', '<leader><leader>j', require('smart-splits').swap_buf_down)
 -- keymap('n', '<leader><leader>k', require('smart-splits').swap_buf_up)
 -- keymap('n', '<leader><leader>l', require('smart-splits').swap_buf_right)
+keymap('n', '<C-;>', '<cmd>lua require("smart-splits").move_cursor_bottom()<CR>', { noremap = true, silent = true })
+
+

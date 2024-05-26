@@ -4,7 +4,9 @@ local builtin    = require('telescope.builtin')
 local icons      = DestNgxVim.icons
 
 require('telescope').load_extension('fzf')
+require('telescope').load_extension('undo')
 require("telescope").load_extension("git_worktree")
+require('telescope').load_extension('media_files')
 
 local git_icons = {
   added = icons.gitAdd,
@@ -38,7 +40,7 @@ require('telescope').setup {
     },
     file_sorter       = require('telescope.sorters').get_fzy_sorter,
     prompt_prefix     = '  ' .. require("nvim-nonicons").get("telescope") .. '  ',
-    selection_caret = " ❯ ",
+    selection_caret   = " ❯ ",
     color_devicons    = true,
     git_icons         = git_icons,
     sorting_strategy  = "ascending",
@@ -77,7 +79,7 @@ require('telescope').setup {
           "~/projects",
         },
       },
-    }
+    },
   }
 }
 
