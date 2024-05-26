@@ -1,5 +1,21 @@
 return {
   {
+    "vhyrro/luarocks.nvim",
+    lazy = false,
+    priority = 1001, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
+    opts = {
+      rocks = { "magick" },
+    },
+  },
+  {
+    "3rd/image.nvim",
+    lazy = false,
+    dependencies = { "luarocks.nvim" },
+    config = function()
+      require("plugins.image")
+    end
+  },
+  {
     'mrjones2014/smart-splits.nvim',
     lazy = false,
   },
@@ -10,29 +26,15 @@ return {
     -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
-  -- {
-  --   'FluxxField/bionic-reading.nvim',
-  --   lazy = false,
-  --   config = function()
-  --     require('bionic-reading').setup({
-  --       auto_highlight = true,
-  --       file_types = {
-  --         ["text"] = "any",
-  --         ["markdown"] = "any",
-  --         ["lua"] = {
-  --           "comment",
-  --         },
-  --       },
-  --       -- Please see :help nvim_set_hl() to see vals that can be passed
-  --       hl_group_value = {
-  --         bold = true
-  --       },
-  --       prompt_user = true,
-  --       treesitter = true,
-  --       update_in_insert_mode = true,
-  --     })
-  --   end,
-  -- },
+  {
+    'MeanderingProgrammer/markdown.nvim',
+    lazy = false,
+    name = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    config = function()
+      require('render-markdown').setup({})
+    end,
+  },
   {
     'declancm/cinnamon.nvim',
     lazy = false,
@@ -227,7 +229,24 @@ return {
       { "nvim-lua/plenary.nvim" },
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
       { "cljoly/telescope-repo.nvim" },
+      { "nvim-telescope/telescope-media-files.nvim" },
+      { "debugloop/telescope-undo.nvim" },
     },
+  },
+  {
+    "AckslD/nvim-neoclip.lua",
+    lazy = false,
+    dependencies = {
+      { 'kkharji/sqlite.lua', module = 'sqlite' },
+      -- you'll need at least one of these
+      -- {'nvim-telescope/telescope.nvim'},
+      -- {'ibhagwan/fzf-lua'},
+    },
+    config = function()
+      require('neoclip').setup({
+        enable_persistent_history = true,
+      })
+    end,
   },
   {
     "kevinhwang91/nvim-bqf",
@@ -269,7 +288,7 @@ return {
       "nvim-treesitter/nvim-treesitter",
     },
     cmd = "Refactor",
-    keys = {
+    kees = {
       { "<leader>re", ":Refactor extract ",              mode = "x",          desc = "Extract function" },
       { "<leader>rf", ":Refactor extract_to_file ",      mode = "x",          desc = "Extract function to file" },
       { "<leader>rv", ":Refactor extract_var ",          mode = "x",          desc = "Extract variable" },
@@ -567,15 +586,7 @@ return {
       { "<leader>cc", "<cmd>lua require('comment-box').llbox()<CR>", mode = "v",          desc = "comment box" },
     }
   },
-  {
-    "akinsho/nvim-toggleterm.lua",
-    lazy = false,
-    branch = "main",
-    config = function()
-      require("plugins.toggleterm")
-    end,
-  },
-  { "tpope/vim-repeat",      lazy = false },
+    { "tpope/vim-repeat",      lazy = false },
   { "tpope/vim-speeddating", lazy = false },
   -- { "dhruvasagar/vim-table-mode", ft = { "markdown" } },
   -- {
