@@ -46,7 +46,7 @@ DestNgxVim = {
   icons = icons,
   -- Status line configuration
   statusline = {
-    path_enabled = true,
+    path_enabled = false,
     path = "relative", -- absolute/relative
   },
   lsp = {
