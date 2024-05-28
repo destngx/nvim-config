@@ -1,4 +1,5 @@
 local baseDefinitionHandler = vim.lsp.handlers["textDocument/definition"]
+local asdf = ''
 
 local filter = require("lsp.utils.filter").filter
 local filterReactDTS = require("lsp.utils.filterReactDTS").filterReactDTS

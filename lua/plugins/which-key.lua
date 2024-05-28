@@ -188,13 +188,9 @@ local normal_mode_mappings = {
   },
   l = {
     name = "List",
-    s = { "<CMD>AerialToggle! left<CR>", 'Symbol Outline', }
+    s = { "<CMD>AerialToggle! left<CR>", 'Symbol Outline', },
+    t = { '<cmd>lua require("nvim-tree.api").tree.toggle()<CR>', "NvimTreeToggle" },
   },
-
-  -- m = {
-  --   name = "Markdown",
-  --   P = { '<cmd>MarkdownPreviewToggle<CR>', 'MarkdownPreview In Browser' },
-  -- },
 
   o = {
     name = 'Obsidian',
@@ -235,6 +231,7 @@ local normal_mode_mappings = {
     d = { '<cmd>lua require("plugins.telescope").edit_neovim()<CR>', 'dotfiles' },
     h = { '<cmd>Telescope oldfiles hidden=true<CR>', 'file history' },
     H = { '<cmd>lua require("plugins.telescope").command_history()<CR>', 'command history' },
+    m = { '<cmd>Telescope recall<CR>', 'Show all marks' },
     s = { '<cmd>Telescope search_history theme=dropdown<CR>', 'search history' },
     q = { '<cmd>Telescope quickfix<CR>', 'quickfix list' },
     t = { '<cmd>TodoTelescope<CR>', 'todo comments' },

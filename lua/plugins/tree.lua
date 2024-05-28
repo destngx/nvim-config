@@ -1,6 +1,5 @@
 -- local utils = require("utils")
 -- local nvim_tree_events = require("nvim-tree.events")
--- local bufferline_api = require("bufferline.api")
 --
 
 local nonicons_extention = require("nvim-nonicons.extentions.nvim-tree")
@@ -163,9 +162,3 @@ require("nvim-tree").setup({
   },
 })
 
-vim.api.nvim_set_keymap(
-  "n",
-  "<C-e>",
-  "<cmd>lua require('nvim-tree.api').tree.toggle()<CR>",
-  { noremap = true, silent = true }
-)

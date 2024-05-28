@@ -11,6 +11,9 @@ vim.keymap.set("n", "Q", "<nop>")
 -- Turn the current word into title case
 keymap("i", "<c-t>", "<Esc>b~lea")
 
+-- Open Oil
+keymap("n", "<c-e>", "<cmd>Oil --float<CR>")
+
 -- Shortcut for faster save and quit
 keymap("n", "<leader>w", "<cmd>update<cr>", { silent = true, desc = "save buffer" })
 
@@ -74,10 +77,6 @@ keymap("v", "<A-`>", "U", silent)
 -- New file by CTRL-N
 keymap("n", "<C-n>", "<cmd>AdvancedNewFile<CR>", silent)
 
--- Save file by CTRL-S
-keymap("n", "<C-s>", ":w<CR>", silent)
-keymap("i", "<C-s>", "<ESC> :w<CR>", silent)
-
 -- telescope
 keymap("n", "V", "<cmd>Telescope neoclip<CR>")
 keymap("n", "U", "<cmd>Telescope undo<CR>")
@@ -93,9 +92,8 @@ keymap("n", "<CR>", ":noh<CR><CR>", silent)
 keymap("n", "<Leader>pw", "<CMD>lua require('telescope.builtin').grep_string({ initial_mode = 'normal' })<CR>")
 
 -- Buffers
-keymap("n", "<Tab>", ":BufferLineCycleNext<CR>", silent)
+keymap("n", "<leader>;", "<cmd>Telescope grapple tags<CR>", silent)
 keymap("n", "gn", ":bn<CR>", silent)
-keymap("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", silent)
 keymap("n", "gp", ":bp<CR>", silent)
 keymap("n", "<S-q>", ":lua require('mini.bufremove').delete(0, false)<CR>", silent)
 
