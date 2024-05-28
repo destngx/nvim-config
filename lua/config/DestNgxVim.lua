@@ -1,4 +1,4 @@
-------------------------------------------------
+----------------------------------------------
 --    This is a main configuration file for   --
 --          EcoVim modified by DestNgx        --
 --      Change variables which you need to    --

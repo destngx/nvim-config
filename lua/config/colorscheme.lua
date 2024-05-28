@@ -106,13 +106,6 @@ if DestNgxVim.colorscheme == "tokyonight" then
   vim.api.nvim_set_hl(0, "BufferOffset", { link = "DestNgxVimSecondary" })
   vim.api.nvim_set_hl(0, "LspInlayHint", { link = "LspCodeLens" })
 
-
-  -- Bufferline
-  vim.api.nvim_set_hl(0, "BufferCurrentSign", { fg = c.cyan0 })
-  vim.api.nvim_set_hl(0, "BufferInactiveSign", { bg = "#202331", fg = c.dark3 })
-  vim.api.nvim_set_hl(0, "BufferInactiveMod", { bg = "NONE", fg = c.yellow })
-
-  vim.api.nvim_set_hl(0, "BufferLineOffsetSeparator", { bg = "#16161e", fg = "#16161e" })
   -- Completion Menu Colors
   local highlights = {
     CmpItemAbbr = { fg = c.dark3, bg = "NONE" },

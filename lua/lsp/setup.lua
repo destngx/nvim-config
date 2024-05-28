@@ -20,7 +20,6 @@ mason_lsp.setup({
     "bashls",
     "cssls",
     "eslint",
-    "graphql",
     "html",
     "jsonls",
     "lua_ls",

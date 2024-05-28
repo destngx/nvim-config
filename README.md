@@ -23,7 +23,7 @@ With the following plugins has been integrated into to support for full stack de
 5. **[autosave.nvim]()**
 6. **[better-escape.nvim]()**
 7. **[bigfile.nvim]()**: Automatically turn off some features of neovim when working with large files
-8. **[bufferline.nvim]()**
+8. **[grapple.nvim]()**
 9. **[cinnamon.nvim]()**: Smooth scrolling for any movement command or string of commands
 10. **[cmp-buffer]()**
 11. **[cmp-calc]()**

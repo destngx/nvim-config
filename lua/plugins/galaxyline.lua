@@ -1,5 +1,5 @@
 -- See: https://github.com/glepnir/galaxyline.nvim
--- Modified by ecosse
+-- Modified by ecosse and destnguyxn
 
 local gl = require('galaxyline')
 local condition = require('galaxyline.condition')

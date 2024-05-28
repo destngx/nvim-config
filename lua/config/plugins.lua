@@ -22,8 +22,9 @@ return {
   {
     'stevearc/oil.nvim',
     lazy = false,
-    opts = {},
-    -- Optional dependencies
+    config = function()
+      require("plugins.oil")
+    end,
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   {
@@ -55,18 +56,11 @@ return {
     "epwalsh/obsidian.nvim",
     version = "*", -- recommended, use latest release instead of latest commit
     lazy = false,
-    -- ft = { "markdown" },
-    -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
     event = {
-      -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-      -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
       "BufReadPre /home/destnguyxn/projects/obsidian-vaults/**.md",
       "BufNewFile /home/destnguyxn/projects/obsidian-vaults/**.md",
     },
-    dependencies = {
-      -- Required.
-      "nvim-lua/plenary.nvim",
-    },
+    dependencies = { "nvim-lua/plenary.nvim", },
     config = function()
       require("plugins.obsidian")
     end,
@@ -125,11 +119,6 @@ return {
     end,
   },
   {
-    'yamatsum/nvim-nonicons',
-    lazy = false,
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-  },
-  {
     "goolord/alpha-nvim",
     lazy = false,
     config = function()
@@ -186,10 +175,8 @@ return {
     config = function()
       require("autosave").setup {
         enabled = true,
-        -- your config goes here
-        -- or just leave it empty :)
         conditions = {
-          filetype_is_not = { "markdown", "gitcommit" },
+          filetype_is_not = { "markdown", "gitcommit", "oil" },
         },
       }
     end,
@@ -256,22 +243,21 @@ return {
     end,
   },
   {
-    "chentoast/marks.nvim",
+    "fnune/recall.nvim",
+    version = "*",
     event = "BufEnter",
-    config = true,
+    config = function()
+      local recall = require("recall")
+      recall.setup({})
+
+      vim.keymap.set("n", "mm", recall.toggle, { noremap = true, silent = true })
+      vim.keymap.set("n", "mn", recall.goto_next, { noremap = true, silent = true })
+      vim.keymap.set("n", "mp", recall.goto_prev, { noremap = true, silent = true })
+      vim.keymap.set("n", "mc", recall.clear, { noremap = true, silent = true })
+    end,
   },
   {
     "nvim-tree/nvim-tree.lua",
-    cmd = {
-      "NvimTreeOpen",
-      "NvimTreeClose",
-      "NvimTreeToggle",
-      "NvimTreeFindFile",
-      "NvimTreeFindFileToggle",
-    },
-    keys = {
-      { "<C-e>", "<cmd>lua require('nvim-tree.api').tree.toggle()<CR>", desc = "NvimTree" },
-    },
     config = function()
       require("plugins.tree")
     end,
@@ -586,7 +572,7 @@ return {
       { "<leader>cc", "<cmd>lua require('comment-box').llbox()<CR>", mode = "v",          desc = "comment box" },
     }
   },
-    { "tpope/vim-repeat",      lazy = false },
+  { "tpope/vim-repeat",      lazy = false },
   { "tpope/vim-speeddating", lazy = false },
   -- { "dhruvasagar/vim-table-mode", ft = { "markdown" } },
   -- {
@@ -653,11 +639,6 @@ return {
   {
     "folke/flash.nvim",
     event = "VeryLazy",
-    opts = {
-      char = {
-        keys = { "f", "F", "t", "T" },
-      }
-    },
     config = function()
       require("plugins.flash-jump")
     end,
@@ -670,14 +651,14 @@ return {
         end,
         desc = "Flash jump",
       },
-      {
-        "r",
-        mode = "o",
-        function()
-          require("flash").remote()
-        end,
-        desc = "Remote Flash"
-      },
+      -- {
+      --   "r",
+      --   mode = "o",
+      --   function()
+      --     require("flash").remote()
+      --   end,
+      --   desc = "Remote Flash"
+      -- },
     },
   },
   {
@@ -705,45 +686,19 @@ return {
     end,
   },
   {
-    "akinsho/bufferline.nvim",
-    event = "VeryLazy",
+    "cbochs/grapple.nvim",
+    lazy = false,
     dependencies = {
-      'nvim-tree/nvim-web-devicons',
-      "echasnovski/mini.bufremove",
+      { "nvim-tree/nvim-web-devicons" }
     },
-    version = "*",
-    config = function()
-      require("plugins.bufferline")
-    end,
+    opts = {
+      scope = "git",
+      icons = true,
+      quick_select = "123456789",
+    },
     keys = {
-      { "<Space>1",    "<cmd>BufferLineGoToBuffer 1<CR>" },
-      { "<Space>2",    "<cmd>BufferLineGoToBuffer 2<CR>" },
-      { "<Space>3",    "<cmd>BufferLineGoToBuffer 3<CR>" },
-      { "<Space>4",    "<cmd>BufferLineGoToBuffer 4<CR>" },
-      { "<Space>5",    "<cmd>BufferLineGoToBuffer 5<CR>" },
-      { "<Space>6",    "<cmd>BufferLineGoToBuffer 6<CR>" },
-      { "<Space>7",    "<cmd>BufferLineGoToBuffer 7<CR>" },
-      { "<Space>8",    "<cmd>BufferLineGoToBuffer 8<CR>" },
-      { "<Space>9",    "<cmd>BufferLineGoToBuffer 9<CR>" },
-      { "<A-1>",       "<cmd>BufferLineGoToBuffer 1<CR>" },
-      { "<A-2>",       "<cmd>BufferLineGoToBuffer 2<CR>" },
-      { "<A-3>",       "<cmd>BufferLineGoToBuffer 3<CR>" },
-      { "<A-4>",       "<cmd>BufferLineGoToBuffer 4<CR>" },
-      { "<A-5>",       "<cmd>BufferLineGoToBuffer 5<CR>" },
-      { "<A-6>",       "<cmd>BufferLineGoToBuffer 6<CR>" },
-      { "<A-7>",       "<cmd>BufferLineGoToBuffer 7<CR>" },
-      { "<A-8>",       "<cmd>BufferLineGoToBuffer 8<CR>" },
-      { "<A-9>",       "<cmd>BufferLineGoToBuffer 9<CR>" },
-      { "<Leader>bb",  "<cmd>BufferLineMovePrev<CR>",                desc = "Move back" },
-      { "<Leader>bl",  "<cmd>BufferLineCloseLeft<CR>",               desc = "Close Left" },
-      { "<Leader>br",  "<cmd>BufferLineCloseRight<CR>",              desc = "Close Right" },
-      { "<Leader>bn",  "<cmd>BufferLineMoveNext<CR>",                desc = "Move next" },
-      { "<Leader>bp",  "<cmd>BufferLinePick<CR>",                    desc = "Pick Buffer" },
-      { "<Leader>bP",  "<cmd>BufferLineTogglePin<CR>",               desc = "Pin/Unpin Buffer" },
-      { "<Leader>bsd", "<cmd>BufferLineSortByDirectory<CR>",         desc = "Sort by directory" },
-      { "<Leader>bse", "<cmd>BufferLineSortByExtension<CR>",         desc = "Sort by extension" },
-      { "<Leader>bsr", "<cmd>BufferLineSortByRelativeDirectory<CR>", desc = "Sort by relative dir" },
-    }
+      { "<leader>'", "<cmd>Grapple toggle<cr>", desc = "Tag a file" },
+    },
   },
   {
     "rcarriga/nvim-notify",
@@ -767,31 +722,13 @@ return {
     end,
   },
   {
-    "vuki656/package-info.nvim",
-    event = "BufEnter package.json",
-    config = function()
-      require("plugins.package-info")
-    end,
-  },
-  {
     "iamcco/markdown-preview.nvim",
-    build = "cd app && yarn install --immutable",
+    build = "cd app && pnpm install",
     init = function()
       vim.g.mkdp_filetypes = { "markdown" }
     end,
     ft = { "markdown" },
   },
-  -- {
-  --   '0x00-ketsu/markdown-preview.nvim',
-  --   ft = { 'md', 'markdown', 'mkd', 'mkdn', 'mdwn', 'mdown', 'mdtxt', 'mdtext', 'rmd', 'wiki' },
-  --   config = function()
-  --     require('markdown-preview').setup {
-  --       -- your configuration comes here
-  --       -- or leave it empty to use the default settings
-  --       -- refer to the setup section below
-  --     }
-  --   end
-  -- },
   {
     "airblade/vim-rooter",
     event = "VeryLazy",
@@ -823,6 +760,11 @@ return {
       vim.keymap.set("n", "zr", require("ufo").openFoldsExceptKinds)
     end,
   },
+  {
+    "echasnovski/mini.bufremove",
+    lazy = "VeryLazy",
+  },
+
   {
     "echasnovski/mini.align",
     lazy = false,

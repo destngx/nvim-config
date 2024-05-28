@@ -1,5 +1,9 @@
 -- Auto sync plugins on save of plugins.lua
---vim.api.nvim_create_autocmd("BufWritePost", { pattern = "plugins.lua", command = "source <afile> | PackerSync" })
+vim.api.nvim_create_autocmd("BufWritePost", { pattern = "plugins.lua", command = "source <afile> | PackerSync" })
+-- Disable tabline
+vim.api.nvim_create_autocmd("BufRead", {
+    command = "set showtabline=0"
+})
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost",
   { callback = function() vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 100 }) end })

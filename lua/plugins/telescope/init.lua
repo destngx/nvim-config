@@ -7,6 +7,7 @@ require('telescope').load_extension('fzf')
 require('telescope').load_extension('undo')
 require("telescope").load_extension("git_worktree")
 require('telescope').load_extension('media_files')
+require("telescope").load_extension("grapple")
 
 local git_icons = {
   added = icons.gitAdd,
@@ -39,7 +40,7 @@ require('telescope').setup {
       prompt_position = "top",
     },
     file_sorter       = require('telescope.sorters').get_fzy_sorter,
-    prompt_prefix     = '  ' .. require("nvim-nonicons").get("telescope") .. '  ',
+    prompt_prefix     = '  ' .. '  ',
     selection_caret   = " ❯ ",
     color_devicons    = true,
     git_icons         = git_icons,
