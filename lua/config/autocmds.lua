@@ -1,8 +1,13 @@
 -- Auto sync plugins on save of plugins.lua
 vim.api.nvim_create_autocmd("BufWritePost", { pattern = "plugins.lua", command = "source <afile> | PackerSync" })
 -- Disable tabline
-vim.api.nvim_create_autocmd("BufRead", {
-    command = "set showtabline=0"
+vim.api.nvim_create_autocmd("BufWinEnter", {
+  command = "set showtabline=0"
+})
+-- desc = "jump to the last position when reopening a file",
+vim.api.nvim_create_autocmd("BufWinEnter", {
+  pattern = "*",
+  command = [[ if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif ]],
 })
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost",
