@@ -3,7 +3,6 @@
 
 local gl = require('galaxyline')
 local condition = require('galaxyline.condition')
-local package_info_present, package = pcall(require, 'package-info')
 -- Configuration {{{1
 -- Functions {{{2
 local function u(code)
@@ -48,13 +47,8 @@ end
 -- Settings {{{2
 local lineLengthWarning = 80
 local lineLengthError = 120
-local leftbracket = "" -- Curve.
-local rightbracket = "" -- Curve.
--- local rightbracket = "" -- Curve.
--- local leftbracket = u 'e0b2' -- Angle filled.
--- local rightbracket = u 'e0b0' -- Angle filled.
--- local leftbracket = u 'e0b3' -- Angle.
--- local rightbracket = u 'e0b1' -- Angle.
+local leftbracket = ""  -- Empty.
+local rightbracket = "" -- Empty.
 -- }}}2
 
 gl.short_line_list = { 'NvimTree', 'vista', 'dbui', 'packer', 'tagbar' }
@@ -70,29 +64,29 @@ end
 
 -- Colours, maps and icons {{{2
 local colors = {
-  bg       = bgcolor();
-  modetext = '#000000',
+  bg              = bgcolor(),
+  modetext        = '#000000',
 
-  giticon = '#FF8800',
-  gitbg   = '#5C2C2E',
-  gittext = '#C5C5C5',
+  giticon         = '#FF8800',
+  gitbg           = '#5C2C2E',
+  gittext         = '#C5C5C5',
 
-  diagerror = '#F44747',
-  diagwarn  = '#FF8800',
-  diaghint  = '#4FC1FF',
-  diaginfo  = '#FFCC66',
+  diagerror       = '#F44747',
+  diagwarn        = '#FF8800',
+  diaghint        = '#4FC1FF',
+  diaginfo        = '#FFCC66',
 
-  lspicon = '#68AF00',
-  lspbg   = '#304B2E',
-  lsptext = '#C5C5C5',
+  lspicon         = '#68AF00',
+  lspbg           = '#304B2E',
+  lsptext         = '#C5C5C5',
 
-  typeicon = '#FF8800',
-  typebg   = '#5C2C2E',
-  typetext = '#C5C5C5',
+  typeicon        = '#FF8800',
+  typebg          = '#5C2C2E',
+  typetext        = '#C5C5C5',
 
-  statsicon = '#9CDCFE',
-  statsbg   = '#5080A0',
-  statstext = '#000000',
+  statsicon       = '#9CDCFE',
+  statsbg         = '#5080A0',
+  statstext       = '#000000',
 
   lineokfg        = '#000000',
   lineokbg        = '#5080A0',
@@ -100,23 +94,23 @@ local colors = {
   linelongwarnfg  = '#FFFF00',
   linelongbg      = '#5080A0',
 
-  shortbg   = '#DCDCAA',
-  shorttext = '#000000',
+  shortbg         = '#DCDCAA',
+  shorttext       = '#000000',
 
-  shortrightbg   = '#3F3F3F',
-  shortrighttext = '#7C4C4E',
+  shortrightbg    = '#3F3F3F',
+  shortrighttext  = '#7C4C4E',
 
-  gpsbg   = '#5C00A3',
-  gpstext = '#C5C5C5',
+  gpsbg           = '#5C00A3',
+  gpstext         = '#C5C5C5',
 
-  red     = '#D16969',
-  yellow  = '#DCDCAA',
-  magenta = '#D16D9E',
-  green   = '#608B4E',
-  orange  = '#FF8800',
-  purple  = '#C586C0',
-  blue    = '#569CD6',
-  cyan    = '#4EC9B0'
+  red             = '#D16969',
+  yellow          = '#DCDCAA',
+  magenta         = '#D16D9E',
+  green           = '#608B4E',
+  orange          = '#FF8800',
+  purple          = '#C586C0',
+  blue            = '#569CD6',
+  cyan            = '#4EC9B0'
 }
 
 local mode_map = {
@@ -195,43 +189,6 @@ end
 -- Left {{{1
 gls.left = {}
 
--- Edit mode {{{2
-table.insert(gls.left, {
-  ViModeSpaceOnFarLeft = {
-    provider = function() return "" end,
-    highlight = { colors.giticon, colors.bg }
-  }
-})
-table.insert(gls.left, {
-  ViModeLeft = {
-    provider = function()
-      highlight('ViModeHighlight', mode_map[vim.fn.mode()][1], colors.bg)
-      return ""
-    end,
-    highlight = 'ViModeHighlight'
-  }
-})
-table.insert(gls.left, {
-  ViModeIconAndText = {
-    provider = function()
-      highlight('GalaxyViMode', colors.modetext, mode_map[vim.fn.mode()][1])
-
-      return " " .. mode_map[vim.fn.mode()][2]
-    end,
-    highlight = 'GalaxyViMode'
-  }
-})
-table.insert(gls.left, {
-  ViModeRight = {
-    provider = function()
-      return ""
-    end,
-    separator = ' ',
-    separator_highlight = 'ViModeHighlight',
-    highlight = 'ViModeHighlight'
-  }
-})
--- }}}2
 
 -- Git info {{{2
 
@@ -410,15 +367,6 @@ table.insert(gls.left, {
 -- Right {{{1
 gls.right = {}
 
-if package_info_present then
-  table.insert(gls.right, {
-    PackageInfoStatus = {
-      provider = function()
-        return package.get_status() .. " "
-      end,
-    },
-  })
-end
 
 -- Type {{{2
 table.insert(gls.right, {
@@ -427,22 +375,22 @@ table.insert(gls.right, {
     highlight = { colors.typeicon, colors.bg }
   }
 })
-table.insert(gls.right, {
-  TypeFileFormatIcon = {
-    provider = function()
-      local icon = icons[vim.bo.fileformat] or ' '
-      return string.format('  %s ', icon)
-    end,
-    highlight = { colors.typebg, colors.typeicon }
-  }
-})
-table.insert(gls.right, {
-  TypeMid = {
-    provider = function() return rightbracket .. ' ' end,
-    highlight = { colors.typeicon, colors.typebg }
-  }
-})
-
+-- table.insert(gls.right, {
+--   TypeFileFormatIcon = {
+--     provider = function()
+--       local icon = icons[vim.bo.fileformat] or ' '
+--       return string.format('  %s ', icon)
+--     end,
+--     highlight = { colors.typebg, colors.typeicon }
+--   }
+-- })
+-- table.insert(gls.right, {
+--   TypeMid = {
+--     provider = function() return rightbracket .. ' ' end,
+--     highlight = { colors.typeicon, colors.typebg }
+--   }
+-- })
+--
 if DestNgxVim.statusline.path_enabled then
   table.insert(gls.right, {
     FileName = {
@@ -463,27 +411,27 @@ if DestNgxVim.statusline.path_enabled then
     }
   })
 end
-table.insert(gls.right, {
-  FileIcon = {
-    provider = 'FileIcon',
-    separator = ' ',
-    highlight = { colors.typeicon, colors.typebg }
-  }
-})
-table.insert(gls.right, {
-  BufferType = {
-    provider = 'FileTypeName',
-    highlight = { colors.typetext, colors.typebg }
-  }
-})
-table.insert(gls.right, {
-  FileSize = {
-    provider = 'FileSize',
-    separator = '  ',
-    separator_highlight = { colors.typeicon, colors.typebg },
-    highlight = { colors.typetext, colors.typebg }
-  }
-})
+-- table.insert(gls.right, {
+--   FileIcon = {
+--     provider = 'FileIcon',
+--     separator = ' ',
+--     highlight = { colors.typeicon, colors.typebg }
+--   }
+-- })
+-- table.insert(gls.right, {
+--   BufferType = {
+--     provider = 'FileTypeName',
+--     highlight = { colors.typetext, colors.typebg }
+--   }
+-- })
+-- table.insert(gls.right, {
+--   FileSize = {
+--     provider = 'FileSize',
+--     separator = '  ',
+--     separator_highlight = { colors.typeicon, colors.typebg },
+--     highlight = { colors.typetext, colors.typebg }
+--   }
+-- })
 -- table.insert(gls.right, {
 --   FileEncode = {
 --     provider = 'FileEncode',
@@ -492,18 +440,18 @@ table.insert(gls.right, {
 --     highlight = { colors.typetext, colors.typebg }
 --   }
 -- })
-table.insert(gls.right, {
-  TypeSectionEnd = {
-    provider = function() return rightbracket end,
-    highlight = { colors.typebg, colors.bg }
-  }
-})
-table.insert(gls.right, {
-  Space = {
-    provider = function() return ' ' end,
-    highlight = { colors.typebg, colors.bg }
-  }
-})
+-- table.insert(gls.right, {
+--   TypeSectionEnd = {
+--     provider = function() return rightbracket end,
+--     highlight = { colors.typebg, colors.bg }
+--   }
+-- })
+-- table.insert(gls.right, {
+--   Space = {
+--     provider = function() return ' ' end,
+--     highlight = { colors.typebg, colors.bg }
+--   }
+-- })
 -- }}}2
 
 -- Cursor Position Section {{{2
@@ -513,26 +461,26 @@ table.insert(gls.right, {
     highlight = { colors.statsicon, colors.bg }
   }
 })
-table.insert(gls.right, {
-  StatsIcon = {
-    provider = function()
-      return ''
-    end,
-    highlight = { colors.statsbg, colors.statsicon }
-  }
-})
+-- table.insert(gls.right, {
+--   StatsIcon = {
+--     provider = function()
+--       return ''
+--     end,
+--     highlight = { colors.statsbg, colors.statsicon }
+--   }
+-- })
 table.insert(gls.right, {
   StatsMid = {
     provider = function() return rightbracket .. ' ' end,
     highlight = { colors.statsicon, colors.statsbg }
   }
 })
-table.insert(gls.right, {
-  PerCent = {
-    provider = 'LinePercent',
-    highlight = { colors.statstext, colors.statsbg }
-  }
-})
+-- table.insert(gls.right, {
+--   PerCent = {
+--     provider = 'LinePercent',
+--     highlight = { colors.statstext, colors.statsbg }
+--   }
+-- })
 table.insert(gls.right, {
   VerticalPosAndSize = {
     provider = function()
@@ -573,7 +521,7 @@ table.insert(gls.right, {
 table.insert(gls.right, {
   LineLength = {
     provider = function()
-      return '' .. string.format("%3i", string.len(vim.fn.getline('.')))
+      return '' .. string.format("%3i", string.len(vim.fn.getline('.'))) .. ' '
     end,
     highlight = 'LineLenHighlightLenNum'
   }
@@ -586,32 +534,24 @@ table.insert(gls.right, {
     highlight = 'LinePosHighlightEnd'
   }
 })
-table.insert(gls.right, {
-  TabOrSpace = {
-    provider = function()
-      if vim.bo.expandtab
-      then
-        return '  ' .. tostring(vim.fn.wordcount().words) .. '  '
-      else
-        return '  ' .. tostring(vim.fn.wordcount().words) .. '  '
-      end
-    end,
-    condition = condition.hide_in_width,
-    highlight = { colors.statsicon, colors.statsbg }
-  }
-})
+if vim.bo.filetype ~= "markdown" then
+  table.insert(gls.right, {
+    TabOrSpace = {
+      provider = function()
+        return ' ' .. tostring(vim.fn.wordcount().words) .. " "
+      end,
+      condition = condition.hide_in_width,
+      highlight = { colors.statsicon, colors.statsbg }
+    }
+  })
+end
 table.insert(gls.right, {
   Tabstop = {
     provider = function()
-      if vim.bo.expandtab
-      then
-        return vim.bo.shiftwidth
-      else
-        return vim.bo.shiftwidth
-      end
+      return ' ' .. tostring(vim.bo.shiftwidth) .. " "
     end,
     condition = condition.hide_in_width,
-    highlight = { colors.statstext, colors.statsbg }
+    highlight = { colors.statsicon, colors.statsbg }
   }
 })
 table.insert(gls.right, {
@@ -621,7 +561,32 @@ table.insert(gls.right, {
   }
 })
 -- }}}2
-
+-- Vi mode {{{2
+table.insert(gls.right, {
+  ViModeSpaceOnFarLeft = {
+    provider = function() return " " end,
+    highlight = { colors.giticon, colors.bg }
+  }
+})
+table.insert(gls.right, {
+  ViModeLeft = {
+    provider = function()
+      highlight('ViModeHighlight', mode_map[vim.fn.mode()][1], colors.bg)
+      return ""
+    end,
+    highlight = 'ViModeHighlight'
+  }
+})
+table.insert(gls.right, {
+  ViModeIconAndText = {
+    provider = function()
+      highlight('GalaxyViMode', colors.modetext, mode_map[vim.fn.mode()][1])
+      return " " .. mode_map[vim.fn.mode()][2]
+    end,
+    highlight = 'GalaxyViMode'
+  }
+})
+-- }}}2
 -- }}}1
 
 -- Left Short {{{1
@@ -638,26 +603,26 @@ table.insert(gls.short_line_left, {
     provider = function() return " " end, highlight = { colors.shorttext, colors.shortbg }
   }
 })
-table.insert(gls.short_line_left, {
-  LeftShortName = {
-    provider = 'FileTypeName',
-    highlight = { colors.shorttext, colors.shortbg },
-  }
-})
+-- table.insert(gls.short_line_left, {
+--   LeftShortName = {
+--     provider = 'FileTypeName',
+--     highlight = { colors.shorttext, colors.shortbg },
+--   }
+-- })
 table.insert(gls.short_line_left, {
   ShortSectionMid = {
     provider = function() return " " end,
     highlight = { colors.shortbg, colors.shortbg }
   }
 })
-table.insert(gls.short_line_left, {
-  LeftShortFileName = {
-    provider = 'SFileName',
-    condition = condition.buffer_not_empty,
-    separator_highlight = { colors.shorttext, colors.shortbg },
-    highlight = { colors.shorttext, colors.shortbg },
-  }
-})
+-- table.insert(gls.short_line_left, {
+--   LeftShortFileName = {
+--     provider = 'SFileName',
+--     condition = condition.buffer_not_empty,
+--     separator_highlight = { colors.shorttext, colors.shortbg },
+--     highlight = { colors.shorttext, colors.shortbg },
+--   }
+-- })
 table.insert(gls.short_line_left, {
   ShortSectionEnd = {
     provider = function() return rightbracket end,
