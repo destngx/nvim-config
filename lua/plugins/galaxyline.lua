@@ -28,17 +28,9 @@ local rightbracket = "" -- Empty.
 gl.short_line_list = { 'NvimTree', 'vista', 'dbui', 'packer', 'tagbar' }
 local gls = gl.section
 
-local bgcolor = function()
-  if DestNgxVim.colorscheme == 'nightfly' then
-    return '#011627'
-  else
-    return nil;
-  end
-end
-
 -- Colours, maps and icons {{{2
 local colors = {
-  bg              = bgcolor(),
+  bg              = nil,
   modetext        = '#000000',
 
   giticon         = '#FF8800',
@@ -310,48 +302,62 @@ table.insert(gls.right, {
 table.insert(gls.right, {
   VerticalPosAndSize = {
     provider = function()
-      return string.format("%s:%4i ", vim.fn.line('.'), vim.fn.line('$'))
+      return string.format("%s:%3i ", vim.fn.line('.'), vim.fn.line('$'))
     end,
     separator = DestNgxVim.icons.constant,
     separator_highlight = { colors.statsicon, colors.statsbg },
     highlight = { colors.statstext, colors.statsbg }
   }
 })
-table.insert(gls.right, {
-  CursorColumnStart = {
-    provider = function()
-      return leftbracket
-    end,
-    separator = DestNgxVim.icons.word,
-    separator_highlight = { colors.statsicon, colors.statsbg },
-    highlight = 'LinePosHighlightStart'
-  }
-})
-table.insert(gls.right, {
-  CursorColumn = {
-    provider = function()
-      setLineWidthColours()
-      return string.format("%3i", vim.fn.col('.')) .. ":"
-    end,
-    highlight = 'LinePosHighlightColNum'
-  }
-})
-table.insert(gls.right, {
-  LineLengthStart = {
-    provider = function()
-      return "" .. leftbracket
-    end,
-    highlight = 'LinePosHighlightMid'
-  }
-})
-table.insert(gls.right, {
-  LineLength = {
-    provider = function()
-      return '' .. string.format("%3i", string.len(vim.fn.getline('.'))) .. ' '
-    end,
-    highlight = 'LineLenHighlightLenNum'
-  }
-})
+if vim.bo.filetype ~= "markdown" then
+  table.insert(gls.right, {
+    LineLengthIcon = {
+      provider = function() return '' end,
+      separator = DestNgxVim.icons.word,
+      separator_highlight = { colors.statsicon, colors.statsbg },
+    }
+  })
+  table.insert(gls.right, {
+    CursorColumn = {
+      provider = function()
+        setLineWidthColours()
+        return string.format("%3i", vim.fn.col('.')) .. ":"
+      end,
+      highlight = 'LinePosHighlightColNum'
+    }
+  })
+  table.insert(gls.right, {
+    LineLength = {
+      provider = function()
+        return string.format("%3i", string.len(vim.fn.getline('.'))) .. ' '
+      end,
+      highlight = 'LineLenHighlightLenNum'
+    }
+  })
+else
+  table.insert(gls.right, {
+    LineLengthIcon = {
+      provider = function() return '' end,
+      separator = DestNgxVim.icons.word,
+      separator_highlight = { colors.statsicon, colors.statsbg },
+    }
+  })
+  table.insert(gls.right, {
+    CursorColumn = {
+      provider = function()
+        setLineWidthColours()
+        return string.format("%3i", vim.fn.col('.')) .. ":"
+      end,
+    }
+  })
+  table.insert(gls.right, {
+    LineLength = {
+      provider = function()
+        return '' .. string.format("%3i", string.len(vim.fn.getline('.'))) .. ' '
+      end,
+    }
+  })
+end
 table.insert(gls.right, {
   LineLengthEnd = {
     provider = function()
@@ -360,17 +366,15 @@ table.insert(gls.right, {
     highlight = 'LinePosHighlightEnd'
   }
 })
-if vim.bo.filetype ~= "markdown" then
-  table.insert(gls.right, {
-    TabOrSpace = {
-      provider = function()
-        return DestNgxVim.icons.word .. tostring(vim.fn.wordcount().words) .. " "
-      end,
-      condition = condition.hide_in_width,
-      highlight = { colors.statsicon, colors.statsbg }
-    }
-  })
-end
+table.insert(gls.right, {
+  TabOrSpace = {
+    provider = function()
+      return DestNgxVim.icons.keyword .. tostring(vim.fn.wordcount().words) .. " "
+    end,
+    condition = condition.hide_in_width,
+    highlight = { colors.statsicon, colors.statsbg }
+  }
+})
 table.insert(gls.right, {
   Tabstop = {
     provider = function()
