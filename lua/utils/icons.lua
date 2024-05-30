@@ -100,7 +100,7 @@ local icons = {
   robot               = " 󰚩 ",
   scissors            = "  ",
   scope               = "  ",
-  search              = "  ",
+  search              = "  ",
   settings            = "  ",
   signIn              = "  ",
   snippet             = "  ",
@@ -133,6 +133,9 @@ local icons = {
   watch               = "  ",
   word                = "  ",
   wrench              = "  ",
+  fillBox             = " 󰄮 ",
+  outlineBox          = " 󰄱 ",
+  selectCaret         = " ❯ ",
 }
 
 return icons
