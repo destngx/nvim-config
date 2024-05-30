@@ -19,7 +19,7 @@ end
 -- }}}2
 
 -- Settings {{{2
-local lineLengthWarning = 80
+local lineLengthWarning = 100
 local lineLengthError = 120
 local leftbracket = ""  -- Empty.
 local rightbracket = "" -- Empty.
@@ -143,21 +143,21 @@ end
 
 -- }}}1
 
--- Left {{{1
 gls.left = {}
 
+gls.right = {}
 
 -- Git info {{{2
 
 -- Git Branch Name {{{3
-table.insert(gls.left, {
+table.insert(gls.right, {
   GitStart = {
     provider = function() return leftbracket end,
     condition = condition.check_git_workspace,
     highlight = { colors.giticon, colors.bg }
   }
 })
-table.insert(gls.left, {
+table.insert(gls.right, {
   GitIcon = {
     provider = function()
       return ' ' .. DestNgxVim.icons.git
@@ -168,14 +168,7 @@ table.insert(gls.left, {
     highlight = { colors.gitbg, colors.giticon }
   }
 })
-table.insert(gls.left, {
-  GitMid = {
-    provider = function() return rightbracket .. ' ' end,
-    condition = condition.check_git_workspace,
-    highlight = { colors.giticon, colors.gitbg }
-  }
-})
-table.insert(gls.left, {
+table.insert(gls.right, {
   GitBranch = {
     provider = 'GitBranch',
     condition = condition.check_git_workspace,
@@ -187,15 +180,23 @@ table.insert(gls.left, {
 -- }}}3
 
 -- Git Changes {{{3
-table.insert(gls.left, {
+table.insert(gls.right, {
+  DiffSeparate = {
+    provider = function() return '' end,
+    separator = ' ',
+    separator_highlight = { colors.gittext, colors.gitbg },
+  }
+})
+table.insert(gls.right, {
   DiffAdd = {
     provider = 'DiffAdd',
     condition = condition.check_git_workspace,
+    separator = '',
     icon = DestNgxVim.icons.gitAdd,
     highlight = { colors.green, colors.gitbg }
   }
 })
-table.insert(gls.left, {
+table.insert(gls.right, {
   DiffModified = {
     provider = 'DiffModified',
     condition = condition.check_git_workspace,
@@ -203,7 +204,7 @@ table.insert(gls.left, {
     highlight = { colors.blue, colors.gitbg }
   }
 })
-table.insert(gls.left, {
+table.insert(gls.right, {
   DiffRemove = {
     provider = 'DiffRemove',
     condition = condition.check_git_workspace,
@@ -211,7 +212,7 @@ table.insert(gls.left, {
     highlight = { colors.red, colors.gitbg }
   }
 })
-table.insert(gls.left, {
+table.insert(gls.right, {
   EndGit = {
     provider = function() return rightbracket end,
     condition = condition.check_git_workspace,
@@ -223,7 +224,7 @@ table.insert(gls.left, {
 -- }}}3
 
 -- Diagnostics {{{3
-table.insert(gls.left, {
+table.insert(gls.right, {
   DiagnosticError = {
     provider = 'DiagnosticError',
     icon = DestNgxVim.icons.errorOutline,
@@ -231,21 +232,21 @@ table.insert(gls.left, {
     highlight = { colors.diagerror, colors.bg }
   }
 })
-table.insert(gls.left, {
+table.insert(gls.right, {
   DiagnosticWarn = {
     provider = 'DiagnosticWarn',
     icon = DestNgxVim.icons.warningTriangleNoBg,
     highlight = { colors.diagwarn, colors.bg }
   }
 })
-table.insert(gls.left, {
+table.insert(gls.right, {
   DiagnosticHint = {
     provider = 'DiagnosticHint',
     icon = DestNgxVim.icons.lightbulbOutline,
     highlight = { colors.diaghint, colors.bg }
   }
 })
-table.insert(gls.left, {
+table.insert(gls.right, {
   DiagnosticInfo = {
     provider = 'DiagnosticInfo',
     icon = DestNgxVim.icons.infoOutline,
@@ -253,7 +254,6 @@ table.insert(gls.left, {
   }
 })
 -- Right {{{1
-gls.right = {}
 
 
 -- Type {{{2
@@ -263,6 +263,7 @@ table.insert(gls.right, {
     highlight = { colors.typeicon, colors.bg }
   }
 })
+
 
 if DestNgxVim.statusline.path_enabled then
   table.insert(gls.right, {
@@ -321,7 +322,14 @@ if vim.bo.filetype ~= "markdown" then
     CursorColumn = {
       provider = function()
         setLineWidthColours()
-        return string.format("%3i", vim.fn.col('.')) .. ":"
+        local currentCol = vim.fn.col('.')
+        if (currentCol > 9) then
+          return string.format("%2i", currentCol) .. ":"
+        end
+        if (currentCol > 99) then
+          return string.format("%3i", currentCol) .. ":"
+        end
+        return string.format("%i", currentCol) .. ":"
       end,
       highlight = 'LinePosHighlightColNum'
     }
@@ -329,7 +337,14 @@ if vim.bo.filetype ~= "markdown" then
   table.insert(gls.right, {
     LineLength = {
       provider = function()
-        return string.format("%3i", string.len(vim.fn.getline('.'))) .. ' '
+        local currentLine = string.len(vim.fn.getline('.'))
+        if (currentLine > 9) then
+          return string.format("%2i", currentLine) .. ' '
+        end
+        if (currentLine > 99) then
+          return string.format("%3i", currentLine) .. ' '
+        end
+        return string.format("%i", currentLine) .. ' '
       end,
       highlight = 'LineLenHighlightLenNum'
     }
@@ -346,14 +361,28 @@ else
     CursorColumn = {
       provider = function()
         setLineWidthColours()
-        return string.format("%3i", vim.fn.col('.')) .. ":"
+        local currentCol = vim.fn.col('.')
+        if (currentCol > 9) then
+          return string.format("%2i", currentCol) .. ":"
+        end
+        if (currentCol > 99) then
+          return string.format("%3i", currentCol) .. ":"
+        end
+        return string.format("%i", currentCol) .. ":"
       end,
     }
   })
   table.insert(gls.right, {
     LineLength = {
       provider = function()
-        return '' .. string.format("%3i", string.len(vim.fn.getline('.'))) .. ' '
+        local currentLine = string.len(vim.fn.getline('.'))
+        if (currentLine > 9) then
+          return string.format("%2i", currentLine) .. ' '
+        end
+        if (currentLine > 99) then
+          return string.format("%3i", currentLine) .. ' '
+        end
+        return string.format("%i", currentLine) .. ' '
       end,
     }
   })
@@ -367,9 +396,32 @@ table.insert(gls.right, {
   }
 })
 table.insert(gls.right, {
-  TabOrSpace = {
+  WordCountIcon = {
     provider = function()
-      return DestNgxVim.icons.keyword .. tostring(vim.fn.wordcount().words) .. " "
+      return DestNgxVim.icons.keyword
+    end,
+    condition = condition.hide_in_width,
+    highlight = { colors.statsicon, colors.statsbg }
+  }
+})
+table.insert(gls.right, {
+  WordCount = {
+    provider = function()
+      setLineWidthColours()
+      return string.format("%i", vim.fn.wordcount().words)
+    end,
+    highlight = { colors.shorttext, colors.statsbg }
+  }
+})
+table.insert(gls.right, {
+  TabstopIcon = {
+    provider = function()
+      if vim.bo.expandtab
+      then
+        return DestNgxVim.icons.fillBox
+      else
+        return DestNgxVim.icons.outlineBox
+      end
     end,
     condition = condition.hide_in_width,
     highlight = { colors.statsicon, colors.statsbg }
@@ -378,19 +430,14 @@ table.insert(gls.right, {
 table.insert(gls.right, {
   Tabstop = {
     provider = function()
-      return DestNgxVim.icons.unit .. tostring(vim.bo.shiftwidth) .. " "
+      return tostring(vim.bo.shiftwidth) .. " "
     end,
     condition = condition.hide_in_width,
-    highlight = { colors.statsicon, colors.statsbg }
+    highlight = { colors.shorttext, colors.statsbg }
   }
 })
-table.insert(gls.right, {
-  StatsSpcSectionEnd = {
-    provider = function() return "" end,
-    highlight = { colors.statsbg, colors.bg }
-  }
-})
--- }}}2
+
+
 -- Vi mode {{{2
 table.insert(gls.right, {
   ViModeSpaceOnFarLeft = {
