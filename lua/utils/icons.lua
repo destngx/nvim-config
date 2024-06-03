@@ -17,6 +17,7 @@ local icons = {
   copilot             = "",
   codeium             = "",
   exit                = " 󰗼 ",
+  chevronDown        = "",
   chevronRight        = "",
   circle              = "  ",
   class               = "  ",

@@ -15,6 +15,7 @@ return {
       require("plugins.image")
     end
   },
+  "tpope/vim-sleuth",
   {
     'mrjones2014/smart-splits.nvim',
     lazy = false,
@@ -50,7 +51,7 @@ return {
       require("plugins.wrapping")
     end
   },
-  { "LunarVim/bigfile.nvim" },
+  { "LunarVim/bigfile.nvim", lazy = false },
   -- Obsidian
   {
     "epwalsh/obsidian.nvim",
@@ -162,13 +163,6 @@ return {
   },
 
   -- Navigating (Telescope/Tree/Refactor)
-  {
-    'stevearc/aerial.nvim',
-    lazy = false,
-    config = function()
-      require("plugins.aerial")
-    end,
-  },
   {
     "0x00-ketsu/autosave.nvim",
     lazy = false,
@@ -431,12 +425,12 @@ return {
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-calc",
       "saadparwaiz1/cmp_luasnip",
-      {
-        "David-Kunz/cmp-npm",
-        config = function()
-          require("plugins.cmp-npm")
-        end,
-      },
+      -- {
+      --   "David-Kunz/cmp-npm",
+      --   config = function()
+      --     require("plugins.cmp-npm")
+      --   end,
+      -- },
       {
         "zbirenbaum/copilot-cmp",
         enabled = DestNgxVim.plugins.ai.copilot.enabled,
@@ -502,11 +496,18 @@ return {
   { "machakann/vim-swap",              event = "VimEnter" },
   -- Add indent object for vim (useful for languages like Python)
   { "michaeljsmith/vim-indent-object", event = "VimEnter" },
-  {
-    "dmmulroy/tsc.nvim",
-    cmd = { "TSC" },
-    config = true,
-  },
+  -- {
+  --   "dmmulroy/tsc.nvim",
+  --   cmd = { "TSC" },
+  --   filetypes = { "typescript", "typescriptreact" },
+  --   config = function ()
+  --     require("tsc").setup({
+  --       run_as_monorepo = true,
+  --       use_trouble_qflist = true,
+  --       use_diagnostics = true
+  --     })
+  --   end,
+  -- },
   {
     "dnlhc/glance.nvim",
     config = function()
