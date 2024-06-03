@@ -46,8 +46,8 @@ DestNgxVim = {
   icons = icons,
   -- Status line configuration
   statusline = {
-    path_enabled = false,
-    path = "relative", -- absolute/relative
+    path_enabled = true,
+    path_type = "relative", -- absolute/relative
   },
   lsp = {
     virtual_text = true, -- show virtual text (errors, warnings, info) inline messages
