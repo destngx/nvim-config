@@ -257,31 +257,27 @@ table.insert(gls.right, {
 
 
 -- Type {{{2
-table.insert(gls.right, {
-  TypeStart = {
-    provider = function() return leftbracket end,
-    highlight = { colors.typeicon, colors.bg }
+table.insert(gls.left, {
+  FileIcon = {
+    provider = 'FileIcon',
+    highlight = { colors.typeicon, "NONE" }
   }
 })
-
-
 if DestNgxVim.statusline.path_enabled then
-  table.insert(gls.right, {
+  table.insert(gls.left, {
     FileName = {
       provider = function()
         if #vim.fn.expand '%:p' == 0 then
           return ''
         end
 
-        if DestNgxVim.statusline.path == 'relative' then
+        if DestNgxVim.statusline.path_type == 'relative' then
           local fname = vim.fn.expand('%:p')
-          return fname:gsub(vim.en.getcwd() .. '/', '') .. ' '
+          return fname:gsub(vim.fn.getcwd() .. '/', '') .. ' '
         end
 
-        return vim.fn.expand '%:t' .. ' '
+        return vim.fn.expand '%:t'
       end,
-      separator_highlight = { 'NONE', colors.typebg },
-      highlight = { colors.typetext, colors.typebg }
     }
   })
 end
