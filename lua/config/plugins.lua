@@ -15,7 +15,7 @@ return {
       require("plugins.image")
     end
   },
-  "tpope/vim-sleuth",
+  { "tpope/vim-sleuth",      lazy = false },
   {
     'mrjones2014/smart-splits.nvim',
     lazy = false,
