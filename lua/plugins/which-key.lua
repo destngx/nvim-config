@@ -128,8 +128,9 @@ local normal_mode_mappings = {
   c = {
     name = 'LSP',
     a = { 'code action' },
-    d = { '<cmd>Trouble diagnostics toggle<CR>', 'local diagnostics' },
-    D = { '<cmd>Telescope diagnostics wrap_results=true<CR>', 'workspace diagnostics' },
+    d = { '<cmd>Trouble diagnostics toggle filter.buf=0<CR>', 'local diagnostics' },
+    -- D = { '<cmd>Telescope diagnostics wrap_results=true<CR>', 'workspace diagnostics' },
+    D = { '<cmd>Trouble diagnostics toggle<CR>', 'workspace diagnostics' },
     l = { 'line diagnostics' },
     r = { 'rename' },
     R = { 'structural replace' },
@@ -188,7 +189,7 @@ local normal_mode_mappings = {
   },
   l = {
     name = "List",
-    s = { "<CMD>AerialToggle! left<CR>", 'Symbol Outline', },
+    s = { '<CMD>Trouble lsp_document_symbols toggle win.position=left focus=false<CR>', 'Symbol Outline', },
     t = { '<cmd>lua require("nvim-tree.api").tree.toggle()<CR>', "NvimTreeToggle" },
   },
 
