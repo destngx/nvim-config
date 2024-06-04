@@ -351,6 +351,7 @@ return {
     config = function()
       require("plugins.copilot")
     end,
+    dependencies = { 'AndreM222/copilot-lualine' }
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
