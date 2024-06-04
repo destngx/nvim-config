@@ -11,20 +11,21 @@ return {
   {
     "3rd/image.nvim",
     enabled = os.getenv "IS_WSL" ~= "true",
-    lazy = false,
+    lazy = true,
+    event = "BufReadPre",
     dependencies = { "luarocks.nvim" },
     config = function()
       require("plugins.image")
     end
   },
-  { "tpope/vim-sleuth",      lazy = false },
+  { "tpope/vim-sleuth",      event = "BufReadPre" },
   {
     'mrjones2014/smart-splits.nvim',
-    lazy = false,
+    event = "VimEnter",
   },
   {
     'stevearc/oil.nvim',
-    lazy = false,
+    event = "VimEnter",
     config = function()
       require("plugins.oil")
     end,
@@ -32,7 +33,7 @@ return {
   },
   {
     'MeanderingProgrammer/markdown.nvim',
-    lazy = false,
+    event = "BufReadPre",
     name = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config = function()
@@ -41,24 +42,23 @@ return {
   },
   {
     'declancm/cinnamon.nvim',
-    lazy = false,
+    event = "BufReadPre",
     config = function()
       require('cinnamon').setup()
     end
   },
   {
     "andrewferrier/wrapping.nvim",
-    lazy = false,
+    event = "BufReadPre",
     config = function()
       require("plugins.wrapping")
     end
   },
-  { "LunarVim/bigfile.nvim", lazy = false },
+  { "LunarVim/bigfile.nvim", event = "VimEnter" },
   -- Obsidian
   {
     "epwalsh/obsidian.nvim",
     version = "*", -- recommended, use latest release instead of latest commit
-    lazy = false,
     event = {
       "BufReadPre /home/destnguyxn/projects/obsidian-vaults/**.md",
       "BufNewFile /home/destnguyxn/projects/obsidian-vaults/**.md",
@@ -82,7 +82,7 @@ return {
   {
     "folke/noice.nvim",
     enabled = DestNgxVim.plugins.experimental_noice.enabled,
-    lazy = false,
+    event = "VeryLazy",
     config = function()
       require("plugins.noice")
     end,
@@ -90,7 +90,7 @@ return {
   {
     "chrisgrieser/nvim-spider",
     enabled = DestNgxVim.plugins.jump_by_subwords.enabled,
-    lazy = true,
+    event = "BufEnter",
     keys = { "w", "e", "b", "ge" },
     config = function()
       vim.keymap.set({ "n", "o", "x" }, "W", "w", { desc = "Normal w" })
@@ -105,9 +105,9 @@ return {
       )
     end,
   },
-  { "nvim-lua/plenary.nvim" },
+  { "nvim-lua/plenary.nvim", lazy = false },
   -- highlight same-name identifider with the same color
-  { "David-Kunz/markid" },
+  { "David-Kunz/markid",     event = "BufReadPre" },
   {
     "nvim-tree/nvim-web-devicons",
     config = function()
@@ -116,7 +116,7 @@ return {
   },
   {
     "goolord/alpha-nvim",
-    lazy = false,
+    event = "VimEnter",
     config = function()
       require("plugins.alpha")
     end,
@@ -125,7 +125,7 @@ return {
   -- Treesitter
   {
     "Mohammed-Taher/AdvancedNewFile.nvim",
-    lazy = false,
+    event = "BufReadPre",
   },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -149,7 +149,7 @@ return {
   -- show context of current line
   {
     "nvim-treesitter/nvim-treesitter-context",
-    lazy = false,
+    event = "BufReadPre",
     config = function()
       require("treesitter-context").setup {
         max_lines = 4,
@@ -160,12 +160,12 @@ return {
   -- Navigating (Telescope/Tree/Refactor)
   {
     "0x00-ketsu/autosave.nvim",
-    lazy = false,
+    event = "InsertLeave",
     config = function()
       require("autosave").setup {
         enabled = true,
         conditions = {
-          filetype_is_not = { "markdown", "gitcommit", "oil" },
+          filetype_is_not = { "markdown", "gitcommit", "oil", "alpha" },
         },
       }
     end,
@@ -180,7 +180,6 @@ return {
   },
   {
     "nvim-pack/nvim-spectre",
-    lazy = true,
     keys = {
       {
         "<Leader>pr",
@@ -197,7 +196,7 @@ return {
   },
   {
     "nvim-telescope/telescope.nvim",
-    lazy = false,
+    event = "VimEnter",
     config = function()
       require("plugins.telescope")
     end,
@@ -211,7 +210,7 @@ return {
   },
   {
     "AckslD/nvim-neoclip.lua",
-    lazy = false,
+    event = "BufReadPre",
     dependencies = {
       { 'kkharji/sqlite.lua', module = 'sqlite' },
       -- you'll need at least one of these
@@ -226,6 +225,7 @@ return {
   },
   {
     "kevinhwang91/nvim-bqf",
+    event = "BufEnter",
     ft = "qf",
     init = function()
       require('plugins.bqf-init')
@@ -253,11 +253,12 @@ return {
   },
   {
     "gbprod/stay-in-place.nvim",
-    lazy = false,
+    event = "BufEnter",
     config = true, -- run require("stay-in-place").setup()
   },
   {
     "ThePrimeagen/refactoring.nvim",
+    event = "BufEnter",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
@@ -295,6 +296,7 @@ return {
   },
   {
     "johmsalas/text-case.nvim",
+    event = "BufEnter",
     dependencies = { "nvim-telescope/telescope.nvim" },
     -- Author's Note: If default keymappings fail to register (possible config issue in my local setup),
     -- verify lazy loading functionality. On failure, disable lazy load and report issue
@@ -341,8 +343,8 @@ return {
   -- AI
   {
     "zbirenbaum/copilot.lua",
+    event = "VeryLazy",
     enabled = DestNgxVim.plugins.ai.copilot.enabled,
-    lazy = false,
     config = function()
       require("plugins.copilot")
     end,
@@ -400,7 +402,8 @@ return {
     "frankroeder/parrot.nvim",
     dependencies = { "ibhagwan/fzf-lua" },
     lazy = false,
-    enabled = os.getenv "OPENAI_API_KEY" ~= nil or os.getenv "PERPLEXITY_API_KEY" ~= nil,
+    enabled = (os.getenv "OPENAI_API_KEY" ~= nil or os.getenv "PERPLEXITY_API_KEY" ~= nil) and
+    DestNgxVim.plugins.ai.parrot.enabled,
     config = function()
       require("plugins.parrot")
     end,
@@ -555,7 +558,7 @@ return {
   },
   {
     "numToStr/Comment.nvim",
-    lazy = false,
+    event = "BufReadPre",
     dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
     config = function()
       require("plugins.comment")
@@ -563,14 +566,13 @@ return {
   },
   {
     "LudoPinelli/comment-box.nvim",
-    lazy = false,
     keys = {
       { "<leader>cc", "<cmd>lua require('comment-box').llbox()<CR>", desc = "comment box" },
       { "<leader>cc", "<cmd>lua require('comment-box').llbox()<CR>", mode = "v",          desc = "comment box" },
     }
   },
-  { "tpope/vim-repeat",      lazy = false },
-  { "tpope/vim-speeddating", lazy = false },
+  { "tpope/vim-repeat",      event = "BufReadPre" },
+  { "tpope/vim-speeddating", event = "BufReadPre" },
   -- { "dhruvasagar/vim-table-mode", ft = { "markdown" } },
   -- {
   --   "smoka7/multicursors.nvim",
@@ -607,14 +609,13 @@ return {
   -- },
   {
     "nacro90/numb.nvim",
-    lazy = false,
+    event = "BufEnter",
     config = function()
       require("plugins.numb")
     end,
   },
   {
     "folke/todo-comments.nvim",
-    lazy = false,
     event = "BufEnter",
     config = function()
       require("plugins.todo-comments")
@@ -673,18 +674,18 @@ return {
       require("plugins.lualine")
     end,
   },
-  {
-    "echasnovski/mini.bufremove",
-    version = "*",
-    config = function()
-      require("mini.bufremove").setup({
-        silent = true,
-      })
-    end,
-  },
+  -- {
+  --   "echasnovski/mini.bufremove",
+  --   version = "*",
+  --   config = function()
+  --     require("mini.bufremove").setup({
+  --       silent = true,
+  --     })
+  --   end,
+  -- },
   {
     "cbochs/grapple.nvim",
-    lazy = false,
+    event = "VimEnter",
     dependencies = {
       { "nvim-tree/nvim-web-devicons" }
     },
@@ -764,7 +765,7 @@ return {
 
   {
     "echasnovski/mini.align",
-    lazy = false,
+    event = "BufEnter",
     version = "*",
     config = function()
       require("mini.align").setup()
@@ -772,7 +773,7 @@ return {
   },
   {
     "echasnovski/mini.ai",
-    lazy = false,
+    event = "BufEnter",
     version = "*",
     config = function()
       require("mini.ai").setup()
@@ -872,8 +873,6 @@ return {
   },
   {
     "sindrets/diffview.nvim",
-    lazy = true,
-    enabled = true,
     event = "BufRead",
     config = function()
       require("plugins.git.diffview")
