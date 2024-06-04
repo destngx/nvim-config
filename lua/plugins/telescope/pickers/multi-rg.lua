@@ -90,7 +90,7 @@ return function(opts)
 
       return flatten {
         args,
-        { "-F", "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case" },
+        { "-F", "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case", "--hidden" },
       }
     end,
     entry_maker = make_entry.gen_from_vimgrep(opts),

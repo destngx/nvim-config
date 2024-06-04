@@ -31,6 +31,9 @@ require('telescope').setup {
       '--with-filename',
       '--line-number',
       '--column',
+      '--hidden',
+      '--glob',
+      '!**/.git/*',
       '--smart-case'
     },
     layout_config     = {
@@ -51,19 +54,40 @@ require('telescope').setup {
     mappings          = {
       i = {
         ["<C-x>"] = false,
-        ["<C-j>"] = actions.move_selection_next,
-        ["<C-k>"] = actions.move_selection_previous,
-        ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-        ["<C-s>"] = actions.cycle_previewers_next,
-        ["<C-a>"] = actions.cycle_previewers_prev,
-        -- ["<C-h>"] = "which_key",
-        ["<ESC>"] = actions.close,
+        ["<C-h>"] = "which_key",
       },
-      n = {
-        ["<C-s>"] = actions.cycle_previewers_next,
-        ["<C-a>"] = actions.cycle_previewers_prev,
-      }
-    }
+    },
+    preview           = {
+      mime_hook = function(filepath, bufnr, opts)
+        local is_image = function(path)
+          local image_extensions = { 'png', 'jpg' } -- Supported image formats
+          local split_path = vim.split(path:lower(), '.', { plain = true })
+          local extension = split_path[#split_path]
+          return vim.tbl_contains(image_extensions, extension)
+        end
+        if is_image(filepath) then
+          local term = vim.api.nvim_open_term(bufnr, {})
+          local function send_output(_, data, _)
+            for _, d in ipairs(data) do
+              vim.api.nvim_chan_send(term, d .. '\r\n')
+            end
+          end
+          vim.fn.jobstart(
+            {
+              'chafa', filepath -- Terminal image viewer command
+            },
+            { on_stdout = send_output, stdout_buffered = true, pty = true })
+        else
+          require("telescope.previewers.utils").set_preview_message(bufnr, opts.winid, "Binary cannot be previewed")
+        end
+      end
+    },
+  },
+  pickers = {
+    find_files = {
+      -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
+      find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+    },
   },
   extensions = {
     fzf = {
@@ -73,8 +97,7 @@ require('telescope').setup {
       case_mode = "smart_case",
     },
     repo = {
-      cached_list = {
-      },
+      cached_list = {},
       list = {
         search_dirs = {
           "~/projects",
@@ -147,10 +170,20 @@ M.edit_neovim = function()
     }))
 end
 
+local is_inside_work_tree = {}
 M.project_files = function(opts)
   opts = opts or {} -- define here if you want to define something
-  local ok = pcall(require "telescope.builtin".git_files, opts)
-  if not ok then require "telescope.builtin".find_files(opts) end
+  local cwd = vim.fn.getcwd()
+  if is_inside_work_tree[cwd] == nil then
+    vim.fn.system("git rev-parse --is-inside-work-tree")
+    is_inside_work_tree[cwd] = vim.v.shell_error == 0
+  end
+
+  if is_inside_work_tree[cwd] then
+    builtin.git_files(opts)
+  else
+    builtin.find_files(opts)
+  end
 end
 
 M.command_history = function()

@@ -6,7 +6,7 @@ vim.opt.list = true
 
 require("ibl").setup {
   exclude = {
-    filetypes = { "help", "dashboard", "packer", "NvimTree", "Trouble", "TelescopePrompt", "Float" },
+    filetypes = { "help", "dashboard", "packer", "NvimTree", "Trouble", "TelescopePrompt", "Float", "oil" },
     buftypes = { "terminal", "nofile", "telescope" },
   },
   indent = {
