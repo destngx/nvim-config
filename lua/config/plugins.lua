@@ -103,13 +103,6 @@ return {
       )
     end,
   },
-  {
-    "SmiteshP/nvim-navic",
-    config = function()
-      require("plugins.navic")
-    end,
-    dependencies = "neovim/nvim-lspconfig",
-  },
   { "nvim-lua/plenary.nvim" },
   -- highlight same-name identifider with the same color
   { "David-Kunz/markid" },
@@ -671,13 +664,6 @@ return {
       require("plugins.which-key")
     end,
   },
-  -- {
-  --   "ecosse3/galaxyline.nvim",
-  --   config = function()
-  --     require("plugins.galaxyline")
-  --   end,
-  --   event = "VeryLazy",
-  -- },
   {
     'nvim-lualine/lualine.nvim',
     event = "VeryLazy",

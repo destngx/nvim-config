@@ -10,6 +10,5 @@ require('config.autocmds')
 require('lsp.config')
 require('lsp.setup')
 require('lsp.functions')
-require('internal.winbar')
 require('internal.cursorword')
 
