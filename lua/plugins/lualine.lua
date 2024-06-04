@@ -31,6 +31,11 @@ require('lualine').setup {
     disabled_filetypes = {
       statusline = {},
       winbar = {},
+      "NvimTree",
+      "Trouble",
+      "leetcode.nvim",
+      "qf",
+      "alpha"
     },
     ignore_focus = {},
     always_divide_middle = true,
@@ -43,24 +48,26 @@ require('lualine').setup {
   },
   sections = {
     lualine_a = {},
-    lualine_b = { },
-    lualine_c = { {
-      'copilot',
-      symbols = {
-        status = {
-          icons = {
-            enabled = DestNgxVim.icons.copilotEnabled,
-            sleep = DestNgxVim.icons.copilotSleep,
-            disabled = DestNgxVim.icons.copilotDisabled,
-            warning = DestNgxVim.icons.copilotWarning,
-            unknown = DestNgxVim.icons.copilotUnknown
+    lualine_b = {},
+    lualine_c = { { 'filetype', padding = 0, icon_only = true }, { 'filename', padding = 0 }, { symbols.get, cond = symbols.has } },
+    lualine_x = {
+      {
+        'copilot',
+        padding = 0,
+        symbols = {
+          status = {
+            icons = {
+              enabled = DestNgxVim.icons.copilotEnabled,
+              sleep = DestNgxVim.icons.copilotSleep,
+              disabled = DestNgxVim.icons.copilotDisabled,
+              warning = DestNgxVim.icons.copilotWarning,
+              unknown = DestNgxVim.icons.copilotUnknown
+            },
           },
         },
+        show_colors = true,
       },
-      show_colors = true,
-    }, { 'filetype', padding = 0, icon_only = true }, { 'filename', padding = 0 }, {symbols.get, cond = symbols.has} },
-    lualine_x = {
-      'branch',
+      { 'branch', icon = DestNgxVim.icons.git },
       {
         'diff',
         symbols = {

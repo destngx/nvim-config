@@ -53,11 +53,7 @@ local handlers = {
     { virtual_text = DestNgxVim.lsp.virtual_text }
   ),
 }
-local navic = require("nvim-navic")
 local function on_attach(client, bufnr)
-  if client.server_capabilities.documentSymbolProvider then
-    navic.attach(client, bufnr)
-  end
   if client.name == "yamlls" then
     client.server_capabilities.documentFormattingProvider = true
     client.server_capabilities.documentRangeFormattingProvider = true

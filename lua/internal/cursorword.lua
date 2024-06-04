@@ -32,7 +32,19 @@ local function matchadd()
   if disable_ft[vim.bo.ft] then
     return
   end
-
+  local fname_ext = string.lower(vim.fn.expand('%:e'))
+  local disable_file_ext = {
+    ['ico'] = true,
+    ['png'] = true,
+    ['jpeg'] = true,
+    ['jpg'] = true,
+    ['epub'] = true,
+    ['pptx'] = true,
+    ['xlsx'] = true,
+  }
+  if disable_file_ext[fname_ext] then
+    return
+  end
   if vim.api.nvim_get_mode().mode == 'i' then
     return
   end

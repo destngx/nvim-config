@@ -75,7 +75,7 @@ With the following plugins has been integrated into to support for full stack de
 57. **[nvim-dap-vscode-js]()**
 58. **[nvim-lsp-file-operations]()**: enhances file operations using lsp
 59. **[nvim-lspconfig]()**
-60. **[nvim-navic]()**: show the current context of file in winbar
+60. **[vim-sleuth]()**: 
 61. **[nvim-nonicons]()**
 62. **[nvim-notify]()**
 63. **[nvim-spectre]()**: refactor, find and replace

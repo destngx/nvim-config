@@ -2,7 +2,6 @@ local present, alpha = pcall(require, "alpha")
 if not present then
   return
 end
-
 local dashboard = require("alpha.themes.dashboard")
 local icons = require("utils.icons")
 local if_nil = vim.F.if_nil
@@ -188,7 +187,6 @@ local opts = {
 }
 
 alpha.setup(opts)
-
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ Hide tabline and statusline on startup screen            │
 -- ╰──────────────────────────────────────────────────────────╯
@@ -199,7 +197,6 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = "alpha",
   command = "set showtabline=0 laststatus=0 noruler",
 })
-
 vim.api.nvim_create_autocmd("FileType", {
   group = "alpha_tabline",
   pattern = "alpha",
