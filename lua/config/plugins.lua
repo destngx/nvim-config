@@ -671,12 +671,19 @@ return {
       require("plugins.which-key")
     end,
   },
+  -- {
+  --   "ecosse3/galaxyline.nvim",
+  --   config = function()
+  --     require("plugins.galaxyline")
+  --   end,
+  --   event = "VeryLazy",
+  -- },
   {
-    "ecosse3/galaxyline.nvim",
-    config = function()
-      require("plugins.galaxyline")
-    end,
+    'nvim-lualine/lualine.nvim',
     event = "VeryLazy",
+    config = function()
+      require("plugins.lualine")
+    end,
   },
   {
     "echasnovski/mini.bufremove",

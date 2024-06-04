@@ -136,11 +136,11 @@ local icons = {
   fillBox             = " 󰄮 ",
   outlineBox          = " 󰄱 ",
   selectCaret         = " ❯ ",
-  copilotSleep        = "",
+  copilotSleep        = " ",
   copilotEnabled      = " ",
   copilotDisabled     = " ",
   copilotWarning      = " ",
-  copilotUnknown      = " "
+  copilotUnknown      = "'"
 }
 
 return icons
