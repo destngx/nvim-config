@@ -1,5 +1,5 @@
 ## My personal neovim config that is inspired by [EcoVim](https://github.com/ecosse3/nvim) and [jdhao neovim config](https://github.com/jdhao/nvim-config).
-
+ 
 ## Requirements:
 1. **[ripgrep](https://github.com/BurntSushi/ripgrep)**
 2. **[locate](https://github.com/cljoly/telescope-repo.nvim/discussions/13)**
@@ -75,7 +75,7 @@ With the following plugins has been integrated into to support for full stack de
 57. **[nvim-dap-vscode-js]()**
 58. **[nvim-lsp-file-operations]()**: enhances file operations using lsp
 59. **[nvim-lspconfig]()**
-60. **[vim-sleuth]()**: 
+60. **[vim-sleuth]()**:
 61. **[nvim-nonicons]()**
 62. **[nvim-notify]()**
 63. **[nvim-spectre]()**: refactor, find and replace
