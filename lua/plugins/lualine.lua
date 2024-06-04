@@ -52,6 +52,11 @@ require('lualine').setup {
     lualine_c = { { 'filetype', padding = 0, icon_only = true }, { 'filename', padding = 0 }, { symbols.get, cond = symbols.has } },
     lualine_x = {
       {
+        require("noice").api.status.command.get,
+        cond = require("noice").api.status.command.has,
+        color = { fg = "#ff9e64" },
+      },
+      {
         'copilot',
         padding = 0,
         symbols = {
