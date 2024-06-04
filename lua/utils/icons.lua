@@ -14,10 +14,9 @@ local icons = {
   calendar            = "  ",
   caretRight          = "",
   checkSquare         = "  ",
-  copilot             = "",
   codeium             = "",
   exit                = " 󰗼 ",
-  chevronDown        = "",
+  chevronDown         = "",
   chevronRight        = "",
   circle              = "  ",
   class               = "  ",
@@ -137,7 +136,11 @@ local icons = {
   fillBox             = " 󰄮 ",
   outlineBox          = " 󰄱 ",
   selectCaret         = " ❯ ",
+  copilotSleep        = "",
+  copilotEnabled      = " ",
+  copilotDisabled     = " ",
+  copilotWarning      = " ",
+  copilotUnknown      = " "
 }
 
 return icons
-

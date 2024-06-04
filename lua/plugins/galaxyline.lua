@@ -1,10 +1,8 @@
--- See: https://github.com/glepnir/galaxyline.nvim
 -- Modified by ecosse and destnguyxn
 
 local gl = require('galaxyline')
 local condition = require('galaxyline.condition')
--- Configuration {{{1
--- Functions {{{2
+local copilot_status = require("copilot-lualine")
 
 local function highlight(group, fg, bg, gui)
   local cmd = string.format('highlight %s guifg=%s guibg=%s', group, fg, bg)
@@ -16,19 +14,15 @@ local function highlight(group, fg, bg, gui)
   vim.cmd(cmd)
 end
 
--- }}}2
-
--- Settings {{{2
 local lineLengthWarning = 100
 local lineLengthError = 120
 local leftbracket = ""  -- Empty.
 local rightbracket = "" -- Empty.
--- }}}2
 
 gl.short_line_list = { 'NvimTree', 'vista', 'dbui', 'packer', 'tagbar' }
 local gls = gl.section
 
--- Colours, maps and icons {{{2
+-- Colours, maps and icons
 local colors = {
   bg              = nil,
   modetext        = '#000000',
@@ -111,7 +105,7 @@ local mode_map = {
   ['Rx']       = { '#DCDCAA', 'Replace mode |i_CTRL-X| completion' },
 }
 
--- Rag status function {{{2
+-- Rag status function
 local function setLineWidthColours()
   local colbg = colors.statsbg
   local linebg = colors.statsbg
@@ -139,17 +133,9 @@ local function setLineWidthColours()
   highlight('LinePosHighlightEnd', linebg, colors.statsbg)
 end
 
--- }}}2
-
--- }}}1
-
 gls.left = {}
-
 gls.right = {}
 
--- Git info {{{2
-
--- Git Branch Name {{{3
 table.insert(gls.right, {
   GitStart = {
     provider = function() return leftbracket end,
@@ -177,9 +163,6 @@ table.insert(gls.right, {
     highlight = { colors.gittext, colors.gitbg }
   }
 })
--- }}}3
-
--- Git Changes {{{3
 table.insert(gls.right, {
   DiffSeparate = {
     provider = function() return '' end,
@@ -221,9 +204,8 @@ table.insert(gls.right, {
     highlight = { colors.gitbg, colors.bg }
   }
 })
--- }}}3
 
--- Diagnostics {{{3
+-- Diagnostics
 table.insert(gls.right, {
   DiagnosticError = {
     provider = 'DiagnosticError',
@@ -253,14 +235,24 @@ table.insert(gls.right, {
     highlight = { colors.diaginfo, colors.bg }
   }
 })
--- Right {{{1
-
-
--- Type {{{2
 table.insert(gls.left, {
-  FileIcon = {
-    provider = 'FileIcon',
-    highlight = { colors.typeicon, "NONE" }
+  CopilotStatus = {
+    provider = function()
+      if vim.bo.buftype == '' then
+        if copilot_status.is_enabled() then
+          return DestNgxVim.icons.copilotEnabled
+        elseif copilot_status.is_Error() then
+          return DestNgxVim.icons.copilotWarning
+        elseif copilot_status.is_sleep() then
+          return DestNgxVim.icons.copilotSleep
+        elseif copilot_status.is_Loading() then
+          return DestNgxVim.icons.copilotSleep
+        end
+        return DestNgxVim.icons.copilotDisabled
+      end
+    end,
+    highlight = { colors.cyan, colors.bg },
+    separator = ' '
   }
 })
 if DestNgxVim.statusline.path_enabled then
@@ -271,18 +263,18 @@ if DestNgxVim.statusline.path_enabled then
           return ''
         end
 
-        if DestNgxVim.statusline.path_type == 'relative' then
+        if DestNgxVim.statusline.path_type == 'relative' and vim.bo.filetype ~= "markdown" then
           local fname = vim.fn.expand('%:p')
-          return fname:gsub(vim.fn.getcwd() .. '/', '') .. ' '
+          return fname:gsub(vim.fn.getcwd() .. '/', '')
         end
 
         return vim.fn.expand '%:t'
       end,
-    }
+      highlight = { colors.blue, "NONE" }
+    },
   })
 end
 
--- Cursor Position Section {{{2
 table.insert(gls.right, {
   StatsSectionStart = {
     provider = function() return leftbracket end,
