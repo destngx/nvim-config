@@ -17,10 +17,17 @@ local symbols = trouble.statusline({
   groups = {},
   title = false,
   filter = { range = true },
-  format = "{kind_icon}{symbol.name}",
-  -- The following line is needed to fix the background color
-  -- Set it to the lualine section you want to use
+  format = "{kind_icon}{symbol.name:NormalFloat}",
+  hl_group = "lualine_c_normal"
 })
+
+local function wordCount()
+  return tostring(vim.fn.wordcount().words) .. DestNgxVim.icons.text
+end
+local function get_location()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return string.format('%d:%d|%d:%d', line, vim.fn.line('$'), col, string.len(vim.fn.getline('.')))
+end
 require('lualine').setup {
   options = {
     icons_enabled = true,
@@ -42,11 +49,12 @@ require('lualine').setup {
   },
   sections = {
     lualine_a = {},
-    lualine_b = {},
-    lualine_c = { { 'filetype', padding = {}, icon_only = true }, { 'filename', padding = 0 },
+    lualine_b = { { 'filetype', padding = {}, icon_only = true }, { 'filename', padding = 0 },},
+    lualine_c = {
       {
         symbols.get,
         cond = symbols.has,
+        padding = 0,
       }
     },
     lualine_x = {
@@ -92,7 +100,7 @@ require('lualine').setup {
         }
       }
     },
-    lualine_y = { 'progress', { 'location', format = "%l" } },
+    lualine_y = { { get_location }, { wordCount, padding = 0 } },
     lualine_z = { 'mode' }
   },
   inactive_sections = {
