@@ -159,16 +159,4 @@ require('lualine').setup {
     lualine_y = { { get_location }, { wordCount, padding = 0 } },
     lualine_z = { 'mode' }
   },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {},
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = {}
-  },
-  tabline = {},
-  winbar = {},
-  inactive_winbar = {},
-  extensions = {}
 }
