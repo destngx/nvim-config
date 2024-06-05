@@ -76,13 +76,12 @@ return {
   },
   -- Themes
   {
-    "folke/tokyonight.nvim",
+    "rebelot/kanagawa.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      -- load the colorscheme here
-      vim.cmd([[colorscheme tokyonight]])
       require("config.colorscheme")
+      vim.cmd([[colorscheme kanagawa-wave]])
     end,
   },
   {

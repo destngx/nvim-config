@@ -17,15 +17,13 @@ local symbols = trouble.statusline({
   groups = {},
   title = false,
   filter = { range = true },
-  format = "{kind_icon}{symbol.name:Normal}",
+  format = "{kind_icon}{symbol.name}",
   -- The following line is needed to fix the background color
   -- Set it to the lualine section you want to use
-  hl_group = "lualine_c_normal",
 })
 require('lualine').setup {
   options = {
     icons_enabled = true,
-    theme = 'auto',
     component_separators = { left = '', right = '' },
     section_separators = { left = '', right = '' },
     disabled_filetypes = {
@@ -40,16 +38,17 @@ require('lualine').setup {
     ignore_focus = {},
     always_divide_middle = true,
     globalstatus = false,
-    refresh = {
-      statusline = 1000,
-      tabline = 1000,
-      winbar = 1000,
-    }
+    refresh = { statusline = 100 }
   },
   sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = { { 'filetype', padding = 0, icon_only = true }, { 'filename', padding = 0 }, { symbols.get, cond = symbols.has } },
+    lualine_c = { { 'filetype', padding = {}, icon_only = true }, { 'filename', padding = 0 },
+      {
+        symbols.get,
+        cond = symbols.has,
+      }
+    },
     lualine_x = {
       {
         require("noice").api.status.command.get,
@@ -93,7 +92,7 @@ require('lualine').setup {
         }
       }
     },
-    lualine_y = { 'progress', 'location' },
+    lualine_y = { 'progress', { 'location', format = "%l" } },
     lualine_z = { 'mode' }
   },
   inactive_sections = {

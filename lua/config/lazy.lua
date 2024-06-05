@@ -13,7 +13,7 @@ vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup("config.plugins", {
   defaults = { lazy = true },
-  install = { colorscheme = { "tokyonight" } },
+  install = { colorscheme = { "kanagawa-wave" } },
   checker = { enabled = false },
   change_detection = { enabled = true, notify = false },
   concurrency = 5,
