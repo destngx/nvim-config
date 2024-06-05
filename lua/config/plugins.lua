@@ -24,12 +24,18 @@ return {
     event = "VimEnter",
   },
   {
-    'stevearc/oil.nvim',
+    "refractalize/oil-git-status.nvim",
     event = "VimEnter",
-    config = function()
-      require("plugins.oil")
-    end,
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = true,
+    dependencies = {
+      {
+        'stevearc/oil.nvim',
+        event = "VimEnter",
+        config = function()
+          require("plugins.oil")
+        end,
+      },
+    },
   },
   {
     'MeanderingProgrammer/markdown.nvim',
@@ -403,7 +409,7 @@ return {
     dependencies = { "ibhagwan/fzf-lua" },
     lazy = false,
     enabled = (os.getenv "OPENAI_API_KEY" ~= nil or os.getenv "PERPLEXITY_API_KEY" ~= nil) and
-    DestNgxVim.plugins.ai.parrot.enabled,
+        DestNgxVim.plugins.ai.parrot.enabled,
     config = function()
       require("plugins.parrot")
     end,
@@ -697,25 +703,11 @@ return {
       { "<leader>'", "<cmd>Grapple toggle<cr>", desc = "Tag a file" },
     },
   },
+  { "j-hui/fidget.nvim", config = true },
   {
     "rcarriga/nvim-notify",
     config = function()
       require("plugins.nvim-notify")
-    end,
-    init = function()
-      local banned_messages = {
-        "No information available",
-        "LSP[tsserver] Inlay Hints request failed. Requires TypeScript 4.4+.",
-        "LSP[tsserver] Inlay Hints request failed. File not opened in the editor.",
-      }
-      vim.notify = function(msg, ...)
-        for _, banned in ipairs(banned_messages) do
-          if msg == banned then
-            return
-          end
-        end
-        return require("notify")(msg, ...)
-      end
     end,
   },
   {

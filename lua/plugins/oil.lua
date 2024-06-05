@@ -9,4 +9,7 @@ require("oil").setup({
     show_hidden = true,
     natural_order = false,
   },
+  win_options = {
+    signcolumn = "yes:2",
+  },
 })
