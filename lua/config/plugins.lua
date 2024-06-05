@@ -698,21 +698,21 @@ return {
   --     })
   --   end,
   -- },
-  {
-    "cbochs/grapple.nvim",
-    event = "VimEnter",
-    dependencies = {
-      { "nvim-tree/nvim-web-devicons" }
-    },
-    opts = {
-      scope = "git",
-      icons = true,
-      quick_select = "123456789",
-    },
-    keys = {
-      { "<leader>'", "<cmd>Grapple toggle<cr>", desc = "Tag a file" },
-    },
-  },
+  -- {
+  --   "cbochs/grapple.nvim",
+  --   event = "VimEnter",
+  --   dependencies = {
+  --     { "nvim-tree/nvim-web-devicons" }
+  --   },
+  --   opts = {
+  --     scope = "git",
+  --     icons = true,
+  --     quick_select = "123456789",
+  --   },
+  --   keys = {
+  --     { "<leader>'", "<cmd>Grapple toggle<cr>", desc = "Tag a file" },
+  --   },
+  -- },
   {
     "j-hui/fidget.nvim",
     tag = "legacy",

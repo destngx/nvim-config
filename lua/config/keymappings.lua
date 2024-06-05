@@ -92,7 +92,7 @@ keymap("n", "<CR>", ":noh<CR><CR>", silent)
 keymap("n", "<Leader>pw", "<CMD>lua require('telescope.builtin').grep_string({ initial_mode = 'normal' })<CR>")
 
 -- Buffers
-keymap("n", "<leader>;", "<cmd>Telescope grapple tags<CR>", silent)
+-- keymap("n", "<leader>;", "<cmd>Telescope grapple tags<CR>", silent)
 keymap("n", "gn", ":bn<CR>", silent)
 keymap("n", "gp", ":bp<CR>", silent)
 keymap("n", "<S-q>", ":lua require('mini.bufremove').delete(0, false)<CR>", silent)
