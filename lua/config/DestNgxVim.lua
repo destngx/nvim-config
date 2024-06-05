@@ -7,7 +7,7 @@
 local icons = require("utils.icons")
 
 DestNgxVim = {
-  colorscheme = "kanagawa-wave",
+  colorscheme = "kanagawa-dragon",
   ui = {
     float = {
       border = "rounded",
