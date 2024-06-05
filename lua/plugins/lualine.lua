@@ -28,9 +28,52 @@ local function get_location()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return string.format('%d:%d|%d:%d', line, vim.fn.line('$'), col, string.len(vim.fn.getline('.')))
 end
+local theme = require("kanagawa.colors").setup().theme
+
+local kanagawa = {}
+
+kanagawa.normal = {
+  a = { bg = theme.syn.fun, fg = theme.ui.bg_m3 },
+  b = { bg = "none", fg = theme.syn.fun },
+  c = { bg = "none", fg = theme.ui.fg },
+}
+
+kanagawa.insert = {
+  a = { bg = theme.diag.ok, fg = theme.ui.bg },
+  b = { bg = theme.ui.bg, fg = theme.diag.ok },
+}
+
+kanagawa.command = {
+  a = { bg = theme.syn.operator, fg = theme.ui.bg },
+  b = { bg = theme.ui.bg, fg = theme.syn.operator },
+}
+
+kanagawa.visual = {
+  a = { bg = theme.syn.keyword, fg = theme.ui.bg },
+  b = { bg = theme.ui.bg, fg = theme.syn.keyword },
+}
+
+kanagawa.replace = {
+  a = { bg = theme.syn.constant, fg = theme.ui.bg },
+  b = { bg = theme.ui.bg, fg = theme.syn.constant },
+}
+
+kanagawa.inactive = {
+  a = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+  b = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim, gui = "bold" },
+  c = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+}
+
+if vim.g.kanagawa_lualine_bold then
+  for _, mode in pairs(kanagawa) do
+    mode.a.gui = "bold"
+  end
+end
+
 require('lualine').setup {
   options = {
     icons_enabled = true,
+    theme = kanagawa,
     component_separators = { left = '', right = '' },
     section_separators = { left = '', right = '' },
     disabled_filetypes = {
@@ -49,7 +92,7 @@ require('lualine').setup {
   },
   sections = {
     lualine_a = {},
-    lualine_b = { { 'filetype', padding = {}, icon_only = true }, { 'filename', padding = 0 },},
+    lualine_b = { { 'filetype', padding = {}, icon_only = true }, { 'filename', padding = { left = 0, right = 1 } }, },
     lualine_c = {
       {
         symbols.get,
@@ -79,6 +122,19 @@ require('lualine').setup {
         },
         show_colors = true,
       },
+      {
+        function()
+          return require("dap").status()
+        end,
+        icon = { DestNgxVim.icons.bug, color = { fg = "#e7c664" } }, -- nerd icon.
+        cond = function()
+          if not package.loaded.dap then
+            return false
+          end
+          local session = require("dap").session()
+          return session ~= nil
+        end,
+      },
       { 'branch', icon = DestNgxVim.icons.git },
       {
         'diff',
@@ -93,7 +149,7 @@ require('lualine').setup {
         'diagnostics',
         sources = { "nvim_diagnostic" },
         symbols = {
-          error = DestNgxVim.icons.bug,
+          error = DestNgxVim.icons.errorOutline,
           warn = DestNgxVim.icons.warningTriangle,
           info = DestNgxVim.icons.infoOutline,
           hint = DestNgxVim.icons.lightbulbOutline

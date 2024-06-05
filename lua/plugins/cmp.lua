@@ -295,7 +295,9 @@ cmp.setup({
     }),
   },
   experimental = {
-    ghost_text = false,
+    ghost_text = {
+      hl_group = "Comment",
+    },
   },
   performance = {
     max_view_entries = 100,
