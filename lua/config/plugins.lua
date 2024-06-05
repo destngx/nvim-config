@@ -65,6 +65,7 @@ return {
   {
     "epwalsh/obsidian.nvim",
     version = "*", -- recommended, use latest release instead of latest commit
+    lazy = false,
     event = {
       "BufReadPre /home/destnguyxn/projects/obsidian-vaults/**.md",
       "BufNewFile /home/destnguyxn/projects/obsidian-vaults/**.md",
@@ -75,13 +76,23 @@ return {
     end,
   },
   -- Themes
+  -- {
+  --   "ellisonleao/gruvbox.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     require("config.colorscheme")
+  --     vim.o.background = "dark"
+  --     vim.cmd([[colorscheme gruvbox]])
+  --   end,
+  -- },
   {
     "rebelot/kanagawa.nvim",
     lazy = false,
     priority = 1000,
     config = function()
       require("config.colorscheme")
-      vim.cmd([[colorscheme kanagawa-wave]])
+      vim.cmd([[colorscheme kanagawa-dragon]])
     end,
   },
   {
@@ -702,13 +713,19 @@ return {
       { "<leader>'", "<cmd>Grapple toggle<cr>", desc = "Tag a file" },
     },
   },
-  { "j-hui/fidget.nvim", config = true },
   {
-    "rcarriga/nvim-notify",
+    "j-hui/fidget.nvim",
+    tag = "legacy",
     config = function()
-      require("plugins.nvim-notify")
+      require("plugins.notify")
     end,
   },
+  -- {
+  --   "rcarriga/nvim-notify",
+  --   config = function()
+  --     require("plugins.notify")
+  --   end,
+  -- },
   {
     "iamcco/markdown-preview.nvim",
     build = "cd app && pnpm install",

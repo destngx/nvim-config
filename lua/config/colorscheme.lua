@@ -3,9 +3,7 @@ if not present then
   vim.cmd([[colorscheme slate]])
 end
 
-local default_colors = require("kanagawa.colors").palette
--- local c = require("tokyonight.colors").setup()
---
+-- local default_colors = require("kanagawa.colors").palette
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ Setup Colorscheme                                        │
 -- ╰──────────────────────────────────────────────────────────╯
@@ -39,14 +37,9 @@ kanagawa.setup({
       -- Popular plugins that open floats will link to NormalFloat by default;
       -- set their background accordingly if you wish to keep them dark and borderless
       LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+      Normal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+      lualine_c_normal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
       MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
-      -- TelescopeTitle = { fg = theme.ui.special, bold = true },
-      -- TelescopePromptNormal = { bg = theme.ui.bg_p1 },
-      -- TelescopePromptBorder = { fg = theme.ui.bg_p1, bg = theme.ui.bg_p1 },
-      -- TelescopeResultsNormal = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m1 },
-      -- TelescopeResultsBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
-      -- TelescopePreviewNormal = { bg = theme.ui.bg_dim },
-      -- TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
       Visual = { bg = "#3a3a3a", fg = colors.palette.bg,}
     }
   end,
