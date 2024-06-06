@@ -22,7 +22,7 @@ local symbols = trouble.statusline({
 })
 
 local function wordCount()
-  return tostring(vim.fn.wordcount().words) .. DestNgxVim.icons.text
+  return tostring(vim.fn.wordcount().words)
 end
 local function get_location()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -36,11 +36,15 @@ kanagawa.normal = {
   a = { bg = theme.syn.fun, fg = theme.ui.bg_m3 },
   b = { bg = "none", fg = theme.syn.fun },
   c = { bg = "none", fg = theme.ui.fg },
+  x = { bg = theme.ui.bg_visual, fg = theme.ui.fg },
+  y = { bg = theme.ui.bg_search, fg = theme.ui.fg },
 }
 
 kanagawa.insert = {
   a = { bg = theme.diag.ok, fg = theme.ui.bg },
   b = { bg = theme.ui.bg, fg = theme.diag.ok },
+  x = { bg = theme.ui.bg_visual, fg = theme.ui.fg },
+  y = { bg = theme.ui.bg_search},
 }
 
 kanagawa.command = {
@@ -154,9 +158,10 @@ require('lualine').setup {
           info = DestNgxVim.icons.infoOutline,
           hint = DestNgxVim.icons.lightbulbOutline
         }
+        , padding = { left = 0, right = 1 }
       }
     },
-    lualine_y = { { get_location }, { wordCount, padding = 0 } },
+    lualine_y = { { get_location }, { wordCount, padding = { left = 0, right = 1 } } },
     lualine_z = { 'mode' }
   },
 }
