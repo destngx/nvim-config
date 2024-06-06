@@ -1,4 +1,10 @@
 ## My personal neovim config that is inspired by [EcoVim](https://github.com/ecosse3/nvim) and [jdhao neovim config](https://github.com/jdhao/nvim-config).
+
+I use kanagawa theme for better on my eyes :)
+
+![image](https://github.com/destngx/nvim-config/assets/92440783/db8dd463-82d2-4520-b7f0-226596e29127)
+
+
 Try install script if it works for you.
 ``` sh
 cd .install
