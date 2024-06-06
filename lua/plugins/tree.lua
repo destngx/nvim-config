@@ -2,7 +2,6 @@
 -- local nvim_tree_events = require("nvim-tree.events")
 --
 
-local nonicons_extention = require("nvim-nonicons.extentions.nvim-tree")
 
 local git_icons = {
   unstaged = "",
