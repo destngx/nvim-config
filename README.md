@@ -1,6 +1,9 @@
 ## My personal neovim config that is inspired by [EcoVim](https://github.com/ecosse3/nvim) and [jdhao neovim config](https://github.com/jdhao/nvim-config).
 Try install script if it works for you.
-
+``` sh
+cd .install
+bash run.sh
+```
 ## Requirements:
 1. **[ripgrep](https://github.com/BurntSushi/ripgrep)**
 2. **[locate](https://github.com/cljoly/telescope-repo.nvim/discussions/13)**
