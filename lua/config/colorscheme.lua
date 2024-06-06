@@ -9,6 +9,8 @@ end
 -- ╰──────────────────────────────────────────────────────────╯
 
 kanagawa.setup({
+  commentStyle = { italic = true, bold = false },
+  dimInactive = true,
   colors = {
     theme = {
       all = {
@@ -21,6 +23,8 @@ kanagawa.setup({
   overrides = function(colors)
     local theme = colors.theme
     return {
+      Boolean = { bold = false },
+      -- Completion Menu colors
       Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1, blend = vim.o.pumblend }, -- add `blend = vim.o.pumblend` to enable transparency
       PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
       PmenuSbar = { bg = theme.ui.bg_m1 },
@@ -43,7 +47,7 @@ kanagawa.setup({
       StatusLineNC = { bg = "none" },
       lualine_c_normal = { bg = "none" },
       MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
-      Visual = { bg = "#3a3a3a", fg = colors.palette.bg,}
+      Visual = { bg = "#3a3a3a", fg = colors.palette.bg, }
     }
   end,
 })
