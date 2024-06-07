@@ -37,15 +37,15 @@ return {
       },
     },
   },
-  {
-    'MeanderingProgrammer/markdown.nvim',
-    event = "BufReadPre",
-    name = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    config = function()
-      require('plugins.markdown')
-    end,
-  },
+  -- {
+  --   'MeanderingProgrammer/markdown.nvim',
+  --   event = "BufReadPre",
+  --   name = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
+  --   dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  --   config = function()
+  --     require('plugins.markdown')
+  --   end,
+  -- },
   {
     'declancm/cinnamon.nvim',
     event = "BufReadPre",
@@ -74,6 +74,24 @@ return {
     config = function()
       require("plugins.obsidian")
     end,
+  },
+  {
+    "HakonHarnes/img-clip.nvim",
+    event = "VeryLazy",
+    opts = {
+      default = {
+        dir_path = "Attachments",
+        relative_to_current_file = true,
+      },
+      filetypes = {
+        markdown = {
+          template = "![[$FILE_NAME]]", ---@type string
+        },
+        vimwiki = {
+          template = "![[$FILE_NAME]]", ---@type string
+        },
+      }
+    },
   },
   -- Themes
   -- {

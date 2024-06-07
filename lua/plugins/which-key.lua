@@ -195,17 +195,15 @@ local normal_mode_mappings = {
 
   o = {
     name = 'Obsidian',
-    -- o = { '<cmd>ObsidianOpen<CR>', 'open note' },
-    -- n = { '<cmd>AdvancedNewFile<CR>', 'new note' },
-    -- n = { '<cmd>lua vim.cmd('ObsidianNew vim.fn.input('file name: ')')<CR>', 'new note' },
     t = { '<cmd>ObsidianTemplate<CR>', 'template' },
-    p = {
-      name = "paste",
-      i = { '<cmd>ObsidianPasteImg<CR>', 'paste image from clipboard' },
-    },
-    b = { 'View Backlinks' },
-    c = { 'toggle check box' },
-    -- r = { '<cmd>ObsidianRename<Cr>', 'rename note' },
+    p = { '<cmd>PasteImage<CR>', 'PasteImage from clipboard' },
+    b = { '<cmd>ObsidianBacklinks<CR>','View Backlinks' },
+    c = { '<cmd>ObsidianToggleCheckbox<CR>', 'toggle check box' },
+    s = {
+      name = 'Search',
+      l = { '<cmd>ObsidianLinks<CR>', 'Links' },
+      t = { '<cmd>ObsidianTags<CR>', 'Tags' },
+    }
   },
 
   p = {

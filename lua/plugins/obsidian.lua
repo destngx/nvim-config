@@ -16,15 +16,14 @@ require('obsidian').setup({
     date_format = "%d-%m-%Y",
     time_format = "%H:%m",
   },
-  attachments = { img_folder = "Zettelkasten/Attachments" },
-  -- finder_mappings = {
-  --   -- Create a new note from your query with `:ObsidianSearch` and `:ObsidianQuickSwitch`.
-  --   -- Currently only telescope supports this.
-  --   new = "<C-x>",
-  -- },
+  attachments = {
+    img_folder = "Zettelkasten/Attachments",
+    img_text_func = function(client, path)
+      path = client:vault_relative_path(path) or path
+      return string.format("![[%s]]", path.name)
+    end,
+  },
   mappings = {
-    -- Overrides the 'gd' mapping to work on markdown/wiki links within your vault.
-    -- vim.keymap.set("n", "<C-p>", "<CMD>ObsidianSearch<CR>")
     ["<C-p>"] = {
       action = function()
         return "<CMD>ObsidianSearch<CR>"
@@ -37,31 +36,6 @@ require('obsidian').setup({
       end,
       opts = { noremap = false, expr = true, buffer = true },
     },
-    -- Toggle check-boxes.
-    ["<leader>oc"] = {
-      action = function()
-        return require("obsidian").util.toggle_checkbox()
-      end,
-      opts = { buffer = true },
-    },
-    ["<leader>ob"] = {
-      action = function()
-        return "<cmd>ObsidianBacklinks<cr>"
-      end,
-      opts = { expr = true, buffer = false },
-    },
-    -- ["<leader>on"] = {
-    --   action = function()
-    --     return "<expr>:ObsidianNew " .. vim.fn.input('file name: ') .. "<cr>"
-    --   end,
-    --   opts = { expr = true, buffer = false },
-    -- },
-    -- ["<leader>or"] = {
-    --   action = function()
-    --     return ":ObsidianRename " .. vim.fn.input('file name: ') .. "<cr>"
-    --   end,
-    --   opts = { expr = true, buffer = true },
-    -- },
   },
   note_id_func = function(title)
     -- Create note IDs in a Zettelkasten format with a timestamp and a suffix.
