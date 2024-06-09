@@ -233,7 +233,7 @@ local normal_mode_mappings = {
     -- m = { '<cmd>Telescope recall<CR>', 'Show all marks' },
     s = { '<cmd>FzfLua search_history theme=dropdown<CR>', 'search history' },
     q = { '<cmd>FzfLua quickfix<CR>', 'quickfix list' },
-    t = { "<cmd>lua require('fzf-lua').grep({search='TODO|HACK|PERF|NOTE|FIX', no_esc=true})<CR>", 'todo comments' },
+    t = { "<cmd>lua require('fzf-lua').grep({search=' TODO | HACK | PERF | NOTE | FIX ', no_esc=true})<CR>", 'todo comments' },
   },
 
   t = {
@@ -290,7 +290,6 @@ local function attach_markdown(bufnr)
   wk.register({
     m = {
       name = "Markdown",
-      t = { '<cmd>RenderMarkdownToggle<CR>', 'Render Markdown Toggle' },
       p = { '<cmd>MarkdownPreviewToggle<CR>', 'MarkdownPreview In Browser' },
     }
   }, {

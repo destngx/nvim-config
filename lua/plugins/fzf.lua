@@ -9,7 +9,7 @@ fzf.setup({
     width = 0.4,
     row = 0.5,
     hl = { normal = "Pmenu" },
-    border = "none",
+    border = "single",
   },
   fzf_opts = {
     ["--no-info"] = "",
@@ -29,20 +29,17 @@ fzf.setup({
     live_grep = {
       prompt = "grep:",
       cmd = "rg --vimgrep --no-heading --smart-case --hidden --follow --color=always --line-number {q} || true",
-      -- cmd = "rg --vimgrep --no-heading --smart-case --hidden --follow --color=always --line-number {q} || true",
-      -- cmd = "rg --vimgrep --no-heading --smart-case --hidden --follow --color=always --line-number {q} || true",
-      -- cmd = "rg --vimgrep --no-heading --smart-case --hidden --follow --color=always --line-number {q} || true",
       preview_opts = "nohidden",
       winopts = {
-      row = 1,
-      width = vim.api.nvim_win_get_width(0),
-      height = 0.5,
+        row = 1,
+        width = vim.api.nvim_win_get_width(0),
+        height = 0.5,
       },
     },
---    cwd = function()
-  --    local git_path = vim.fn.finddir(".git", ".;")
-    --  return vim.fn.fnamemodify(git_path, ":h")
---    end,
+    --    cwd = function()
+    --     local git_path = vim.fn.finddir(".git", ".;")
+    --     return vim.fn.fnamemodify(git_path, ":h")
+    --    end,
     -- actions = {
     -- check diff selected file with current file
     --   ["ctrl-d"] = function(...)
@@ -60,15 +57,15 @@ fzf.setup({
     no_header = true,
     fzf_opts = { ["--delimiter"] = " ", ["--with-nth"] = "-1.." },
   },
-  -- helptags = {
-  --   prompt = "💡:",
-  --   preview_opts = "hidden",
-  --   winopts = {
-  --     row = 1,
-  --     width = vim.api.nvim_win_get_width(0),
-  --     height = 0.3,
-  --   },
-  -- },
+  helptags = {
+    prompt = "💡:",
+    preview_opts = "hidden",
+    winopts = {
+      row = 1,
+      width = vim.api.nvim_win_get_width(0),
+      height = 0.3,
+    },
+  },
   git = {
     bcommits = {
       prompt = "logs:",
@@ -94,20 +91,20 @@ fzf.setup({
         height = 0.5,
       },
     },
-    -- branches = {
-    --   prompt = "branches:",
-    --   cmd = "git branch --all --color",
-    --   winopts = {
-    --     preview = {
-    --       layout = "vertical",
-    --       vertical = "right:50%",
-    --       wrap = "wrap",
-    --     },
-    --     row = 1,
-    --     width = vim.api.nvim_win_get_width(0),
-    --     height = 0.3,
-    --   },
-    -- },
+    branches = {
+      prompt = "branches:",
+      cmd = "git branch --all --color",
+      winopts = {
+        preview = {
+          layout = "vertical",
+          vertical = "right:50%",
+          wrap = "wrap",
+        },
+        row = 1,
+        width = vim.api.nvim_win_get_width(0),
+        height = 0.3,
+      },
+    },
   },
   -- autocmds = {
   --   prompt = "autocommands:",

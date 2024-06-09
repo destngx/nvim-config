@@ -12,11 +12,11 @@ bash run.sh
 ```
 ## Requirements:
 1. **[ripgrep](https://github.com/BurntSushi/ripgrep)**
-2. **[locate](https://github.com/cljoly/telescope-repo.nvim/discussions/13)**
-3. **[fd-find](https://github.com/sharkdp/fd)**
-4. **[fzf](https://github.com/junegunn/fzf)**
-5. **git version** > 2.30.
-6. **[lazy-git](https://github.com/jesseduffield/lazygit)**
+2. **[fd-find](https://github.com/sharkdp/fd)**
+3. **[fzf](https://github.com/junegunn/fzf)**
+4. **git version** > 2.30.
+5. **[lazy-git](https://github.com/jesseduffield/lazygit)**
+
 ``` sh
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
 curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
@@ -26,6 +26,8 @@ sudo install lazygit /usr/local/bin
 ## Features
 With the following plugins has been integrated into to support for full stack development:
 
+> ![INFO] I have actively updated this config so it may be changed in the future.
+
 1. **[AdvancedNewFile.nvim]()**: Create new files and folders
 2. **[Comment.nvim]()**: quickly comment code with treesitter power
 3. **[LuaSnip](https://github.com/L3MON4D3/LuaSnip)**
@@ -33,7 +35,7 @@ With the following plugins has been integrated into to support for full stack de
 5. **[autosave.nvim]()**
 6. **[better-escape.nvim]()**
 7. **[bigfile.nvim]()**: Automatically turn off some features of neovim when working with large files
-8. **[grapple.nvim]()**
+<!-- 8. **[grapple.nvim]()** -->
 9. **[cinnamon.nvim]()**: Smooth scrolling for any movement command or string of commands
 10. **[cmp-buffer]()**
 11. **[cmp-calc]()**
@@ -52,7 +54,7 @@ With the following plugins has been integrated into to support for full stack de
 24. **[flash.nvim]()** navigate like the flash
 25. **[friendly-snippets]()**: completion Snippets collection for a set of different programming languages.
 26. **[fzf-lua]()**
-27. **[galaxyline.nvim]()**: Statusline
+27. **[lualine.nvim]()**: Statusline
 28. **[git-conflict.nvim]()**
 29. **[git-worktree.nvim]()**
 30. **[gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)**: super fast git decorations implemented purely in Lua
@@ -69,8 +71,8 @@ With the following plugins has been integrated into to support for full stack de
 41. **[mason.nvim]()**
 42. **[mini.ai]()**
 43. **[mini.align]()**
-44. **[mini.bufremove]()**
-45. **[multicursors.nvim]()**
+<!-- 44. **[mini.bufremove]()** -->
+<!-- 45. **[multicursors.nvim]()** -->
 46. **[neovim-session-manager]()**
 47. **[noice.nvim]()**: experimental interface for messages, command-line and the popup menu
 48. **[nui.nvim]()**
@@ -86,12 +88,12 @@ With the following plugins has been integrated into to support for full stack de
 58. **[nvim-lsp-file-operations]()**: enhances file operations using lsp
 59. **[nvim-lspconfig]()**
 60. **[vim-sleuth]()**:
-61. **[nvim-nonicons]()**
+<!-- 61. **[nvim-nonicons]()** -->
 62. **[nvim-notify]()**
 63. **[nvim-spectre]()**: refactor, find and replace
 64. **[nvim-spider]()**: move by subwords and skip insignificant punctuation
 65. **[nvim-surround]()**
-66. **[nvim-toggleterm.lua]()**
+<!-- 66. **[nvim-toggleterm.lua]()** -->
 67. **[nvim-tree.lua]()**: a file explorer tree
 68. **[nvim-treesitter]()**: syntax highlighting and code context
 69. **[nvim-treesitter-context]()**: view context of current line in the top
@@ -114,15 +116,15 @@ With the following plugins has been integrated into to support for full stack de
 86. **[stay-in-place.nvim]()**: maintaining the cursor position during various actions
 87. **[tailwind-fold.nvim]()**
 88. **[tailwind-sorter.nvim]()**
-89. **[telescope-fzf-native.nvim]()**
-90. **[telescope-repo.nvim]()**
-91. **[telescope.nvim]()**
+<!-- 89. **[telescope-fzf-native.nvim]()** -->
+<!-- 90. **[telescope-repo.nvim]()** -->
+<!-- 91. **[telescope.nvim]()** -->
 92. **[template-string.nvim]()**: auto change backtick when use template string
 93. **[todo-comments.nvim]()**
-94. **[tokyonight.nvim]()**: Themes
+94. **[kanagawa.nvim]()**: Themes
 95. **[treesj]()**: splitting and joining block code efficiency
 96. **[trouble.nvim]()**
-97. **[tsc.nvim]()**: project wide async ts type-checking
+<!-- 97. **[tsc.nvim]()**: project wide async ts type-checking -->
 98. **[tw-values.nvim]()**
 99. **[twilight.nvim]()**
 100. **[typescript-tools.nvim]()**
