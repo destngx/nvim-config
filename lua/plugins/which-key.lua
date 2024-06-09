@@ -18,7 +18,7 @@ wk.setup {
       motions = false,   -- adds help for motions text_objects = false, -- help for text objects triggered after entering an operator
       windows = false,   -- default bindings on <c-w>
       nav = false,       -- misc bindings to work with windows
-      z = true,         -- bindings for folds, spelling and others prefixed with z
+      z = true,          -- bindings for folds, spelling and others prefixed with z
       g = false,         -- bindings for prefixed with g
     },
   },
@@ -162,7 +162,7 @@ local normal_mode_mappings = {
     a = { '<cmd>!git add %:p<CR>', 'add current' },
     A = { '<cmd>!git add .<CR>', 'add all' },
     b = { '<cmd>lua require("internal.blame").open()<CR>', 'blame' },
-    B = { '<cmd>Telescope git_branches<CR>', 'branches' },
+    B = { '<cmd>FzfLua git_branches<CR>', 'branches' },
     c = {
       name = 'Conflict',
     },
@@ -172,21 +172,21 @@ local normal_mode_mappings = {
     i = { '<cmd>Octo issue list<CR>', 'Issues List' },
     l = {
       name = 'Log',
-      A = { '<cmd>lua require("plugins.telescope").my_git_commits()<CR>', 'commits (Telescope)' },
+      -- A = { '<cmd>lua require("plugins.telescope").my_git_commits()<CR>', 'commits (Telescope)' },
       a = { '<cmd>LazyGitFilter<CR>', 'commits' },
-      C = { '<cmd>lua require("plugins.telescope").my_git_bcommits()<CR>', 'buffer commits (Telescope)' },
+      -- C = { '<cmd>lua require("plugins.telescope").my_git_bcommits()<CR>', 'buffer commits (Telescope)' },
       c = { '<cmd>LazyGitFilterCurrentFile<CR>', 'buffer commits' },
     },
     m = { 'blame line' },
-    S = { '<cmd>Telescope git_status<CR>', 'telescope status' },
+    s = { '<cmd>FzfLua git_status<CR>', 'git status' },
     p = { '<cmd>Octo pr list<CR>', 'Pull Requests List' },
-    s = { '<cmd>Telescope git_status<CR>', 'telescope status' },
     w = {
       name = 'Worktree',
       w = 'worktrees',
       c = 'create worktree',
     }
   },
+
   l = {
     name = "List",
     s = { '<CMD>Trouble lsp_document_symbols toggle win.position=left focus=false<CR>', 'Symbol Outline', },
@@ -197,7 +197,7 @@ local normal_mode_mappings = {
     name = 'Obsidian',
     t = { '<cmd>ObsidianTemplate<CR>', 'template' },
     p = { '<cmd>PasteImage<CR>', 'PasteImage from clipboard' },
-    b = { '<cmd>ObsidianBacklinks<CR>','View Backlinks' },
+    b = { '<cmd>ObsidianBacklinks<CR>', 'View Backlinks' },
     c = { '<cmd>ObsidianToggleCheckbox<CR>', 'toggle check box' },
     s = {
       name = 'Search',
@@ -210,11 +210,11 @@ local normal_mode_mappings = {
     name = 'Project',
     f = { 'file' },
     w = { 'word' },
-    l = {
-      "<cmd>lua require'telescope'.extensions.repo.cached_list{file_ignore_patterns={'/%.cache/', '/%.cargo/', '/%.local/', '/%timeshift/', '/usr/', '/srv/', '/%.oh%-my%-zsh', '/Library/', '/%.cocoapods/'}}<CR>",
-      'recently list' },
-    a = { "<cmd>lua require'telescope'.extensions.repo.list{}<CR>", 'all in local' },
-    r = { 'refactor' },
+    -- l = {
+    --   "<cmd>lua require'telescope'.extensions.repo.cached_list{file_ignore_patterns={'/%.cache/', '/%.cargo/', '/%.local/', '/%timeshift/', '/usr/', '/srv/', '/%.oh%-my%-zsh', '/Library/', '/%.cocoapods/'}}<CR>",
+    --   'recently list' },
+    -- a = { "<cmd>lua require'telescope'.extensions.repo.list{}<CR>", 'all in local' },
+    r = { 'refactor with strectre' },
     s = { "<cmd>SessionManager available_commands<CR>", 'save session' },
     S = { "<cmd>SessionManager save_current_session<CR>", 'save session' },
     t = { "<cmd>TodoTrouble<CR>", 'todo' },
@@ -226,14 +226,14 @@ local normal_mode_mappings = {
 
   s = {
     name = 'Search',
-    c = { '<cmd>Telescope colorscheme<CR>', 'color schemes' },
-    d = { '<cmd>lua require("plugins.telescope").edit_neovim()<CR>', 'dotfiles' },
-    h = { '<cmd>Telescope oldfiles hidden=true<CR>', 'file history' },
-    H = { '<cmd>lua require("plugins.telescope").command_history()<CR>', 'command history' },
-    m = { '<cmd>Telescope recall<CR>', 'Show all marks' },
-    s = { '<cmd>Telescope search_history theme=dropdown<CR>', 'search history' },
-    q = { '<cmd>Telescope quickfix<CR>', 'quickfix list' },
-    t = { '<cmd>TodoTelescope<CR>', 'todo comments' },
+    c = { '<cmd>FzfLua colorscheme<CR>', 'color schemes' },
+    -- d = { '<cmd>lua require("plugins.telescope").edit_neovim()<CR>', 'dotfiles' },
+    -- h = { '<cmd>Telescope oldfiles hidden=true<CR>', 'file history' },
+    H = { '<cmd>FzfLua command_history<CR>', 'command history' },
+    -- m = { '<cmd>Telescope recall<CR>', 'Show all marks' },
+    s = { '<cmd>FzfLua search_history theme=dropdown<CR>', 'search history' },
+    q = { '<cmd>FzfLua quickfix<CR>', 'quickfix list' },
+    t = { "<cmd>lua require('fzf-lua').grep({search='TODO|HACK|PERF|NOTE|FIX', no_esc=true})<CR>", 'todo comments' },
   },
 
   t = {

@@ -204,6 +204,14 @@ return {
       }
     end,
   },
+  {
+    "ibhagwan/fzf-lua",
+    event = "VimEnter",
+    branch = "main",
+    config = function()
+      require("plugins.fzf")
+    end,
+  },
   -- better escape
   {
     "max397574/better-escape.nvim",
@@ -229,27 +237,12 @@ return {
     }
   },
   {
-    "nvim-telescope/telescope.nvim",
-    event = "VimEnter",
-    config = function()
-      require("plugins.telescope")
-    end,
-    dependencies = {
-      { "nvim-lua/plenary.nvim" },
-      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-      { "cljoly/telescope-repo.nvim" },
-      { "nvim-telescope/telescope-media-files.nvim" },
-      { "debugloop/telescope-undo.nvim" },
-    },
-  },
-  {
     "AckslD/nvim-neoclip.lua",
     event = "BufReadPre",
     dependencies = {
       { 'kkharji/sqlite.lua', module = 'sqlite' },
       -- you'll need at least one of these
-      -- {'nvim-telescope/telescope.nvim'},
-      -- {'ibhagwan/fzf-lua'},
+      { 'ibhagwan/fzf-lua' },
     },
     config = function()
       require('neoclip').setup({
@@ -265,20 +258,20 @@ return {
       require('plugins.bqf-init')
     end,
   },
-  {
-    "fnune/recall.nvim",
-    version = "*",
-    event = "BufEnter",
-    config = function()
-      local recall = require("recall")
-      recall.setup({})
-
-      vim.keymap.set("n", "mm", recall.toggle, { noremap = true, silent = true })
-      vim.keymap.set("n", "mn", recall.goto_next, { noremap = true, silent = true })
-      vim.keymap.set("n", "mp", recall.goto_prev, { noremap = true, silent = true })
-      vim.keymap.set("n", "mc", recall.clear, { noremap = true, silent = true })
-    end,
-  },
+  -- {
+  --   "fnune/recall.nvim",
+  --   version = "*",
+  --   event = "BufEnter",
+  --   config = function()
+  --     local recall = require("recall")
+  --     recall.setup({})
+  --
+  --     vim.keymap.set("n", "mm", recall.toggle, { noremap = true, silent = true })
+  --     vim.keymap.set("n", "mn", recall.goto_next, { noremap = true, silent = true })
+  --     vim.keymap.set("n", "mp", recall.goto_prev, { noremap = true, silent = true })
+  --     vim.keymap.set("n", "mc", recall.clear, { noremap = true, silent = true })
+  --   end,
+  -- },
   {
     "nvim-tree/nvim-tree.lua",
     config = function()
@@ -331,16 +324,16 @@ return {
   {
     "johmsalas/text-case.nvim",
     event = "BufEnter",
-    dependencies = { "nvim-telescope/telescope.nvim" },
-    -- Author's Note: If default keymappings fail to register (possible config issue in my local setup),
-    -- verify lazy loading functionality. On failure, disable lazy load and report issue
-    -- lazy = false,
+    --   dependencies = { "nvim-telescope/telescope.nvim" },
+    --   -- Author's Note: If default keymappings fail to register (possible config issue in my local setup),
+    --   -- verify lazy loading functionality. On failure, disable lazy load and report issue
+    --   -- lazy = false,
     config = function()
       require("textcase").setup(
         {
           -- Set `default_keymappings_enabled` to false if you don't want automatic keymappings to be registered.
           default_keymappings_enabled = true,
-          -- `prefix` is only considered if `default_keymappings_enabled` is true. It configures the prefix
+          -- `prefix` is only considered if `default_keymappings_enabled` is true. it configures the prefix
           -- of the keymappings, e.g. `gau ` executes the `current_word` method with `to_upper_case`
           -- and `gaou` executes the `operator` method with `to_upper_case`.
           prefix = "gu",
@@ -369,9 +362,9 @@ return {
           },
         }
       )
-      require("telescope").load_extension("textcase")
+      -- require("telescope").load_extension("textcase")
     end,
-    cmd = { "TextCaseOpenTelescope", "Subs" },
+    -- cmd = { "TextCaseOpenTelescope", "Subs" },
     keys = { "gu" }
   },
   -- AI
@@ -432,16 +425,16 @@ return {
       require("codeium").setup({ enabled_chat = true })
     end,
   },
-  {
-    "frankroeder/parrot.nvim",
-    dependencies = { "ibhagwan/fzf-lua" },
-    lazy = false,
-    enabled = (os.getenv "OPENAI_API_KEY" ~= nil or os.getenv "PERPLEXITY_API_KEY" ~= nil) and
-        DestNgxVim.plugins.ai.parrot.enabled,
-    config = function()
-      require("plugins.parrot")
-    end,
-  },
+  -- {
+  --   "frankroeder/parrot.nvim",
+  --   dependencies = { "ibhagwan/fzf-lua" },
+  --   lazy = false,
+  --   enabled = (os.getenv "OPENAI_API_KEY" ~= nil or os.getenv "PERPLEXITY_API_KEY" ~= nil) and
+  --       DestNgxVim.plugins.ai.parrot.enabled,
+  --   config = function()
+  --     require("plugins.parrot")
+  --   end,
+  -- },
   -- LSP Cmp
   {
     "hrsh7th/nvim-cmp",

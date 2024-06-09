@@ -110,10 +110,10 @@ local function button(sc, txt, keybind, keybind_opts)
 end
 
 dashboard.section.buttons.val = {
-  button("<C-P>", icons.fileNoBg .. " " .. "Find File", "<cmd>Telescope find_files<CR>", {}),
+  button("<C-P>", icons.fileNoBg .. " " .. "Find File", "<cmd>FzfLua files<CR>", {}),
   button("<S-P>", icons.word .. " " .. "Find Word",
-    "<cmd>lua require('plugins.telescope.pickers.multi-rg')({ layout_strategy = 'vertical' })<CR>", {}),
-  button("h", icons.fileRecent .. " " .. "Recents", "<cmd>Telescope oldfiles hidden=true<CR>", {}),
+    "<cmd>FzfLua live_grep<CR>", {}),
+  button("h", icons.fileRecent .. " " .. "Recents", "<cmd>FzfLua oldfiles<CR>", {}),
   button("l", icons.timer .. " " .. "Load Current Dir Session", "<cmd>SessionManager load_current_dir_session<CR>", {}),
   button("u", icons.packageDown .. " " .. "Update Plugins", "<cmd>Lazy update<CR>", {}),
   button("m", icons.package .. " " .. "Manage Plugins", "<cmd>Lazy<CR>", {}),

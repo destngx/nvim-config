@@ -78,24 +78,47 @@ keymap("v", "<A-`>", "U", silent)
 keymap("n", "<C-n>", "<cmd>AdvancedNewFile<CR>", silent)
 
 -- telescope
-keymap("n", "V", "<cmd>Telescope neoclip<CR>")
-keymap("n", "U", "<cmd>Telescope undo<CR>")
-keymap("n", "<C-p>", "<cmd>Telescope find_files<CR>")
-keymap("n", "<S-p>", "<CMD>lua require('plugins.telescope.pickers.multi-rg')({ layout_strategy = 'vertical' })<CR>")
+-- keymap("n", "V", "<cmd>Telescope neoclip<CR>")
+-- keymap("n", "U", "<cmd>Telescope undo<CR>")
+-- keymap("n", "<C-p>", "<cmd>FzfLua files<CR>")
+-- keymap("n", "<S-p>", "<CMD>lua require('plugins.telescope.pickers.multi-rg')({ layout_strategy = 'vertical' })<CR>")
 
+-- fzflua
+keymap("n", "<S-p>", "<CMD>lua require('fzf-lua').live_grep_resume()<CR>")
+keymap("n", "<C-p>", "<CMD>lua require('fzf-lua').files()<CR>")
+keymap("n", "<C-b>", "<CMD>lua require('fzf-lua').buffers()<CR>")
+keymap("n", '""', "<CMD>lua require('fzf-lua').registers()<CR>")
+-- vim.keymap.set({ "n" }, "<F0>", function()
+--   fzf.help_tags()
+-- end, { desc = "fzf help tags" })
+-- vim.keymap.set({ "n" }, '""', function()
+--   fzf.registers()
+-- end, { desc = "fzf show registers content" })
+-- vim.keymap.set({ "n" }, "<leader>gB", function()
+--   fzf.git_branches()
+-- end, { desc = "fzf git branches" })
+-- vim.api.nvim_create_user_command("Autocmd", function()
+--   fzf.autocmds()
+-- end, { desc = "fzf autocmds list" })
+-- vim.api.nvim_create_user_command("Maps", function()
+--   fzf.keymaps()
+-- end, { desc = "fzf maps list" })
+-- vim.api.nvim_create_user_command("Highlights", function()
+--   fzf.highlights()
+-- end, { desc = "fzf highlights list" })
 -- Remove highlights
 keymap("n", "<CR>", ":noh<CR><CR>", silent)
 
 -- Find word/file across project
 -- keymap("n", "<Leader>pf",
 --  "<CMD>lua require('plugins.telescope').project_files({ default_text = vim.fn.expand('<cword>'), initial_mode = 'normal' })<CR>")
-keymap("n", "<Leader>pw", "<CMD>lua require('telescope.builtin').grep_string({ initial_mode = 'normal' })<CR>")
+-- keymap("n", "<Leader>pw", "<CMD>lua require('telescope.builtin').grep_string({ initial_mode = 'normal' })<CR>")
 
 -- Buffers
 -- keymap("n", "<leader>;", "<cmd>Telescope grapple tags<CR>", silent)
 keymap("n", "gn", ":bn<CR>", silent)
-keymap("n", "gp", ":bp<CR>", silent)
-keymap("n", "<S-q>", ":lua require('mini.bufremove').delete(0, false)<CR>", silent)
+keymap("n", "gN", ":bp<CR>", silent)
+-- keymap("n", "<S-q>", ":lua require('mini.bufremove').delete(0, false)<CR>", silent)
 
 -- Don't yank on delete char
 keymap("n", "x", '"_x', silent)
@@ -188,5 +211,3 @@ keymap('n', '<C-l>', require('smart-splits').move_cursor_right)
 -- keymap('n', '<leader><leader>k', require('smart-splits').swap_buf_up)
 -- keymap('n', '<leader><leader>l', require('smart-splits').swap_buf_right)
 keymap('n', '<C-;>', '<cmd>lua require("smart-splits").move_cursor_bottom()<CR>', { noremap = true, silent = true })
-
-
