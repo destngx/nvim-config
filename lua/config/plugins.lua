@@ -745,10 +745,10 @@ return {
       vim.keymap.set("n", "zr", require("ufo").openFoldsExceptKinds)
     end,
   },
-  {
-    "echasnovski/mini.bufremove",
-    lazy = "VeryLazy",
-  },
+  -- {
+  --   "echasnovski/mini.bufremove",
+  --   lazy = "VeryLazy",
+  -- },
 
   {
     "echasnovski/mini.align",

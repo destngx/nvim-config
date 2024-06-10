@@ -13,7 +13,7 @@ bash run.sh
 ## Requirements:
 1. **[ripgrep](https://github.com/BurntSushi/ripgrep)**
 2. **[fd-find](https://github.com/sharkdp/fd)**
-3. **[fzf](https://github.com/junegunn/fzf)**
+3. **[fzf](https://github.com/junegunn/fzf)**: version > 0.53
 4. **git version** > 2.30.
 5. **[lazy-git](https://github.com/jesseduffield/lazygit)**
 
@@ -26,7 +26,9 @@ sudo install lazygit /usr/local/bin
 ## Features
 With the following plugins has been integrated into to support for full stack development:
 
-> ![INFO] I have actively updated this config so it may be changed in the future.
+> [!INFO] I have actively updated this config so it may be changed in the future.
+> You can try telescope instead of fzf-lua at telescope branch. But it will not be updated since I don't use it.
+> There are some plugins that I don't use but I still keep it for reference use.
 
 1. **[AdvancedNewFile.nvim]()**: Create new files and folders
 2. **[Comment.nvim]()**: quickly comment code with treesitter power
@@ -53,7 +55,7 @@ With the following plugins has been integrated into to support for full stack de
 23. **[dressing.nvim]()**: UI enhancement
 24. **[flash.nvim]()** navigate like the flash
 25. **[friendly-snippets]()**: completion Snippets collection for a set of different programming languages.
-26. **[fzf-lua]()**
+26. **[fzf-lua]()**: finder, grep text, and more.
 27. **[lualine.nvim]()**: Statusline
 28. **[git-conflict.nvim]()**
 29. **[git-worktree.nvim]()**
@@ -103,11 +105,11 @@ With the following plugins has been integrated into to support for full stack de
 73. **[nvim-ufo]()**
 74. **[nvim-web-devicons]()**
 75. **[obsidian.nvim]()**: for take note zetelkasten working with obsidian-vault
-76. **[octo.nvim]()**
-77. **[package-info.nvim]()**: enhancement for package.json
-78. **[parrot.nvim]()**: AI assistant
+<!-- 76. **[octo.nvim]()** -->
+<!-- 77. **[package-info.nvim]()**: enhancement for package.json -->
+<!-- 78. **[parrot.nvim]()**: AI assistant -->
 79. **[plenary.nvim]()**
-80. **[popup.nvim]()** deprecated
+<!-- 80. **[popup.nvim]()** deprecated -->
 81. **[printer.nvim]()**: quickly put a print/log of the word with `gpiW`
 82. **[promise-async]()**
 83. **[rainbow-delimiters.nvim]()**
