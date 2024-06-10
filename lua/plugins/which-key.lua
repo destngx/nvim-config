@@ -195,13 +195,14 @@ local normal_mode_mappings = {
 
   o = {
     name = 'Obsidian',
-    t = { '<cmd>ObsidianTemplate<CR>', 'template' },
-    p = { '<cmd>PasteImage<CR>', 'PasteImage from clipboard' },
+    t = { '<cmd>ObsidianTemplate<CR>', 'Template' },
+    n = { '<cmd>ObsidianNew<CR>', 'Create New Note' },
     b = { '<cmd>ObsidianBacklinks<CR>', 'View Backlinks' },
     c = { '<cmd>ObsidianToggleCheckbox<CR>', 'toggle check box' },
+    e = { '<cmd>ObsidianExtractNote<CR>', 'Extract text to new note' },
+    l = { '<cmd>ObsidianLinks<CR>', 'Links' },
     s = {
       name = 'Search',
-      l = { '<cmd>ObsidianLinks<CR>', 'Links' },
       t = { '<cmd>ObsidianTags<CR>', 'Tags' },
     }
   },

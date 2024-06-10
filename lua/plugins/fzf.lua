@@ -5,11 +5,11 @@ end
 
 fzf.setup({
   winopts = {
-    height = 0.5,
-    width = 0.4,
-    row = 0.5,
+    height = 0.6,
+    width = 0.6,
+    row = 0.6,
     hl = { normal = "Pmenu" },
-    border = "single",
+    border = "none",
   },
   fzf_opts = {
     ["--no-info"] = "",
@@ -17,6 +17,26 @@ fzf.setup({
     ["--padding"] = "13%,5%,13%,5%",
     ["--header"] = " ",
     ["--no-scrollbar"] = "",
+  },
+  oldfiles = {
+    formatter = "path.filename_first",
+    git_icons = true,
+    preview_opts = "hidden",
+  },
+  live_grep = {
+    formatter = "path.filename_first",
+    git_icons = true,
+    prompt = "grep:",
+    cmd = "rg --vimgrep --no-heading --smart-case --hidden --follow --color=always --line-number {q} || true",
+    preview_opts = "nohidden",
+    no_header = false,
+    cwd_header = true,
+    cwd_prompt = false,
+    winopts = {
+      row = 1,
+      width = vim.api.nvim_win_get_width(0),
+      height = 0.5,
+    },
   },
   files = {
     formatter = "path.filename_first",
@@ -26,16 +46,6 @@ fzf.setup({
     no_header = false,
     cwd_header = true,
     cwd_prompt = false,
-    live_grep = {
-      prompt = "grep:",
-      cmd = "rg --vimgrep --no-heading --smart-case --hidden --follow --color=always --line-number {q} || true",
-      preview_opts = "nohidden",
-      winopts = {
-        row = 1,
-        width = vim.api.nvim_win_get_width(0),
-        height = 0.5,
-      },
-    },
     --    cwd = function()
     --     local git_path = vim.fn.finddir(".git", ".;")
     --     return vim.fn.fnamemodify(git_path, ":h")
