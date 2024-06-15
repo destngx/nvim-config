@@ -194,12 +194,12 @@ return {
   -- Navigating (Telescope/Tree/Refactor)
   {
     "0x00-ketsu/autosave.nvim",
-    event = "InsertLeave",
+    event = { "InsertLeave", "TextChanged" },
     config = function()
       require("autosave").setup {
         enabled = true,
         conditions = {
-          filetype_is_not = { "markdown", "gitcommit", "oil", "alpha" },
+          filetype_is_not = { "gitcommit", "oil", "alpha" },
         },
       }
     end,
