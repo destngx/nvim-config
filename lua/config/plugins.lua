@@ -766,6 +766,7 @@ return {
       require("mini.ai").setup()
     end,
   },
+  { 'taybart/b64.nvim' },
   {
     "rareitems/printer.nvim",
     event = "BufEnter",

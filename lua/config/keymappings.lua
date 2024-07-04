@@ -190,6 +190,9 @@ keymap("n", "K", function()
   end
 end)
 
+-- based64
+keymap('v', '<leader>b', '<cmd>lua require("b64").encode()<cr>', silent)
+keymap('v', '<leader>B', '<cmd>lua require("b64").decode()<cr>', silent)
 
 -- recommended mappings
 -- resizing splits
