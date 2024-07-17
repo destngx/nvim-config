@@ -46,13 +46,13 @@ return {
   --     require('plugins.markdown')
   --   end,
   -- },
-  {
-    'declancm/cinnamon.nvim',
-    event = "BufReadPre",
-    config = function()
-      require('cinnamon').setup()
-    end
-  },
+  -- {
+  --   'declancm/cinnamon.nvim',
+  --   event = "BufReadPre",
+  --   config = function()
+  --     require('cinnamon').setup()
+  --   end
+  -- },
   {
     "andrewferrier/wrapping.nvim",
     event = "BufReadPre",

@@ -7,14 +7,14 @@ keymap({ "n", "x" }, ";", ":")
 keymap("i", "<c-u>", "<Esc>viwUea")
 
 -- disable the Q command
-vim.keymap.set("n", "Q", "<nop>")
+keymap("n", "Q", "<nop>")
 -- Turn the current word into title case
 keymap("i", "<c-t>", "<Esc>b~lea")
 
 -- Open Oil
 keymap("n", "<c-e>", "<cmd>Oil --float<CR>")
 
--- Shortcut for faster save and quit
+-- Shortcut for faster save
 keymap("n", "<leader>w", "<cmd>update<cr>", { silent = true, desc = "save buffer" })
 
 -- Saves the file if modified and quit
@@ -24,12 +24,12 @@ keymap("n", "<leader>q", "<cmd>x<cr>", { silent = true, desc = "quit current win
 keymap("n", "<leader>Q", "<cmd>qa!<cr>", { silent = true, desc = "quit nvim" })
 
 -- Paste non-linewise text above or below current line, see https://stackoverflow.com/a/1346777/6064933
-keymap("n", "<leader>P", "m`o<ESC>p``", { desc = "paste below current line" })
+-- keymap("n", "<leader>P", "m`o<ESC>p``", { desc = "paste below current line and keep cursor position" })
 -- keymap("n", "<leader>P", "m`O<ESC>p``", { desc = "paste above current line" })
 
 -- Center the screen on the next/prev search result with n/N
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
+keymap("n", "n", "nzzzv")
+keymap("n", "N", "Nzzzv")
 
 -- Better window movement
 keymap("n", "<C-h>", "<C-w>h", silent)
@@ -77,12 +77,8 @@ keymap("v", "<A-`>", "U", silent)
 -- New file by CTRL-N
 keymap("n", "<C-n>", "<cmd>AdvancedNewFile<CR>", silent)
 
--- telescope
--- keymap("n", "V", "<cmd>Telescope neoclip<CR>")
--- keymap("n", "U", "<cmd>Telescope undo<CR>")
--- keymap("n", "<C-p>", "<cmd>FzfLua files<CR>")
--- keymap("n", "<S-p>", "<CMD>lua require('plugins.telescope.pickers.multi-rg')({ layout_strategy = 'vertical' })<CR>")
-
+keymap("n", "<leader>lt", "<cmd>lua require('nvim-tree.api').tree.toggle()<CR>", {desc = "toggle file tree"}, silent)
+keymap("n", "<leader>ls", "<cmd>Trouble lsp_document_symbols toggle win.position=left focus=false<CR>", {desc = "Symbol Outline"}, silent)
 -- fzflua
 keymap("n", "<S-p>", "<CMD>lua require('fzf-lua').live_grep_resume()<CR>")
 keymap("n", "<C-p>", "<CMD>lua require('fzf-lua').files()<CR>")
@@ -157,15 +153,15 @@ else
   keymap("n", "gx", "<cmd>silent execute '!xdg-open ' . shellescape('<cWORD>')<CR>", silent)
 end
 
--- Refactor with spectre
 -- LSP
 -- keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", silent)-- Replaced with Glance plugin
 -- keymap("n", "gr", "<cmd>lua vim.lsp.buf.references({ includeDeclaration = false })<CR>", silent)-- Replaced with Glance plugin
 keymap("n", "<C-Space>", "<cmd>lua vim.lsp.buf.code_action()<CR>", silent)
 keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", silent)
+keymap("n", "<leader>cd", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", { desc = "current file diagnostics" }, silent)
+keymap("n", "<leader>cD", "<cmd>Trouble diagnostics toggle<CR>", { desc = "workspace diagnostics"}, silent)
 keymap("v", "<leader>ca", "<cmd>'<,'>lua vim.lsp.buf.code_action()<CR>", silent)
 keymap("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<CR>", silent)
--- keymap("n", "<leader>cf", "<cmd>lua require('lsp.functions').format()<CR>", silent)
 keymap("v", "<leader>cf", function()
   local start_row, _ = unpack(vim.api.nvim_buf_get_mark(0, "<"))
   local end_row, _ = unpack(vim.api.nvim_buf_get_mark(0, ">"))
@@ -190,6 +186,14 @@ keymap("n", "K", function()
   end
 end)
 
+-- Obsidian
+keymap("n", "<leader>ot", "<cmd>ObsidianTemplate<CR>", { desc = "Obsidian Template"}, silent)
+keymap("n", "<leader>on", "<cmd>ObsidianNew<CR>", { desc = "Create New Note"}, silent)
+keymap("n", "<leader>ob", "<cmd>ObsidianBacklinks<CR>", { desc = "View Backlinks"}, silent)
+keymap("n", "<leader>oc", "<cmd>ObsidianToggleCheckbox<CR>", { desc = "ObsidianToggleCheckbox"}, silent)
+keymap("v", "<leader>oc", "<cmd>ObsidianExtractNote<CR>", { desc = "Extract text to new note"}, silent)
+keymap("v", "<leader>ol", "<cmd>ObsidianExtractNote<CR>", { desc = "View Links"}, silent)
+keymap("v", "<leader>ost", "<cmd>ObsidianTags<CR>", { desc = "Searching for Tags in Vault"}, silent)
 -- based64
 keymap('v', '<leader>b', '<cmd>lua require("b64").encode()<cr>', silent)
 keymap('v', '<leader>B', '<cmd>lua require("b64").decode()<cr>', silent)
