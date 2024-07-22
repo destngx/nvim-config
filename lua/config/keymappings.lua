@@ -74,6 +74,8 @@ keymap("v", ">", ">gv", silent)
 keymap("v", "`", "u", silent)
 keymap("v", "<A-`>", "U", silent)
 
+keymap("n", "<leader>z", "<cmd>ZenMode<CR>", silent)
+keymap("n", "<leader>//", "<cmd>Alpha<CR>", silent)
 -- New file by CTRL-N
 keymap("n", "<C-n>", "<cmd>AdvancedNewFile<CR>", silent)
 
@@ -158,9 +160,15 @@ end
 -- keymap("n", "gr", "<cmd>lua vim.lsp.buf.references({ includeDeclaration = false })<CR>", silent)-- Replaced with Glance plugin
 keymap("n", "<C-Space>", "<cmd>lua vim.lsp.buf.code_action()<CR>", silent)
 keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", silent)
+keymap("v", "<leader>ca", "<cmd>'<,'>lua vim.lsp.buf.code_action()<CR>", silent)
+keymap("n", "<leader>ce", "<cmd>TSC<CR>", { desc = "workspace error"}, silent)
+keymap("n", "<leader>cF", "<cmd>TSToolsFixAll<CR>", { desc = "fix all"}, silent)
+keymap("n", "<leader>ci", "<cmd>TSToolsAddMissingImports<CR>", { desc = "Typescript add missing import"}, silent)
+keymap("n", "<leader>co", "<cmd>TSToolsOrganizeImports<CR>", { desc = "Typescript organize import"}, silent)
+keymap("n", "<leader>cs", "<cmd>TSToolsSortImports<CR>", { desc = "Typescript sort import"}, silent)
+keymap("n", "<leader>cu", "<cmd>TSToolsRemoveUnused<CR>", { desc = "Typescript remove unused import"}, silent)
 keymap("n", "<leader>cd", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", { desc = "current file diagnostics" }, silent)
 keymap("n", "<leader>cD", "<cmd>Trouble diagnostics toggle<CR>", { desc = "workspace diagnostics"}, silent)
-keymap("v", "<leader>ca", "<cmd>'<,'>lua vim.lsp.buf.code_action()<CR>", silent)
 keymap("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<CR>", silent)
 keymap("v", "<leader>cf", function()
   local start_row, _ = unpack(vim.api.nvim_buf_get_mark(0, "<"))
