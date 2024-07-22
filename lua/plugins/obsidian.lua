@@ -66,4 +66,5 @@ require('obsidian').setup({
     end
     return out
   end,
+ 
 })

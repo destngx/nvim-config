@@ -79,8 +79,9 @@ keymap("n", "<leader>//", "<cmd>Alpha<CR>", silent)
 -- New file by CTRL-N
 keymap("n", "<C-n>", "<cmd>AdvancedNewFile<CR>", silent)
 
-keymap("n", "<leader>lt", "<cmd>lua require('nvim-tree.api').tree.toggle()<CR>", {desc = "toggle file tree"}, silent)
-keymap("n", "<leader>ls", "<cmd>Trouble lsp_document_symbols toggle win.position=left focus=false<CR>", {desc = "Symbol Outline"}, silent)
+keymap("n", "<leader>lt", "<cmd>lua require('nvim-tree.api').tree.toggle()<CR>", { desc = "toggle file tree" }, silent)
+keymap("n", "<leader>ls", "<cmd>Trouble lsp_document_symbols toggle win.position=left focus=false<CR>",
+  { desc = "Symbol Outline" }, silent)
 -- fzflua
 keymap("n", "<S-p>", "<CMD>lua require('fzf-lua').live_grep_resume()<CR>")
 keymap("n", "<C-p>", "<CMD>lua require('fzf-lua').files()<CR>")
@@ -161,14 +162,15 @@ end
 keymap("n", "<C-Space>", "<cmd>lua vim.lsp.buf.code_action()<CR>", silent)
 keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", silent)
 keymap("v", "<leader>ca", "<cmd>'<,'>lua vim.lsp.buf.code_action()<CR>", silent)
-keymap("n", "<leader>ce", "<cmd>TSC<CR>", { desc = "workspace error"}, silent)
-keymap("n", "<leader>cF", "<cmd>TSToolsFixAll<CR>", { desc = "fix all"}, silent)
-keymap("n", "<leader>ci", "<cmd>TSToolsAddMissingImports<CR>", { desc = "Typescript add missing import"}, silent)
-keymap("n", "<leader>co", "<cmd>TSToolsOrganizeImports<CR>", { desc = "Typescript organize import"}, silent)
-keymap("n", "<leader>cs", "<cmd>TSToolsSortImports<CR>", { desc = "Typescript sort import"}, silent)
-keymap("n", "<leader>cu", "<cmd>TSToolsRemoveUnused<CR>", { desc = "Typescript remove unused import"}, silent)
-keymap("n", "<leader>cd", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", { desc = "current file diagnostics" }, silent)
-keymap("n", "<leader>cD", "<cmd>Trouble diagnostics toggle<CR>", { desc = "workspace diagnostics"}, silent)
+keymap("n", "<leader>ce", "<cmd>TSC<CR>", { desc = "workspace error" }, silent)
+keymap("n", "<leader>cF", "<cmd>TSToolsFixAll<CR>", { desc = "fix all" }, silent)
+keymap("n", "<leader>ci", "<cmd>TSToolsAddMissingImports<CR>", { desc = "Typescript add missing import" }, silent)
+keymap("n", "<leader>co", "<cmd>TSToolsOrganizeImports<CR>", { desc = "Typescript organize import" }, silent)
+keymap("n", "<leader>cs", "<cmd>TSToolsSortImports<CR>", { desc = "Typescript sort import" }, silent)
+keymap("n", "<leader>cu", "<cmd>TSToolsRemoveUnused<CR>", { desc = "Typescript remove unused import" }, silent)
+keymap("n", "<leader>cd", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", { desc = "current file diagnostics" },
+  silent)
+keymap("n", "<leader>cD", "<cmd>Trouble diagnostics toggle<CR>", { desc = "workspace diagnostics" }, silent)
 keymap("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<CR>", silent)
 keymap("v", "<leader>cf", function()
   local start_row, _ = unpack(vim.api.nvim_buf_get_mark(0, "<"))
@@ -195,18 +197,21 @@ keymap("n", "K", function()
 end)
 
 -- Obsidian
-keymap("n", "<leader>ot", "<cmd>ObsidianTemplate<CR>", { desc = "Obsidian Template"}, silent)
-keymap("n", "<leader>on", "<cmd>ObsidianNew<CR>", { desc = "Create New Note"}, silent)
-keymap("n", "<leader>ob", "<cmd>ObsidianBacklinks<CR>", { desc = "View Backlinks"}, silent)
-keymap("n", "<leader>oc", "<cmd>ObsidianToggleCheckbox<CR>", { desc = "ObsidianToggleCheckbox"}, silent)
-keymap("v", "<leader>oc", "<cmd>ObsidianExtractNote<CR>", { desc = "Extract text to new note"}, silent)
-keymap("v", "<leader>ol", "<cmd>ObsidianExtractNote<CR>", { desc = "View Links"}, silent)
-keymap("v", "<leader>ost", "<cmd>ObsidianTags<CR>", { desc = "Searching for Tags in Vault"}, silent)
+keymap("n", "<leader>ot", "<cmd>ObsidianTemplate<CR>", { desc = "Obsidian Template" }, silent)
+keymap("n", "<leader>on", "<cmd>ObsidianNew<CR>", { desc = "Create New Note" }, silent)
+keymap("n", "<leader>ob", "<cmd>ObsidianBacklinks<CR>", { desc = "View Backlinks" }, silent)
+keymap("n", "<leader>oc", "<cmd>ObsidianToggleCheckbox<CR>", { desc = "ObsidianToggleCheckbox" }, silent)
+keymap("v", "<leader>oc", "<cmd>ObsidianExtractNote<CR>", { desc = "Extract text to new note" }, silent)
+keymap("v", "<leader>ol", "<cmd>ObsidianExtractNote<CR>", { desc = "View Links" }, silent)
+keymap("v", "<leader>ost", "<cmd>ObsidianTags<CR>", { desc = "Searching for Tags in Vault" }, silent)
 -- based64
 keymap('v', '<leader>b', '<cmd>lua require("b64").encode()<cr>', silent)
 keymap('v', '<leader>B', '<cmd>lua require("b64").decode()<cr>', silent)
 
 -- recommended mappings
+-- split
+keymap('n', '<leader>v', '<C-w>v', { desc = '<cmd>split right<CR>' }, silent)
+keymap('n', '<leader>V', '<C-w>s', { desc = '<cmd>split below<CR>' }, silent)
 -- resizing splits
 -- these keymaps will also accept a range,
 -- for example `10<A-h>` will `resize_left` by `(10 * config.default_amount)`
