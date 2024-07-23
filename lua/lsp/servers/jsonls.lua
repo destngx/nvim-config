@@ -4,6 +4,10 @@ M.settings = {
   json = {
     schemas = {
       {
+        fileMatch = { ".releaserc.json" },
+        url = "https://json.schemastore.org/semantic-release.json"
+      },
+      {
         fileMatch = { "package.json" },
         url = "https://json.schemastore.org/package.json"
       },
