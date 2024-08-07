@@ -172,6 +172,7 @@ keymap("n", "<leader>cd", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", { 
   silent)
 keymap("n", "<leader>cD", "<cmd>Trouble diagnostics toggle<CR>", { desc = "workspace diagnostics" }, silent)
 keymap("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<CR>", silent)
+-- normal mode format using conform <leader>cf
 keymap("v", "<leader>cf", function()
   local start_row, _ = unpack(vim.api.nvim_buf_get_mark(0, "<"))
   local end_row, _ = unpack(vim.api.nvim_buf_get_mark(0, ">"))
