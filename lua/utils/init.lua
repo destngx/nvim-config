@@ -124,4 +124,14 @@ M.add_whitespaces = function(number)
   return string.rep(" ", number)
 end
 
+M.is_plugin_loaded = function(plugin_name)
+  local lazy_status_ok, lazy = pcall(require, "lazy")
+  if not lazy_status_ok then
+    return
+  end
+
+  local plugin = lazy.plugins[plugin_name]
+  return plugin and plugin.loaded
+end
+
 return M
