@@ -1,6 +1,6 @@
 local mason_ok, mason = pcall(require, "mason")
 local mason_lsp_ok, mason_lsp = pcall(require, "mason-lspconfig")
-local ufo_config_handler = require("plugins.nvim-ufo").handler
+local ufo_config_handler = require("lsp.utils._ufo").handler
 
 if not mason_ok or not mason_lsp_ok then
   return
