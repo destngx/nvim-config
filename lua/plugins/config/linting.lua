@@ -9,7 +9,4 @@ lint.linters_by_ft = {
   python = { "pylint" },
 }
 
-vim.keymap.set("n", "<leader>cL", function()
-  lint.try_lint()
-end, { desc = "lint file" })
 

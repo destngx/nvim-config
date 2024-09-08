@@ -1,5 +1,5 @@
 return {
-  { "David-Kunz/markid",     event = "BufReadPre" },
+  { "David-Kunz/markid", event = "BufReadPre" },
   {
     "windwp/nvim-ts-autotag",
     event = "InsertEnter",
@@ -13,9 +13,22 @@ return {
   },
   {
     "NvChad/nvim-colorizer.lua",
-    config = function()
-      require("plugins.config.nvchad-colorizer")
-    end,
+    opts = {
+      filetypes = {
+        'html',
+        'css',
+        'javascript',
+        'typescript',
+        'typescriptreact',
+        'javascriptreact',
+        'lua',
+        'python',
+      },
+      user_default_options = {
+        mode = "background",
+        tailwind = true, -- Enable tailwind colors
+      }
+    }
   },
   {
     "numToStr/Comment.nvim",
@@ -80,7 +93,29 @@ return {
       "javascriptreact",
       "typescriptreact",
     },
-
+    opts = {
+      keymap = "gp",             -- Plugin doesn't have any keymaps by default
+      behavior = "insert_below", -- how operator should behave
+      -- "insert_below" will insert the text below the cursor
+      --  "yank" will not insert but instead put text into the default '"' register
+      formatters = {
+        -- you can define your formatters for specific filetypes
+        -- by assigning function that takes two strings
+        -- one text modified by 'add_to_inside' function
+        -- second the variable (thing) you want to print out
+        -- see examples in lua/formatters.lua
+        lua = function(inside, variable)
+          return string.format('print("%s: " .. %s)', inside, variable)
+        end,
+        typescriptreact = function(inside, variable)
+          return string.format("console.log('%s: ', %s)", inside, variable)
+        end,
+      },
+      -- function which modifies the text inside string in the print statement, by default it adds the path and line number
+      add_to_inside = function(text)
+        return string.format("[%s:%s] %s", vim.fn.expand("%"), vim.fn.line("."), text)
+      end,
+    }
   },
   {
     "lukas-reineke/indent-blankline.nvim",

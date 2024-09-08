@@ -19,22 +19,6 @@ conform.setup({
   },
 })
 
-vim.keymap.set({ "n" }, "<leader>cf", function()
-  conform.format({
-    lsp_fallback = true,
-    async = false,
-    timeout_ms = 500,
-  })
-end, { desc = "format file" })
-
-vim.keymap.set({ "v" }, "<leader>cf", function()
-  conform.format({
-    lsp_fallback = true,
-    async = false,
-    timeout_ms = 500,
-  })
-end, { desc = "format selection" })
-
 vim.api.nvim_create_user_command("Format", function(args)
   local range = nil
   if args.count ~= -1 then

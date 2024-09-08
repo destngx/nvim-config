@@ -156,6 +156,9 @@ else
   keymap("n", "gx", "<cmd>silent execute '!xdg-open ' . shellescape('<cWORD>')<CR>", silent)
 end
 
+-- You can use use '<Plug>printer_print' to call the pluging inside more advanced keymaps
+-- for example a keymap that always adds a prnt statement based on 'iw'
+keymap("n", "gP", "<Plug>(printer_print)iw")
 -- LSP
 -- keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", silent)-- Replaced with Glance plugin
 -- keymap("n", "gr", "<cmd>lua vim.lsp.buf.references({ includeDeclaration = false })<CR>", silent)-- Replaced with Glance plugin
@@ -172,19 +175,40 @@ keymap("n", "<leader>cd", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", { 
   silent)
 keymap("n", "<leader>cD", "<cmd>Trouble diagnostics toggle<CR>", { desc = "workspace diagnostics" }, silent)
 keymap("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<CR>", silent)
--- normal mode format using conform <leader>cf
-keymap("v", "<leader>cf", function()
-  local start_row, _ = unpack(vim.api.nvim_buf_get_mark(0, "<"))
-  local end_row, _ = unpack(vim.api.nvim_buf_get_mark(0, ">"))
-
-  vim.lsp.buf.format({
-    range = {
-      ["start"] = { start_row, 0 },
-      ["end"] = { end_row, 0 },
-    },
-    async = true,
+-- lint
+keymap("n", "<leader>cL", function()
+  require("lint").try_lint()
+end, { desc = "lint file" })
+keymap({ "n" }, "<leader>cf", function()
+  require("conform").format({
+    lsp_fallback = true,
+    async = false,
+    timeout_ms = 500,
   })
-end, silent)
+end, { desc = "format file" })
+
+keymap({ "v" }, "<leader>cf", function()
+  require("conform").format({
+    lsp_fallback = true,
+    async = false,
+    timeout_ms = 500,
+  })
+end, { desc = "format selection" })
+
+
+-- normal mode format using conform <leader>cf
+-- keymap("v", "<leader>cf", function()
+--   local start_row, _ = unpack(vim.api.nvim_buf_get_mark(0, "<"))
+--   local end_row, _ = unpack(vim.api.nvim_buf_get_mark(0, ">"))
+--
+--   vim.lsp.buf.format({
+--     range = {
+--       ["start"] = { start_row, 0 },
+--       ["end"] = { end_row, 0 },
+--     },
+--     async = true,
+--   })
+-- end, silent)
 keymap("n", "<leader>cl", "<cmd>lua vim.diagnostic.open_float({ border = 'rounded', max_width = 100 })<CR>", silent)
 keymap("n", "gl", "<cmd>lua vim.diagnostic.open_float({ border = 'rounded', max_width = 100 })<CR>", silent)
 -- keymap("n", "L", "<cmd>lua vim.lsp.buf.signature_help()<CR>", silent)
@@ -210,6 +234,9 @@ keymap('v', '<leader>b', '<cmd>lua require("b64").encode()<cr>', silent)
 keymap('v', '<leader>B', '<cmd>lua require("b64").decode()<cr>', silent)
 
 -- recommended mappings
+-- Todo Comments
+keymap("n", "]t", function() require("todo-comments").jump_next() end, { desc = "Next todo comment" })
+keymap("n", "[t", function() require("todo-comments").jump_prev() end, { desc = "Previous todo comment" })
 -- split
 keymap('n', '<leader>v', '<C-w>v', { desc = '<cmd>split right<CR>' }, silent)
 keymap('n', '<leader>V', '<C-w>s', { desc = '<cmd>split below<CR>' }, silent)
