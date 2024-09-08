@@ -63,9 +63,6 @@ return {
       "BufNewFile /home/destnguyxn/projects/obsidian-vaults/**.md",
     },
     dependencies = { "nvim-lua/plenary.nvim", },
-    config = function()
-      require("plugins.config.obsidian")
-    end,
     opts = {
       workspaces = {
         {
