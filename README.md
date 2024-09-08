@@ -42,6 +42,11 @@ I use kanagawa theme for better on my eyes :)
 
 ![image](https://github.com/destngx/nvim-config/assets/92440783/db8dd463-82d2-4520-b7f0-226596e29127)
 
+## Prerequisities
+
+- Make sure you have installed the latest version of Neovim v0.9.0+ (nightly is preferred).
+- Have wget, curl, unzip, git, make, pip, python, npm, node, luarocks, fd, ripgrep and cargo installed on your system. You can check if you are missing anything with :checkhealth command.
+- Have any nerd font installed. Fira Code has been used in screenshots. You can download it from nerdfonts.com.
 
 Try install script if it works for you.
 ``` sh
@@ -167,7 +172,7 @@ With the following plugins has been integrated into to support for full stack de
 <!-- 97. **[tsc.nvim]()**: project wide async ts type-checking -->
 98. **[tw-values.nvim]()**
 99. **[twilight.nvim]()**
-100. **[typescript-tools.nvim]()**
+100. **[vtsls]()**
 101. **[vim-indent-object]()**
 102. **[vim-python-pep8-indent]()**
 103. **[vim-pythonsense]()**
