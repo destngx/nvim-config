@@ -24,8 +24,8 @@ return {
       require("plugins.config.git.diffview")
     end,
     keys = {
-      { "<Leader>gd", "<cmd>lua require('plugins.git.diffview').toggle_file_history()<CR>", desc = "diff file" },
-      { "<Leader>gS", "<cmd>lua require('plugins.git.diffview').toggle_status()<CR>",       desc = "status" }
+      { "<Leader>gd", "<cmd>lua require('plugins.config.git.diffview').toggle_file_history()<CR>", desc = "diff file" },
+      { "<Leader>gS", "<cmd>lua require('plugins.config.git.diffview').toggle_status()<CR>",       desc = "status" }
     },
   },
   {
