@@ -25,7 +25,7 @@ return {
     },
     opts = {
       border = DestNgxVim.ui.float.border or "rounded", -- Valid window border style,
-      show_unknown_classes = true                   -- Shows the unknown classes popup
+      show_unknown_classes = true                       -- Shows the unknown classes popup
     }
   },
 
@@ -40,7 +40,7 @@ return {
 
     },
     dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-lua/plenary.nvim" },
-    build = "cd formatter && npm i && npm run build",
+    build = "cd formatter && bun i && bun run build",
     config = true,
   },
 
@@ -67,7 +67,10 @@ return {
     config = true
   },
 
-  { "artemave/workspace-diagnostics.nvim" },
+  {
+    "artemave/workspace-diagnostics.nvim",
+    lazy = false,
+  },
   {
     "axelvc/template-string.nvim",
     event = "InsertEnter",

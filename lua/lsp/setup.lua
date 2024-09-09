@@ -75,8 +75,18 @@ require("mason-lspconfig").setup_handlers {
       handlers = handlers,
     }
   end,
+  ["vtsls"] = function()
+    require("lspconfig.configs").vtsls = require("vtsls").lspconfig
+
+    lspconfig.vtsls.setup({
+      capabilities = capabilities,
+      handlers = require("lsp.servers.tsserver").handlers,
+      on_attach =require("lsp.servers.tsserver").on_attach,
+      settings = require("lsp.servers.tsserver").settings,
+    })
+  end,
   ["tsserver"] = function()
-    -- skip to use typescript-tools
+    -- skip to use vtsls
   end,
   ["tailwindcss"] = function()
     lspconfig.tailwindcss.setup({
