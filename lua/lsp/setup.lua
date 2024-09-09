@@ -53,6 +53,7 @@ local handlers = {
     { virtual_text = DestNgxVim.lsp.virtual_text }
   ),
 }
+---@diagnostic disable-next-line: unused-local
 local function on_attach(client, bufnr)
   if client.name == "yamlls" then
     client.server_capabilities.documentFormattingProvider = true

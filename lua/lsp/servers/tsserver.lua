@@ -2,7 +2,6 @@ local M = {}
 
 local present, _ = pcall(require, "which-key")
 if not present then return end
-local _, pwk = pcall(require, "which-key.setup")
 
 local filter = require("lsp.utils.filter").filter
 local filterReactDTS = require("lsp.utils.filterReactDTS").filterReactDTS
