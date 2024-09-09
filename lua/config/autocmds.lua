@@ -32,7 +32,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 })
 -- disable cinnamon for specific filetypes
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = {"help", "Oil", "NvimTree", "dashboard", "packer", "startify", "fzf", "fugitive", "spectre_panel"},
+    pattern = {"help", "lazy", "Oil", "NvimTree", "dashboard", "packer", "startify", "fzf", "fugitive", "spectre_panel"},
     callback = function() vim.b.cinnamon_disable = true end,
 })
 -- Attach specific keybindings in which-key for specific filetypes
