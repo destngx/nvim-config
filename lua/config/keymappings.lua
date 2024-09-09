@@ -160,8 +160,8 @@ end
 -- for example a keymap that always adds a prnt statement based on 'iw'
 keymap("n", "gP", "<Plug>(printer_print)iw")
 -- LSP
--- keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", silent)-- Replaced with Glance plugin
--- keymap("n", "gr", "<cmd>lua vim.lsp.buf.references({ includeDeclaration = false })<CR>", silent)-- Replaced with Glance plugin
+keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", silent)-- Replaced with Glance plugin
+keymap("n", "gr", "<cmd>lua vim.lsp.buf.references({ includeDeclaration = false })<CR>", silent)-- Replaced with Glance plugin
 keymap("n", "<C-Space>", "<cmd>lua vim.lsp.buf.code_action()<CR>", silent)
 keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", silent)
 keymap("v", "<leader>ca", "<cmd>'<,'>lua vim.lsp.buf.code_action()<CR>", silent)
