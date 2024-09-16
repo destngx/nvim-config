@@ -12,7 +12,7 @@ keymap("n", "Q", "<nop>")
 keymap("i", "<c-t>", "<Esc>b~lea")
 
 -- Open Oil
-keymap("n", "<c-e>", "<cmd>Oil --float<CR>", { noremap = true, silent = true })
+keymap("n", "<leader>e", "<cmd>Oil --float<CR>", { noremap = true, silent = true })
 
 -- Shortcut for faster save
 keymap("n", "<c-s>", "<cmd>update<cr>", { silent = true, desc = "save current buffer" })
