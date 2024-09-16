@@ -22,6 +22,7 @@ local options = {
   smartindent    = true,                    --- Makes indenting smart
   smarttab       = false,                    --- Makes tabbing smarter will realize you have 2 vs 4
   splitright     = true,                    --- Vertical splits will automatically be to the right
+  autoread       = true,                    --- autoreaad buffer
   swapfile       = false,                   --- Swap not needed
   tabstop        = 2,                       --- Insert 2 spaces for a tab
   softtabstop    = 2,                       --- Insert 2 spaces for a tab
