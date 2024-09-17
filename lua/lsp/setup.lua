@@ -16,7 +16,7 @@ mason.setup({
 mason_lsp.setup({
   -- A list of servers to automatically install if they're not already installed
   ensure_installed = {
-    "tsserver",
+    -- "tsserver",
     "bashls",
     "cssls",
     "eslint",
@@ -27,8 +27,8 @@ mason_lsp.setup({
     "jsonls",
     "lua_ls",
     "tailwindcss",
-    "volar",
-    "prismals",
+    -- "volar",
+    -- "prismals",
     "pylsp",
     "dockerls",
     "docker_compose_language_service",

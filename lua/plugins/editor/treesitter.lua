@@ -20,6 +20,8 @@ return {
       "python",
       "dockerfile",
       "yaml",
+      "markdown",
+      "markdown_inline",
     },                              -- one of "all", or a list of languages
     sync_install = false,           -- install languages synchronously (only applied to `ensure_installed`)
     ignore_install = { "haskell" }, -- list of parsers to ignore installing

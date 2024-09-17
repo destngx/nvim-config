@@ -47,6 +47,24 @@ return {
     }
   },
   {
+    "HakonHarnes/img-clip.nvim",
+    event = "VeryLazy",
+    opts = {
+      default = {
+        dir_path = "Attachments",
+        relative_to_current_file = true,
+      },
+      filetypes = {
+        markdown = {
+          template = "![[$FILE_NAME]]", ---@type string
+        },
+        vimwiki = {
+          template = "![[$FILE_NAME]]", ---@type string
+        },
+      }
+    },
+  },
+  {
     "iamcco/markdown-preview.nvim",
     build = "cd app && bun install",
     init = function()
@@ -135,24 +153,6 @@ return {
     },
   },
   {
-    "HakonHarnes/img-clip.nvim",
-    event = "VeryLazy",
-    opts = {
-      default = {
-        dir_path = "Attachments",
-        relative_to_current_file = true,
-      },
-      filetypes = {
-        markdown = {
-          template = "![[$FILE_NAME]]", ---@type string
-        },
-        vimwiki = {
-          template = "![[$FILE_NAME]]", ---@type string
-        },
-      }
-    },
-  },
-  {
     "andrewferrier/wrapping.nvim",
     event = "BufReadPre",
     opts = {
@@ -160,5 +160,5 @@ return {
       create_keymaps = false,
       notify_on_switch = false
     }
-  },
+  }
 }
