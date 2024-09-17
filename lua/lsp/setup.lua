@@ -17,21 +17,21 @@ mason_lsp.setup({
   -- A list of servers to automatically install if they're not already installed
   ensure_installed = {
     -- "tsserver",
-    "bashls",
-    "cssls",
-    "eslint",
-    "html",
+    -- "bashls",
+    -- "cssls",
+    -- "eslint",
+    -- "html",
     -- "markdown",
     -- "markdown_inline",
     -- "markman",
-    "jsonls",
-    "lua_ls",
-    "tailwindcss",
+    -- "jsonls",
+    -- "lua_ls",
+    -- "tailwindcss",
     -- "volar",
     -- "prismals",
-    "pylsp",
-    "dockerls",
-    "docker_compose_language_service",
+    -- "pylsp",
+    -- "dockerls",
+    -- "docker_compose_language_service",
   },
   -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
   -- This setting has no relation with the `ensure_installed` setting.
@@ -89,7 +89,7 @@ require("mason-lspconfig").setup_handlers {
       settings = require("lsp.servers.tsserver").settings,
     })
   end,
-  ["tsserver"] = function()
+  ["ts_ls"] = function()
     -- skip to use vtsls
   end,
   ["tailwindcss"] = function()
