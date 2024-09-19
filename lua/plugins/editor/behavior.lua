@@ -143,5 +143,6 @@ return {
         -- Configuration here, or leave empty to use defaults
       })
     end
-  }
+  },
+  -- { 'pappasam/vim-keywordprg-commands', lazy = false }
 }
