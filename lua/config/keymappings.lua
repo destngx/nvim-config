@@ -259,3 +259,5 @@ keymap('n', '<C-l>', require('smart-splits').move_cursor_right)
 -- keymap('n', '<leader><leader>k', require('smart-splits').swap_buf_up)
 -- keymap('n', '<leader><leader>l', require('smart-splits').swap_buf_right)
 keymap('n', '<C-;>', '<cmd>lua require("smart-splits").move_cursor_bottom()<CR>', { noremap = true, silent = true })
+-- url-open
+keymap("n", "gx", "<esc>:URLOpenUnderCursor<cr>")
