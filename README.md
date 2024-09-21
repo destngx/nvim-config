@@ -40,6 +40,8 @@
 
 I use kanagawa theme for better on my eyes :)
 
+Feel free to use it and modify it to your liking. And starred my repo if you like it.
+
 ![image](https://github.com/destngx/nvim-config/assets/92440783/db8dd463-82d2-4520-b7f0-226596e29127)
 
 ## Prerequisities
@@ -67,6 +69,11 @@ tar xf lazygit.tar.gz lazygit
 sudo install lazygit /usr/local/bin
 ```
 ## Features
+
+You can search word under cursor with dictionary in MacOS with K in markdown file. Feel free to config other dictionary app if you are using Linux or Windows.
+
+URL highlight and open with `gx` in normal mode using `url-open` plugin.
+
 With the following plugins has been integrated into to support for full stack development:
 
 > [!INFO] I have actively updated this config so it may be changed in the future.

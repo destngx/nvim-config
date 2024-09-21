@@ -171,3 +171,6 @@ mongodb
 configcat
 AWS
 lisence
+GC
+BMP
+treesitter
