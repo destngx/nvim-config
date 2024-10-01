@@ -48,6 +48,7 @@ return {
   },
   {
     "HakonHarnes/img-clip.nvim",
+    enabled = os.getenv "IS_WSL" ~= "true",
     event = "VeryLazy",
     opts = {
       default = {
