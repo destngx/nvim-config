@@ -5,5 +5,8 @@ vim.filetype.add {
     rasi = "rasi",
     html = "html",
     zsh = "sh",
+    ejs = "html",
+    eslintrc = "jsonc",
+    mdx = "mdx",
   },
 }

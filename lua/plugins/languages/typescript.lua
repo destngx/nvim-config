@@ -82,4 +82,8 @@ return {
     },
     config = true, -- run require("template-string").setup()
   },
+    {
+    "vuki656/package-info.nvim",
+    config = true,
+  },
 }
