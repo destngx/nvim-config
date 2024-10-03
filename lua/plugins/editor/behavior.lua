@@ -118,12 +118,21 @@ return {
     }
   },
   {
-    "lukas-reineke/indent-blankline.nvim",
-    event = "BufReadPre",
-    main = "ibl",
+    "shellRaining/hlchunk.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
-      require("plugins.config.indent")
-    end,
+      require("hlchunk").setup({
+        chunk = {
+          enable = true,
+          chars = { right_arrow = "─" },
+          style = "#75A1FF",
+          duration = 50,
+          delay = 10,
+        },
+        indent = { enable = true },
+        line_num = { enable = true },
+      })
+    end
   },
   {
     "kevinhwang91/nvim-ufo",
