@@ -54,9 +54,13 @@ local function biome_or_prettier(bufnr)
   end
 
   -- Default to Prettier if no config is found
-  return { "prettier", stop_after_first = true }
+  return {}
 end
 
+local filetypes_without_dynamic_formatter = {
+  "markdown",
+  "markdown.mdx",
+}
 local filetypes_with_dynamic_formatter = {
   "javascript",
   "javascriptreact",
@@ -70,8 +74,6 @@ local filetypes_with_dynamic_formatter = {
   "json",
   "jsonc",
   "yaml",
-  "markdown",
-  "markdown.mdx",
   "graphql",
   "handlebars",
 }
@@ -79,12 +81,14 @@ conform.setup({
   formatters_by_ft = (function()
     local result = {}
     for _, ft in ipairs(filetypes_with_dynamic_formatter) do
+      result[ft] = biome_or_prettier
+    end
+    for _, ft in ipairs(filetypes_without_dynamic_formatter) do
       if ft == "markdown" or ft == "markdown.mdx" then
         result[ft] = { "markdown-toc", "markdownlint-cli2" }
-      else
-        result[ft] = biome_or_prettier
       end
     end
+
     return result
   end)(),
 })
