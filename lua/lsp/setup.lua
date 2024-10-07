@@ -16,6 +16,8 @@ mason.setup({
 mason_lsp.setup({
   -- A list of servers to automatically install if they're not already installed
   ensure_installed = {
+    -- "makrdownlint-cli2",
+    -- "markdown-toc",
     -- "tsserver",
     -- "bashls",
     -- "cssls",
@@ -85,7 +87,7 @@ require("mason-lspconfig").setup_handlers {
     lspconfig.vtsls.setup({
       capabilities = capabilities,
       handlers = require("lsp.servers.tsserver").handlers,
-      on_attach =require("lsp.servers.tsserver").on_attach,
+      on_attach = require("lsp.servers.tsserver").on_attach,
       settings = require("lsp.servers.tsserver").settings,
     })
   end,
@@ -166,5 +168,11 @@ require("mason-lspconfig").setup_handlers {
 require("ufo").setup({
   fold_virt_text_handler = ufo_config_handler,
   close_fold_kinds_for_ft = {
-    default = { "import" } },
+    default = { "imports", "comment" },
+    markdown = { "marker" },
+    json = { 'array' },
+    c = { 'comment', 'region' }
+  },
+
+
 })

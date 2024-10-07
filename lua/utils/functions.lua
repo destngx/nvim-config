@@ -149,7 +149,7 @@ M.concat = function(...)
   return concatenated
 end
 
--- Creates a new table populated with the results of calling a provided functions on every numeric indexed element in the calling table
+-- Creates a new table populated with the results of calling a provided functions on every numeric indexed element in the calling jable
 M.imap = function(tbl, func)
   return M.ireduce(
     tbl,

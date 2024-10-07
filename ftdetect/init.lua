@@ -7,6 +7,6 @@ vim.filetype.add {
     zsh = "sh",
     ejs = "html",
     eslintrc = "jsonc",
-    mdx = "mdx",
+    mdx = "markdown.mdx",
   },
 }

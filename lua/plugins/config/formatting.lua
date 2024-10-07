@@ -1,5 +1,27 @@
 local conform = require("conform")
-local formatters = { "biome", "prettierd", "prettier" }
+local formatters = {
+  "biome",
+  "prettierd",
+  "prettier",
+  ["markdown-toc"] = {
+    condition = function(_, ctx)
+      for _, line in ipairs(vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, false)) do
+        if line:find("<!%-%- toc %-%->") then
+          return true
+        end
+      end
+    end,
+  },
+  ["markdownlint-cli2"] = {
+    condition = function(_, ctx)
+      local diag = vim.tbl_filter(function(d)
+        return d.source == "markdownlint"
+      end, vim.diagnostic.get(ctx.buf))
+      return #diag > 0
+    end,
+  },
+
+}
 
 local function find_config(bufnr, config_files)
   return vim.fs.find(config_files, {
@@ -57,7 +79,11 @@ conform.setup({
   formatters_by_ft = (function()
     local result = {}
     for _, ft in ipairs(filetypes_with_dynamic_formatter) do
-      result[ft] = biome_or_prettier
+      if ft == "markdown" or ft == "markdown.mdx" then
+        result[ft] = { "markdown-toc", "markdownlint-cli2" }
+      else
+        result[ft] = biome_or_prettier
+      end
     end
     return result
   end)(),
