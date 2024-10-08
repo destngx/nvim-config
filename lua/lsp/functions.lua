@@ -1,26 +1,37 @@
 local M = {}
+local conform = require("conform")
 
-function M.format()
-  local root_dir = vim.fn.getcwd() -- Adjust this if you have a more accurate way to find the project root
-  local eslintrc_json = root_dir .. "/.eslintrc.json"
-  local eslintrc_js = root_dir .. "/.eslintrc.js"
-
-  -- Check if eslint LSP is active
-  local active_clients = vim.lsp.buf_get_clients()
-  local eslint_is_active = false
-
-  for _, client in ipairs(active_clients) do
-    if client.name == "eslint" then
-      eslint_is_active = true
-      break
-    end
+function M.format(args)
+  local range = nil
+  if args.count ~= -1 then
+    local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+    range = {
+      start = { args.line1, 0 },
+      ["end"] = { args.line2, end_line:len() },
+    }
   end
 
-  if eslint_is_active and (vim.fn.filereadable(eslintrc_json) == 1 or vim.fn.filereadable(eslintrc_js) == 1) then
-    vim.cmd("EslintFixAll")
-  else
-    vim.lsp.buf.format({ async = true })
-  end
+  conform.format({ async = true, lsp_fallback = true, range = range })
+  -- local root_dir = vim.fn.getcwd() -- Adjust this if you have a more accurate way to find the project root
+  -- local eslintrc_json = root_dir .. "/.eslintrc.json"
+  -- local eslintrc_js = root_dir .. "/.eslintrc.js"
+  --
+  -- -- Check if eslint LSP is active
+  -- local active_clients = vim.lsp.buf_get_clients()
+  -- local eslint_is_active = false
+  --
+  -- for _, client in ipairs(active_clients) do
+  --   if client.name == "eslint" then
+  --     eslint_is_active = true
+  --     break
+  --   end
+  -- end
+  --
+  -- if eslint_is_active and (vim.fn.filereadable(eslintrc_json) == 1 or vim.fn.filereadable(eslintrc_js) == 1) then
+  --   vim.cmd("EslintFixAll")
+  -- else
+  --   vim.lsp.buf.format({ async = true })
+  -- end
 end
 
 function M.enable_format_on_save()
@@ -29,12 +40,12 @@ function M.enable_format_on_save()
     callback = M.format,
     group = group,
   })
-  require("notify")("Enabled format on save", "info", { title = "LSP", timeout = 2000 })
+  -- require("fidget")("Enabled format on save", "info", { title = "LSP", timeout = 2000 })
 end
 
 function M.disable_format_on_save()
   vim.api.nvim_del_augroup_by_name("format_on_save")
-  require("notify")("Disabled format on save", "info", { title = "LSP", timeout = 2000 })
+  -- require("fidget")("Disabled format on save", "info", { title = "LSP", timeout = 2000 })
 end
 
 function M.toggle_format_on_save()
