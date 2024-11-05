@@ -106,11 +106,11 @@ require('lualine').setup {
       }
     },
     lualine_x = {
-      {
-        require("noice").api.status.command.get,
-        cond = require("noice").api.status.command.has,
-        color = { fg = "#ff9e64" },
-      },
+      -- {
+      --   require("noice").api.status.command.get,
+      --   cond = require("noice").api.status.command.has,
+      --   color = { fg = "#ff9e64" },
+      -- },
       {
         'copilot',
         padding = 0,
