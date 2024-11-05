@@ -30,10 +30,10 @@ DestNgxVim = {
       enabled = true, -- sync after change
     },
     ai = {
-      codeium = { enable = os.getenv "COPILOT" == nil },
-      parrot = { enable = false },
-      copilot = { enable = os.getenv "COPILOT" ~= nil and os.getenv('COPILOT') },
-      chatgpt = { enable = true }
+      codeium = { enabled = os.getenv "COPILOT" == nil },
+      parrot = { enabled = false },
+      copilot = { enabled = os.getenv "COPILOT" ~= nil and os.getenv('COPILOT') },
+      chatgpt = { enabled = true }
     },
     experimental_noice = {
       enabled = true,
