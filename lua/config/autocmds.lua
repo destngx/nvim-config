@@ -68,6 +68,28 @@ vim.api.nvim_create_autocmd("FileType", {
     })
   end,
 })
+
+-- ╭──────────────────────────────────────────────────────────╮
+-- │ Hide tabline and statusline on startup screen            │
+-- ╰──────────────────────────────────────────────────────────╯
+-- vim.api.nvim_create_augroup("dashboard_tabline", { clear = true })
+--
+-- vim.api.nvim_create_autocmd("FileType", {
+--   group = "dashboard_tabline",
+--   pattern = "dashboard",
+--   command = "set showtabline=0 laststatus=0 noruler",
+-- })
+-- vim.api.nvim_create_autocmd("FileType", {
+--   group = "dashboard_tabline",
+--   pattern = "dashboard",
+--   callback = function()
+--     vim.api.nvim_create_autocmd("BufUnload", {
+--       group = "dashboard_tabline",
+--       buffer = 0,
+--       command = "set showtabline=2 ruler laststatus=3",
+--     })
+--   end,
+-- })
 -- Attach specific keybindings in which-key for specific filetypes
 -- local present, _ = pcall(require, "which-key")
 -- if not present then return end

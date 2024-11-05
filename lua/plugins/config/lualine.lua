@@ -87,7 +87,8 @@ require('lualine').setup {
       "Trouble",
       "leetcode.nvim",
       "qf",
-      "alpha"
+      "alpha",
+      "dashboard",
     },
     ignore_focus = {},
     always_divide_middle = true,

@@ -124,6 +124,7 @@ local icons = {
   typeParameter       = "  ",
   unit                = "  ",
   up_hexagon          = " 󰋘 ",
+  update              = " 󰊳 ",
   value               = "  ",
   variable            = "  ",
   warningCircle       = "  ",

@@ -75,7 +75,7 @@ keymap("v", "`", "u", silent)
 keymap("v", "<A-`>", "U", silent)
 
 keymap("n", "<leader>z", "<cmd>ZenMode<CR>", silent)
-keymap("n", "<leader>//", "<cmd>Alpha<CR>", silent)
+keymap("n", "<leader>//", "<cmd>Dashboard<CR>", silent)
 -- New file by CTRL-N
 keymap("n", "<C-n>", "<cmd>AdvancedNewFile<CR>", silent)
 
