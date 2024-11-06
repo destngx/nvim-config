@@ -28,6 +28,7 @@ local function matchadd()
     ['NvimTree'] = true,
     ['lspsagafinder'] = true,
     ['dashboard'] = true,
+    ['checkhealth'] = true,
   }
   if disable_ft[vim.bo.ft] then
     return
