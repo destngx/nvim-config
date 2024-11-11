@@ -376,8 +376,8 @@ return {
           relative = "editor",
           width = 1, -- when <=1 it's a percentage of the editor width
           height = 1,
-          row = -1, -- when negative it's an offset from the bottom
-          col = 0, -- when negative it's an offset from the right
+          row = -1,  -- when negative it's an offset from the bottom
+          col = 0,   -- when negative it's an offset from the right
           zindex = 1000,
         },
       },
@@ -420,7 +420,7 @@ return {
     "folke/todo-comments.nvim",
     event = "BufEnter",
     opts = {
-      signs = true,  -- show icons in the signs column
+      signs = true,      -- show icons in the signs column
       sign_priority = 8, -- sign priority
       -- keywords recognized as todo comments
       keywords = {
@@ -431,15 +431,16 @@ return {
         PERF = { alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
       },
       highlight = {
-        before = "",                 -- "fg" or "bg" or empty
+        before = "",                     -- "fg" or "bg" or empty
         -- keyword = "wide", -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
-        keyword = "wide",            -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
-        after = "fg",                -- "fg" or "bg" or empty
+        keyword = "wide",                -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
+        after = "fg",                    -- "fg" or "bg" or empty
         pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns, used for highlightng (vim regex)
-        comments_only = true,        -- uses treesitter to match keywords in comments only
-        max_line_len = 400,          -- ignore lines longer than this
-        exclude = {},                -- list of file types to exclude highlighting
+        comments_only = true,            -- uses treesitter to match keywords in comments only
+        max_line_len = 400,              -- ignore lines longer than this
+        exclude = {},                    -- list of file types to exclude highlighting
       },
     }
   },
+  { 'norcalli/nvim-colorizer.lua', event = "VeryLazy" },
 }
