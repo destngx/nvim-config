@@ -33,14 +33,14 @@ local settings = {
   typescript = {
     inlayHints = {
       parameterNames = { enabled = "literals" },
-      parameterTypes = { enabled = false },
-      variableTypes = { enabled = false },
+      parameterTypes = { enabled = true },
+      variableTypes = { enabled = true },
       propertyDeclarationTypes = { enabled = true },
-      functionLikeReturnTypes = { enabled = false },
+      functionLikeReturnTypes = { enabled = true },
       enumMemberValues = { enabled = true },
     },
     suggest = {
-      includeCompletionsForModuleExports = false,
+      includeCompletionsForModuleExports = true,
     },
   },
   javascript = {
