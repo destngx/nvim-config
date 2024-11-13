@@ -21,6 +21,7 @@ return {
 
   {
     "MaximilianLloyd/tw-values.nvim",
+    ft = { "typescriptreact" },
     event = "BufRead",
     keys = {
       { "<Leader>cv", "<CMD>TWValues<CR>", desc = "Tailwind CSS values" },
@@ -33,6 +34,7 @@ return {
 
   {
     "laytan/tailwind-sorter.nvim",
+    ft = { "typescriptreact" },
     event = "BufRead",
     cmd = {
       "TailwindSort",
@@ -61,6 +63,7 @@ return {
 
   {
     "dmmulroy/tsc.nvim",
+    ft = { "typescript", "typescriptreact" },
     event = "BufRead",
     cmd = { "TSC" },
     config = true,
@@ -68,25 +71,16 @@ return {
 
   {
     "dmmulroy/ts-error-translator.nvim",
+    ft = { "typescript", "typescriptreact" },
     event = "BufRead",
     config = true
   },
 
   {
     "artemave/workspace-diagnostics.nvim",
+    ft = { "typescript", "typescriptreact" },
     event = "BufRead",
     lazy = false,
-  },
-  {
-    "axelvc/template-string.nvim",
-    event = "InsertEnter",
-    ft = {
-      "javascript",
-      "typescript",
-      "javascriptreact",
-      "typescriptreact",
-    },
-    config = true, -- run require("template-string").setup()
   },
   {
     "vuki656/package-info.nvim",
