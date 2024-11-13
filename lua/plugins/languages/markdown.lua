@@ -48,7 +48,7 @@ return {
   {
     "HakonHarnes/img-clip.nvim",
     enabled = os.getenv "IS_WSL" ~= "true",
-    event = "VeryLazy",
+    ft = { "markdown", "vimwiki" },
     opts = {
       default = {
         dir_path = "Attachments",
@@ -153,6 +153,7 @@ return {
   },
   {
     "andrewferrier/wrapping.nvim",
+    ft = { "markdown" },
     event = "BufReadPre",
     opts = {
       softener = { markdown = true },
