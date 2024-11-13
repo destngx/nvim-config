@@ -8,6 +8,8 @@ return {
        panel = { enabled = true },
        filetypes = {
          markdown = true,
+         typescript = true,
+         yaml = true,
        },
     },
     dependencies = { 'AndreM222/copilot-lualine' }

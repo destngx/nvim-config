@@ -1,13 +1,17 @@
 return {
-  { "onsails/lspkind-nvim" },
   {
-           "L3MON4D3/LuaSnip",
-           dependencies = "rafamadriz/friendly-snippets",
-           build = "make install_jsregexp",
-           config = function()
-             require("luasnip.loaders.from_vscode").lazy_load { paths = { vim.fn.stdpath("config") .. "/snippets" } }
-           end
-         },
+    "onsails/lspkind-nvim",
+    event = "VeryLazy",
+  },
+  {
+    "L3MON4D3/LuaSnip",
+    dependencies = "rafamadriz/friendly-snippets",
+    event = "VeryLazy",
+    build = "make install_jsregexp",
+    config = function()
+      require("luasnip.loaders.from_vscode").lazy_load { paths = { vim.fn.stdpath("config") .. "/snippets" } }
+    end
+  },
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
@@ -22,13 +26,13 @@ return {
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-calc",
       "saadparwaiz1/cmp_luasnip",
-       {
-         "David-Kunz/cmp-npm",
-         opts = {
-           ignore = {},
-           only_semantic_versions = true,
-         }
-       },
+      {
+        "David-Kunz/cmp-npm",
+        opts = {
+          ignore = {},
+          only_semantic_versions = true,
+        }
+      },
       {
         "zbirenbaum/copilot-cmp",
         enabled = DestNgxVim.plugins.ai.copilot.enabled,
@@ -41,6 +45,7 @@ return {
   },
   {
     "js-everts/cmp-tailwind-colors",
+    event = "VeryLazy",
     config = true,
   },
 }

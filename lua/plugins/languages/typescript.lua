@@ -11,6 +11,7 @@ return {
 
   {
     "razak17/tailwind-fold.nvim",
+    event = "BufRead",
     opts = {
       min_chars = 50,
     },
@@ -20,6 +21,7 @@ return {
 
   {
     "MaximilianLloyd/tw-values.nvim",
+    event = "BufRead",
     keys = {
       { "<Leader>cv", "<CMD>TWValues<CR>", desc = "Tailwind CSS values" },
     },
@@ -31,6 +33,7 @@ return {
 
   {
     "laytan/tailwind-sorter.nvim",
+    event = "BufRead",
     cmd = {
       "TailwindSort",
       "TailwindSortOnSaveToggle"
@@ -58,17 +61,20 @@ return {
 
   {
     "dmmulroy/tsc.nvim",
+    event = "BufRead",
     cmd = { "TSC" },
     config = true,
   },
 
   {
     "dmmulroy/ts-error-translator.nvim",
+    event = "BufRead",
     config = true
   },
 
   {
     "artemave/workspace-diagnostics.nvim",
+    event = "BufRead",
     lazy = false,
   },
   {
@@ -82,8 +88,22 @@ return {
     },
     config = true, -- run require("template-string").setup()
   },
-    {
+  {
     "vuki656/package-info.nvim",
+    event = "BufRead",
+    ft = { "json", "typescript", "typescriptreact" },
     config = true,
   },
+  -- {
+  --   "OlegGulevskyy/better-ts-errors.nvim",
+  --   dependencies = { "MunifTanjim/nui.nvim" },
+  --   event = "BufRead",
+  --   ft = { "typescript", "typescriptreact" },
+  --   config = {
+  --     keymaps = {
+  --       toggle = '<leader>cl',          -- default '<leader>dd'
+  --       go_to_definition = '<CR>' -- default '<leader>dx'
+  --     }
+  --   }
+  -- }
 }

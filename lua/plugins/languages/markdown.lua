@@ -11,8 +11,7 @@ return {
   {
     "3rd/image.nvim",
     enabled = os.getenv "IS_WSL" ~= "true",
-    lazy = true,
-    event = "BufReadPre",
+    ft = { "markdown", "vimwiki" },
     dependencies = { "luarocks.nvim" },
     opts = {
       backend = "kitty",
