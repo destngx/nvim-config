@@ -79,6 +79,7 @@ local codes = {
   }
 }
 
+
 vim.diagnostic.config({
   float = {
     source = false,

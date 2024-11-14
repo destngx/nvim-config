@@ -16,9 +16,10 @@ mason.setup({
 mason_lsp.setup({
   -- A list of servers to automatically install if they're not already installed
   ensure_installed = {
+    "lua_ls",
+    "vtsls",
     -- "makrdownlint-cli2",
     -- "markdown-toc",
-    -- "tsserver",
     -- "bashls",
     -- "cssls",
     -- "eslint",
@@ -27,10 +28,7 @@ mason_lsp.setup({
     -- "markdown_inline",
     -- "markman",
     -- "jsonls",
-    -- "lua_ls",
     -- "tailwindcss",
-    -- "volar",
-    -- "prismals",
     -- "pylsp",
     -- "dockerls",
     -- "docker_compose_language_service",
@@ -42,9 +40,15 @@ mason_lsp.setup({
   --   - true: All servers set up via lspconfig are automatically installed.
   --   - { exclude: string[] }: All servers set up via lspconfig, except the ones provided in the list, are automatically installed.
   --       Example: automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }
-  automatic_installation = false,
+  automatic_installation = true,
 })
 
+-- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
+-- Be aware that you also will need to properly configure your LSP server to
+-- provide the inlay hints.
+vim.lsp.inlay_hint.enable(true)
+
+-- vim.lsp.codelens.enable(true)
 local lspconfig = require("lspconfig")
 
 local handlers = {
@@ -86,13 +90,14 @@ require("mason-lspconfig").setup_handlers {
 
     lspconfig.vtsls.setup({
       capabilities = capabilities,
-      handlers = require("lsp.servers.tsserver").handlers,
-      on_attach = require("lsp.servers.tsserver").on_attach,
-      settings = require("lsp.servers.tsserver").settings,
+      handlers = require("lsp.servers.vtsls").handlers,
+      on_attach = require("lsp.servers.vtsls").on_attach,
+      settings = require("lsp.servers.vtsls").settings,
     })
   end,
   ["ts_ls"] = function()
     -- skip to use vtsls
+    return true
   end,
   ["tailwindcss"] = function()
     lspconfig.tailwindcss.setup({
@@ -173,6 +178,4 @@ require("ufo").setup({
     json = { 'array' },
     c = { 'comment', 'region' }
   },
-
-
 })

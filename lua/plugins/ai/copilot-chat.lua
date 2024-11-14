@@ -37,7 +37,7 @@ return {
     -- end,
     keys = {
       {
-        "<leader>acq",
+        "<leader>aq",
         function()
           local input = vim.fn.input("Quick Chat: ")
           if input ~= "" then
@@ -49,7 +49,7 @@ return {
       },
       -- Show prompts actions with fzf-lua
       {
-        "<leader>acp",
+        "<leader>ap",
         function()
           local actions = require("CopilotChat.actions")
           require("CopilotChat.integrations.fzflua").pick(actions.prompt_actions())
@@ -58,7 +58,7 @@ return {
         mode = { "n", "v" },
       },
       {
-        "<leader>aca",
+        "<leader>aa",
         "<cmd>CopilotChat<cr>",
         desc = "CopilotChat - Toggle ", -- Toggle vertical split
         mode = { "n", "v" },
@@ -88,24 +88,24 @@ return {
         end,
       }
 
-      chat.setup(opts)
       -- Setup CMP integration
-      require("CopilotChat.integrations.cmp").setup()
+      if pcall(require, "cmp") then
+        require("CopilotChat.integrations.cmp").setup()
+      end
 
       -- Custom buffer for CopilotChat
       vim.api.nvim_create_autocmd("BufEnter", {
-        pattern = "copilot-*",
+        pattern = "copilot-chat",
         callback = function()
-          vim.opt_local.relativenumber = true
-          vim.opt_local.number = true
+          vim.opt_local.relativenumber = false
+          vim.opt_local.number = false
 
           -- Get current filetype and set it to markdown if the current filetype is copilot-chat
-          local ft = vim.bo.filetype
-          if ft == "copilot-chat" then
-            vim.bo.filetype = "markdown"
-          end
+          vim.bo.filetype = "markdown"
         end,
       })
+
+      chat.setup(opts)
     end,
   }
 }

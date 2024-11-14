@@ -15,7 +15,14 @@ return {
       "neovim/nvim-lspconfig",
     },
   },
-
+  {
+    "dmmulroy/ts-error-translator.nvim",
+    event = "BufRead",
+    ft = "javascript,typescript,typescriptreact,svelte",
+    opts = {
+      auto_override_publish_diagnostics = true,
+    },
+  },
   {
     "razak17/tailwind-fold.nvim",
     event = "BufRead",
