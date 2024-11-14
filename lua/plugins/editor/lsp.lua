@@ -2,6 +2,7 @@ return {
   {
     "williamboman/mason.nvim",
     cmd = "Mason",
+    lazy = false,
     keys = {
       { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" },
     },

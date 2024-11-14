@@ -23,6 +23,7 @@ M.settings = {
     enable = true,
     mode = "all"
   },
+  dynamicRegistration = true,
   format = true,
   nodePath = "",
   onIgnoredFiles = "off",

@@ -2,7 +2,14 @@ return {
   {
     "yioneko/nvim-vtsls",
     event = { "BufReadPre", "BufNewFile" },
-    ft = { "typescript", "typescriptreact" },
+    ft = {
+      "javascript",
+      "javascriptreact",
+      "javascript.jsx",
+      "typescript",
+      "typescriptreact",
+      "typescript.tsx",
+    },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "neovim/nvim-lspconfig",

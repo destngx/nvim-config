@@ -30,7 +30,18 @@ local handlers = {
 }
 
 local settings = {
+  complete_function_calls = true,
+  vtsls = {
+    enableMoveToFileCodeAction = true,
+    autoUseWorkspaceTsdk = true,
+    experimental = {
+      completion = {
+        enableServerSideFuzzyMatch = true,
+      },
+    },
+  },
   typescript = {
+    updateImportsOnFileMove = { enabled = "always" },
     inlayHints = {
       parameterNames = { enabled = "literals" },
       parameterTypes = { enabled = true },
@@ -40,23 +51,13 @@ local settings = {
       enumMemberValues = { enabled = true },
     },
     suggest = {
+      completeFunctionCalls = true,
       includeCompletionsForModuleExports = true,
     },
   },
-  javascript = {
-    inlayHints = {
-      parameterNames = { enabled = "literals" },
-      parameterTypes = { enabled = false },
-      variableTypes = { enabled = false },
-      propertyDeclarationTypes = { enabled = true },
-      functionLikeReturnTypes = { enabled = false },
-      enumMemberValues = { enabled = true },
-    },
-    suggest = {
-      includeCompletionsForModuleExports = false,
-    },
-  },
 }
+settings.javascript =
+    vim.tbl_deep_extend("force", {}, settings.typescript, settings.javascript or {})
 
 local on_attach = function(client, bufnr)
   vim.lsp.inlay_hint.enable(true, { bufnr })
