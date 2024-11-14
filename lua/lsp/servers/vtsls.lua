@@ -41,6 +41,9 @@ local settings = {
     },
   },
   typescript = {
+    tsserver = {
+      maxTsServerMemory = 8192,
+    },
     updateImportsOnFileMove = { enabled = "always" },
     inlayHints = {
       parameterNames = { enabled = "literals" },
