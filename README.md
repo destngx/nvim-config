@@ -153,7 +153,7 @@ With the following plugins has been integrated into to support for full stack de
 71. **[nvim-treesitter-textsubjects]()**
 72. **[nvim-ts-context-commentstring]()**
 73. **[nvim-ufo]()**
-74. **[nvim-web-devicons]()**
+74. **[mini-icons]()**
 75. **[obsidian.nvim]()**: for take note zetelkasten working with obsidian-vault
 <!-- 76. **[octo.nvim]()** -->
 <!-- 77. **[package-info.nvim]()**: enhancement for package.json -->

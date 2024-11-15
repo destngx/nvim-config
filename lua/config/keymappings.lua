@@ -243,10 +243,10 @@ keymap('n', '<leader>V', '<C-w>s', { desc = '<cmd>split below<CR>' }, silent)
 -- resizing splits
 -- these keymaps will also accept a range,
 -- for example `10<A-h>` will `resize_left` by `(10 * config.default_amount)`
-keymap('n', '<A-h>', require('smart-splits').resize_left)
-keymap('n', '<A-j>', require('smart-splits').resize_down)
-keymap('n', '<A-k>', require('smart-splits').resize_up)
-keymap('n', '<A-l>', require('smart-splits').resize_right)
+-- keymap('n', '<A-h>', require('smart-splits').resize_left)
+-- keymap('n', '<A-j>', require('smart-splits').resize_down)
+-- keymap('n', '<A-k>', require('smart-splits').resize_up)
+-- keymap('n', '<A-l>', require('smart-splits').resize_right)
 -- moving between splits
 keymap('n', '<C-h>', require('smart-splits').move_cursor_left)
 keymap('n', '<C-j>', require('smart-splits').move_cursor_down)
