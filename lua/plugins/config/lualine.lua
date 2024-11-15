@@ -126,6 +126,7 @@ require('lualine').setup {
           },
         },
         show_colors = true,
+        show_loading = true,
       },
       {
         function()
