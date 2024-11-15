@@ -7,5 +7,5 @@ vim.opt.shiftwidth=2
 
 vim.keymap.set("n", "j", "<Down>")
 vim.keymap.set("n", "k", "<Up>")
-
+vim.keymap.set("n", "K", ":!open-dict <C-R><C-W><CR>", { noremap = true, silent = true })
 

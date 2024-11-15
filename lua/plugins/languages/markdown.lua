@@ -11,7 +11,7 @@ return {
   {
     "3rd/image.nvim",
     enabled = os.getenv "IS_WSL" ~= "true",
-    ft = { "markdown", "vimwiki" },
+    ft = { "markdown" },
     dependencies = { "luarocks.nvim" },
     opts = {
       backend = "kitty",
@@ -48,7 +48,7 @@ return {
   {
     "HakonHarnes/img-clip.nvim",
     enabled = os.getenv "IS_WSL" ~= "true",
-    ft = { "markdown", "vimwiki" },
+    ft = { "markdown" },
     opts = {
       default = {
         dir_path = "Attachments",

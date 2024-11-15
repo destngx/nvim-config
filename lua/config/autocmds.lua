@@ -68,6 +68,12 @@ vim.api.nvim_create_autocmd("FileType", {
     })
   end,
 })
+-- vim.api.nvim_create_autocmd("FileType", {
+--     pattern = "copilot-chat",  -- Specify the file type
+--     callback = function()
+--         vim.cmd("TSBufDisable highlight")  -- Disable Tree-sitter highlighting
+--     end,
+-- })
 
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ Hide tabline and statusline on startup screen            │
