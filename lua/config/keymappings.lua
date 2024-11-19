@@ -261,3 +261,6 @@ keymap('n', '<leader><leader>l', require('smart-splits').swap_buf_right)
 keymap('n', '<C-;>', '<cmd>lua require("smart-splits").move_cursor_bottom()<CR>', { noremap = true, silent = true })
 -- url-open
 keymap("n", "gx", "<esc>:URLOpenUnderCursor<cr>")
+-- markdown
+keymap('n', '<leader>mp', '<cmd>PasteImage<CR>', { desc = 'Paste Image in to Makrdown buffer' }, silent)
+keymap('n', '<leader>mv', '<cmd>MarkdownPreview<CR>', { desc = 'Preview Makrdown in browser' }, silent)

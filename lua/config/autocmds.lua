@@ -96,7 +96,9 @@ vim.api.nvim_create_autocmd("FileType", {
 --     })
 --   end,
 -- })
--- Attach specific keybindings in which-key for specific filetypes
+-- ╭─────────────────────────────────────────────────────────────────╮
+-- │ Attach specific keybindings in which-key for specific filetypes │
+-- ╰─────────────────────────────────────────────────────────────────╯
 -- local present, _ = pcall(require, "which-key")
 -- if not present then return end
 -- local _, pwk = pcall(require, "plugins.which-key")

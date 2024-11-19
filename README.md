@@ -191,3 +191,7 @@ With the following plugins has been integrated into to support for full stack de
 109. **[which-key.nvim]()**
 110. **[wrapping.nvim]()**
 111. **[zen-mode.nvim]()**
+
+### TODO
+
+- [ ] Reimplement specific key mapping for file types. 
