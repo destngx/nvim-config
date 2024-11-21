@@ -89,9 +89,10 @@ return {
       }
 
       -- Setup CMP integration
-      if pcall(require, "cmp") then
-        require("CopilotChat.integrations.cmp").setup()
-      end
+      -- if pcall(require, "cmp") then
+      --   require("CopilotChat.integrations.cmp").setup()
+      -- end
+      opts.chat_autocomplete = true
 
       -- Custom buffer for CopilotChat
       vim.api.nvim_create_autocmd("BufEnter", {
