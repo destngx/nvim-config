@@ -10,8 +10,8 @@
 local fidget = require("fidget")
 
 fidget.setup({
-  window = { blend = 0, },
-  position = "relative",
+  -- window = { blend = 0, },
+  -- position = "relative",
 })
 
 vim.notify = fidget.notify

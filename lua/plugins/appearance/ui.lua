@@ -68,7 +68,6 @@ return {
   {
     "j-hui/fidget.nvim",
     lazy = false,
-    tag = "legacy",
     config = function()
       require("plugins.config.notify")
     end,
