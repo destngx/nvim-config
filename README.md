@@ -113,7 +113,7 @@ With the following plugins has been integrated into to support for full stack de
 31. **[glance.nvim]()**: pretty window for previewing, navigating and changing lsp location
 32. **[hlargs.nvim]()**
 33. **[hydra.nvim]()**
-34. **[indent-blankline.nvim]()**
+34. **[hlchunk.nvim]()**
 35. **[lazy.nvim]()**
 36. **[lazygit.nvim]()**
 37. **[lspkind-nvim]()**

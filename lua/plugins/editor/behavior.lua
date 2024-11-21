@@ -13,6 +13,7 @@ return {
   },
   {
     "NvChad/nvim-colorizer.lua",
+    event = "BufReadPre",
     opts = {
       filetypes = {
         'html',
@@ -118,7 +119,7 @@ return {
     }
   },
   {
-    "shellRaining/hlchunk.nvim",
+    "shellRaining/hlchunk.nvim", -- indent-blankline.nvim alternative
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("hlchunk").setup({
@@ -131,6 +132,7 @@ return {
         },
         indent = { enable = true },
         line_num = { enable = true },
+        exclude_filetypes = { "help", "git", "markdown", "snippets", "text", "gitconfig", "alpha", "dashboard" },
       })
     end
   },

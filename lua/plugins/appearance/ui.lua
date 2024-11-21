@@ -134,7 +134,7 @@ return {
     "folke/zen-mode.nvim",
     cmd = { "ZenMode" },
     config = function()
-      require("plugins.zen")
+      require("plugins.config.zen")
     end,
     enabled = DestNgxVim.plugins.zen.enabled,
   },
@@ -441,5 +441,4 @@ return {
       },
     }
   },
-  { 'norcalli/nvim-colorizer.lua', event = "VeryLazy" },
 }
