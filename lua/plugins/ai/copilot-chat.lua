@@ -2,7 +2,7 @@ return {
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     enabled = DestNgxVim.plugins.ai.copilot.enabled,
-    branch = "canary",
+    version = "3.1.0",
     dependencies = {
       { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
       { "nvim-lua/plenary.nvim" },  -- for curl, log wrapper

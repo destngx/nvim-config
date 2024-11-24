@@ -1,7 +1,7 @@
 {
   "AdvancedNewFile.nvim": { "branch": "main", "commit": "9b4576dcf916d848148241e7269c9cd78f299b22" },
   "Comment.nvim": { "branch": "master", "commit": "e30b7f2008e52442154b66f7c519bfd2f1e32acb" },
-  "CopilotChat.nvim": { "branch": "canary", "commit": "f53ae2f17b4321bc4ff90ad9562fb1deeac5794c" },
+  "CopilotChat.nvim": { "branch": "canary", "commit": "d36b868dbdadc0037a365e862fb0bc5aae236986" },
   "LuaSnip": { "branch": "master", "commit": "0f7bbce41ea152a94d12aea286f2ce98e63c0f58" },
   "autosave.nvim": { "branch": "main", "commit": "feaf2d220f6a01a8f794c596145dfb2739a00203" },
   "b64.nvim": { "branch": "main", "commit": "e93d1a7e065f6eaf5d3bae9efb9bc2c30907f471" },
