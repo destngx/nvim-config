@@ -1,6 +1,7 @@
 return {
   "sphamba/smear-cursor.nvim",
-  lazy = false,
+  event = "VeryLazy",
+  enabled = DestNgxVim.plugins.experimental_cursor.enabled,
   opts = {
     -- Cursor color. Defaults to Cursor gui color
     cursor_color = "#d3cdc3",
