@@ -13,7 +13,7 @@ return {
     smear_between_buffers = true,
 
     -- Smear cursor when moving within line or to neighbor lines
-    smear_between_neighbor_lines = true,
+    smear_between_neighbor_lines = false,
 
     -- Use floating windows to display smears outside buffers.
     -- May have performance issues with other plugins.
@@ -28,7 +28,7 @@ return {
 
     -- How fast the smear's tail moves towards the head.
     -- 0: no movement, 1: instantaneous, default: 0.3
-    trailing_stiffness = 0.3,
+    trailing_stiffness = 0.5,
 
     -- How much the tail slows down when getting close to the head.
     -- 0: no slowdown, more: more slowdown, default: 0.1
