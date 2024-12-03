@@ -21,12 +21,36 @@ local symbols = trouble.statusline({
   hl_group = "lualine_c_normal"
 })
 
+local function isMarkdownFile()
+  local filetype = vim.bo.filetype
+
+  if filetype == 'markdown' then
+    return true
+  end
+  return false
+end
+local function isObsidianVaults()
+  local currentDir = vim.loop.cwd()
+
+  if string.find(currentDir, "obsidian%-vaults") then
+    return true
+  end
+
+  return false
+end
 local function wordCount()
+  if isObsidianVaults() and isMarkdownFile() then
+    return tostring(vim.fn.wordcount().words) .. " words"
+  end
   return tostring(vim.fn.wordcount().words)
 end
 local function get_location()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return string.format('%d:%d|%d:%d', line, vim.fn.line('$'), col, string.len(vim.fn.getline('.')))
+  if isObsidianVaults() then
+    return string.format('char %d of %d at line %d of %d total lines', col + 1, string.len(vim.fn.getline('.')), line,
+      vim.fn.line('$'))
+  end
+  return string.format('%d:%d|%d:%d', line, vim.fn.line('$'), col + 1, string.len(vim.fn.getline('.')))
 end
 local theme = require("kanagawa.colors").setup().theme
 
@@ -37,14 +61,16 @@ kanagawa.normal = {
   b = { bg = "none", fg = theme.syn.fun },
   c = { bg = "none", fg = theme.ui.fg },
   x = { bg = theme.ui.bg_visual, fg = theme.ui.fg },
-  y = { bg = theme.ui.bg_search, fg = theme.ui.fg },
+  y = isObsidianVaults() and { bg = "none", fg = theme.syn.keyword } or
+      { bg = theme.ui.bg_search, fg = theme.syn.fg },
 }
 
 kanagawa.insert = {
   a = { bg = theme.diag.ok, fg = theme.ui.bg },
   b = { bg = theme.ui.bg, fg = theme.diag.ok },
   x = { bg = theme.ui.bg_visual, fg = theme.ui.fg },
-  y = { bg = theme.ui.bg_search},
+  y = isObsidianVaults() and { bg = "none", fg = theme.syn.keyword } or
+      { bg = theme.ui.bg_search, fg = theme.syn.fg },
 }
 
 kanagawa.command = {
@@ -74,6 +100,74 @@ if vim.g.kanagawa_lualine_bold then
   end
 end
 
+local sections = {
+  lualine_a = {},
+  lualine_b = { { 'filetype', padding = {}, icon_only = true }, { 'filename', padding = { left = 0, right = 1 } }, },
+  lualine_c = {
+    {
+      symbols.get,
+      cond = symbols.has,
+      padding = 0,
+    }
+  },
+  lualine_x = isObsidianVaults() and {} or {
+    {
+      'copilot',
+      padding = 0,
+      symbols = {
+        status = {
+          icons = {
+            enabled = DestNgxVim.icons.copilotEnabled,
+            sleep = DestNgxVim.icons.copilotSleep,
+            disabled = DestNgxVim.icons.copilotDisabled,
+            warning = DestNgxVim.icons.copilotWarning,
+            unknown = DestNgxVim.icons.copilotUnknown
+          },
+        },
+      },
+      show_colors = true,
+      show_loading = true,
+    },
+    {
+      function()
+        return require("dap.lua").status()
+      end,
+      icon = { DestNgxVim.icons.bug, color = { fg = "#e7c664" } }, -- nerd icon.
+      cond = function()
+        if not package.loaded.dap then
+          return false
+        end
+        local session = require("dap.lua").session()
+        return session ~= nil
+      end,
+    },
+    { 'branch', icon = DestNgxVim.icons.git },
+    {
+      'diff',
+      symbols = {
+        added = DestNgxVim.icons.gitAdd,
+        modified = DestNgxVim.icons.gitChange,
+        removed = DestNgxVim.icons.gitRemove
+      },
+      cond = conditions.hide_in_width,
+    },
+    {
+      'diagnostics',
+      sources = { "nvim_diagnostic" },
+      symbols = {
+        error = DestNgxVim.icons.errorOutline,
+        warn = DestNgxVim.icons.warningTriangle,
+        info = DestNgxVim.icons.infoOutline,
+        hint = DestNgxVim.icons.lightbulbOutline
+      }
+      ,
+      padding = { left = 0, right = 1 }
+    }
+  },
+  lualine_y = { { get_location }, { wordCount, padding = { left = 0, right = 1 } } },
+  lualine_z = { 'mode' }
+}
+
 require('lualine').setup {
   options = {
     icons_enabled = true,
@@ -95,75 +189,5 @@ require('lualine').setup {
     globalstatus = true,
     refresh = { statusline = 200 }
   },
-  sections = {
-    lualine_a = {},
-    lualine_b = { { 'filetype', padding = {}, icon_only = true }, { 'filename', padding = { left = 0, right = 1 } }, },
-    lualine_c = {
-      {
-        symbols.get,
-        cond = symbols.has,
-        padding = 0,
-      }
-    },
-    lualine_x = {
-      -- {
-      --   require("noice").api.status.command.get,
-      --   cond = require("noice").api.status.command.has,
-      --   color = { fg = "#ff9e64" },
-      -- },
-      {
-        'copilot',
-        padding = 0,
-        symbols = {
-          status = {
-            icons = {
-              enabled = DestNgxVim.icons.copilotEnabled,
-              sleep = DestNgxVim.icons.copilotSleep,
-              disabled = DestNgxVim.icons.copilotDisabled,
-              warning = DestNgxVim.icons.copilotWarning,
-              unknown = DestNgxVim.icons.copilotUnknown
-            },
-          },
-        },
-        show_colors = true,
-        show_loading = true,
-      },
-      {
-        function()
-          return require("dap.lua").status()
-        end,
-        icon = { DestNgxVim.icons.bug, color = { fg = "#e7c664" } }, -- nerd icon.
-        cond = function()
-          if not package.loaded.dap then
-            return false
-          end
-          local session = require("dap.lua").session()
-          return session ~= nil
-        end,
-      },
-      { 'branch', icon = DestNgxVim.icons.git },
-      {
-        'diff',
-        symbols = {
-          added = DestNgxVim.icons.gitAdd,
-          modified = DestNgxVim.icons.gitChange,
-          removed = DestNgxVim.icons.gitRemove
-        },
-        cond = conditions.hide_in_width,
-      },
-      {
-        'diagnostics',
-        sources = { "nvim_diagnostic" },
-        symbols = {
-          error = DestNgxVim.icons.errorOutline,
-          warn = DestNgxVim.icons.warningTriangle,
-          info = DestNgxVim.icons.infoOutline,
-          hint = DestNgxVim.icons.lightbulbOutline
-        }
-        , padding = { left = 0, right = 1 }
-      }
-    },
-    lualine_y = { { get_location }, { wordCount, padding = { left = 0, right = 1 } } },
-    lualine_z = { 'mode' }
-  },
+  sections = sections
 }
