@@ -56,22 +56,22 @@ return {
           -- append = header,
         },
         shortcut = {
-          { desc = icons.update .. 'Update',
+          { desc = icons.update .. 'Plugins',
             group = '@property',
-            action = 'Lazy update',
-            key = 'u'
+            action = 'Lazy',
+            key = 'l'
           },
           {
             desc = icons.fileNoBg .. 'Files',
             group = 'Label',
             action = 'FzfLua files',
-            key = 'f',
+            key = '<C-p>',
           },
           {
             desc = icons.word .. 'Find Word',
             group = 'DiagnosticHint',
             action = 'FzfLua live_grep',
-            key = 'w',
+            key = '<S-p>',
           },
         },
         project = {
