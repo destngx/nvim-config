@@ -252,3 +252,4 @@ json
 Deserialization
 TypedArray
 WebSockets
+chainable

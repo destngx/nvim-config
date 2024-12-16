@@ -110,7 +110,25 @@ local sections = {
       padding = 0,
     }
   },
-  lualine_x = isObsidianVaults() and {} or {
+  lualine_x = isObsidianVaults() and {
+    {
+      'copilot',
+      padding = 0,
+      symbols = {
+        status = {
+          icons = {
+            enabled = DestNgxVim.icons.copilotEnabled,
+            sleep = DestNgxVim.icons.copilotSleep,
+            disabled = DestNgxVim.icons.copilotDisabled,
+            warning = DestNgxVim.icons.copilotWarning,
+            unknown = DestNgxVim.icons.copilotUnknown
+          },
+        },
+      },
+      show_colors = true,
+      show_loading = true,
+    },
+  } or {
     {
       'copilot',
       padding = 0,
