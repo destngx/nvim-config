@@ -253,3 +253,5 @@ Deserialization
 TypedArray
 WebSockets
 chainable
+XMLHttpRequest
+YYYY

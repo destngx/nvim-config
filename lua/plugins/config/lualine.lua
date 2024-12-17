@@ -40,7 +40,7 @@ local function isObsidianVaults()
 end
 local function wordCount()
   if isObsidianVaults() and isMarkdownFile() then
-    return tostring(vim.fn.wordcount().words) .. " words"
+    return "and " .. tostring(vim.fn.wordcount().words) .. " words"
   end
   return tostring(vim.fn.wordcount().words)
 end
@@ -60,7 +60,7 @@ kanagawa.normal = {
   a = { bg = theme.syn.fun, fg = theme.ui.bg_m3 },
   b = { bg = "none", fg = theme.syn.fun },
   c = { bg = "none", fg = theme.ui.fg },
-  x = { bg = theme.ui.bg_visual, fg = theme.ui.fg },
+  x = isObsidianVaults() and { bg = "none" } or { bg = theme.ui.bg_visual, fg = theme.ui.fg },
   y = isObsidianVaults() and { bg = "none", fg = theme.syn.keyword } or
       { bg = theme.ui.bg_search, fg = theme.syn.fg },
 }
@@ -68,7 +68,7 @@ kanagawa.normal = {
 kanagawa.insert = {
   a = { bg = theme.diag.ok, fg = theme.ui.bg },
   b = { bg = theme.ui.bg, fg = theme.diag.ok },
-  x = { bg = theme.ui.bg_visual, fg = theme.ui.fg },
+  x = isObsidianVaults() and { bg = "none" } or { bg = theme.ui.bg_visual, fg = theme.ui.fg },
   y = isObsidianVaults() and { bg = "none", fg = theme.syn.keyword } or
       { bg = theme.ui.bg_search, fg = theme.syn.fg },
 }
@@ -113,19 +113,6 @@ local sections = {
   lualine_x = isObsidianVaults() and {
     {
       'copilot',
-      padding = 0,
-      symbols = {
-        status = {
-          icons = {
-            enabled = DestNgxVim.icons.copilotEnabled,
-            sleep = DestNgxVim.icons.copilotSleep,
-            disabled = DestNgxVim.icons.copilotDisabled,
-            warning = DestNgxVim.icons.copilotWarning,
-            unknown = DestNgxVim.icons.copilotUnknown
-          },
-        },
-      },
-      show_colors = true,
       show_loading = true,
     },
   } or {
@@ -183,7 +170,7 @@ local sections = {
     }
   },
   lualine_y = { { get_location }, { wordCount, padding = { left = 0, right = 1 } } },
-  lualine_z = { 'mode' }
+  lualine_z = isObsidianVaults() and { } or{ 'mode' }
 }
 
 require('lualine').setup {
