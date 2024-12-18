@@ -30,7 +30,7 @@ return {
   -- },
   {
     "echasnovski/mini.diff", -- Inline and better diff over the default
-    event = "BufRead",
+    lazy = false,
     config = function()
       local diff = require("mini.diff")
       diff.setup({
@@ -41,7 +41,7 @@ return {
   },
   {
     "akinsho/git-conflict.nvim",
-    lazy = false,
+    event = "BufRead",
     config = function()
       require("plugins.config.git.conflict")
     end,
