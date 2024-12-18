@@ -17,16 +17,27 @@ return {
       { "<Leader>ghu", desc = "undo stage" }
     }
   },
+  -- {
+  --   "sindrets/diffview.nvim",
+  --   event = "BufRead",
+  --   config = function()
+  --     require("plugins.config.git.diffview")
+  --   end,
+  --   keys = {
+  --     { "<Leader>gd", "<cmd>lua require('plugins.config.git.diffview').toggle_file_history()<CR>", desc = "diff file" },
+  --     { "<Leader>gS", "<cmd>lua require('plugins.config.git.diffview').toggle_status()<CR>",       desc = "status" }
+  --   },
+  -- },
   {
-    "sindrets/diffview.nvim",
+    "echasnovski/mini.diff", -- Inline and better diff over the default
     event = "BufRead",
     config = function()
-      require("plugins.config.git.diffview")
+      local diff = require("mini.diff")
+      diff.setup({
+        -- Disabled by default
+        source = diff.gen_source.none(),
+      })
     end,
-    keys = {
-      { "<Leader>gd", "<cmd>lua require('plugins.config.git.diffview').toggle_file_history()<CR>", desc = "diff file" },
-      { "<Leader>gS", "<cmd>lua require('plugins.config.git.diffview').toggle_status()<CR>",       desc = "status" }
-    },
   },
   {
     "akinsho/git-conflict.nvim",

@@ -116,6 +116,7 @@ local sections = {
       show_loading = true,
     },
   } or {
+    -- { require("plugins.config.lualine-codecompanion") },
     {
       'copilot',
       padding = 0,
@@ -146,7 +147,7 @@ local sections = {
         return session ~= nil
       end,
     },
-    { 'branch', icon = DestNgxVim.icons.git },
+    { 'branch',                        icon = DestNgxVim.icons.git },
     {
       'diff',
       symbols = {
@@ -170,7 +171,7 @@ local sections = {
     }
   },
   lualine_y = { { get_location }, { wordCount, padding = { left = 0, right = 1 } } },
-  lualine_z = isObsidianVaults() and { } or{ 'mode' }
+  lualine_z = isObsidianVaults() and {} or { 'mode' }
 }
 
 require('lualine').setup {

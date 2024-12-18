@@ -32,8 +32,8 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 })
 -- disable cinnamon for specific filetypes
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = {"help", "lazy", "Oil", "NvimTree", "dashboard", "packer", "startify", "fzf", "fugitive", "spectre_panel"},
-    callback = function() vim.b.cinnamon_disable = true end,
+  pattern = { "help", "lazy", "Oil", "NvimTree", "dashboard", "packer", "startify", "fzf", "fugitive", "spectre_panel" },
+  callback = function() vim.b.cinnamon_disable = true end,
 })
 local function augroup(name)
   return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
@@ -58,6 +58,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "neotest-output-panel",
     "dbout",
     "gitsigns.blame",
+    "codecompanion",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
@@ -68,11 +69,15 @@ vim.api.nvim_create_autocmd("FileType", {
     })
   end,
 })
--- vim.api.nvim_create_autocmd("FileType", {
---     pattern = "copilot-chat",  -- Specify the file type
---     callback = function()
---         vim.cmd("TSBufDisable highlight")  -- Disable Tree-sitter highlighting
---     end,
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--   pattern = "codecompanion",
+--   callback = function()
+--     vim.opt_local.relativenumber = false
+--     vim.opt_local.number = false
+--
+--     -- Get current filetype and set it to markdown if the current filetype is copilot-chat
+--     vim.bo.filetype = "markdown"
+--   end,
 -- })
 
 -- ╭──────────────────────────────────────────────────────────╮

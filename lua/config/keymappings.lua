@@ -264,3 +264,12 @@ keymap("n", "gx", "<esc>:URLOpenUnderCursor<cr>")
 -- markdown
 keymap('n', '<leader>mp', '<cmd>PasteImage<CR>', { desc = 'Paste Image in to Makrdown buffer' }, silent)
 keymap('n', '<leader>mv', '<cmd>MarkdownPreview<CR>', { desc = 'Preview Makrdown in browser' }, silent)
+-- AI
+-- CodeCompanion
+
+keymap('n', '<leader>aa', '<cmd>CodeCompanionChat<CR>', { desc = 'AI Chat Panel Open' }, silent)
+keymap('n', '<leader>aq', '<cmd>CodeCompanion<CR>', { desc = 'AI Inline Quickchat' }, silent)
+keymap('v', '<leader>aq', '<cmd>CodeCompanion<CR>', { desc = 'AI Inline Quickchat' }, silent)
+keymap('n', '<leader>ap', '<cmd>CodeCompanionActions<CR>', { desc = 'AI Actions Selected' }, silent)
+keymap('v', '<leader>ap', '<cmd>CodeCompanionActions<CR>', { desc = 'AI Actions Selected' }, silent)
+keymap('v', '<leader>ad', '<cmd>CodeCompanionChat Add<CR>', { desc = 'AI Chat Add Selected' }, silent)
