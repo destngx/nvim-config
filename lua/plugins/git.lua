@@ -17,20 +17,20 @@ return {
       { "<Leader>ghu", desc = "undo stage" }
     }
   },
-  -- {
-  --   "sindrets/diffview.nvim",
-  --   event = "BufRead",
-  --   config = function()
-  --     require("plugins.config.git.diffview")
-  --   end,
-  --   keys = {
-  --     { "<Leader>gd", "<cmd>lua require('plugins.config.git.diffview').toggle_file_history()<CR>", desc = "diff file" },
-  --     { "<Leader>gS", "<cmd>lua require('plugins.config.git.diffview').toggle_status()<CR>",       desc = "status" }
-  --   },
-  -- },
+  {
+    "sindrets/diffview.nvim",
+    event = "BufRead",
+    config = function()
+      require("plugins.config.git.diffview")
+    end,
+    keys = {
+      { "<Leader>gd", "<cmd>lua require('plugins.config.git.diffview').toggle_file_history()<CR>", desc = "diff file" },
+      { "<Leader>gS", "<cmd>lua require('plugins.config.git.diffview').toggle_status()<CR>",       desc = "status" }
+    },
+  },
   {
     "echasnovski/mini.diff", -- Inline and better diff over the default
-    lazy = false,
+    event = "BufRead",
     config = function()
       local diff = require("mini.diff")
       diff.setup({
