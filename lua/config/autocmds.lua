@@ -1,8 +1,17 @@
 -- Auto sync plugins on save of plugins.lua
-vim.api.nvim_create_autocmd("BufWritePost", { pattern = "plugins.lua", command = "source <afile> | PackerSync" })
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = { "plugins.lua", "plugins/*/*.lua", "plugins/*.lua" },
+  command = "source <afile> | Lazy sync"
+})
 -- Disable tabline
 vim.api.nvim_create_autocmd("BufWinEnter", {
   command = "set showtabline=0"
+})
+-- Use fzf-lua for vim.ui.select
+vim.api.nvim_create_autocmd("BufWinEnter", {
+  callback = function()
+    require("fzf-lua").register_ui_select({}, true)
+  end,
 })
 -- desc = "jump to the last position when reopening a file",
 vim.api.nvim_create_autocmd("BufWinEnter", {
@@ -69,38 +78,7 @@ vim.api.nvim_create_autocmd("FileType", {
     })
   end,
 })
--- vim.api.nvim_create_autocmd("BufEnter", {
---   pattern = "codecompanion",
---   callback = function()
---     vim.opt_local.relativenumber = false
---     vim.opt_local.number = false
---
---     -- Get current filetype and set it to markdown if the current filetype is copilot-chat
---     vim.bo.filetype = "markdown"
---   end,
--- })
 
--- ╭──────────────────────────────────────────────────────────╮
--- │ Hide tabline and statusline on startup screen            │
--- ╰──────────────────────────────────────────────────────────╯
--- vim.api.nvim_create_augroup("dashboard_tabline", { clear = true })
---
--- vim.api.nvim_create_autocmd("FileType", {
---   group = "dashboard_tabline",
---   pattern = "dashboard",
---   command = "set showtabline=0 laststatus=0 noruler",
--- })
--- vim.api.nvim_create_autocmd("FileType", {
---   group = "dashboard_tabline",
---   pattern = "dashboard",
---   callback = function()
---     vim.api.nvim_create_autocmd("BufUnload", {
---       group = "dashboard_tabline",
---       buffer = 0,
---       command = "set showtabline=2 ruler laststatus=3",
---     })
---   end,
--- })
 -- ╭─────────────────────────────────────────────────────────────────╮
 -- │ Attach specific keybindings in which-key for specific filetypes │
 -- ╰─────────────────────────────────────────────────────────────────╯
