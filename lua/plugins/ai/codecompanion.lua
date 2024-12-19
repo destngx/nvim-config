@@ -140,6 +140,11 @@ return {
           },
         },
         slash_commands = {
+          ["help"] = {
+            opts = {
+              provider = "fzf_lua", -- default|telescope|mini_pick|fzf_lua
+            },
+          },
           ["symbols"] = {
             opts = {
               provider = "fzf_lua", -- default|telescope|mini_pick|fzf_lua
