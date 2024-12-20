@@ -9,9 +9,13 @@ return {
     cond = DestNgxVim.plugins.ai.copilot.enabled,
     event = "VeryLazy",
     opts = {
-      suggestion = { enabled = true },
+      suggestion = {
+        enabled = true,
+        auto_trigger = true,
+      },
       panel = { enabled = true },
       filetypes = {
+        sql =true,
         markdown = true,
         typescript = true,
         yaml = true,
