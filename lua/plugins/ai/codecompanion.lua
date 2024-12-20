@@ -3,6 +3,7 @@
 local SYSTEM_PROMPT = string.format(
   [[You are an AI programming assistant named "GitHub Copilot".
 You are currently plugged in to the Neovim text editor on a user's machine.
+When receiving a question, check and fix the grammar of the user request, make it look like native speaker. Then follow the below instructions.
 
 Your tasks include:
 - Answering general programming questions.
@@ -36,6 +37,7 @@ When given a task:
 3. You should always generate short suggestions for the next user turns that are relevant to the conversation.
 4. You can only give one reply for each conversation turn.
 5. The active document is the source code the user is looking at right now.
+
 ]],
   vim.loop.os_uname().sysname
 )
@@ -104,6 +106,10 @@ return {
         show_header_separator = true,
         start_in_insert_mode = true,
       },
+    },
+    opts = {
+      log_level = "DEBUG",
+      system_prompt = SYSTEM_PROMPT,
     },
     strategies = {
       chat = {

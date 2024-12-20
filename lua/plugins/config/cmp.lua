@@ -242,15 +242,15 @@ cmp.setup({
   -- You should specify your *installed* sources.
   sources = {
     {
-      name = "copilot",
-      priority = 11,
-      max_item_count = 3,
-    },
-    {
       name = "nvim_lsp",
-      priority = 10,
+      priority = 11,
       -- Limits LSP results to specific types based on line context (Fields, Methods, Variables)
       entry_filter = limit_lsp_types,
+    },
+    {
+      name = "copilot",
+      priority = 10,
+      max_item_count = 3,
     },
     { name = "codeium", priority = 9 },
     { name = "luasnip", priority = 7, max_item_count = 5 },
@@ -263,7 +263,7 @@ cmp.setup({
       max_item_count = 10,
       option = buffer_option,
     },
-    { name = "npm",     priority = 5 },
+    { name = "npm",      priority = 5 },
     { name = "nvim_lua", priority = 5 },
     { name = "path",     priority = 4 },
     { name = "calc",     priority = 3 },

@@ -10,10 +10,10 @@ return {
     event = "VeryLazy",
     opts = {
       suggestion = {
-        enabled = true,
+        enabled = false,
         auto_trigger = true,
       },
-      panel = { enabled = true },
+      panel = { enabled = false },
       filetypes = {
         sql =true,
         markdown = true,
