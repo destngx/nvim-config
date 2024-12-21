@@ -27,7 +27,7 @@ DestNgxVim = {
       alacritty_enabled = false,
       kitty_enabled = true,
       wezterm_enabled = true,
-      enabled = true, -- sync after change
+      enabled = false, -- sync after change
     },
     ai = {
       codeium = { enabled = os.getenv "COPILOT" == nil },

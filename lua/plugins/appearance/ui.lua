@@ -1,3 +1,8 @@
+local function no_nect_pain_calculate_with()
+  local width = vim.api.nvim_win_get_width(0)
+  local min_width = math.max(width * 0.70, 85)
+  return math.min(width, min_width)
+end
 local oil_git_ignored = setmetatable({}, {
   __index = function(self, key)
     local proc = vim.system({ "git", "ls-files", "--ignored", "--exclude-standard", "--others", "--directory" }, {
@@ -194,11 +199,33 @@ return {
       require("plugins.config.zen")
     end,
     enabled = DestNgxVim.plugins.zen.enabled,
+    keys = {
+      {
+        "<leader>z",
+        "<cmd>ZenMode<cr>",
+        desc = "Toggle Zen Mode",
+      }
+    }
   },
   {
     "folke/twilight.nvim",
     config = true,
     enabled = DestNgxVim.plugins.zen.enabled,
+  },
+  {
+    "shortcuts/no-neck-pain.nvim",
+    opts = {
+      width = no_nect_pain_calculate_with(),
+    },
+    enabled = not DestNgxVim.plugins.zen.enabled,
+    keys = {
+      -- add <leader>cz to enter zen mode
+      {
+        "<leader>z",
+        "<cmd>NoNeckPain<cr>",
+        desc = "Distraction Free Mode",
+      },
+    },
   },
   {
     "folke/flash.nvim",
