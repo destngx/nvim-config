@@ -258,7 +258,7 @@ Here are the diff:
 %s
 ```
 
-                ]], vim.fn.system("git status --short"), vim.fn.system("git diff --no-ext-diff"))
+                ]], vim.fn.system("git status --short"), vim.fn.system("git diff HEAD --no-ext-diff"))
             end,
           },
         },
