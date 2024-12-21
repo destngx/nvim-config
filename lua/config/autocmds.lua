@@ -8,6 +8,7 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
   command = "set showtabline=0"
 })
 -- Use fzf-lua for vim.ui.select
+-- BufWinEnter will slow at first time, but it's fine
 vim.api.nvim_create_autocmd("BufWinEnter", {
   callback = function()
     require("fzf-lua").register_ui_select({}, true)
