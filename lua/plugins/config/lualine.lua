@@ -1,3 +1,7 @@
+-- Utility functions
+-- Code companion util
+
+-- diff conditions util
 local conditions = {
   buffer_not_empty = function()
     return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
@@ -10,17 +14,16 @@ local conditions = {
     local gitdir = vim.fn.finddir('.git', filepath .. ';')
     return gitdir and #gitdir > 0 and #gitdir < #filepath
   end,
+  is_not_code_companion_buffer = function()
+    local ft = vim.bo.filetype
+    return ft ~= 'codecompanion'
+  end,
+  is_code_companion_buffer = function()
+    local ft = vim.bo.filetype
+    return ft == 'codecompanion'
+  end,
 }
-local trouble = require("trouble")
-local symbols = trouble.statusline({
-  mode = "lsp_document_symbols",
-  groups = {},
-  title = false,
-  filter = { range = true },
-  format = "{kind_icon}{symbol.name:NormalFloat}",
-  hl_group = "lualine_c_normal"
-})
-
+-- filetype makrdown util
 local function isMarkdownFile()
   local filetype = vim.bo.filetype
 
@@ -38,6 +41,61 @@ local function isObsidianVaults()
 
   return false
 end
+
+-- theme
+local theme = require("kanagawa.colors").setup().theme
+local kanagawa = {}
+kanagawa.normal = {
+  a = { bg = theme.syn.fun, fg = theme.ui.bg_m3 },
+  b = { bg = "none", fg = theme.syn.fun },
+  c = { bg = "none", fg = theme.ui.fg },
+  x = isObsidianVaults() and { bg = "none" } or { bg = theme.ui.bg_visual, fg = theme.ui.fg },
+  y = isObsidianVaults() and { bg = "none", fg = theme.syn.keyword } or
+      { bg = theme.ui.bg_search, fg = theme.syn.fg },
+}
+kanagawa.insert = {
+  a = { bg = theme.diag.ok, fg = theme.ui.bg },
+  b = { bg = theme.ui.bg, fg = theme.diag.ok },
+  x = isObsidianVaults() and { bg = "none" } or { bg = theme.ui.bg_visual, fg = theme.ui.fg },
+  y = isObsidianVaults() and { bg = "none", fg = theme.syn.keyword } or
+      { bg = theme.ui.bg_search, fg = theme.syn.fg },
+}
+kanagawa.command = {
+  a = { bg = theme.syn.operator, fg = theme.ui.bg },
+  b = { bg = theme.ui.bg, fg = theme.syn.operator },
+}
+kanagawa.visual = {
+  a = { bg = theme.syn.keyword, fg = theme.ui.bg },
+  b = { bg = theme.ui.bg, fg = theme.syn.keyword },
+}
+kanagawa.replace = {
+  a = { bg = theme.syn.constant, fg = theme.ui.bg },
+  b = { bg = theme.ui.bg, fg = theme.syn.constant },
+}
+kanagawa.inactive = {
+  a = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+  b = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim, gui = "bold" },
+  c = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+}
+if vim.g.kanagawa_lualine_bold then
+  for _, mode in pairs(kanagawa) do
+    mode.a.gui = "bold"
+  end
+end
+
+-- Custom components
+-- trouble component
+local trouble = require("trouble")
+local symbols = trouble.statusline({
+  mode = "lsp_document_symbols",
+  groups = {},
+  title = false,
+  filter = { range = true },
+  format = "{kind_icon}{symbol.name:NormalFloat}",
+  hl_group = "lualine_c_normal"
+})
+
+-- wordcount component
 local function wordCount()
   if isObsidianVaults() and isMarkdownFile() then
     return "and " .. tostring(vim.fn.wordcount().words) .. " words"
@@ -52,54 +110,31 @@ local function get_location()
   end
   return string.format('%d:%d|%d:%d', line, vim.fn.line('$'), col + 1, string.len(vim.fn.getline('.')))
 end
-local theme = require("kanagawa.colors").setup().theme
 
-local kanagawa = {}
-
-kanagawa.normal = {
-  a = { bg = theme.syn.fun, fg = theme.ui.bg_m3 },
-  b = { bg = "none", fg = theme.syn.fun },
-  c = { bg = "none", fg = theme.ui.fg },
-  x = isObsidianVaults() and { bg = "none" } or { bg = theme.ui.bg_visual, fg = theme.ui.fg },
-  y = isObsidianVaults() and { bg = "none", fg = theme.syn.keyword } or
-      { bg = theme.ui.bg_search, fg = theme.syn.fg },
+-- ai components
+local copilot_component = {
+  'copilot',
+  padding = 0,
+  symbols = {
+    status = {
+      icons = {
+        enabled = DestNgxVim.icons.copilotEnabled,
+        sleep = DestNgxVim.icons.copilotSleep,
+        disabled = DestNgxVim.icons.copilotDisabled,
+        warning = DestNgxVim.icons.copilotWarning,
+        unknown = DestNgxVim.icons.copilotUnknown
+      },
+    },
+  },
+  show_colors = true,
+  show_loading = true,
+  cond = conditions.is_not_code_companion_buffer
 }
+-- for chat panel
+local lualine_codecompanion_component = require("plugins.config.lualine-codecompanion")
 
-kanagawa.insert = {
-  a = { bg = theme.diag.ok, fg = theme.ui.bg },
-  b = { bg = theme.ui.bg, fg = theme.diag.ok },
-  x = isObsidianVaults() and { bg = "none" } or { bg = theme.ui.bg_visual, fg = theme.ui.fg },
-  y = isObsidianVaults() and { bg = "none", fg = theme.syn.keyword } or
-      { bg = theme.ui.bg_search, fg = theme.syn.fg },
-}
 
-kanagawa.command = {
-  a = { bg = theme.syn.operator, fg = theme.ui.bg },
-  b = { bg = theme.ui.bg, fg = theme.syn.operator },
-}
-
-kanagawa.visual = {
-  a = { bg = theme.syn.keyword, fg = theme.ui.bg },
-  b = { bg = theme.ui.bg, fg = theme.syn.keyword },
-}
-
-kanagawa.replace = {
-  a = { bg = theme.syn.constant, fg = theme.ui.bg },
-  b = { bg = theme.ui.bg, fg = theme.syn.constant },
-}
-
-kanagawa.inactive = {
-  a = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
-  b = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim, gui = "bold" },
-  c = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
-}
-
-if vim.g.kanagawa_lualine_bold then
-  for _, mode in pairs(kanagawa) do
-    mode.a.gui = "bold"
-  end
-end
-
+-- Config
 local sections = {
   lualine_a = {},
   lualine_b = { { 'filetype', padding = {}, icon_only = true }, { 'filename', padding = { left = 0, right = 1 } }, },
@@ -116,24 +151,8 @@ local sections = {
       show_loading = true,
     },
   } or {
-    -- { require("plugins.config.lualine-codecompanion") },
-    {
-      'copilot',
-      padding = 0,
-      symbols = {
-        status = {
-          icons = {
-            enabled = DestNgxVim.icons.copilotEnabled,
-            sleep = DestNgxVim.icons.copilotSleep,
-            disabled = DestNgxVim.icons.copilotDisabled,
-            warning = DestNgxVim.icons.copilotWarning,
-            unknown = DestNgxVim.icons.copilotUnknown
-          },
-        },
-      },
-      show_colors = true,
-      show_loading = true,
-    },
+    { lualine_codecompanion_component, cond = conditions.is_code_companion_buffer },
+    copilot_component,
     {
       function()
         return require("dap.lua").status()

@@ -4,16 +4,16 @@ M.processing = false
 M.spinner_index = 1
 
 local spinner_symbols = {
-  "⠋",
-  "⠙",
-  "⠹",
-  "⠸",
-  "⠼",
-  "⠴",
-  "⠦",
-  "⠧",
-  "⠇",
-  "⠏",
+  "(" .. DestNgxVim.icons.copilotSleep .. "     )",
+  "( " .. DestNgxVim.icons.copilotEnabled .. "    )",
+  "(  " .. DestNgxVim.icons.copilotUnknown .. "   )",
+  "(   " .. DestNgxVim.icons.copilotWarning .. "  )",
+  "(    " .. DestNgxVim.icons.copilotSleep .. " )",
+  "(     " .. DestNgxVim.icons.copilotSleep .. ")",
+  "(   " .. DestNgxVim.icons.copilotWarning .. "  )",
+  "(  " .. DestNgxVim.icons.copilotUnknown .. "   )",
+  "( " .. DestNgxVim.icons.copilotEnabled .. "    )",
+  "( " .. DestNgxVim.icons.copilotSleep .. "    )",
 }
 local spinner_symbols_len = 10
 
@@ -42,7 +42,7 @@ function M:update_status()
     self.spinner_index = (self.spinner_index % spinner_symbols_len) + 1
     return spinner_symbols[self.spinner_index]
   else
-    return nil
+    return "(" .. DestNgxVim.icons.copilotSleep .. "     )"
   end
 end
 
