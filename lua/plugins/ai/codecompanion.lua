@@ -189,6 +189,17 @@ return {
           auto_submit = true,
           user_prompt = false,
           stop_context_insertion = true,
+          adapters = {
+            copilot = function()
+              return require("codecompanion.adapters").extend("copilot", {
+                schema = {
+                  model = {
+                    default = "o1-preview-2024-09-12",
+                  },
+                },
+              })
+            end,
+          }
         },
         prompts = {
           {
@@ -218,7 +229,8 @@ return {
         opts = {
           index = 10,
           default_prompt = true,
-          slash_cmd = "scommitall",
+          short_name = "commit",
+          is_slash_cmd = true,
           auto_submit = true,
         },
         prompts = {
@@ -258,7 +270,6 @@ Here are the diff:
         opts = {
           index = 10,
           default_prompt = true,
-          slash_cmd = "scommitstaged",
           auto_submit = true,
         },
         prompts = {
@@ -298,7 +309,6 @@ Here are the staged changes:
           index = 11,
           default_prompt = true,
           modes = { "v" },
-          slash_cmd = "doc",
           auto_submit = true,
           user_prompt = false,
           stop_context_insertion = true,
@@ -343,10 +353,16 @@ Here are the staged changes:
           index = 12,
           default_prompt = true,
           modes = { "v" },
-          slash_cmd = "refactor",
+          short_name = "refactor",
+          is_slash_cmd = true,
           auto_submit = true,
           user_prompt = false,
           stop_context_insertion = true,
+          adapters = {
+            name = "copilot",
+            model = "o1-preview-2024-09-12",
+          },
+
         },
         prompts = {
           {
@@ -356,7 +372,8 @@ Here are the staged changes:
                 1. **Analyze the Code**: Understand the functionality and identify potential bottlenecks.
                 2. **Implement the Optimization**: Apply the optimizations including best practices to the code.
                 3. **Shorten the code**: Remove unnecessary code and refactor the code to be more concise.
-                3. **Review the Optimized Code**: Ensure the code is optimized for performance and readability. Ensure the code:
+                4. **Refactor**: Make sure the code is better at readability.
+                5. **Review the Optimized Code**: Ensure the code is optimized for performance and readability. Ensure the code:
                   - Maintains the original functionality.
                   - Is more efficient in terms of time and space complexity.
                   - Follows best practices for readability and maintainability.
@@ -371,8 +388,28 @@ Here are the staged changes:
             role = "user",
             content = function(context)
               local code = require("codecompanion.helpers.actions").get_code(context.start_line, context.end_line)
+              return string.format([[
+When asked to optimize code, follow these steps:
+1. **Analyze the Code**: Understand the functionality and identify potential bottlenecks.
+2. **Implement the Optimization**: Apply the optimizations including best practices to the code.
+3. **Shorten the code**: Remove unnecessary code and refactor the code to be more concise.
+4. **Refactor**: Make sure the code is better at readability.
+5. **Review the Optimized Code**: Ensure the code is optimized for performance and readability. Ensure the code:
+- Maintains the original functionality.
+- Is more efficient in terms of time and space complexity.
+- Follows best practices for readability and maintainability.
+- Is formatted correctly.
 
-              return string.format("Please optimize the selected code:\n\n```%s\n%s\n```\n\n", context.filetype, code)
+Use Markdown formatting and include the programming language name at the start of the code block.
+Please optimize the selected code:
+
+```
+File type: %s
+
+%s
+```
+"
+              ]], context.filetype, code)
             end,
             opts = {
               contains_code = true,
@@ -380,21 +417,34 @@ Here are the staged changes:
           },
         },
       },
-      ["Last Commit Code Review"] = {
+      ["Code Review"] = {
         strategy = "chat",
-        description = "",
+        description = "Review your code",
         opts = {
           index = 13,
           default_prompt = true,
-          slash_cmd = "review",
+          short_name = "review",
+          is_slash_cmd = true,
           auto_submit = true,
+          adapters = {
+            copilot = function()
+              return require("codecompanion.adapters").extend("copilot", {
+                schema = {
+                  model = {
+                    default = "o1-preview-2024-09-12",
+                  },
+                },
+              })
+            end,
+          },
         },
         prompts = {
           {
             role = "user",
             contains_code = true,
             content = function()
-              local number = vim.fn.input("How many commit you want to check? ") or 1
+              local number = vim.fn.input("How many commit you want to check?\nLeave empty to review current change ") or
+                  ""
               local git_history_cmd = string.format("git log --oneline -n %s", number)
               local git_diff_cmd = string.format("git diff HEAD~%s", number)
               return string.format([[

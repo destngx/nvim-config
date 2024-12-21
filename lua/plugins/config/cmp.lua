@@ -118,6 +118,7 @@ local source_mapping = {
   zsh = DestNgxVim.icons.terminal .. "ZSH",
 }
 
+
 local buffer_option = {
   -- Complete from all visible buffers (splits)
   get_bufnrs = function()
@@ -263,10 +264,10 @@ cmp.setup({
       max_item_count = 10,
       option = buffer_option,
     },
-    { name = "npm",      priority = 5 },
-    { name = "nvim_lua", priority = 5 },
-    { name = "path",     priority = 4 },
-    { name = "calc",     priority = 3 },
+    { name = "npm",        priority = 5 },
+    { name = "nvim_lua",   priority = 5 },
+    { name = "async_path", priority = 4 },
+    { name = "calc",       priority = 3 },
   },
   sorting = {
     priority_weight = 2,

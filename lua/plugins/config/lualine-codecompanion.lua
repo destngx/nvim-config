@@ -4,16 +4,16 @@ M.processing = false
 M.spinner_index = 1
 
 local spinner_symbols = {
-  "(" .. DestNgxVim.icons.copilotSleep .. "     )",
-  "( " .. DestNgxVim.icons.copilotEnabled .. "    )",
-  "(  " .. DestNgxVim.icons.copilotUnknown .. "   )",
-  "(   " .. DestNgxVim.icons.copilotWarning .. "  )",
-  "(    " .. DestNgxVim.icons.copilotSleep .. " )",
+  "(" .. DestNgxVim.icons.copilotSleep .. "    )",
+  "( " .. DestNgxVim.icons.copilotEnabled .. "   )",
+  "(  " .. DestNgxVim.icons.copilotUnknown .. "  )",
+  "(   " .. DestNgxVim.icons.copilotWarning .. " )",
+  "(    " .. DestNgxVim.icons.copilotSleep .. ")",
   "(     " .. DestNgxVim.icons.copilotSleep .. ")",
-  "(   " .. DestNgxVim.icons.copilotWarning .. "  )",
-  "(  " .. DestNgxVim.icons.copilotUnknown .. "   )",
-  "( " .. DestNgxVim.icons.copilotEnabled .. "    )",
-  "( " .. DestNgxVim.icons.copilotSleep .. "    )",
+  "(   " .. DestNgxVim.icons.copilotWarning .. " )",
+  "(  " .. DestNgxVim.icons.copilotUnknown .. "  )",
+  "( " .. DestNgxVim.icons.copilotEnabled .. "   )",
+  "( " .. DestNgxVim.icons.copilotSleep .. "   )",
 }
 local spinner_symbols_len = 10
 

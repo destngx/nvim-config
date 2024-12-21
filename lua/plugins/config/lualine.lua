@@ -1,3 +1,4 @@
+local icons = DestNgxVim.icons
 -- Utility functions
 -- Code companion util
 
@@ -22,25 +23,14 @@ local conditions = {
     local ft = vim.bo.filetype
     return ft == 'codecompanion'
   end,
+  is_markdown_file = function() return vim.bo.filetype == 'markdown' end,
+  is_obsidian_vault = function()
+    return string.find(vim.loop.cwd(), "obsidian%-vaults")
+  end,
+  is_dap_active = function()
+    return package.loaded.dap and require("dap.lua").session() ~= nil
+  end,
 }
--- filetype makrdown util
-local function isMarkdownFile()
-  local filetype = vim.bo.filetype
-
-  if filetype == 'markdown' then
-    return true
-  end
-  return false
-end
-local function isObsidianVaults()
-  local currentDir = vim.loop.cwd()
-
-  if string.find(currentDir, "obsidian%-vaults") then
-    return true
-  end
-
-  return false
-end
 
 -- theme
 local theme = require("kanagawa.colors").setup().theme
@@ -49,15 +39,15 @@ kanagawa.normal = {
   a = { bg = theme.syn.fun, fg = theme.ui.bg_m3 },
   b = { bg = "none", fg = theme.syn.fun },
   c = { bg = "none", fg = theme.ui.fg },
-  x = isObsidianVaults() and { bg = "none" } or { bg = theme.ui.bg_visual, fg = theme.ui.fg },
-  y = isObsidianVaults() and { bg = "none", fg = theme.syn.keyword } or
+  x = conditions.is_obsidian_vault() and { bg = "none" } or { bg = theme.ui.bg_visual, fg = theme.ui.fg },
+  y = conditions.is_obsidian_vault() and { bg = "none", fg = theme.syn.keyword } or
       { bg = theme.ui.bg_search, fg = theme.syn.fg },
 }
 kanagawa.insert = {
   a = { bg = theme.diag.ok, fg = theme.ui.bg },
   b = { bg = theme.ui.bg, fg = theme.diag.ok },
-  x = isObsidianVaults() and { bg = "none" } or { bg = theme.ui.bg_visual, fg = theme.ui.fg },
-  y = isObsidianVaults() and { bg = "none", fg = theme.syn.keyword } or
+  x = conditions.is_obsidian_vault() and { bg = "none" } or { bg = theme.ui.bg_visual, fg = theme.ui.fg },
+  y = conditions.is_obsidian_vault() and { bg = "none", fg = theme.syn.keyword } or
       { bg = theme.ui.bg_search, fg = theme.syn.fg },
 }
 kanagawa.command = {
@@ -96,19 +86,18 @@ local symbols = trouble.statusline({
 })
 
 -- wordcount component
-local function wordCount()
-  if isObsidianVaults() and isMarkdownFile() then
+local function word_count()
+  if conditions.is_obsidian_vault() and conditions.is_makrdown_file() then
     return "and " .. tostring(vim.fn.wordcount().words) .. " words"
   end
   return tostring(vim.fn.wordcount().words)
 end
 local function get_location()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  if isObsidianVaults() then
-    return string.format('char %d of %d at line %d of %d total lines', col + 1, string.len(vim.fn.getline('.')), line,
-      vim.fn.line('$'))
-  end
-  return string.format('%d:%d|%d:%d', line, vim.fn.line('$'), col + 1, string.len(vim.fn.getline('.')))
+  return conditions.is_obsidian_vault() and
+      string.format('char %d of %d at line %d of %d total lines', col + 1, string.len(vim.fn.getline('.')), line,
+        vim.fn.line('$'))
+      or string.format('%d:%d|%d:%d', line, vim.fn.line('$'), col + 1, string.len(vim.fn.getline('.')))
 end
 
 -- ai components
@@ -118,11 +107,11 @@ local copilot_component = {
   symbols = {
     status = {
       icons = {
-        enabled = DestNgxVim.icons.copilotEnabled,
-        sleep = DestNgxVim.icons.copilotSleep,
-        disabled = DestNgxVim.icons.copilotDisabled,
-        warning = DestNgxVim.icons.copilotWarning,
-        unknown = DestNgxVim.icons.copilotUnknown
+        enabled = icons.copilotEnabled,
+        sleep = icons.copilotSleep,
+        disabled = icons.copilotDisabled,
+        warning = icons.copilotWarning,
+        unknown = icons.copilotUnknown
       },
     },
   },
@@ -133,64 +122,69 @@ local copilot_component = {
 -- for chat panel
 local lualine_codecompanion_component = require("plugins.config.lualine-codecompanion")
 
+local ai_components = {
+  { lualine_codecompanion_component, cond = conditions.is_code_companion_buffer(), show_colors = true },
+  copilot_component,
+}
 
+-- dap component
+local dap_status = function()
+  if not package.loaded.dap then return false end
+  return require("dap.lua").session() ~= nil
+end
+
+local dap_component = {
+  function() return require("dap.lua").status() end,
+  icon = { icons.bug, color = { fg = "#e7c664" } },
+  cond = dap_status
+}
+
+-- diff component
+local diff_component = {
+  'diff',
+  symbols = {
+    added = icons.gitAdd,
+    modified = icons.gitChange,
+    removed = icons.gitRemove
+  },
+  cond = conditions.hide_in_width
+}
+
+-- diagnostics component
+local diagnostic_component = {
+  'diagnostics',
+  sources = { "nvim_diagnostic" },
+  symbols = {
+    error = icons.errorOutline,
+    warn = icons.warningTriangle,
+    info = icons.infoOutline,
+    hint = icons.lightbulbOutline
+  },
+  padding = { left = 0, right = 1 }
+}
 -- Config
+
 local sections = {
   lualine_a = {},
-  lualine_b = { { 'filetype', padding = {}, icon_only = true }, { 'filename', padding = { left = 0, right = 1 } }, },
+  lualine_b = {
+    { 'filetype', padding = {},                     icon_only = true },
+    { 'filename', padding = { left = 0, right = 1 } },
+  },
   lualine_c = {
-    {
-      symbols.get,
-      cond = symbols.has,
-      padding = 0,
-    }
+    { symbols.get, cond = symbols.has, padding = 0 }
   },
-  lualine_x = isObsidianVaults() and {
-    {
-      'copilot',
-      show_loading = true,
-    },
-  } or {
-    { lualine_codecompanion_component, cond = conditions.is_code_companion_buffer },
+  lualine_x = {
+    { lualine_codecompanion_component, cond = conditions.is_code_companion_buffer, show_colors = true },
     copilot_component,
-    {
-      function()
-        return require("dap.lua").status()
-      end,
-      icon = { DestNgxVim.icons.bug, color = { fg = "#e7c664" } }, -- nerd icon.
-      cond = function()
-        if not package.loaded.dap then
-          return false
-        end
-        local session = require("dap.lua").session()
-        return session ~= nil
-      end,
-    },
-    { 'branch',                        icon = DestNgxVim.icons.git },
-    {
-      'diff',
-      symbols = {
-        added = DestNgxVim.icons.gitAdd,
-        modified = DestNgxVim.icons.gitChange,
-        removed = DestNgxVim.icons.gitRemove
-      },
-      cond = conditions.hide_in_width,
-    },
-    {
-      'diagnostics',
-      sources = { "nvim_diagnostic" },
-      symbols = {
-        error = DestNgxVim.icons.errorOutline,
-        warn = DestNgxVim.icons.warningTriangle,
-        info = DestNgxVim.icons.infoOutline,
-        hint = DestNgxVim.icons.lightbulbOutline
-      }
-      ,
-      padding = { left = 0, right = 1 }
-    }
+    unpack(conditions.is_obsidian_vault() and {} or {
+      dap_component,
+      { 'branch', icon = icons.git },
+      diff_component,
+      diagnostic_component,
+    })
   },
-  lualine_y = { { get_location }, { wordCount, padding = { left = 0, right = 1 } } },
-  lualine_z = isObsidianVaults() and {} or { 'mode' }
+  lualine_y = { { get_location }, { word_count, padding = { left = 0, right = 1 } } },
+  lualine_z = conditions.is_obsidian_vault() and {} or { 'mode' }
 }
 
 require('lualine').setup {
