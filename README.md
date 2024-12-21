@@ -83,7 +83,7 @@ With the following plugins has been integrated into to support for full stack de
 1. **[AdvancedNewFile.nvim]()**: Create new files and folders
 2. **[Comment.nvim]()**: quickly comment code with treesitter power
 3. **[LuaSnip](https://github.com/L3MON4D3/LuaSnip)**
-4. **[alpha-nvim]()** customizable dashboard
+4. **[dashboard]()** customizable dashboard
 5. **[autosave.nvim]()**
 6. **[better-escape.nvim]()**
 7. **[bigfile.nvim]()**: Automatically turn off some features of neovim when working with large files

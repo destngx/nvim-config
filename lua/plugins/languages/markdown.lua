@@ -65,12 +65,19 @@ return {
     },
   },
   {
-    "iamcco/markdown-preview.nvim",
-    build = "cd app && bun install",
-    init = function()
-      vim.g.mkdp_filetypes = { "markdown" }
+    "previm/previm",
+    config = function()
+      -- define global for open markdown preview, let g:previm_open_cmd = 'open -a Safari'
+      vim.g.previm_open_cmd = "open -a Safari"
     end,
     ft = { "markdown" },
+    keys = {
+      {
+        "<leader>mv",
+        "<cmd>PrevimOpen<cr>",
+        desc = "Markdown preview",
+      },
+    },
   },
   {
     "epwalsh/obsidian.nvim",
