@@ -228,7 +228,6 @@ return {
         description = "Generate a Commit Message for All Changed Files",
         opts = {
           index = 10,
-          default_prompt = true,
           short_name = "commit",
           is_slash_cmd = true,
           auto_submit = true,
@@ -269,7 +268,6 @@ Here are the diff:
         description = "",
         opts = {
           index = 10,
-          default_prompt = true,
           auto_submit = true,
         },
         prompts = {
@@ -351,7 +349,6 @@ Here are the staged changes:
         description = "",
         opts = {
           index = 12,
-          default_prompt = true,
           modes = { "v" },
           short_name = "refactor",
           is_slash_cmd = true,
@@ -422,7 +419,6 @@ File type: %s
         description = "Review your code",
         opts = {
           index = 13,
-          default_prompt = true,
           short_name = "review",
           is_slash_cmd = true,
           auto_submit = true,
