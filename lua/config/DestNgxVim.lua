@@ -54,6 +54,6 @@ DestNgxVim = {
     path_type = "relative", -- absolute/relative
   },
   lsp = {
-    virtual_text = true, -- show virtual text (errors, warnings, info) inline messages
+    virtual_text = false, -- show virtual text (errors, warnings, info) inline messages, set fallse to use tiny-inline-diagnostic
   },
 }

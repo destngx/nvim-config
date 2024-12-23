@@ -120,9 +120,9 @@ vim.diagnostic.config({
   },
   underline = true,
   update_in_insert = false,
-  virtual_text = {
+  virtual_text = DestNgxVim.lsp.virtual_text and {
     prefix = DestNgxVim.icons.circle,
-  },
+  } or false,
 })
 
 -- UI

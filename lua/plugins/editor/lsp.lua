@@ -28,4 +28,20 @@ return {
       require("lsp-file-operations").setup()
     end
   },
+  {
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "LspAttach", -- Or `VeryLazy`
+    priority = 1000,     -- needs to be loaded in first
+    config = function()
+      require('tiny-inline-diagnostic').setup({
+        preset = 'simple',
+        options = {
+          multilines = true,
+          use_icons_from_diagnostic = true,
+          multiple_diag_under_cursor = true,
+          show_all_diags_on_cursorline = true,
+        },
+      })
+    end
+  }
 }
