@@ -256,3 +256,5 @@ chainable
 XMLHttpRequest
 YYYY
 iterables
+url
+lifecycle
