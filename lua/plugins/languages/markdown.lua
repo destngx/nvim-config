@@ -97,7 +97,7 @@ return {
       },
       notes_subdir = "Zettelkasten",
       completion = {
-        nvim_cmp = true,
+        -- nvim_cmp = true,
         min_chars = 2,
       },
       new_notes_location = "notes_subdir",
