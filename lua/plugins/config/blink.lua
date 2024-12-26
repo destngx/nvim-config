@@ -122,9 +122,24 @@ require("blink.cmp").setup(
     },
 
     sources = {
-      default = { "lsp", "path", "snippets", "buffer", "copilot", "codecompanion", "calc", "git", "npm" },
+      default = { "lsp", "path", "snippets", "buffer", "copilot", "codecompanion", "calc", "git", "npm", "obsidian", "obsidian_new", "obsidian_tags" },
       cmdline = {}, -- Disable sources for command-line mode
       providers = {
+        obsidian = {
+          name = "obsidian",
+          module = "blink.compat.source",
+          min_keyword_length = 1,
+        },
+        obsidian_new = {
+          name = "obsidian_new",
+          module = "blink.compat.source",
+          min_keyword_length = 1,
+        },
+        obsidian_tags = {
+          name = "obsidian_tags",
+          module = "blink.compat.source",
+          min_keyword_length = 1,
+        },
         calc = { name = "calc", module = "blink.compat.source", min_keyword_length = 3 },
         git = { name = "git", module = "blink.compat.source" },
         npm = {

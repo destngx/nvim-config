@@ -24,5 +24,5 @@ return {
     config = function()
       require("plugins.config.blink")
     end,
-  }
+  },
 }
