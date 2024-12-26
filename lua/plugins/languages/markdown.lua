@@ -97,6 +97,7 @@ return {
       },
       notes_subdir = "Zettelkasten",
       completion = {
+        -- TODO: update config for blink.cmp
         -- nvim_cmp = true,
         min_chars = 2,
       },

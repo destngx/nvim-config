@@ -16,6 +16,7 @@ DestNgxVim = {
   plugins = {
     completion = {
       select_first_on_enter = true,
+      ghost_text = true,
     },
     rooter = {
       -- Removing package.json from list in Monorepo Frontend Project can be helpful

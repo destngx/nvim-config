@@ -13,7 +13,7 @@ return {
     dependencies = {
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      -- "hrsh7th/cmp-nvim-lsp",
+      "saghen/blink.cmp",
     },
     servers = nil,
   },
