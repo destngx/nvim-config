@@ -478,27 +478,31 @@ return {
       },
     },
     keys = {
-      {
-        "s",
-        mode = { "n", "x", "o" },
-        function()
-          require("flash").jump()
-        end,
-        desc = "Flash jump",
-      },
-      -- {
-      --   "r",
-      --   mode = "o",
-      --   function()
-      --     require("flash").remote()
-      --   end,
-      --   desc = "Remote Flash"
-      -- },
+      { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash jump", },
+      { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter jump", },
+      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
     },
   },
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
+    opts = {
+      spec = {
+        {
+          mode = { "n", "v" },
+          { "<leader>a", group = "AI" },
+          { "<leader>c", group = "code" },
+          { "<leader>d", group = "debug" },
+          { "<leader>l", group = "list" },
+          { "<leader>m", group = "markdown" },
+          { "<leader>g", group = "git" },
+          { "<leader>o", group = "obsidian" },
+          { "<leader>s", group = "search" },
+        },
+      },
+    }
   },
   {
     "folke/todo-comments.nvim",
@@ -506,7 +510,6 @@ return {
     opts = {
       signs = true,      -- show icons in the signs column
       sign_priority = 8, -- sign priority
-      -- keywords recognized as todo comments
       keywords = {
         FIX = {
           alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
@@ -516,7 +519,6 @@ return {
       },
       highlight = {
         before = "",                     -- "fg" or "bg" or empty
-        -- keyword = "wide", -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
         keyword = "wide",                -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
         after = "fg",                    -- "fg" or "bg" or empty
         pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns, used for highlightng (vim regex)
@@ -524,6 +526,10 @@ return {
         max_line_len = 400,              -- ignore lines longer than this
         exclude = {},                    -- list of file types to exclude highlighting
       },
+    },
+    keys = {
+      { "<leader>st", function() require("todo-comments.fzf").todo() end,                                          desc = "Todo" },
+      { "<leader>sT", function() require("todo-comments.fzf").todo({ keywords = { "TODO", "FIX", "FIXME" } }) end, desc = "Todo/Fix/Fixme" },
     }
   },
 }

@@ -100,11 +100,6 @@ return {
       -- "insert_below" will insert the text below the cursor
       --  "yank" will not insert but instead put text into the default '"' register
       formatters = {
-        -- you can define your formatters for specific filetypes
-        -- by assigning function that takes two strings
-        -- one text modified by 'add_to_inside' function
-        -- second the variable (thing) you want to print out
-        -- see examples in lua/formatters.lua
         lua = function(inside, variable)
           return string.format('print("%s: " .. %s)', inside, variable)
         end,
@@ -155,5 +150,4 @@ return {
       })
     end
   },
-  -- { 'pappasam/vim-keywordprg-commands', lazy = false }
 }

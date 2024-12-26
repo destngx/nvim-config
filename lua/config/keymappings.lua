@@ -12,7 +12,7 @@ keymap("n", "Q", "<nop>")
 keymap("i", "<c-t>", "<Esc>b~lea")
 
 -- Open Oil
-keymap("n", "<leader>e", "<cmd>Oil --float<CR>", { noremap = true, silent = true })
+keymap("n", "<leader>e", "<cmd>Oil --float<CR>", { noremap = true, silent = true, desc = "File Explorer" })
 
 -- Shortcut for faster save
 keymap("n", "<c-s>", "<cmd>update<cr>", { silent = true, desc = "save current buffer" })
@@ -137,9 +137,8 @@ vim.cmd([[
 ]])
 
 -- Quickfix
-keymap("n", "<Space>,", ":cp<CR>", silent)
-keymap("n", "<Space>.", ":cn<CR>", silent)
-
+-- keymap("n", "<Space>,", ":cp<CR>", silent)
+-- keymap("n", "<Space>.", ":cn<CR>", silent)
 -- Toggle quicklist
 -- keymap("n", "<leader>q", "<cmd>lua require('utils').toggle_quicklist()<CR>", silent)
 
@@ -159,8 +158,16 @@ end
 -- for example a keymap that always adds a prnt statement based on 'iw'
 keymap("n", "gP", "<Plug>(printer_print)iw")
 -- LSP
-keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", silent)                               -- Replaced with Glance plugin
-keymap("n", "gr", "<cmd>lua vim.lsp.buf.references({ includeDeclaration = false })<CR>", silent) -- Replaced with Glance plugin
+-- { "gd", "<cmd>FzfLua lsp_definitions     jump_to_single_result=true ignore_current_line=true<cr>", desc = "Goto Definition", has = "definition" },
+-- { "gr", "<cmd>FzfLua lsp_references      jump_to_single_result=true ignore_current_line=true<cr>", desc = "References", nowait = true },
+-- { "gI", "<cmd>FzfLua lsp_implementations jump_to_single_result=true ignore_current_line=true<cr>", desc = "Goto Implementation" },
+-- { "gy", "<cmd>FzfLua lsp_typedefs        jump_to_single_result=true ignore_current_line=true<cr>", desc = "Goto T[y]pe Definition" },
+-- keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", silent)                               -- Replaced with Glance plugin
+-- keymap("n", "gr", "<cmd>lua vim.lsp.buf.references({ includeDeclaration = false })<CR>", silent) -- Replaced with Glance plugin
+keymap("n", "gd", "<cmd>FzfLua lsp_definitions     jump_to_single_result=true ignore_current_line=true<cr>",
+  { desc = "Goto Definition" }, silent)
+keymap("n", "gr", "<cmd>FzfLua lsp_references      jump_to_single_result=true ignore_current_line=true<cr>",
+  { desc = "References", nowait = true }, silent)
 keymap("n", "<C-Space>", "<cmd>lua vim.lsp.buf.code_action()<CR>", silent)
 keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", silent)
 keymap("v", "<leader>ca", "<cmd>'<,'>lua vim.lsp.buf.code_action()<CR>", silent)
@@ -172,7 +179,15 @@ keymap("n", "<leader>cs", "<cmd>TSToolsSortImports<CR>", { desc = "Typescript so
 keymap("n", "<leader>cu", "<cmd>TSToolsRemoveUnused<CR>", { desc = "Typescript remove unused import" }, silent)
 keymap("n", "<leader>cd", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", { desc = "current file diagnostics" },
   silent)
-keymap("n", "<leader>cD", "<cmd>Trouble diagnostics toggle<CR>", { desc = "workspace diagnostics" }, silent)
+keymap("n", "<leader>cD", function()
+  for _, client in pairs(vim.lsp.buf_get_clients()) do
+    require("workspace-diagnostics").populate_workspace_diagnostics(client, 0)
+  end
+
+  vim.defer_fn(function()
+    require("trouble").open({ mode = "diagnostics" })
+  end, 1000)
+end, { desc = "workspace diagnostics" })
 keymap("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<CR>", silent)
 -- lint
 keymap("n", "<leader>cL", function()
@@ -214,28 +229,39 @@ keymap("n", "gl", "<cmd>lua vim.diagnostic.open_float({ border = 'rounded', max_
 keymap("n", "]g", "<cmd>lua vim.diagnostic.goto_next({ float = { border = 'rounded', max_width = 100 }})<CR>", silent)
 keymap("n", "[g", "<cmd>lua vim.diagnostic.goto_prev({ float = { border = 'rounded', max_width = 100 }})<CR>", silent)
 keymap("n", "K", function()
-  local winid = require('ufo').peekFoldedLinesUnderCursor()
-  if not winid then
+  -- Use custom wrapper around MacOS dictionary as keyword look-up
+  if vim.bo.filetype == "markdown" then
+    local word = vim.fn.expand("<cword>"):gsub("[^%w%s-]", "")
+    local success, _ = pcall(vim.fn.system, "open dict://" .. word)
+    if not success then
+      vim.notify("Dictionary lookup failed", vim.log.levels.WARN)
+    end
+    return
+  end
+
+  local ufo = require('ufo')
+  local peek_window = ufo.peekFoldedLinesUnderCursor()
+  if not peek_window then
     vim.lsp.buf.hover()
   end
 end)
 
 -- Obsidian
-keymap("n", "<leader>ot", "<cmd>ObsidianTemplate<CR>", { desc = "Obsidian Template" }, silent)
-keymap("n", "<leader>on", "<cmd>ObsidianNew<CR>", { desc = "Create New Note" }, silent)
-keymap("n", "<leader>ob", "<cmd>ObsidianBacklinks<CR>", { desc = "View Backlinks" }, silent)
-keymap("n", "<leader>oc", "<cmd>ObsidianToggleCheckbox<CR>", { desc = "ObsidianToggleCheckbox" }, silent)
-keymap("v", "<leader>oc", "<cmd>ObsidianExtractNote<CR>", { desc = "Extract text to new note" }, silent)
-keymap("v", "<leader>ol", "<cmd>ObsidianExtractNote<CR>", { desc = "View Links" }, silent)
-keymap("v", "<leader>ost", "<cmd>ObsidianTags<CR>", { desc = "Searching for Tags in Vault" }, silent)
+keymap("n", "<leader>ot", "<cmd>ObsidianTemplate<CR>", { desc = "Obsidian Template", silent = true })
+keymap("n", "<leader>on", "<cmd>ObsidianNew<CR>", { desc = "Create New Note", silent = true })
+keymap("n", "<leader>ob", "<cmd>ObsidianBacklinks<CR>", { desc = "View Backlinks", silent = true })
+keymap("n", "<leader>oc", "<cmd>ObsidianToggleCheckbox<CR>", { desc = "ObsidianToggleCheckbox", silent = true })
+keymap("v", "<leader>oc", "<cmd>ObsidianExtractNote<CR>", { desc = "Extract text to new note", silent = true })
+keymap("v", "<leader>ol", "<cmd>ObsidianExtractNote<CR>", { desc = "View Links", silent = true })
+keymap("v", "<leader>ost", "<cmd>ObsidianTags<CR>", { desc = "Searching for Tags in Vault", silent = true })
 -- based64
-keymap('v', '<leader>b', '<cmd>lua require("b64").encode()<cr>', silent)
+keymap('v', '<leader>b', '<cmd>lua require("b64").encode()<cr>', { desc = "Base64 Encode", silent = true })
 keymap('v', '<leader>B', '<cmd>lua require("b64").decode()<cr>', silent)
 
--- recommended mappings
--- Todo Comments
-keymap("n", "]t", function() require("todo-comments").jump_next() end, { desc = "Next todo comment" })
-keymap("n", "[t", function() require("todo-comments").jump_prev() end, { desc = "Previous todo comment" })
+-- -- recommended mappings
+-- -- Todo Comments
+-- keymap("n", "]t", function() require("todo-comments").jump_next() end, { desc = "Next todo comment" })
+-- keymap("n", "[t", function() require("todo-comments").jump_prev() end, { desc = "Previous todo comment" })
 -- split
 keymap('n', '<leader>v', '<C-w>v', { desc = '<cmd>split right<CR>' }, silent)
 keymap('n', '<leader>V', '<C-w>s', { desc = '<cmd>split below<CR>' }, silent)
@@ -253,18 +279,16 @@ keymap('n', '<C-k>', require('smart-splits').move_cursor_up)
 keymap('n', '<C-l>', require('smart-splits').move_cursor_right)
 -- keymap('n', '<C-\\>', require('smart-splits').move_cursor_previous)
 -- swapping buffers between windows
-keymap('n', '<leader><leader>h', require('smart-splits').swap_buf_left)
-keymap('n', '<leader><leader>j', require('smart-splits').swap_buf_down)
-keymap('n', '<leader><leader>k', require('smart-splits').swap_buf_up)
-keymap('n', '<leader><leader>l', require('smart-splits').swap_buf_right)
-keymap('n', '<C-;>', '<cmd>lua require("smart-splits").move_cursor_bottom()<CR>', { noremap = true, silent = true })
+keymap('n', '<leader><leader>h', require('smart-splits').swap_buf_left, { desc = 'Swap buffer with left window' })
+keymap('n', '<leader><leader>j', require('smart-splits').swap_buf_down, { desc = 'Swap buffer with down window' })
+keymap('n', '<leader><leader>k', require('smart-splits').swap_buf_up, { desc = 'Swap buffer with up window' })
+keymap('n', '<leader><leader>l', require('smart-splits').swap_buf_right, { desc = 'Swap buffer with right window' })
 -- url-open
-keymap("n", "gx", "<esc>:URLOpenUnderCursor<cr>")
+keymap("n", "gx", "<esc>:URLOpenUnderCursor<cr>", { desc = "Open URL under cursor in browser" }, silent)
 -- markdown
 keymap('n', '<leader>mp', '<cmd>PasteImage<CR>', { desc = 'Paste Image in to Makrdown buffer' }, silent)
 -- AI
 -- CodeCompanion
-
 keymap('n', '<leader>aa', '<cmd>CodeCompanionChat<CR>', { desc = 'AI Chat Panel Open' }, silent)
 keymap('n', '<leader>aq', '<cmd>CodeCompanion<CR>', { desc = 'AI Inline Quickchat' }, silent)
 keymap('v', '<leader>aq', '<cmd>CodeCompanion<CR>', { desc = 'AI Inline Quickchat' }, silent)

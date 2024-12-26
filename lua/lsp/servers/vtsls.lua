@@ -112,7 +112,7 @@ local on_attach = function(client, bufnr)
   end
   require("which-key").add({
     { buffer = bufnr },
-    { "<leader>c",   group = "LSP", },
+    { "<leader>c",   group = "TypeScript Actions", },
     { "<leader>ce",  "<cmd>TSC<CR>",                         desc = "workspace errors (TSC)" },
     { "<leader>cF",  "<cmd>VtsExec fix_all<CR>",             desc = "fix all" },
     { "<leader>ci",  "<cmd>VtsExec add_missing_imports<CR>", desc = "import all" },
@@ -122,7 +122,7 @@ local on_attach = function(client, bufnr)
     { "<leader>cV",  "<cmd>VtsExec select_ts_version<CR>",   desc = "select TS version" },
     { "<leader>cF",  "<cmd>VtsExec file_references<CR>",     desc = "file references" },
   })
-  require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
+  -- require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
 end
 
 M.handlers = handlers

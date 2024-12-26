@@ -174,6 +174,9 @@ local icons = {
   Event               = '󱐋',
   Operator            = '󰪚',
   TypeParameter       = '󰬛',
+
+  User                = '󰙵 ',
+  Diagnostic          = '󱖫 ',
 }
 
 return icons

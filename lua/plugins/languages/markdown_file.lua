@@ -73,7 +73,7 @@ return {
     ft = { "markdown" },
     keys = {
       {
-        "<leader>mv",
+        "<leader>mm",
         "<cmd>PrevimOpen<cr>",
         desc = "Markdown preview",
       },
