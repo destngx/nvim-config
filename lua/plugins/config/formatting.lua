@@ -1,27 +1,17 @@
 local conform = require("conform")
-local formatters = {
-  "biome",
-  "prettierd",
-  "prettier",
-  ["markdown-toc"] = {
-    condition = function(_, ctx)
-      for _, line in ipairs(vim.api.nvim_buf_get_lines(ctx.buf, 0, -1, false)) do
-        if line:find("<!%-%- toc %-%->") then
-          return true
-        end
-      end
-    end,
-  },
-  ["markdownlint-cli2"] = {
-    condition = function(_, ctx)
-      local diag = vim.tbl_filter(function(d)
-        return d.source == "markdownlint"
-      end, vim.diagnostic.get(ctx.buf))
-      return #diag > 0
-    end,
-  },
+local mason_registry_ok, mason_registry = pcall(require, "mason-registry")
 
+local mason_ensure_installed_formatter = {
+  "terraform_fmt"
 }
+if mason_registry_ok then
+  for _, formatter in ipairs(mason_ensure_installed_formatter) do
+    if not mason_registry.is_installed(formatter) and mason_registry.has_package(formatter) then
+      vim.notify("Please install " .. formatter .. " formatter")
+      vim.cmd("MasonInstall " .. formatter)
+    end
+  end
+end
 
 local function find_config(bufnr, config_files)
   return vim.fs.find(config_files, {
@@ -53,7 +43,7 @@ local function biome_or_prettier(bufnr)
     return { "prettier", stop_after_first = true }
   end
 
-  -- Default to Prettier if no config is found
+  -- Default to None if no config is found
   return {}
 end
 
@@ -76,6 +66,12 @@ local filetypes_with_dynamic_formatter = {
   "yaml",
   "graphql",
   "handlebars",
+  "hcl",
+  "terraform",
+  "tf",
+  terraform = { "terraform_fmt" },
+  tf = { "terraform_fmt" },
+  ["terraform-vars"] = { "terraform_fmt" },
 }
 conform.setup({
   formatters_by_ft = (function()
@@ -86,6 +82,9 @@ conform.setup({
     for _, ft in ipairs(filetypes_without_dynamic_formatter) do
       if ft == "markdown" or ft == "markdown.mdx" then
         result[ft] = { "markdown-toc", "markdownlint-cli2" }
+      end
+      if ft == "terraform" or ft == "terraform-vars" or ft == "tf" then
+        result[ft] = { "terraform_fmt" }
       end
     end
 

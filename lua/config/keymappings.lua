@@ -168,6 +168,41 @@ keymap("n", "<leader>cD", function()
   end, 1000)
 end, { desc = "workspace diagnostics" })
 keymap("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<CR>", silent)
+
+-- normal mode format using conform <leader>cf
+-- keymap("v", "<leader>cf", function()
+--   local start_row, _ = unpack(vim.api.nvim_buf_get_mark(0, "<"))
+--   local end_row, _ = unpack(vim.api.nvim_buf_get_mark(0, ">"))
+--
+--   vim.lsp.buf.format({
+--     range = {
+--       ["start"] = { start_row, 0 },
+--       ["end"] = { end_row, 0 },
+--     },
+--     async = true,
+--   })
+-- end, silent)
+keymap("n", "<leader>cl", "<cmd>lua vim.diagnostic.open_float({ border = 'rounded', max_width = 100 })<CR>", silent)
+keymap("n", "<leader>ch", "<cmd>lua vim.lsp.buf.signature_help()<CR>", silent)
+keymap("n", "]g", "<cmd>lua vim.diagnostic.goto_next({ float = { border = 'rounded', max_width = 100 }})<CR>", silent)
+keymap("n", "[g", "<cmd>lua vim.diagnostic.goto_prev({ float = { border = 'rounded', max_width = 100 }})<CR>", silent)
+keymap("n", "K", function()
+  -- Use custom wrapper around MacOS dictionary as keyword look-up
+  if vim.bo.filetype == "markdown" then
+    local word = vim.fn.expand("<cword>"):gsub("[^%w%s-]", "")
+    local success, _ = pcall(vim.fn.system, "open dict://" .. word)
+    if not success then
+      vim.notify("Dictionary lookup failed", vim.log.levels.WARN)
+    end
+    return
+  end
+
+  local ufo = require('ufo')
+  local peek_window = ufo.peekFoldedLinesUnderCursor()
+  if not peek_window then
+    vim.lsp.buf.hover()
+  end
+end)
 -- lint
 keymap("n", "<leader>cL", function()
   require("lint").try_lint()
@@ -188,43 +223,8 @@ keymap({ "v" }, "<leader>cf", function()
   })
 end, { desc = "format selection" })
 
-
--- normal mode format using conform <leader>cf
--- keymap("v", "<leader>cf", function()
---   local start_row, _ = unpack(vim.api.nvim_buf_get_mark(0, "<"))
---   local end_row, _ = unpack(vim.api.nvim_buf_get_mark(0, ">"))
---
---   vim.lsp.buf.format({
---     range = {
---       ["start"] = { start_row, 0 },
---       ["end"] = { end_row, 0 },
---     },
---     async = true,
---   })
--- end, silent)
-keymap("n", "<leader>cl", "<cmd>lua vim.diagnostic.open_float({ border = 'rounded', max_width = 100 })<CR>", silent)
-keymap("n", "gl", "<cmd>lua vim.diagnostic.open_float({ border = 'rounded', max_width = 100 })<CR>", silent)
--- keymap("n", "L", "<cmd>lua vim.lsp.buf.signature_help()<CR>", silent)
-keymap("n", "]g", "<cmd>lua vim.diagnostic.goto_next({ float = { border = 'rounded', max_width = 100 }})<CR>", silent)
-keymap("n", "[g", "<cmd>lua vim.diagnostic.goto_prev({ float = { border = 'rounded', max_width = 100 }})<CR>", silent)
-keymap("n", "K", function()
-  -- Use custom wrapper around MacOS dictionary as keyword look-up
-  if vim.bo.filetype == "markdown" then
-    local word = vim.fn.expand("<cword>"):gsub("[^%w%s-]", "")
-    local success, _ = pcall(vim.fn.system, "open dict://" .. word)
-    if not success then
-      vim.notify("Dictionary lookup failed", vim.log.levels.WARN)
-    end
-    return
-  end
-
-  local ufo = require('ufo')
-  local peek_window = ufo.peekFoldedLinesUnderCursor()
-  if not peek_window then
-    vim.lsp.buf.hover()
-  end
-end)
-
+-- Markdown
+keymap('n', '<leader>mp', '<cmd>PasteImage<CR>', { desc = 'Paste Image in to Makrdown buffer', silent = true })
 -- Obsidian
 keymap("n", "<leader>ot", "<cmd>ObsidianTemplate<CR>", { desc = "Obsidian Template", silent = true })
 keymap("n", "<leader>on", "<cmd>ObsidianNew<CR>", { desc = "Create New Note", silent = true })
@@ -264,8 +264,7 @@ keymap('n', '<leader><leader>k', require('smart-splits').swap_buf_up, { desc = '
 keymap('n', '<leader><leader>l', require('smart-splits').swap_buf_right, { desc = 'Swap buffer with right window' })
 -- url-open
 keymap("n", "gx", "<esc>:URLOpenUnderCursor<cr>", { desc = "Open URL under cursor in browser", silent = true })
--- markdown
-keymap('n', '<leader>mp', '<cmd>PasteImage<CR>', { desc = 'Paste Image in to Makrdown buffer', silent = true })
+
 -- AI
 -- CodeCompanion
 keymap('n', '<leader>aa', '<cmd>CodeCompanionChat<CR>', { desc = 'AI Chat Panel Open', silent = true })

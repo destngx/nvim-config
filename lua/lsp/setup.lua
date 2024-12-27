@@ -13,11 +13,15 @@ mason.setup({
   },
 })
 
+
 mason_lsp.setup({
   -- A list of servers to automatically install if they're not already installed
   ensure_installed = {
     "lua_ls",
     "vtsls",
+    "dockerls",
+    "docker_compose_language_service",
+    "terraformls",
     -- "makrdownlint-cli2",
     -- "markdown-toc",
     -- "bashls",
@@ -30,23 +34,16 @@ mason_lsp.setup({
     -- "jsonls",
     -- "tailwindcss",
     -- "pylsp",
-    -- "dockerls",
-    -- "docker_compose_language_service",
+
   },
-  -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
-  -- This setting has no relation with the `ensure_installed` setting.
-  -- Can either be:
-  --   - false: Servers are not automatically installed.
-  --   - true: All servers set up via lspconfig are automatically installed.
-  --   - { exclude: string[] }: All servers set up via lspconfig, except the ones provided in the list, are automatically installed.
-  --       Example: automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }
   automatic_installation = true,
 })
 
 -- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
 -- Be aware that you also will need to properly configure your LSP server to
 -- provide the inlay hints.
-vim.lsp.inlay_hint.enable(true)
+
+pcall(vim.lsp.inlay_hint.enable, true)
 
 -- vim.lsp.codelens.enable(true)
 local lspconfig = require("lspconfig")
