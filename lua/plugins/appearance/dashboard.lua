@@ -76,7 +76,7 @@ return {
           {
             desc = icons.exit .. 'Quit',
             group = 'DiagnosticError',
-            action = '<cmd>exit<CR>',
+            action = 'quitall',
             key = 'q',
           },
         },
