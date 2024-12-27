@@ -64,6 +64,7 @@ settings.javascript =
 
 local on_attach = function(client, bufnr)
   client.commands["_typescript.moveToFileRefactoring"] = function(command, ctx)
+    print(ctx.bufnr)
     local action, uri, range = unpack(command.arguments)
 
     local function move(newf)

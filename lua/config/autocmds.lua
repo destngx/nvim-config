@@ -9,11 +9,19 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 })
 -- Use fzf-lua for vim.ui.select
 -- BufWinEnter will slow at first time, but it's fine
-vim.api.nvim_create_autocmd("BufWinEnter", {
-  callback = function()
-    require("fzf-lua").register_ui_select({}, true)
-  end,
-})
+-- vim.api.nvim_create_autocmd("VimEnter", {
+--   callback = function()
+--     -- run after 200ms
+--     vim.defer_fn(function()
+--       require("fzf-lua").register_ui_select({}, true)
+--     end, 200)
+--   end,
+-- })
+-- auto lint on save
+local autosave = require('autosave')
+autosave.hook_after_saving = function()
+  require("lint").try_lint()
+end
 -- desc = "jump to the last position when reopening a file",
 vim.api.nvim_create_autocmd("BufWinEnter", {
   pattern = "*",

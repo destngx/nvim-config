@@ -3,8 +3,8 @@ if not present then
   return
 end
 
-local keymap = vim.keymap.set
-local silent = { silent = true }
+-- local keymap = vim.keymap.set
+-- local silent = { silent = true }
 local utils = require('utils')
 
 -- ╭──────────────────────────────────────────────────────────╮

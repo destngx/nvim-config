@@ -46,8 +46,7 @@ return {
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,
-          -- TODO: update for blink.cmp support
-          -- ["cmp.entry.get_documentation"] = true,
+          ["cmp.entry.get_documentation"] = true,
         },
         progress = {
           enabled = true,
@@ -489,6 +488,10 @@ return {
     "folke/which-key.nvim",
     event = "VeryLazy",
     opts = {
+      plugins = {
+        marks = false,     -- shows a list of your marks on ' and `
+        registers = false, -- shows your registers on " in normal or <C-r> in insert mode
+      },
       spec = {
         {
           mode = { "n", "v" },

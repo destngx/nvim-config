@@ -78,44 +78,23 @@ keymap("n", "<leader>//", "<cmd>Dashboard<CR>", silent)
 -- New file by CTRL-N
 keymap("n", "<C-n>", "<cmd>AdvancedNewFile<CR>", silent)
 
-keymap("n", "<leader>lt", "<cmd>lua require('nvim-tree.api').tree.toggle()<CR>", { desc = "toggle file tree" }, silent)
+keymap("n", "<leader>lt", "<cmd>lua require('nvim-tree.api').tree.toggle()<CR>",
+  { desc = "toggle file tree", silent = true })
 keymap("n", "<leader>ls", "<cmd>Trouble lsp_document_symbols toggle win.position=left focus=false<CR>",
-  { desc = "Symbol Outline" }, silent)
+  { desc = "Symbol Outline", silent = true })
 -- fzflua
-keymap("n", "<S-p>", "<CMD>lua require('fzf-lua').live_grep_resume()<CR>")
-keymap("n", "<C-p>", "<CMD>lua require('fzf-lua').files()<CR>")
-keymap("n", "<C-b>", "<CMD>lua require('fzf-lua').buffers()<CR>")
-keymap("n", '""', "<CMD>lua require('fzf-lua').registers()<CR>")
--- vim.keymap.set({ "n" }, "<F0>", function()
---   fzf.help_tags()
--- end, { desc = "fzf help tags" })
--- vim.keymap.set({ "n" }, '""', function()
---   fzf.registers()
--- end, { desc = "fzf show registers content" })
--- vim.keymap.set({ "n" }, "<leader>gB", function()
---   fzf.git_branches()
--- end, { desc = "fzf git branches" })
--- vim.api.nvim_create_user_command("Autocmd", function()
---   fzf.autocmds()
--- end, { desc = "fzf autocmds list" })
--- vim.api.nvim_create_user_command("Maps", function()
---   fzf.keymaps()
--- end, { desc = "fzf maps list" })
--- vim.api.nvim_create_user_command("Highlights", function()
---   fzf.highlights()
--- end, { desc = "fzf highlights list" })
+keymap("n", "<S-p>", "<CMD>lua require('fzf-lua').live_grep_resume()<CR>", { desc = "Search keywords", silent = true })
+keymap("n", "<C-p>", "<CMD>lua require('fzf-lua').files()<CR>", { desc = "Search files", silent = true })
+keymap("n", "<leader>sb", "<CMD>lua require('fzf-lua').buffers()<CR>", { desc = "Search buffers", silent = true })
+keymap("n", '<leader>s"', "<CMD>lua require('fzf-lua').registers()<CR>",
+  { desc = "Show registers content", silent = true })
+keymap("n", '<leader>sm', "<CMD>lua require('fzf-lua').marks()<CR>", { desc = "Show marks", silent = true })
 -- Remove highlights
 keymap("n", "<CR>", ":noh<CR><CR>", silent)
 
--- Find word/file across project
--- keymap("n", "<Leader>pf",
---  "<CMD>lua require('plugins.telescope').project_files({ default_text = vim.fn.expand('<cword>'), initial_mode = 'normal' })<CR>")
--- keymap("n", "<Leader>pw", "<CMD>lua require('telescope.builtin').grep_string({ initial_mode = 'normal' })<CR>")
-
 -- Buffers
--- keymap("n", "<leader>;", "<cmd>Telescope grapple tags<CR>", silent)
-keymap("n", "gn", ":bn<CR>", silent)
-keymap("n", "gN", ":bp<CR>", silent)
+-- keymap("n", "gn", ":bn<CR>", silent)
+-- keymap("n", "gN", ":bp<CR>", silent)
 -- keymap("n", "<S-q>", ":lua require('mini.bufremove').delete(0, false)<CR>", silent)
 
 -- Don't yank on delete char
@@ -144,8 +123,8 @@ vim.cmd([[
 
 -- Manually invoke speeddating in case switch.vim didn't work
 keymap("n", "<C-a>", ":if !switch#Switch() <bar> call speeddating#increment(v:count1) <bar> endif<CR>", silent)
--- keymap("n", "<C-x>", ":if !switch#Switch({'reverse': 1}) <bar> call speeddating#increment(-v:count1) <bar> endif<CR>",
---  silent)
+keymap("n", "<C-x>", ":if !switch#Switch({'reverse': 0}) <bar> call speeddating#increment(-v:count1) <bar> endif<CR>",
+  silent)
 
 -- Open links under cursor in browser with gx
 if vim.fn.has('macunix') == 1 then
@@ -158,27 +137,27 @@ end
 -- for example a keymap that always adds a prnt statement based on 'iw'
 keymap("n", "gP", "<Plug>(printer_print)iw")
 -- LSP
--- { "gd", "<cmd>FzfLua lsp_definitions     jump_to_single_result=true ignore_current_line=true<cr>", desc = "Goto Definition", has = "definition" },
--- { "gr", "<cmd>FzfLua lsp_references      jump_to_single_result=true ignore_current_line=true<cr>", desc = "References", nowait = true },
--- { "gI", "<cmd>FzfLua lsp_implementations jump_to_single_result=true ignore_current_line=true<cr>", desc = "Goto Implementation" },
--- { "gy", "<cmd>FzfLua lsp_typedefs        jump_to_single_result=true ignore_current_line=true<cr>", desc = "Goto T[y]pe Definition" },
 -- keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", silent)                               -- Replaced with Glance plugin
 -- keymap("n", "gr", "<cmd>lua vim.lsp.buf.references({ includeDeclaration = false })<CR>", silent) -- Replaced with Glance plugin
+keymap("n", "gy", "<cmd>FzfLua lsp_typedefs        jump_to_single_result=true ignore_current_line=true<cr>",
+  { desc = "Goto Type Definition", silent = true })
+keymap("n", "gI", "<cmd>FzfLua lsp_implementations jump_to_single_result=true ignore_current_line=true<cr>",
+  { desc = "Goto Implementation", silent = true })
 keymap("n", "gd", "<cmd>FzfLua lsp_definitions     jump_to_single_result=true ignore_current_line=true<cr>",
-  { desc = "Goto Definition" }, silent)
+  { desc = "Goto Definition", silent = true })
 keymap("n", "gr", "<cmd>FzfLua lsp_references      jump_to_single_result=true ignore_current_line=true<cr>",
-  { desc = "References", nowait = true }, silent)
+  { desc = "References", nowait = true, silent = true })
 keymap("n", "<C-Space>", "<cmd>lua vim.lsp.buf.code_action()<CR>", silent)
 keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", silent)
 keymap("v", "<leader>ca", "<cmd>'<,'>lua vim.lsp.buf.code_action()<CR>", silent)
-keymap("n", "<leader>ce", "<cmd>TSC<CR>", { desc = "workspace error" }, silent)
-keymap("n", "<leader>cF", "<cmd>TSToolsFixAll<CR>", { desc = "fix all" }, silent)
-keymap("n", "<leader>ci", "<cmd>TSToolsAddMissingImports<CR>", { desc = "Typescript add missing import" }, silent)
-keymap("n", "<leader>co", "<cmd>TSToolsOrganizeImports<CR>", { desc = "Typescript organize import" }, silent)
-keymap("n", "<leader>cs", "<cmd>TSToolsSortImports<CR>", { desc = "Typescript sort import" }, silent)
-keymap("n", "<leader>cu", "<cmd>TSToolsRemoveUnused<CR>", { desc = "Typescript remove unused import" }, silent)
-keymap("n", "<leader>cd", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>", { desc = "current file diagnostics" },
-  silent)
+keymap("n", "<leader>ce", "<cmd>TSC<CR>", { desc = "workspace error", silent = true })
+keymap("n", "<leader>cF", "<cmd>TSToolsFixAll<CR>", { desc = "fix all", silent = true })
+keymap("n", "<leader>ci", "<cmd>TSToolsAddMissingImports<CR>", { desc = "Typescript add missing import", silent = true })
+keymap("n", "<leader>co", "<cmd>TSToolsOrganizeImports<CR>", { desc = "Typescript organize import", silent = true })
+keymap("n", "<leader>cs", "<cmd>TSToolsSortImports<CR>", { desc = "Typescript sort import", silent = true })
+keymap("n", "<leader>cu", "<cmd>TSToolsRemoveUnused<CR>", { desc = "Typescript remove unused import", silent = true })
+keymap("n", "<leader>cd", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>",
+  { desc = "current file diagnostics", silent = true })
 keymap("n", "<leader>cD", function()
   for _, client in pairs(vim.lsp.buf_get_clients()) do
     require("workspace-diagnostics").populate_workspace_diagnostics(client, 0)
@@ -263,8 +242,8 @@ keymap('v', '<leader>B', '<cmd>lua require("b64").decode()<cr>', silent)
 -- keymap("n", "]t", function() require("todo-comments").jump_next() end, { desc = "Next todo comment" })
 -- keymap("n", "[t", function() require("todo-comments").jump_prev() end, { desc = "Previous todo comment" })
 -- split
-keymap('n', '<leader>v', '<C-w>v', { desc = '<cmd>split right<CR>' }, silent)
-keymap('n', '<leader>V', '<C-w>s', { desc = '<cmd>split below<CR>' }, silent)
+keymap('n', '<leader>v', '<C-w>v', { desc = '<cmd>split right<CR>', silent = true })
+keymap('n', '<leader>V', '<C-w>s', { desc = '<cmd>split below<CR>', silent = true })
 -- resizing splits
 -- these keymaps will also accept a range,
 -- for example `10<A-h>` will `resize_left` by `(10 * config.default_amount)`
@@ -284,14 +263,14 @@ keymap('n', '<leader><leader>j', require('smart-splits').swap_buf_down, { desc =
 keymap('n', '<leader><leader>k', require('smart-splits').swap_buf_up, { desc = 'Swap buffer with up window' })
 keymap('n', '<leader><leader>l', require('smart-splits').swap_buf_right, { desc = 'Swap buffer with right window' })
 -- url-open
-keymap("n", "gx", "<esc>:URLOpenUnderCursor<cr>", { desc = "Open URL under cursor in browser" }, silent)
+keymap("n", "gx", "<esc>:URLOpenUnderCursor<cr>", { desc = "Open URL under cursor in browser", silent = true })
 -- markdown
-keymap('n', '<leader>mp', '<cmd>PasteImage<CR>', { desc = 'Paste Image in to Makrdown buffer' }, silent)
+keymap('n', '<leader>mp', '<cmd>PasteImage<CR>', { desc = 'Paste Image in to Makrdown buffer', silent = true })
 -- AI
 -- CodeCompanion
-keymap('n', '<leader>aa', '<cmd>CodeCompanionChat<CR>', { desc = 'AI Chat Panel Open' }, silent)
-keymap('n', '<leader>aq', '<cmd>CodeCompanion<CR>', { desc = 'AI Inline Quickchat' }, silent)
-keymap('v', '<leader>aq', '<cmd>CodeCompanion<CR>', { desc = 'AI Inline Quickchat' }, silent)
-keymap('n', '<leader>ap', '<cmd>CodeCompanionActions<CR>', { desc = 'AI Actions Selected' }, silent)
-keymap('v', '<leader>ap', '<cmd>CodeCompanionActions<CR>', { desc = 'AI Actions Selected' }, silent)
-keymap('v', '<leader>ad', '<cmd>CodeCompanionChat Add<CR>', { desc = 'AI Chat Add Selected' }, silent)
+keymap('n', '<leader>aa', '<cmd>CodeCompanionChat<CR>', { desc = 'AI Chat Panel Open', silent = true })
+keymap('n', '<leader>aq', '<cmd>CodeCompanion<CR>', { desc = 'AI Inline Quickchat', silent = true })
+keymap('v', '<leader>aq', '<cmd>CodeCompanion<CR>', { desc = 'AI Inline Quickchat', silent = true })
+keymap('n', '<leader>ap', '<cmd>CodeCompanionActions<CR>', { desc = 'AI Actions Selected', silent = true })
+keymap('v', '<leader>ap', '<cmd>CodeCompanionActions<CR>', { desc = 'AI Actions Selected', silent = true })
+keymap('v', '<leader>ad', '<cmd>CodeCompanionChat Add<CR>', { desc = 'AI Chat Add Selected', silent = true })

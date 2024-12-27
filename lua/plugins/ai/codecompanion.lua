@@ -241,6 +241,7 @@ return {
 You are an expert at following the Conventional Commit specification.
 Given the git diff listed below, please generate a commit message for me.
 If I should break it down into multiple commit, please suggest me and list the files for each commit.
+Also generate 1 single commit suggestion for everything.
 Think step-by-step about what was actually changed and keep the commit message focused on these changes.
 Use commitizen style for the commit message. Include the scope if possible.
 Focus on:
@@ -267,7 +268,7 @@ Here are the diff:
         strategy = "inline",
         description = "",
         opts = {
-          index = 10,
+          index = 11,
           auto_submit = true,
         },
         prompts = {
@@ -279,6 +280,7 @@ Here are the diff:
 You are an expert at following the Conventional Commit specification.
 Given the git diff listed below, please generate a commit message for me.
 If I should break it down into multiple commit, please suggest me and list the files for each commit.
+Also generate 1 single commit suggestion for everything.
 Think step-by-step about what was actually changed and keep the commit message focused on these changes.
 Use commitizen style for the commit message. Include the scope if possible.
 Focus on:

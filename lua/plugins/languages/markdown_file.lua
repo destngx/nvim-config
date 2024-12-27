@@ -89,12 +89,8 @@ return {
     },
     dependencies = {
       "nvim-lua/plenary.nvim",
-      -- TODO: keep for obdisian.nvim cmp
-      -- {
-      --   "hrsh7th/nvim-cmp",
-      -- },
     },
-    config = function(opts)
+    config = function()
       require("obsidian").setup({
         workspaces = {
           {

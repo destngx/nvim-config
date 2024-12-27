@@ -56,7 +56,7 @@ return {
       -- Set to false to disable the vim.ui.select implementation
       enabled = true,
       -- Priority list of preferred vim.select implementations
-      backend = { "telescope", "nui", "fzf", "builtin" },
+      backend = { "fzf_lua","telescope", "nui",  "builtin" },
       -- Options for nui Menu
       nui = {
         position = {
