@@ -1,4 +1,4 @@
-local icons = require("utils.icons")
+local icons = DestNgxVim.icons
 -- local function capture(cmd, raw)
 -- 	local f = assert(io.popen(cmd, "r"))
 -- 	local s = assert(f:read("*a"))
@@ -31,17 +31,17 @@ local icons = require("utils.icons")
 -- 	return result
 -- end
 -- if vim.fn.executable("onefetch") == 1 then
-  -- local header = split(
-  --   capture(
-  --     [[onefetch 2>/dev/null | sed 's/\x1B[@A-Z\\\]^_]\|\x1B\[[0-9:;<=>?]*[-!"#$%&'"'"'()*+,.\/]*[][\\@A-Z^_`a-z{|}~]//g']],
-  --     true
-  --   ),
-  --   "\n"
-  -- )
-  -- if next(header) ~= nil then
-  --   require("alpha.themes.dashboard").section.header.val = header
-  --   require("alpha").redraw()
-  -- end
+-- local header = split(
+--   capture(
+--     [[onefetch 2>/dev/null | sed 's/\x1B[@A-Z\\\]^_]\|\x1B\[[0-9:;<=>?]*[-!"#$%&'"'"'()*+,.\/]*[][\\@A-Z^_`a-z{|}~]//g']],
+--     true
+--   ),
+--   "\n"
+-- )
+-- if next(header) ~= nil then
+--   require("alpha.themes.dashboard").section.header.val = header
+--   require("alpha").redraw()
+-- end
 -- end
 
 return {
@@ -72,6 +72,12 @@ return {
             group = 'DiagnosticHint',
             action = 'FzfLua live_grep',
             key = '<S-p>',
+          },
+          {
+            desc = icons.exit .. 'Quit',
+            group = 'DiagnosticError',
+            action = '<cmd>exit<CR>',
+            key = 'q',
           },
         },
         project = {

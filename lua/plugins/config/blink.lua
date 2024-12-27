@@ -24,8 +24,8 @@ local keymap = {
   ["<Down>"] = { "select_next", "fallback" },
   ["<C-p>"] = { "select_prev", "fallback" },
   ["<C-n>"] = { "select_next", "fallback" },
-  ["<C-up>"] = { "scroll_documentation_up", "fallback" },
-  ["<C-down>"] = { "scroll_documentation_down", "fallback" },
+  ["<C-k>"] = { "scroll_documentation_up", "fallback" },
+  ["<C-j>"] = { "scroll_documentation_down", "fallback" },
 }
 ---@module 'blink.cmp'
 ---@diagnostic disable-next-line: undefined-doc-name

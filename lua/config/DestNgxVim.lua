@@ -47,7 +47,6 @@ DestNgxVim = {
       enabled = true,
     },
   },
-  -- Please keep it
   icons = icons,
   -- Status line configuration
   statusline = {
