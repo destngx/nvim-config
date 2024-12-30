@@ -4,6 +4,7 @@ local mason_registry_ok, mason_registry = pcall(require, "mason-registry")
 local mason_ensure_installed_linter = {
   "hadolint",
   "tflint",
+  "vale",
 }
 
 if mason_registry_ok then
@@ -26,7 +27,7 @@ lint.linters_by_ft = {
   typescriptreact = { "eslint_d" },
   svelte = { "eslint_d" },
   python = { "pylint" },
-  makrdown = { "markdownlint-cli2" },
+  makrdown = { "markdownlint-cli2", "vale" },
   dockerfile = { "hadolint" },
   terraform = { "tflint" },
   tf = { "tflint" },

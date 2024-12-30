@@ -22,6 +22,7 @@ mason_lsp.setup({
     "dockerls",
     "docker_compose_language_service",
     "terraformls",
+    "vale_ls",
     -- "makrdownlint-cli2",
     -- "markdown-toc",
     -- "bashls",
