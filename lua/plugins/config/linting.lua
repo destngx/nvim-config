@@ -28,7 +28,7 @@ lint.linters_by_ft = {
   python = { "pylint" },
   makrdown = { "markdownlint-cli2" },
   dockerfile = { "hadolint" },
-  terraform = { "terraform_validate" },
-  tf = { "terraform_validate" },
+  terraform = { "tflint" },
+  tf = { "tflint" },
   hcl = { "terraform_validate" },
 }

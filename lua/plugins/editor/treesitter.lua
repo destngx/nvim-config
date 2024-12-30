@@ -40,6 +40,9 @@ return {
           },
         },
 
+        matchup = {
+          enable = true,
+        },
         autotag = {
           enable = true
         },

@@ -1,6 +1,13 @@
 return {
   { "David-Kunz/markid", event = "BufReadPre" },
   {
+    "andymass/vim-matchup",
+    event = "BufReadPre",
+    setup = function()
+      vim.g.matchup_matchparen_offscreen = { method = "popup" }
+    end,
+  },
+  {
     "windwp/nvim-ts-autotag",
     event = "InsertEnter",
   },
@@ -41,7 +48,7 @@ return {
   },
   {
     "Wansmer/treesj",
-    lazy = true,
+    event = "BufEnter",
     cmd = { "TSJToggle", "TSJSplit", "TSJJoin" },
     keys = {
       { "gJ", "<cmd>TSJToggle<CR>", desc = "Toggle Split/Join" },
@@ -55,7 +62,6 @@ return {
   {
     "johmsalas/text-case.nvim",
     event = "BufEnter",
-    --   dependencies = { "nvim-telescope/telescope.nvim" },
     config = function()
       require("textcase").setup(
         {

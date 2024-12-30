@@ -127,6 +127,7 @@ keymap("n", "<C-x>", ":if !switch#Switch({'reverse': 0}) <bar> call speeddating#
   silent)
 
 -- Open links under cursor in browser with gx
+-- check if current nvim run in macos
 if vim.fn.has('macunix') == 1 then
   keymap("n", "gx", "<cmd>silent execute '!open ' . shellescape('<cWORD>')<CR>", silent)
 else
@@ -167,21 +168,11 @@ keymap("n", "<leader>cD", function()
     require("trouble").open({ mode = "diagnostics" })
   end, 1000)
 end, { desc = "workspace diagnostics" })
-keymap("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<CR>", silent)
-
--- normal mode format using conform <leader>cf
--- keymap("v", "<leader>cf", function()
---   local start_row, _ = unpack(vim.api.nvim_buf_get_mark(0, "<"))
---   local end_row, _ = unpack(vim.api.nvim_buf_get_mark(0, ">"))
---
---   vim.lsp.buf.format({
---     range = {
---       ["start"] = { start_row, 0 },
---       ["end"] = { end_row, 0 },
---     },
---     async = true,
---   })
--- end, silent)
+-- refactor symbol
+-- keymap("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<CR>", silent)
+keymap("n", "<leader>cr", function()
+  return ":IncRename " .. vim.fn.expand("<cword>")
+end, { desc = "Refactor Symbol", expr = true, silent = true })
 keymap("n", "<leader>cl", "<cmd>lua vim.diagnostic.open_float({ border = 'rounded', max_width = 100 })<CR>", silent)
 keymap("n", "<leader>ch", "<cmd>lua vim.lsp.buf.signature_help()<CR>", silent)
 keymap("n", "]g", "<cmd>lua vim.diagnostic.goto_next({ float = { border = 'rounded', max_width = 100 }})<CR>", silent)
@@ -263,7 +254,7 @@ keymap('n', '<leader><leader>j', require('smart-splits').swap_buf_down, { desc =
 keymap('n', '<leader><leader>k', require('smart-splits').swap_buf_up, { desc = 'Swap buffer with up window' })
 keymap('n', '<leader><leader>l', require('smart-splits').swap_buf_right, { desc = 'Swap buffer with right window' })
 -- url-open
-keymap("n", "gx", "<esc>:URLOpenUnderCursor<cr>", { desc = "Open URL under cursor in browser", silent = true })
+-- keymap("n", "gx", "<esc>:URLOpenUnderCursor<cr>", { desc = "Open URL under cursor in browser", silent = true })
 
 -- AI
 -- CodeCompanion
