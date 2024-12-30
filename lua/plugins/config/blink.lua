@@ -1,6 +1,6 @@
 local function is_obsidian_note()
   return vim.bo.filetype == "markdown"
-      and vim.api.nvim_buf_get_name(0):match('^/home/destnguyxn/projects/obsidian-vaults/*%.md$')
+      and vim.api.nvim_buf_get_name(0):match('^/Users/destnguyxn/projects/obsidian%-vaults/.+%.md$')
 end
 local copilot_kind = "Copilot"
 local keymap = {

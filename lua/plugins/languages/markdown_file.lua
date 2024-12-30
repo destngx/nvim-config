@@ -83,10 +83,21 @@ return {
     "epwalsh/obsidian.nvim",
     version = "*", -- recommended, use latest release instead of latest commit
     lazy = false,
-    event = {
-      "BufReadPre /home/destnguyxn/projects/obsidian-vaults/**.md",
-      "BufNewFile /home/destnguyxn/projects/obsidian-vaults/**.md",
-    },
+    event = function()
+      if vim.fn.has('macunix') == 1 then
+        return {
+          "BufReadPre /Users/destnguyxn/projects/obsidian-vaults/**.md",
+          "BufNewFile /Users/destnguyxn/projects/obsidian-vaults/**.md",
+        }
+      else
+        return {
+          "BufReadPre /home/destnguyxn/projects/obsidian-vaults/**.md",
+          "BufNewFile /home/destnguyxn/projects/obsidian-vaults/**.md",
+        }
+      end
+    end
+    ,
+
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
