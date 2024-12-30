@@ -37,7 +37,7 @@ return {
           "lsp",
           "treesitter",
           "syntax",
-          "matchparen",
+          "matchit",
           "vimopts",
           "filetype",
         },

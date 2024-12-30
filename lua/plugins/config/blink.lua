@@ -1,3 +1,7 @@
+local function is_obsidian_note()
+  return vim.bo.filetype == "markdown"
+      and vim.api.nvim_buf_get_name(0):match('^/home/destnguyxn/projects/obsidian-vaults/*%.md$')
+end
 local copilot_kind = "Copilot"
 local keymap = {
   preset = 'super-tab',
@@ -33,8 +37,8 @@ local keymap = {
 require("blink.cmp").setup({
   enabled = function()
     return not vim.tbl_contains(
-        { "help", "lazy", "Oil", "NvimTree", "dashboard", "packer", "startify", "fzf", "fugitive", "spectre_panel",
-          "DressingInput" }, vim.bo.filetype)
+      { "help", "lazy", "Oil", "NvimTree", "dashboard", "packer", "startify", "fzf", "fugitive", "spectre_panel",
+        "DressingInput" }, vim.bo.filetype)
   end,
   appearance = {
     use_nvim_cmp_as_default = false,
@@ -50,7 +54,6 @@ require("blink.cmp").setup({
       treesitter_highlighting = true,
       window = { border = "rounded" },
     },
-
     list = {
       cycle = {
         from_top = true,
@@ -126,7 +129,11 @@ require("blink.cmp").setup({
   },
 
   sources = {
-    default = { "lsp", "path", "snippets", "buffer", "copilot", "codecompanion", "calc", "git", "npm", "obsidian", "obsidian_new", "obsidian_tags" },
+    default = function()
+      local default_source = { "lsp", "path", "snippets", "buffer", "copilot", "codecompanion", "calc", "git", "npm" }
+      return is_obsidian_note() and
+      vim.list_extend(default_source, { "obsidian", "obsidian_new", "obsidian_tags" }) or default_source
+    end,
     cmdline = {}, -- Disable sources for command-line mode
     providers = {
       obsidian = {

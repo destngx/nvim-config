@@ -51,9 +51,9 @@ local options = {
 }
 
 local globals = {
-  mapleader               = ' ',     --- Map leader key to SPC
-  maplocalleader          = ',',     --- Map local leader key to comma
-  speeddating_no_mappings = 1,       --- Disable default mappings for speeddating
+  mapleader               = ' ', --- Map leader key to SPC
+  maplocalleader          = ',', --- Map local leader key to comma
+  speeddating_no_mappings = 1,   --- Disable default mappings for speeddating
 }
 
 vim.opt.shortmess:append('c');
@@ -74,18 +74,3 @@ end
 for k, v in pairs(globals) do
   vim.g[k] = v
 end
-
-if vim.g.neovide then
-  vim.opt.title = true
-  vim.opt.guifont = DestNgxVim.ui.font
-  vim.g.neovide_scale_factor = 1.1
-  vim.g.neovide_refresh_rate = 144
-  vim.g.neovide_underline_stroke_scale = 0.5
-  vim.g.neovide_input_use_logo = 1
-  vim.g.neovide_input_macos_option_key_is_meta = 'only_left'
-
-  vim.keymap.set({ 'n', 'v' }, '<D-c>', '"+y')  -- Copy
-  vim.keymap.set({ 'n', 'v' }, '<D-v>', '"*p')  -- Paste normal/visual mode
-  vim.keymap.set({ 'c', 'i' }, '<D-v>', '<C-R>+') -- Paste command/insert mode
-end
-
