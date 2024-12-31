@@ -124,7 +124,8 @@ vim.diagnostic.config({
     prefix = DestNgxVim.icons.circle,
   } or false,
 })
--- Codelens
+-- Default Codelens command
+-- Each LSP client can override this function to provide custom codelens
 vim.lsp.commands["editor.action.showReferences"] = function(command, ctx)
   local locations = command.arguments[3]
   local client = vim.lsp.get_client_by_id(ctx.client_id)

@@ -65,6 +65,14 @@ settings.javascript =
     vim.tbl_deep_extend("force", {}, settings.typescript, settings.javascript or {})
 
 local on_attach = function(client, bufnr)
+  client.commands["editor.action.showReferences"] = function(command, ctx)
+    local locations = command.arguments[3]
+    if locations and #locations > 0 then
+      local items = vim.lsp.util.locations_to_items(locations, client.offset_encoding)
+      vim.fn.setloclist(0, {}, " ", { title = "References", items = items, context = ctx })
+      vim.api.nvim_command("lopen")
+    end
+  end
   client.commands["_typescript.moveToFileRefactoring"] = function(command, ctx)
     print(ctx.bufnr)
     local action, uri, range = unpack(command.arguments)
@@ -125,7 +133,6 @@ local on_attach = function(client, bufnr)
     { "<leader>cV",  "<cmd>VtsExec select_ts_version<CR>",   desc = "select TS version" },
     { "<leader>cF",  "<cmd>VtsExec file_references<CR>",     desc = "file references" },
   })
-  -- require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
 end
 
 M.handlers = handlers
