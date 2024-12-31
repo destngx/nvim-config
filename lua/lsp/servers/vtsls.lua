@@ -41,6 +41,8 @@ local settings = {
     },
   },
   typescript = {
+    implementationCodeLens = { enabled = true },
+    referencesCodeLens = { enabled = true, showOnAllFunctions = true },
     tsserver = {
       maxTsServerMemory = 8192,
     },

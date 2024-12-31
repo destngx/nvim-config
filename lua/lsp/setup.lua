@@ -40,13 +40,6 @@ mason_lsp.setup({
   automatic_installation = true,
 })
 
--- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
--- Be aware that you also will need to properly configure your LSP server to
--- provide the inlay hints.
-
-pcall(vim.lsp.inlay_hint.enable, true)
-
--- vim.lsp.codelens.enable(true)
 local lspconfig = require("lspconfig")
 
 local handlers = {

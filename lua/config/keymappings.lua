@@ -148,15 +148,10 @@ keymap("n", "gd", "<cmd>FzfLua lsp_definitions     jump_to_single_result=true ig
   { desc = "Goto Definition", silent = true })
 keymap("n", "gr", "<cmd>FzfLua lsp_references      jump_to_single_result=true ignore_current_line=true<cr>",
   { desc = "References", nowait = true, silent = true })
-keymap("n", "<C-Space>", "<cmd>lua vim.lsp.buf.code_action()<CR>", silent)
+keymap("n", "<C-Space>", vim.lsp.codelens.run, { desc = "Run CodeLens", silent = true })
 keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", silent)
 keymap("v", "<leader>ca", "<cmd>'<,'>lua vim.lsp.buf.code_action()<CR>", silent)
 keymap("n", "<leader>ce", "<cmd>TSC<CR>", { desc = "workspace error", silent = true })
-keymap("n", "<leader>cF", "<cmd>TSToolsFixAll<CR>", { desc = "fix all", silent = true })
-keymap("n", "<leader>ci", "<cmd>TSToolsAddMissingImports<CR>", { desc = "Typescript add missing import", silent = true })
-keymap("n", "<leader>co", "<cmd>TSToolsOrganizeImports<CR>", { desc = "Typescript organize import", silent = true })
-keymap("n", "<leader>cs", "<cmd>TSToolsSortImports<CR>", { desc = "Typescript sort import", silent = true })
-keymap("n", "<leader>cu", "<cmd>TSToolsRemoveUnused<CR>", { desc = "Typescript remove unused import", silent = true })
 keymap("n", "<leader>cd", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>",
   { desc = "current file diagnostics", silent = true })
 keymap("n", "<leader>cD", function()

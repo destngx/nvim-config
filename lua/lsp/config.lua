@@ -79,7 +79,7 @@ local codes = {
   }
 }
 
-
+-- Diagnostic config
 vim.diagnostic.config({
   float = {
     source = false,
@@ -124,7 +124,24 @@ vim.diagnostic.config({
     prefix = DestNgxVim.icons.circle,
   } or false,
 })
+-- Codelens
+vim.lsp.commands["editor.action.showReferences"] = function(command, ctx)
+  local locations = command.arguments[3]
+  local client = vim.lsp.get_client_by_id(ctx.client_id)
+  if locations and #locations > 0 then
+    local items = vim.lsp.util.locations_to_items(locations, client.offset_encoding)
+    vim.fn.setloclist(0, {}, " ", { title = "References", items = items, context = ctx })
+    vim.api.nvim_command("lopen")
+  end
+end
+vim.api.nvim_create_autocmd({ "LspAttach", "BufEnter", "BufWritePost", "InsertLeave" }, {
+  callback = vim.lsp.codelens.refresh,
+})
+-- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
+-- Be aware that you also will need to properly configure your LSP server to
+-- provide the inlay hints.
 
+pcall(vim.lsp.inlay_hint.enable, true)
 -- UI
 local lspui_ok, lspui = pcall(require, 'lspconfig.ui.windows')
 if not lspui_ok then
