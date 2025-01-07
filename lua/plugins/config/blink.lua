@@ -98,6 +98,34 @@ require("blink.cmp").setup({
             end
           },
           label = {
+            width = { fill = true, max = 60 },
+            -- text = function(ctx)
+            --   local highlights_info =
+            --       require("colorful-menu").highlights(ctx.item, vim.bo.filetype)
+            --   if highlights_info ~= nil then
+            --     return highlights_info.text
+            --   else
+            --     return ctx.label
+            --   end
+            -- end,
+            -- highlight = function(ctx)
+            --   local highlights_info =
+            --       require("colorful-menu").highlights(ctx.item, vim.bo.filetype)
+            --   local highlights = {}
+            --   if highlights_info ~= nil then
+            --     for _, info in ipairs(highlights_info.highlights) do
+            --       table.insert(highlights, {
+            --         info.range[1],
+            --         info.range[2],
+            --         group = ctx.deprecated and "BlinkCmpLabelDeprecated" or info[1],
+            --       })
+            --     end
+            --   end
+            --   for _, idx in ipairs(ctx.label_matched_indices) do
+            --     table.insert(highlights, { idx, idx + 1, group = "BlinkCmpLabelMatch" })
+            --   end
+            --   return highlights
+            -- end,
             text = function(item)
               return item.label
             end,
@@ -132,7 +160,7 @@ require("blink.cmp").setup({
     default = function()
       local default_source = { "lsp", "path", "snippets", "buffer", "copilot", "codecompanion", "calc", "git", "npm" }
       return is_obsidian_note() and
-      vim.list_extend(default_source, { "obsidian", "obsidian_new", "obsidian_tags" }) or default_source
+          vim.list_extend(default_source, { "obsidian", "obsidian_new", "obsidian_tags" }) or default_source
     end,
     cmdline = {}, -- Disable sources for command-line mode
     providers = {
