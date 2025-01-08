@@ -9,6 +9,7 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
+    version = "*",
     lazy = false,
     dependencies = {
       "mason.nvim",

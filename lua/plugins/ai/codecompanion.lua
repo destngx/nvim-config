@@ -104,7 +104,6 @@ return {
         show_settings = true,
         render_headers = false,
         show_references = true,
-        show_header_separator = true,
         start_in_insert_mode = true,
       },
     },
