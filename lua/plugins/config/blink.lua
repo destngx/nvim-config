@@ -59,11 +59,11 @@ require("blink.cmp").setup({
         from_top = true,
         from_bottom = true,
       },
-      selection = function(ctx)
-        return ctx.mode == "cmdline" and "auto_insert" or "preselect"
-      end,
+      selection = {
+        preselect = true,
+        auto_insert = true,
+      },
     },
-
     menu = {
       border = "rounded",
 
@@ -150,7 +150,7 @@ require("blink.cmp").setup({
 
   -- Experimental signature help support
   signature = {
-    -- TODO: I already have this, wtf?
+    -- TODO: I already have this, by config the lsp server, which one is better?
     -- disable because of duplication
     enabled = false,
     window = { border = "rounded" },
