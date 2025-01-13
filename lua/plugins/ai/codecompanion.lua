@@ -356,14 +356,14 @@ Here are the staged changes:
       },
       ["Refactor the selected code for readability, maintainability and performances"] = {
         strategy = "chat",
-        description = "",
+        description = "Refactor the selected code",
         opts = {
           index = 12,
           modes = { "v" },
           short_name = "refactor",
           is_slash_cmd = true,
           auto_submit = true,
-          user_prompt = false,
+          user_prompt = true,
           stop_context_insertion = true,
           adapters = {
             name = "copilot",

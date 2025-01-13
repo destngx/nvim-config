@@ -40,6 +40,7 @@ kanagawa.setup({
       -- E.g.: autocmd TermOpen * setlocal winhighlight=Normal:NormalDark
       Normal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
       NormalDark = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m3 },
+      WinSeparator = { fg = theme.ui.nontext }, -- brighter
       -- Popular plugins that open floats will link to NormalFloat by default;
       -- set their background accordingly if you wish to keep them dark and borderless
       LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
