@@ -12,8 +12,6 @@ return {
     config.defaults.keymap.fzf["ctrl-u"] = "half-page-up"
     config.defaults.keymap.fzf["ctrl-d"] = "half-page-down"
     config.defaults.keymap.fzf["ctrl-x"] = "jump"
-    config.defaults.keymap.fzf["ctrl-f"] = "preview-page-down"
-    config.defaults.keymap.fzf["ctrl-b"] = "preview-page-up"
 
     local img_previewer ---@type string[]?
     for _, v in ipairs({
@@ -43,7 +41,6 @@ return {
         height = 0.6,
         width = 0.6,
         row = 0.6,
-        hl = { normal = "Pmenu" },
         border = "none",
         preview = {
           layout = "flex",
@@ -51,6 +48,7 @@ return {
         },
         backdrop = 60,
       },
+      hls = { normal = "Pmenu" },
       fzf_opts = {
         ["--no-info"] = "",
         ["--info"] = "hidden",
@@ -91,7 +89,6 @@ return {
       oldfiles = {
         formatter = "path.filename_first",
         git_icons = true,
-        preview_opts = "hidden",
         actions = {
           ["alt-i"] = { actions.toggle_ignore },
           ["alt-h"] = { actions.toggle_hidden },
@@ -103,7 +100,6 @@ return {
         git_icons = true,
         prompt = "grep: ",
         cmd = "rg --vimgrep --no-heading --smart-case --hidden --follow --color=always --line-number {q} || true",
-        preview_opts = "nohidden",
         no_header = false,
         cwd_header = true,
         cwd_prompt = false,
@@ -111,6 +107,9 @@ return {
           row = 1,
           width = vim.api.nvim_win_get_width(0),
           height = 0.5,
+          preview = {
+            hidden = false,
+          },
         },
         actions = {
           ["alt-i"] = { actions.toggle_ignore },
@@ -122,7 +121,11 @@ return {
         formatter = "path.filename_first",
         git_icons = true,
         prompt = DestNgxVim.icons.telescope,
-        preview_opts = "nohidden",
+        winopts = {
+          preview = {
+            hidden = false,
+          },
+        },
         no_header = false,
         cwd_header = true,
         actions = {
@@ -147,17 +150,23 @@ return {
       buffers = {
         formatter = "path.filename_first",
         prompt = "buffers: ",
-        preview_opts = "hidden",
+winopts = {
+          preview = {
+            hidden = false,
+          },
+        },
         no_header = true,
         fzf_opts = { ["--delimiter"] = " ", ["--with-nth"] = "-1.." },
       },
       helptags = {
         prompt = "💡: ",
-        preview_opts = "hidden",
         winopts = {
           row = 1,
           width = vim.api.nvim_win_get_width(0),
           height = 0.3,
+          preview = {
+            hidden = false,
+          },
         },
       },
       git = {
@@ -174,9 +183,9 @@ return {
               vim.api.nvim_feedkeys(switch, "t", false)
             end,
           },
-          preview_opts = "nohidden",
           winopts = {
             preview = {
+              hidden = false,
               layout = "vertical",
               vertical = "right:50%",
               wrap = "wrap",
@@ -260,11 +269,11 @@ return {
       },
       registers = {
         prompt = "Registers: ",
-        preview_opts = "hidden",
         winopts = {
           width = 0.8,
           height = 0.7,
           preview = {
+            hidden = true,
             layout = "horizontal",
             horizontal = "down:45%",
           },
