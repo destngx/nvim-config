@@ -99,37 +99,12 @@ require("blink.cmp").setup({
           },
           label = {
             width = { fill = true, max = 60 },
-            -- text = function(ctx)
-            --   local highlights_info =
-            --       require("colorful-menu").highlights(ctx.item, vim.bo.filetype)
-            --   if highlights_info ~= nil then
-            --     return highlights_info.text
-            --   else
-            --     return ctx.label
-            --   end
-            -- end,
-            -- highlight = function(ctx)
-            --   local highlights_info =
-            --       require("colorful-menu").highlights(ctx.item, vim.bo.filetype)
-            --   local highlights = {}
-            --   if highlights_info ~= nil then
-            --     for _, info in ipairs(highlights_info.highlights) do
-            --       table.insert(highlights, {
-            --         info.range[1],
-            --         info.range[2],
-            --         group = ctx.deprecated and "BlinkCmpLabelDeprecated" or info[1],
-            --       })
-            --     end
-            --   end
-            --   for _, idx in ipairs(ctx.label_matched_indices) do
-            --     table.insert(highlights, { idx, idx + 1, group = "BlinkCmpLabelMatch" })
-            --   end
-            --   return highlights
-            -- end,
-            text = function(item)
-              return item.label
+            text = function(ctx)
+              return require("colorful-menu").blink_components_text(ctx)
             end,
-            highlight = "CmpItemAbbr",
+            highlight = function(ctx)
+              return require("colorful-menu").blink_components_highlight(ctx)
+            end,
           },
           kind = {
             text = function(item)
@@ -199,6 +174,7 @@ require("blink.cmp").setup({
       copilot = {
         name = "copilot",
         module = "blink-cmp-copilot",
+        min_keyword_length = 0,
         score_offset = 100,
         async = true,
         -- set position for copilot suggestions at first row
@@ -213,17 +189,17 @@ require("blink.cmp").setup({
         end,
       },
       lsp = {
-        min_keyword_length = 2, -- Number of characters to trigger porvider
+        min_keyword_length = 0, -- Number of characters to trigger porvider
         score_offset = 0,       -- Boost/penalize the score of the items
       },
       path = {
         min_keyword_length = 0,
       },
       snippets = {
-        min_keyword_length = 1,
+        min_keyword_length = 3,
       },
       buffer = {
-        min_keyword_length = 5,
+        min_keyword_length = 3,
         max_items = 5,
       },
     },

@@ -19,9 +19,7 @@ return {
     "dmmulroy/ts-error-translator.nvim",
     event = "BufRead",
     ft = "javascript,typescript,typescriptreact,svelte",
-    opts = {
-      auto_override_publish_diagnostics = true,
-    },
+    config = true,
   },
   {
     "razak17/tailwind-fold.nvim",
@@ -32,7 +30,6 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     ft = { "html", "svelte", "astro", "vue", "typescriptreact" },
   },
-
   {
     "MaximilianLloyd/tw-values.nvim",
     ft = { "typescriptreact" },
@@ -45,7 +42,6 @@ return {
       show_unknown_classes = true                       -- Shows the unknown classes popup
     }
   },
-
   {
     "laytan/tailwind-sorter.nvim",
     ft = { "typescriptreact" },
@@ -83,12 +79,6 @@ return {
     config = true,
   },
 
-  {
-    "dmmulroy/ts-error-translator.nvim",
-    ft = { "typescript", "typescriptreact" },
-    event = "BufRead",
-    config = true
-  },
 
   {
     "artemave/workspace-diagnostics.nvim",

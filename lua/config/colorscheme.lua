@@ -25,6 +25,7 @@ kanagawa.setup({
     return {
       Boolean = { bold = false },
       -- Completion Menu colors
+      BlinkCmpMenuBorder = { link = "Pmenu" },
       Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_dim, blend = vim.o.pumblend }, -- add `blend = vim.o.pumblend` to enable transparency
       PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
       PmenuSbar = { bg = theme.ui.bg_m1 },

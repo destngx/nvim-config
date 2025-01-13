@@ -15,10 +15,14 @@ local handlers = {
     vim.lsp.handlers.signature_help,
     { border = DestNgxVim.ui.float.border }
   ),
-  ["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics,
-    { virtual_text = DestNgxVim.lsp.virtual_text }
-  ),
+  ["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
+    require("ts-error-translator").translate_diagnostics(err, result, ctx, config)
+    vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
+  end,
+  -- ["textDocument/publishDiagnostics"] = vim.lsp.with(
+  --   vim.lsp.diagnostic.on_publish_diagnostics,
+  --   { virtual_text = DestNgxVim.lsp.virtual_text }
+  -- ),
   ["textDocument/definition"] = function(err, result, method, ...)
     if vim.tbl_islist(result) and #result > 1 then
       local filtered_result = filter(result, filterReactDTS)
