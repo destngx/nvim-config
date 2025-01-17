@@ -59,6 +59,11 @@ local function on_attach(client, bufnr)
   if client.name == "yamlls" then
     client.server_capabilities.documentFormattingProvider = true
     client.server_capabilities.documentRangeFormattingProvider = true
+    if vim.bo[bufnr].filetype == "helm" then
+      vim.schedule(function()
+        vim.cmd("LspStop ++force yamlls")
+      end)
+    end
   end
 end
 
