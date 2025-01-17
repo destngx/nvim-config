@@ -89,6 +89,7 @@ keymap("n", "<leader>sb", "<CMD>lua require('fzf-lua').buffers()<CR>", { desc = 
 keymap("n", '<leader>s"', "<CMD>lua require('fzf-lua').registers()<CR>",
   { desc = "Show registers content", silent = true })
 keymap("n", '<leader>sm', "<CMD>lua require('fzf-lua').marks()<CR>", { desc = "Show marks", silent = true })
+keymap("n", '<leader>so', "<CMD>lua require('fzf-lua').oldfiles()<CR>", { desc = "Show recent files", silent = true })
 -- Remove highlights
 keymap("n", "<CR>", ":noh<CR><CR>", silent)
 
