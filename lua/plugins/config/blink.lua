@@ -100,9 +100,6 @@ require("blink.cmp").setup({
           label = {
             width = { fill = true, max = 60 },
             text = function(ctx)
-              if vim.bo.filetype == "helm" then
-                return ctx.label
-              end
               return require("colorful-menu").blink_components_text(ctx)
             end,
             highlight = function(ctx)
