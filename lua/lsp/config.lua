@@ -138,11 +138,7 @@ end
 vim.api.nvim_create_autocmd({ "LspAttach", "BufEnter", "BufWritePost", "InsertLeave" }, {
   callback = vim.lsp.codelens.refresh,
 })
--- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
--- Be aware that you also will need to properly configure your LSP server to
--- provide the inlay hints.
 
-pcall(vim.lsp.inlay_hint.enable, true)
 -- UI
 local lspui_ok, lspui = pcall(require, 'lspconfig.ui.windows')
 if not lspui_ok then

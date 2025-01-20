@@ -54,17 +54,12 @@ local handlers = {
     { virtual_text = DestNgxVim.lsp.virtual_text }
   ),
 }
----@diagnostic disable-next-line: unused-local
-local function on_attach(client, bufnr)
-  if client.name == "yamlls" then
-    client.server_capabilities.documentFormattingProvider = true
-    client.server_capabilities.documentRangeFormattingProvider = true
-    if vim.bo[bufnr].filetype == "helm" then
-      vim.schedule(function()
-        vim.cmd("LspStop ++force yamlls")
-      end)
-    end
-  end
+
+local function on_attach(_, bufnr)
+  vim.lsp.inlay_hint.enable(true, { bufnr })
+  -- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
+  -- Be aware that you also will need to properly configure your LSP server to
+  -- provide the inlay hints.
 end
 
 local capabilities = require("blink.cmp").get_lsp_capabilities()
