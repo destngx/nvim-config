@@ -71,6 +71,7 @@ Identify 'gotchas' or less obvious parts of the code that might trip up someone 
 Provide clear and relevant examples aligned with any provided context.
 ]]
 )
+
 return {
   "olimorris/codecompanion.nvim",
   enabled = DestNgxVim.plugins.ai.copilot.enabled,
@@ -616,6 +617,31 @@ Generate a markmap-compatible mind map for the provided text. Also provided this
           },
         },
       },
+      ["Explain like I'm five year olds"] = {
+        strategy = "chat",
+        description = "Explain the topic in a simple way.",
+        opts = {
+          index = 11,
+          short_name = "eli5",
+          is_slash_cmd = true,
+          auto_submit = true,
+        },
+        prompts = {
+          {
+            role = "system",
+            content = [[
+Explain to me like I'm five years old.
+You are an expert at breaking down complex topics into simple, easy-to-understand explanations.
+Your explanations should be clear, concise, and engaging, using simple language and relatable examples.
+Avoid jargon, technical terms, and complex concepts.
+Focus on the main points and use analogies, stories, and visual aids to help simplify the topic.
+]],
+            opts = {
+              visible = false,
+            },
+          },
+        },
+      }
     },
   },
 }

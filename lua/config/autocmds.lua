@@ -88,6 +88,16 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "codecompanion",
+  callback = function()
+    vim.opt_local.relativenumber = false
+    vim.opt_local.number = false
+
+    -- Get current filetype and set it to markdown if the current filetype is copilot-chat
+    vim.bo.filetype = "markdown"
+  end,
+})
 -- ╭─────────────────────────────────────────────────────────────────╮
 -- │ Attach specific keybindings in which-key for specific filetypes │
 -- ╰─────────────────────────────────────────────────────────────────╯
