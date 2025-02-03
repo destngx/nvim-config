@@ -79,9 +79,11 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
+    "j-hui/fidget.nvim"
   },
   init = function()
     vim.cmd([[cab cc CodeCompanion]])
+    require("plugins.config.codecompanion.fidget-spinner"):init()
   end,
   opts = {
     adapters = {
