@@ -86,6 +86,7 @@ keymap("n", "<leader>ls", "<cmd>Trouble lsp_document_symbols toggle win.position
 keymap("n", "<S-p>", "<CMD>lua require('fzf-lua').live_grep_resume()<CR>", { desc = "Search keywords", silent = true })
 keymap("n", "<C-p>", "<CMD>lua require('fzf-lua').files()<CR>", { desc = "Search files", silent = true })
 keymap("n", "<leader>sb", "<CMD>lua require('fzf-lua').buffers()<CR>", { desc = "Search buffers", silent = true })
+keymap("n", "<leader>ss", "<CMD>lua require('fzf-lua').lsp_document_symbols()<CR>", { desc = "Search lsp_document_symbols", silent = true })
 keymap("n", '<leader>s"', "<CMD>lua require('fzf-lua').registers()<CR>",
   { desc = "Show registers content", silent = true })
 keymap("n", '<leader>sm', "<CMD>lua require('fzf-lua').marks()<CR>", { desc = "Show marks", silent = true })
