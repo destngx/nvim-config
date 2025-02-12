@@ -17,7 +17,7 @@ return {
 
     -- Use floating windows to display smears outside buffers.
     -- May have performance issues with other plugins.
-    use_floating_windows = true,
+    use_floating_windows = false,
 
     -- Set to `true` if your font supports legacy computing symbols (block unicode symbols).
     -- Smears will blend better on all backgrounds.

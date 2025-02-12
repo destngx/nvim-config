@@ -219,8 +219,8 @@ keymap("n", "<leader>on", "<cmd>ObsidianNew<CR>", { desc = "Create New Note", si
 keymap("n", "<leader>ob", "<cmd>ObsidianBacklinks<CR>", { desc = "View Backlinks", silent = true })
 keymap("n", "<leader>oc", "<cmd>ObsidianToggleCheckbox<CR>", { desc = "ObsidianToggleCheckbox", silent = true })
 keymap("v", "<leader>oc", "<cmd>ObsidianExtractNote<CR>", { desc = "Extract text to new note", silent = true })
-keymap("v", "<leader>ol", "<cmd>ObsidianExtractNote<CR>", { desc = "View Links", silent = true })
-keymap("v", "<leader>ost", "<cmd>ObsidianTags<CR>", { desc = "Searching for Tags in Vault", silent = true })
+keymap("n", "<leader>ol", "<cmd>ObsidianLinks<CR>", { desc = "View Links", silent = true })
+keymap("n", "<leader>oT", "<cmd>ObsidianTags<CR>", { desc = "Searching for Tags in Vault", silent = true })
 -- based64
 keymap('v', '<leader>b', '<cmd>lua require("b64").encode()<cr>', { desc = "Base64 Encode", silent = true })
 keymap('v', '<leader>B', '<cmd>lua require("b64").decode()<cr>', silent)
