@@ -117,10 +117,10 @@ return {
     strategies = {
       chat = {
         adapter = "copilot",
-        roles = {
-          llm = " ", -- The markdown header content for the LLM's responses
-          user = " ", -- The markdown header for your questions
-        },
+        -- roles = {
+        --   llm = " ", -- The markdown header content for the LLM's responses
+        --   user = " ", -- The markdown header for your questions
+        -- },
         keymaps = {
           send = {
             modes = {
