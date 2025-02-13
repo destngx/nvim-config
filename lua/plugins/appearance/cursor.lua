@@ -9,6 +9,9 @@ return {
     -- Background color. Defaults to Normal gui background color
     normal_bg = "#282828",
 
+    -- Disable smear on terminal mode, for example when using LazyGit
+    smear_terminal_mode = false,
+    smear_input_mode = false,
     -- Smear cursor when switching buffers
     smear_between_buffers = false,
 

@@ -104,7 +104,7 @@ return {
         prompt = "Actions: ", -- Prompt used for interactive LLM calls
       },
       chat = {
-        show_settings = true,
+        -- show_settings = true,
         render_headers = false,
         show_references = true,
         start_in_insert_mode = true,
@@ -201,15 +201,8 @@ return {
           user_prompt = false,
           stop_context_insertion = true,
           adapters = {
-            copilot = function()
-              return require("codecompanion.adapters").extend("copilot", {
-                schema = {
-                  model = {
-                    default = "o1-preview-2024-09-12",
-                  },
-                },
-              })
-            end,
+            name = "copilot",
+            model = "o3-mini-2025-01-31",
           }
         },
         prompts = {
@@ -370,7 +363,7 @@ Here are the staged changes:
           stop_context_insertion = true,
           adapters = {
             name = "copilot",
-            model = "o1-preview-2024-09-12",
+            model = "o3-mini-2025-01-31",
           },
 
         },
@@ -436,16 +429,9 @@ File type: %s
           is_slash_cmd = true,
           auto_submit = true,
           adapters = {
-            copilot = function()
-              return require("codecompanion.adapters").extend("copilot", {
-                schema = {
-                  model = {
-                    default = "o1-preview-2024-09-12",
-                  },
-                },
-              })
-            end,
-          },
+            name = "copilot",
+            model = "o3-mini-2025-01-31",
+          }
         },
         prompts = {
           {
@@ -630,7 +616,7 @@ Generate a markmap-compatible mind map for the provided text. Also provided this
         },
         prompts = {
           {
-            role = "system",
+            role = "user",
             content = [[
 Explain to me like I'm five years old.
 You are an expert at breaking down complex topics into simple, easy-to-understand explanations.
