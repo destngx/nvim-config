@@ -105,7 +105,7 @@ return {
       },
       chat = {
         -- show_settings = true,
-        render_headers = false,
+        render_headers = true,
         show_references = true,
         start_in_insert_mode = true,
       },

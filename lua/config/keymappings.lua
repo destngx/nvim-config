@@ -224,7 +224,8 @@ keymap("n", "<leader>oT", "<cmd>ObsidianTags<CR>", { desc = "Searching for Tags 
 -- based64
 keymap('v', '<leader>b', '<cmd>lua require("b64").encode()<cr>', { desc = "Base64 Encode", silent = true })
 keymap('v', '<leader>B', '<cmd>lua require("b64").decode()<cr>', silent)
-
+-- Snacks.lazygit
+keymap('n', '<leader>gg', '<cmd>lua Snacks.lazygit()<cr>', silent)
 -- -- recommended mappings
 -- -- Todo Comments
 -- keymap("n", "]t", function() require("todo-comments").jump_next() end, { desc = "Next todo comment" })

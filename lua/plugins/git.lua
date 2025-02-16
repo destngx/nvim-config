@@ -52,21 +52,21 @@ return {
       require("plugins.config.git.worktree")
     end,
   },
-  {
-    "kdheepak/lazygit.nvim",
-    cmd = {
-      "LazyGit",
-      "LazyGitCurrentFile",
-      "LazyGitFilterCurrentFile",
-      "LazyGitFilter",
-    },
-    config = function()
-      vim.g.lazygit_floating_window_scaling_factor = 0.9
-    end,
-    keys = {
-      { "<Leader>gg", "<cmd>LazyGit<CR>", desc = "lazygit" },
-    },
-  },
+  -- {
+  --   "kdheepak/lazygit.nvim",
+  --   cmd = {
+  --     "LazyGit",
+  --     "LazyGitCurrentFile",
+  --     "LazyGitFilterCurrentFile",
+  --     "LazyGitFilter",
+  --   },
+  --   config = function()
+  --     vim.g.lazygit_floating_window_scaling_factor = 0.9
+  --   end,
+  --   keys = {
+  --     { "<Leader>gg", "<cmd>LazyGit<CR>", desc = "lazygit" },
+  --   },
+  -- },
   {
     "FabijanZulj/blame.nvim",
     config = function()

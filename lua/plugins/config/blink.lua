@@ -37,7 +37,8 @@ local keymap = {
 require("blink.cmp").setup({
   enabled = function()
     return not vim.tbl_contains(
-      { "help", "lazy", "Oil", "NvimTree", "dashboard", "packer", "startify", "fzf", "fugitive", "spectre_panel",
+      { "snacks_input", "prompts", "help", "lazy", "Oil", "NvimTree", "dashboard", "packer", "startify", "fzf",
+        "fugitive", "spectre_panel",
         "DressingInput" }, vim.bo.filetype)
   end,
   appearance = {
@@ -45,6 +46,7 @@ require("blink.cmp").setup({
     nerd_font_variant = "mono",
   },
 
+  cmdline = { enabled = false },
   completion = {
     accept = { auto_brackets = { enabled = true } },
 
@@ -137,7 +139,6 @@ require("blink.cmp").setup({
       return is_obsidian_note() and
           vim.list_extend(default_source, { "obsidian", "obsidian_new", "obsidian_tags" }) or default_source
     end,
-    cmdline = {}, -- Disable sources for command-line mode
     providers = {
       obsidian = {
         name = "obsidian",

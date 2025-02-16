@@ -23,26 +23,6 @@ return {
     end,
   },
   { "nvim-lua/plenary.nvim", lazy = false },
-  {
-    "LunarVim/bigfile.nvim",
-    event = "VimEnter",
-    config = function()
-      -- default config
-      require("bigfile").setup {
-        filesize = 2, -- size of the file in MiB, the plugin round file sizes to the closest MiB
-        pattern = { "*" }, -- autocmd pattern or function see <### Overriding the detection of big files>
-        features = { -- features to disable
-          "indent_blankline",
-          "illuminate",
-          "lsp",
-          "treesitter",
-          "syntax",
-          "vimopts",
-          "filetype",
-        },
-      }
-    end
-  },
   { "tpope/vim-sleuth",      event = "BufReadPre" },
   {
     "chrisgrieser/nvim-spider",

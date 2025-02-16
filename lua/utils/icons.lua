@@ -177,6 +177,7 @@ local icons = {
 
   User                = '󰙵 ',
   Diagnostic          = '󱖫 ',
+ { "<leader>u", group = "ui", icon = { icon = "", color = "cyan" } },
 }
 
 return icons
