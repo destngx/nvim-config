@@ -196,7 +196,7 @@ require('lualine').setup {
     disabled_filetypes = {
       statusline = {},
       winbar = {},
-      "NvimTree",
+      "neo-tree",
       "Trouble",
       "leetcode.nvim",
       "qf",

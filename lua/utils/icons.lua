@@ -18,6 +18,8 @@ local icons = {
   exit                = " 󰗼 ",
   chevronDown         = "",
   chevronRight        = "",
+  expanderCollapsed  = "",
+  expanderExpanded   = "",
   circle              = "  ",
   class               = "  ",
   close               = "  ",
@@ -62,6 +64,12 @@ local icons = {
   gitAdd              = " ",
   gitChange           = "󰏬 ",
   gitRemove           = " ",
+  gitRename           = " 󰁕",
+  gitUntracked        = "",
+  gitIgnored          = "",
+  gitUnstaged         = "󰄱",
+  gitStaged           = "",
+  gitConflict         = "",
   hexCutOut           = "  ",
   history             = "  ",
   hook                = " ﯠ ",
@@ -177,7 +185,6 @@ local icons = {
 
   User                = '󰙵 ',
   Diagnostic          = '󱖫 ',
- { "<leader>u", group = "ui", icon = { icon = "", color = "cyan" } },
 }
 
 return icons

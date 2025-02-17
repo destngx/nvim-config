@@ -50,7 +50,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 })
 -- disable cinnamon for specific filetypes
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "help", "lazy", "Oil", "NvimTree", "dashboard", "packer", "startify", "fzf", "fugitive", "spectre_panel" },
+  pattern = { "help", "lazy", "Oil", "neo-tree", "dashboard", "packer", "startify", "fzf", "fugitive", "spectre_panel" },
   callback = function() vim.b.cinnamon_disable = true end,
 })
 local function augroup(name)
@@ -137,6 +137,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
 --   callback = function() pwk.attach_spectre(0) end
 -- })
 -- vim.api.nvim_create_autocmd("FileType", {
---   pattern = "NvimTree",
+--   pattern = "neo-tree",
 --   callback = function() pwk.attach_nvim_tree(0) end
 -- })

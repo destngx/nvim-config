@@ -37,7 +37,7 @@ local keymap = {
 require("blink.cmp").setup({
   enabled = function()
     return not vim.tbl_contains(
-      { "snacks_input", "prompts", "help", "lazy", "Oil", "NvimTree", "dashboard", "packer", "startify", "fzf",
+      { "snacks_input", "prompts", "help", "lazy", "Oil", "neo-tree", "dashboard", "packer", "startify", "fzf",
         "fugitive", "spectre_panel",
         "DressingInput" }, vim.bo.filetype)
   end,

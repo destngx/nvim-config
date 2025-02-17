@@ -57,11 +57,11 @@ return {
       },
       -- you can enable a preset for easier configuration
       presets = {
-        bottom_search = false,        -- use a classic bottom cmdline for search
-        command_palette = true,       -- position the cmdline and popupmenu together
+        bottom_search = false,         -- use a classic bottom cmdline for search
+        command_palette = true,        -- position the cmdline and popupmenu together
         long_message_to_split = false, -- long messages will be sent to a split
-        inc_rename = true,           -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = true,        -- add a border to hover docs and signature help
+        inc_rename = true,             -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = true,         -- add a border to hover docs and signature help
       },
       views = {
         cmdline_popup = {
@@ -115,8 +115,20 @@ return {
       require("plugins.config.lualine")
     end,
   },
+  -- {
+  --   "nvim-tree/nvim-tree.lua",
+  --   config = function()
+  --     require("plugins.config.tree")
+  --   end,
+  -- },
   {
-    "nvim-tree/nvim-tree.lua",
+    "nvim-neo-tree/neo-tree.nvim",
+    lazy = false,
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+    },
     config = function()
       require("plugins.config.tree")
     end,
@@ -478,7 +490,7 @@ return {
     },
     keys = {
       { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash jump", },
-      { "ga",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter jump", },
+      { "ga",    mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter jump", },
       { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
       { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
       { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
@@ -531,7 +543,7 @@ return {
       },
     },
     keys = {
-      { "<leader>st", function() require("todo-comments.fzf").todo() end,                                          desc = "Todo" },
+      { "<leader>st", function() require("todo-comments.fzf").todo() end, desc = "Todo" },
       -- { "<leader>sT", function() require("todo-comments.fzf").todo({ keywords = { "TODO", "FIX", "FIXME" } }) end, desc = "Todo/Fix/Fixme" },
     }
   },

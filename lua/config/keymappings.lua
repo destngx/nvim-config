@@ -78,9 +78,10 @@ keymap("n", "<leader>//", "<cmd>Dashboard<CR>", silent)
 -- New file by CTRL-N
 keymap("n", "<C-n>", "<cmd>AdvancedNewFile<CR>", silent)
 
-keymap("n", "<leader>lt", "<cmd>lua require('nvim-tree.api').tree.toggle()<CR>",
+keymap("n", "<leader>lt", ":Neotree reveal toggle<CR>",
   { desc = "toggle file tree", silent = true })
-keymap("n", "<leader>ls", "<cmd>Trouble lsp_document_symbols toggle win.position=left focus=false<CR>",
+-- keymap("n", "<leader>ls", "<cmd>Trouble lsp_document_symbols toggle win.position=left focus=false<CR>",
+keymap("n", "<leader>ls", "<cmd>Neotree document_symbols toggle<CR>",
   { desc = "Symbol Outline", silent = true })
 -- fzflua
 keymap("n", "<S-p>", "<CMD>lua require('fzf-lua').live_grep_resume()<CR>", { desc = "Search keywords", silent = true })
