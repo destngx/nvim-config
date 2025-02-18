@@ -58,6 +58,6 @@ return {
     scope = { enabled = false },
     scroll = { enabled = true },
     statuscolumn = { enabled = false },
-    words = { enabled = true },
+    words = { enabled = false }, -- highlight words under cursor, already have a manual function
   },
 }

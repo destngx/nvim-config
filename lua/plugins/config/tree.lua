@@ -74,7 +74,6 @@ require("neo-tree").setup({
       trailing_slash = true,
       highlight_opened_files = true,
       use_git_status_colors = true,
-      highlight = "NeoTreeFileName",
     },
     git_status = {
       symbols = {
@@ -231,7 +230,7 @@ require("neo-tree").setup({
     -- "open_current",  -- netrw disabled, opening a directory opens within the
     -- window like netrw would, regardless of window.position
     -- "disabled",    -- netrw left alone, neo-tree does not handle opening dirs
-    use_libuv_file_watcher = false, -- This will use the OS level file watchers to detect changes
+    use_libuv_file_watcher = true, -- This will use the OS level file watchers to detect changes
     -- instead of relying on nvim autocmd events.
     window = {
       mappings = {
