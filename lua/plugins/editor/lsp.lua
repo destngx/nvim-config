@@ -43,6 +43,7 @@ return {
           multiple_diag_under_cursor = true,
           show_all_diags_on_cursorline = true,
         },
+        disabled_ft = { "markdown" } -- List of filetypes to disable the plugin
       })
     end
   }
