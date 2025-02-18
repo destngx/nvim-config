@@ -19,22 +19,22 @@ return {
       },
       sections = {
         { section = "header" },
-        { section = "keys",  gap = 1, padding = 1 },
         {
-          pane = 2,
           section = "terminal",
-          cmd = " date '+%A, %B %d, %Y'",
-          height = 8,
-          padding = 1,
-        },
-        { pane = 2, icon = DestNgxVim.icons.history,    title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-        { pane = 2, icon = DestNgxVim.icons.folderOpen, title = "Projects",     section = "projects",     indent = 2, padding = 1 },
-        {
+          cmd = "pokemon-colorscripts -r --no-title; sleep .1",
+          random = 10,
           pane = 2,
+          indent = 4,
+          height = 20,
+        },
+        { icon = DestNgxVim.icons.history,    title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
+        { icon = DestNgxVim.icons.folderOpen, title = "Projects",     section = "projects",     indent = 2, padding = 1 },
+        {
           icon = DestNgxVim.icons.git,
           title = "Git Status",
           section = "terminal",
           enabled = function()
+            local Snacks = require("snacks")
             return Snacks.git.get_root() ~= nil
           end,
           cmd = "git status --short --branch --renames",
@@ -44,6 +44,7 @@ return {
           indent = 3,
         },
         { section = "startup" },
+        { pane = 2,           section = "keys", gap = 1, padding = 1 },
       },
     },
     explorer = { enabled = false },
@@ -57,6 +58,6 @@ return {
     scope = { enabled = false },
     scroll = { enabled = true },
     statuscolumn = { enabled = false },
-    words = { enabled = false },
+    words = { enabled = true },
   },
 }
