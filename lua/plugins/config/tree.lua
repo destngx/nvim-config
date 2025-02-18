@@ -11,23 +11,6 @@ require("neo-tree").setup({
     },
   },
   close_if_last_window = true,
-  popup_border_style = "rounded",
-  enable_modified_markers = true, -- Show markers for files with unsaved changes.
-  enable_opened_markers = true,   -- Enable tracking of opened files. Required for `components.name.highlight_opened_files`
-  enable_git_status = true,
-  enable_diagnostics = true,
-  use_git_status_colors = true,
-  open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
-  open_files_using_relative_paths = false,
-  sort_case_insensitive = false,                                     -- used when sorting files and directories in the tree
-  sort_function = nil,                                               -- use a custom function for sorting files and directories in the tree
-  -- sort_function = function (a,b)
-  --       if a.type == b.type then
-  --           return a.path > b.path
-  --       else
-  --           return a.type > b.type
-  --       end
-  --   end , -- this sorts files and directories descendantly
   default_component_configs = {
     container = {
       enable_character_fade = true,
@@ -66,15 +49,6 @@ require("neo-tree").setup({
       default = "*",
       highlight = "NeoTreeFileIcon",
     },
-    modified = {
-      symbol = "[+]",
-      highlight = "NeoTreeModified",
-    },
-    name = {
-      trailing_slash = true,
-      highlight_opened_files = true,
-      use_git_status_colors = true,
-    },
     git_status = {
       symbols = {
         -- Change type
@@ -89,30 +63,6 @@ require("neo-tree").setup({
         staged = DestNgxVim.icons.gitStaged,       -- or "S", but this is redundant info if you use git_status_colors on the name
         conflict = DestNgxVim.icons.gitConflict,   -- or "C", but this is redundant info if you use git_status_colors on the name
       },
-    },
-    -- If you don't want to use these columns, you can set `enabled = false` for each of them individually
-    file_size = {
-      enabled = true,
-      width = 12,          -- width of the column
-      required_width = 64, -- min width of window required to show this column
-    },
-    type = {
-      enabled = true,
-      width = 10,           -- width of the column
-      required_width = 122, -- min width of window required to show this column
-    },
-    last_modified = {
-      enabled = true,
-      width = 20,          -- width of the column
-      required_width = 88, -- min width of window required to show this column
-    },
-    created = {
-      enabled = true,
-      width = 20,           -- width of the column
-      required_width = 110, -- min width of window required to show this column
-    },
-    symlink_target = {
-      enabled = false,
     },
   },
   -- A list of functions, each representing a global custom command
