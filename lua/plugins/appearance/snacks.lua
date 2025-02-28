@@ -54,7 +54,7 @@ return {
     picker = { enabled = false },
     notifier = { enabled = false },
     quickfile = { enabled = true },
-    lazygit = { enabled = true },
+    lazygit = {},
     scope = { enabled = false },
     scroll = { enabled = true },
     statuscolumn = { enabled = false },
