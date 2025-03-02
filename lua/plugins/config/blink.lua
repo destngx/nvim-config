@@ -37,9 +37,11 @@ local keymap = {
 require("blink.cmp").setup({
   enabled = function()
     return not vim.tbl_contains(
-      { "snacks_input", "prompts", "help", "lazy", "Oil", "neo-tree", "dashboard", "packer", "startify", "fzf",
-        "fugitive", "spectre_panel",
-        "DressingInput" }, vim.bo.filetype)
+          { "snacks_input", "prompts", "help", "lazy", "Oil", "neo-tree", "dashboard", "packer", "startify", "fzf",
+            "fugitive", "spectre_panel",
+            "DressingInput" }, vim.bo.filetype)
+        and vim.bo.buftype ~= "prompt"
+        and vim.b.completion ~= false
   end,
   appearance = {
     use_nvim_cmp_as_default = false,
