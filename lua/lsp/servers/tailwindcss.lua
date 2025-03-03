@@ -20,12 +20,12 @@ local on_attach = function(client, bufnr)
   end
 end
 
-local filetypes = { "html", "mdx", "javascript", "javascriptreact", "typescriptreact", "vue", "svelte" }
+local filetypes = { "html", "mdx", "javascriptreact", "typescriptreact", "vue", "svelte" }
 
 local init_options = {
   userLanguages = {
-    eelixir = "html-eex",
-    eruby = "erb",
+    elixir = "html-ex",
+    ruby = "rb",
   },
 }
 

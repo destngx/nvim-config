@@ -137,11 +137,12 @@ require("blink.cmp").setup({
 
   sources = {
     default = function()
-      local default_source = { "lsp", "path", "snippets", "buffer", "copilot", "codecompanion", "calc", "git", "npm" }
+      local default_source = { "lsp", "path", "snippets", "buffer", "copilot", "codecompanion", "calc", "git", "npm", "ecolog" }
       return is_obsidian_note() and
           vim.list_extend(default_source, { "obsidian", "obsidian_new", "obsidian_tags" }) or default_source
     end,
     providers = {
+      ecolog  = { name = 'ecolog', module = 'ecolog.integrations.cmp.blink_cmp' },
       obsidian = {
         name = "obsidian",
         module = "blink.compat.source",
