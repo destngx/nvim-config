@@ -253,7 +253,12 @@ Focus on:
 2. Summarize repetitve changes. E.g. do not state every single added documentation or refactoring, but summarize it.
 3. Carefully inspect the diff and make sure you understand the changes.
 4. Observe the kind of changes. For example, is it documentation, comments, refactored code or new code?
-Here are the git status:
+
+Here is the latest git commit message:
+```diff
+%s
+```
+Here is the current git status:
 ```diff
 %s
 ```
@@ -262,7 +267,7 @@ Here are the diff:
 %s
 ```
 
-                ]], vim.fn.system("git status --short"), vim.fn.system("git diff HEAD --no-ext-diff"))
+                ]], vim.fn.system("git log -1 --oneline"), vim.fn.system("git status --short"), vim.fn.system("git diff HEAD --no-ext-diff"))
             end,
           },
         },
@@ -293,6 +298,10 @@ Focus on:
 3. Carefully inspect the diff and make sure you understand the changes.
 4. Observe the kind of changes. For example, is it documentation, comments, refactored code or new code?
 
+Here is the latest git commit message:
+```diff
+%s
+```
 Here are the git status:
 ```diff
 %s
@@ -301,7 +310,7 @@ Here are the staged changes:
 ```diff
 %s
 ```
-                ]], vim.fn.system("git status --short"), vim.fn.system("git diff --staged"))
+                ]], vim.fn.system("git log -1 --oneline"), vim.fn.system("git status --short"), vim.fn.system("git diff --staged"))
             end,
           },
         },
