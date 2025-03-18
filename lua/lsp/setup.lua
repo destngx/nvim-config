@@ -113,6 +113,7 @@ require("mason-lspconfig").setup_handlers {
   ["eslint"] = function()
     lspconfig.eslint.setup({
       capabilities = capabilities,
+      filetypes = require("lsp.servers.eslint").filetypes,
       handlers = handlers,
       on_attach = require("lsp.servers.eslint").on_attach,
       settings = require("lsp.servers.eslint").settings,

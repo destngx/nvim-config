@@ -9,6 +9,8 @@ end
 
 M.on_attach = on_attach;
 
+M.filetypes = { "html", "mdx", "javascriptreact", "typescriptreact", "vue", "svelte" }
+
 M.settings = {
   codeAction = {
     disableRuleComment = {
