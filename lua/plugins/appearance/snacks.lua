@@ -50,7 +50,7 @@ return {
     explorer = { enabled = false },
     indent = { enabled = false },
     input = { relative = "cursor", },
-    image = { enabled = false },
+    image = { enabled = DestNgxVim.snacks.image },
     picker = { enabled = false },
     notifier = { enabled = false },
     quickfile = { enabled = true },

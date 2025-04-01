@@ -56,4 +56,7 @@ DestNgxVim = {
   lsp = {
     virtual_text = false, -- show virtual text (errors, warnings, info) inline messages, set fallse to use tiny-inline-diagnostic
   },
+  snacks = {
+    image = true,
+  }
 }

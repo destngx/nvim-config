@@ -10,7 +10,7 @@ return {
   },
   {
     "3rd/image.nvim",
-    enabled = os.getenv "IS_WSL" ~= "true",
+    enabled = DestNgxVim.snacks.image,
     ft = { "markdown", "vimwiki" },
     dependencies = { "luarocks.nvim" },
     opts = {
