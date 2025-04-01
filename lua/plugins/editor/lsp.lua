@@ -35,13 +35,29 @@ return {
     event = "LspAttach", -- Or `VeryLazy`
     priority = 1000,     -- needs to be loaded in first
     config = function()
+      vim.diagnostic.config({
+        virtual_text = DestNgxVim.lsp.virtual_text,
+        virtual_lines = {
+          enabled = true,
+          severity = {
+            min = vim.diagnostic.severity.ERROR
+          }
+        }
+      })
       require('tiny-inline-diagnostic').setup({
         preset = 'simple',
         options = {
-          multilines = true,
-          use_icons_from_diagnostic = true,
           multiple_diag_under_cursor = true,
-          show_all_diags_on_cursorline = true,
+          multilines = false,
+          overflow = { mode = "wrap" },
+          severity = {
+            vim.diagnostic.severity.WARN,
+            vim.diagnostic.severity.INFO,
+            vim.diagnostic.severity.HINT
+          },
+          -- multilines = true,
+          -- use_icons_from_diagnostic = true,
+          -- show_all_diags_on_cursorline = true,
         },
         disabled_ft = { "markdown" } -- List of filetypes to disable the plugin
       })
