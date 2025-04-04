@@ -39,6 +39,7 @@ return {
         virtual_text = DestNgxVim.lsp.virtual_text,
         virtual_lines = {
           enabled = true,
+          current_line = true,
           severity = {
             min = vim.diagnostic.severity.ERROR
           }

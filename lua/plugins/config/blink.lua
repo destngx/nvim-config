@@ -200,10 +200,10 @@ require("blink.cmp").setup({
         min_keyword_length = 0,
       },
       snippets = {
-        min_keyword_length = 3,
+        min_keyword_length = 2,
       },
       buffer = {
-        min_keyword_length = 3,
+        min_keyword_length = 1,
         max_items = 5,
       },
     },
