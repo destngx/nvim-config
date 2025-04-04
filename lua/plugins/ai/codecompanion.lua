@@ -244,8 +244,9 @@ return {
               return string.format([[
 You are an expert at following the Conventional Commit specification.
 Given the git diff listed below, please generate a commit message for me.
-If I should break it down into multiple commit, please suggest me and list the files for each commit.
-Also generate 1 single commit suggestion for everything.
+Separate the result into 2 part without markdown header
+If I should break it down into multiple commit, please suggest me and list the files for each commit and called that method 1 with header I
+Also generate 1 single commit suggestion for everything and called that method 2 with header II
 Think step-by-step about what was actually changed and keep the commit message focused on these changes.
 Use commitizen style for the commit message. Include the scope if possible.
 Focus on:
@@ -266,8 +267,10 @@ Here are the diff:
 ```diff
 %s
 ```
+              When have the result, ask me if I want to use method 1 or method 2 and using @cmd_runner to apply the commit
 
-                ]], vim.fn.system("git log -1 --oneline"), vim.fn.system("git status --short"), vim.fn.system("git diff HEAD --no-ext-diff"))
+                ]], vim.fn.system("git log -1 --oneline"), vim.fn.system("git status --short"),
+                vim.fn.system("git diff HEAD --no-ext-diff"))
             end,
           },
         },
@@ -310,7 +313,8 @@ Here are the staged changes:
 ```diff
 %s
 ```
-                ]], vim.fn.system("git log -1 --oneline"), vim.fn.system("git status --short"), vim.fn.system("git diff --staged"))
+                ]], vim.fn.system("git log -1 --oneline"), vim.fn.system("git status --short"),
+                vim.fn.system("git diff --staged"))
             end,
           },
         },
@@ -583,7 +587,7 @@ Here are the diff changes:
         },
         prompts = {
           {
-            role = "system",
+            role = "user",
             content = [[
 You are a specialized mind map generator that creates markmap-compatible markdown output. Your task is to analyze the provided text and create a hierarchical mind map structure using markdown syntax.
 
@@ -609,9 +613,9 @@ Example format:
 
 Generate a markmap-compatible mind map for the provided text. Also provided this URL in a single line: https://markmap.js.org/repl]],
             opts = {
-              visible = true,
+              visible = false,
             },
-          },
+          }
         },
       },
       ["Explain like I'm five year olds"] = {
@@ -633,6 +637,25 @@ Your explanations should be clear, concise, and engaging, using simple language 
 Avoid jargon, technical terms, and complex concepts.
 Focus on the main points and use analogies, stories, and visual aids to help simplify the topic.
 ]],
+            opts = {
+              visible = false,
+            },
+          },
+        },
+      },
+      ["Generate Mermaid chart"] = {
+        strategy = "chat",
+        description = "Generate mermaid chart/diagram/flow from content",
+        opts = {
+          index = 12,
+          short_name = "mermaid",
+          is_slash_cmd = true,
+          auto_submit = true,
+        },
+        prompts = {
+          {
+            role = "user",
+            content = [[ Analyze the given content, suggest and generate chart/diagram/flow using mermaid.js. At the end, provide the url mermaid.live ]],
             opts = {
               visible = false,
             },
