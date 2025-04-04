@@ -49,10 +49,10 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   command = "setlocal conceallevel=2"
 })
 -- disable cinnamon for specific filetypes
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "help", "lazy", "Oil", "neo-tree", "dashboard", "packer", "startify", "fzf", "fugitive", "spectre_panel" },
-  callback = function() vim.b.cinnamon_disable = true end,
-})
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = { "help", "lazy", "Oil", "neo-tree", "dashboard", "packer", "startify", "fzf", "fugitive", "spectre_panel" },
+--   callback = function() vim.b.cinnamon_disable = true end,
+-- })
 local function augroup(name)
   return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
 end
