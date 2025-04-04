@@ -71,6 +71,10 @@ Identify 'gotchas' or less obvious parts of the code that might trip up someone 
 Provide clear and relevant examples aligned with any provided context.
 ]]
 )
+local constants = {
+  USER_ROLE = "user",
+  SYSTEM_ROLE = "system",
+}
 
 return {
   "olimorris/codecompanion.nvim",
@@ -228,25 +232,23 @@ return {
         },
       },
       ["Generate a Commit Message"] = {
-        strategy = "chat",
+        strategy = "workflow",
         description = "Generate a Commit Message for All Changed Files",
         opts = {
           index = 10,
           short_name = "commit",
-          is_slash_cmd = true,
-          auto_submit = true,
+          is_default = true,
         },
         prompts = {
-          {
-            role = "user",
-            contains_code = true,
+          { {
+            role = "system",
             content = function()
               return string.format([[
 You are an expert at following the Conventional Commit specification.
-Given the git diff listed below, please generate a commit message for me.
+If I give the git diff listed, please generate commit messages for me.
 Separate the result into 2 part without markdown header
-If I should break it down into multiple commit, please suggest me and list the files for each commit and called that method 1 with header I
-Also generate 1 single commit suggestion for everything and called that method 2 with header II
+If I should break it down into multiple commit, please suggest me and list the files for each commit and called that method 1.
+Also generate 1 single commit suggestion for everything and called that method 2.
 Think step-by-step about what was actually changed and keep the commit message focused on these changes.
 Use commitizen style for the commit message. Include the scope if possible.
 Focus on:
@@ -267,12 +269,42 @@ Here are the diff:
 ```diff
 %s
 ```
-              When have the result, ask me if I want to use method 1 or method 2 and using @cmd_runner to apply the commit
-
-                ]], vim.fn.system("git log -1 --oneline"), vim.fn.system("git status --short"),
+                ]],
+                vim.fn.system("git log -1 --oneline"),
+                vim.fn.system("git status --short"),
                 vim.fn.system("git diff HEAD --no-ext-diff"))
             end,
-          },
+            opts = {
+              auto_submit = false,
+            },
+          }, {
+            role = constants.USER_ROLE,
+            content = "Now generate commmit messages",
+            opts = {
+              auto_submit = false,
+            },
+          }, },
+          {
+            {
+              role = constants.USER_ROLE,
+              content = "Using @cmd_runner to commit the code with method ",
+              opts = {
+                auto_submit = false,
+              },
+            },
+            -- {
+            --   role = "user",
+            --   content = function()
+            --     local method = vim.fn.input("Which method do you want to choose?") or 1
+            --
+            --     return string.format([[
+            --   I want to use method %s using @cmd_runner to apply the commit. If not specify, using method 1
+            --
+            --     ]], method)
+            --   end,
+            -- }
+          }
+
         },
       },
       -- Custom user prompts
@@ -655,13 +687,71 @@ Focus on the main points and use analogies, stories, and visual aids to help sim
         prompts = {
           {
             role = "user",
-            content = [[ Analyze the given content, suggest and generate chart/diagram/flow using mermaid.js. At the end, provide the url mermaid.live ]],
+            content =
+            [[ Analyze the given content, suggest and generate chart/diagram/flow using mermaid.js. At the end, provide the url mermaid.live ]],
             opts = {
               visible = false,
             },
           },
         },
-      }
+      },
+      ["Code workflow"] = {
+        strategy = "workflow",
+        description = "Use a workflow to guide an LLM in writing code",
+        opts = {
+          index = 13,
+          _default = true,
+          short_name = "cw",
+          is_slash_cmd = true,
+        },
+        prompts = {
+          {
+            -- We can group prompts together to make a workflow
+            -- This is the first prompt in the workflow
+            -- Everything in this group is added to the chat buffer in one batch
+            {
+              role = constants.SYSTEM_ROLE,
+              content = function(context)
+                return string.format(
+                  "You carefully provide accurate, factual, thoughtful, nuanced answers, and are brilliant at reasoning. If you think there might not be a correct answer, you say so. Always spend a few sentences explaining background context, assumptions, and step-by-step thinking BEFORE you try to answer a question. Don't be verbose in your answers, but do provide details and examples where it might help the explanation. You are an expert software engineer for the %s language",
+                  context.filetype
+                )
+              end,
+              opts = {
+                visible = false,
+              },
+            },
+            {
+              role = constants.USER_ROLE,
+              content = "I want you to ",
+              opts = {
+                auto_submit = false,
+              },
+            },
+          },
+          -- This is the second group of prompts
+          {
+            {
+              role = constants.USER_ROLE,
+              content =
+              "Great. Now let's consider your code. I'd like you to check it carefully for correctness, style, and efficiency, and give constructive criticism for how to improve it.",
+              opts = {
+                auto_submit = false,
+              },
+            },
+          },
+          -- This is the final group of prompts
+          {
+            {
+              role = constants.USER_ROLE,
+              content = "Thanks. Now let's revise the code based on the feedback, without additional explanations.",
+              opts = {
+                auto_submit = false,
+              },
+            },
+          },
+        },
+      },
     },
   },
 }
