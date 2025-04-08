@@ -253,10 +253,10 @@ You are an expert in interpreting code changes according to the Conventional Com
 With my provide context, your task is to generate commit messages in commitizen style. Follow these rules:
 🎯 Expected Output
 Return two methods of structuring the commit:
-  - Multiple Commits (If Applicable):
+  1. Multiple Commits (If Applicable):
       - Suggest how the changes can be logically broken down into multiple commits.
       - For each commit, list the associated files and provide a commit message.
-  - Single Commit:
+  2. Single Commit:
       - If the entire diff can reasonably be grouped into one commit, generate a single, comprehensive commit message.
   - ✅ If both methods result in the same outcome, only return the single commit.
 🧠 Thought Process
