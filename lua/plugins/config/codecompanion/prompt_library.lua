@@ -519,6 +519,7 @@ Present the Mermaid.js code snippet, and provide a link to visualize the diagram
         },
         content = function(context)
           local ctx = require("contextfiles.extensions.codecompanion")
+          -- You can check example context rules at https://cursor.directory/rules
 
           local ctx_opts = {
             --   context_dir = ".cursor/rules",
