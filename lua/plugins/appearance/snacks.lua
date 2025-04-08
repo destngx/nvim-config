@@ -56,28 +56,29 @@ return {
     quickfile = { enabled = true },
     lazygit = {},
     scope = { enabled = false },
-    scroll = {
-      filter = function(buf)
-        local buftype_pattern = { "help", "lazy", "Oil", "neo-tree", "dashboard", "packer", "startify", "fzf", "fugitive",
-          "spectre_panel", "CodeCompanion" }
-        local filetype_pattern = { "nofile" }
-        local buftype = vim.bo[buf].buftype
-        local filetype = vim.bo[buf].filetype
-
-        -- Check if buftype or filetype is in the exclude pattern
-        for _, p in ipairs(buftype_pattern) do
-          if buftype == p then
-            return false
-          end
-        end
-        for _, p in ipairs(filetype_pattern) do
-          if filetype == p then
-            return false
-          end
-        end
-        return vim.g.snacks_scroll ~= false and vim.b[buf].snacks_scroll ~= false and buftype ~= "terminal"
-      end,
-    },
+    -- scroll = {
+    --   filter = function(buf)
+    --     local buftype_pattern = { "help", "lazy", "Oil", "neo-tree", "dashboard", "packer", "startify", "fzf", "fugitive",
+    --       "spectre_panel", "CodeCompanion" }
+    --     local filetype_pattern = { "nofile" }
+    --     local buftype = vim.bo[buf].buftype
+    --     local filetype = vim.bo[buf].filetype
+    --
+    --     -- Check if buftype or filetype is in the exclude pattern
+    --     for _, p in ipairs(buftype_pattern) do
+    --       if buftype == p then
+    --         return false
+    --       end
+    --     end
+    --     for _, p in ipairs(filetype_pattern) do
+    --       if filetype == p then
+    --         return false
+    --       end
+    --     end
+    --     return vim.g.snacks_scroll ~= false and vim.b[buf].snacks_scroll ~= false and buftype ~= "terminal"
+    --   end,
+    -- },
+    scroll = {enabled = true},
     statuscolumn = { enabled = false },
     words = { enabled = false }, -- highlight words under cursor, already have a manual function
   },
