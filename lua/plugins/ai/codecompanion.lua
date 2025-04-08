@@ -83,7 +83,8 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
-    "j-hui/fidget.nvim"
+    "j-hui/fidget.nvim",
+    "banjo/contextfiles.nvim",
   },
   init = function()
     vim.cmd([[cab cc CodeCompanion]])
@@ -121,10 +122,6 @@ return {
     strategies = {
       chat = {
         adapter = "copilot",
-        -- roles = {
-        --   llm = " ", -- The markdown header content for the LLM's responses
-        --   user = " ", -- The markdown header for your questions
-        -- },
         keymaps = {
           send = {
             modes = {
@@ -211,14 +208,14 @@ return {
         },
         prompts = {
           {
-            role = "system",
+            role = constants.SYSTEM_ROLE,
             content = COPILOT_EXPLAIN,
             opts = {
               visible = false,
             },
           },
           {
-            role = "user",
+            role = constants.USER_ROLE,
             content = function(context)
               local code = require("codecompanion.helpers.actions").get_code(context.start_line, context.end_line)
 
@@ -241,23 +238,41 @@ return {
         },
         prompts = {
           { {
-            role = "system",
+            role = constants.SYSTEM_ROLE,
             content = function()
-              return string.format([[
-You are an expert at following the Conventional Commit specification.
-If I give the git diff listed, please generate commit messages for me.
-Separate the result into 2 part without markdown header
-If I should break it down into multiple commit, please suggest me and list the files for each commit and called that method 1.
-Also generate 1 single commit suggestion for everything and called that method 2.
-Think step-by-step about what was actually changed and keep the commit message focused on these changes.
-Use commitizen style for the commit message. Include the scope if possible.
-Focus on:
-1. What was changed and why.
-2. Summarize repetitve changes. E.g. do not state every single added documentation or refactoring, but summarize it.
-3. Carefully inspect the diff and make sure you understand the changes.
-4. Observe the kind of changes. For example, is it documentation, comments, refactored code or new code?
+              local is_staged_only = vim.fn.input(
+                "Do you want to only generate commit for staged files?\n(default is no): ") or ""
 
-Here is the latest git commit message:
+              local diff_content = vim.fn.system("git diff HEAD --no-ext-diff")
+              if is_staged_only == "y" or is_staged_only == "yes" then
+                diff_content = vim.fn.system("git diff --staged") .. "\n\n-- SHOWING STAGED CHANGES ONLY --"
+              end
+
+              return string.format([[
+You are an expert in interpreting code changes according to the Conventional Commits specification and generating high-quality commit messages.
+With my provide context, your task is to generate commit messages in commitizen style. Follow these rules:
+🎯 Expected Output
+Return two methods of structuring the commit:
+  - Multiple Commits (If Applicable):
+      - Suggest how the changes can be logically broken down into multiple commits.
+      - For each commit, list the associated files and provide a commit message.
+  - Single Commit:
+      - If the entire diff can reasonably be grouped into one commit, generate a single, comprehensive commit message.
+  - ✅ If both methods result in the same outcome, only return the single commit.
+🧠 Thought Process
+Think step-by-step and consider the following when generating messages:
+  - What was changed and why?
+  - What kind of change is it? (e.g. feat, fix, refactor, docs, etc.)
+  - Is there a consistent pattern across files?
+  - Summarize repetitive actions (e.g., multiple small doc updates = one docs commit).
+  - Avoid over-specificity unless it's important.
+  - Include a meaningful scope, if applicable.
+
+✍️ Commit Message Format
+Follow the commitizen style:
+<type>(<scope>): short summary
+
+Here is the 10 latest git commit message:
 ```diff
 %s
 ```
@@ -270,9 +285,9 @@ Here are the diff:
 %s
 ```
                 ]],
-                vim.fn.system("git log -1 --oneline"),
+                vim.fn.system("git log -10 --oneline"),
                 vim.fn.system("git status --short"),
-                vim.fn.system("git diff HEAD --no-ext-diff"))
+                diff_content)
             end,
             opts = {
               auto_submit = false,
@@ -292,63 +307,8 @@ Here are the diff:
                 auto_submit = false,
               },
             },
-            -- {
-            --   role = "user",
-            --   content = function()
-            --     local method = vim.fn.input("Which method do you want to choose?") or 1
-            --
-            --     return string.format([[
-            --   I want to use method %s using @cmd_runner to apply the commit. If not specify, using method 1
-            --
-            --     ]], method)
-            --   end,
-            -- }
           }
 
-        },
-      },
-      -- Custom user prompts
-      ["Generate a Commit Message for Staged Files"] = {
-        strategy = "inline",
-        description = "",
-        opts = {
-          index = 11,
-          auto_submit = true,
-        },
-        prompts = {
-          {
-            role = "user",
-            contains_code = true,
-            content = function()
-              return string.format([[
-You are an expert at following the Conventional Commit specification.
-Given the git diff listed below, please generate a commit message for me.
-If I should break it down into multiple commit, please suggest me and list the files for each commit.
-Also generate 1 single commit suggestion for everything.
-Think step-by-step about what was actually changed and keep the commit message focused on these changes.
-Use commitizen style for the commit message. Include the scope if possible.
-Focus on:
-1. What was changed and why.
-2. Summarize repetitve changes. E.g. do not state every single added documentation or refactoring, but summarize it.
-3. Carefully inspect the diff and make sure you understand the changes.
-4. Observe the kind of changes. For example, is it documentation, comments, refactored code or new code?
-
-Here is the latest git commit message:
-```diff
-%s
-```
-Here are the git status:
-```diff
-%s
-```
-Here are the staged changes:
-```diff
-%s
-```
-                ]], vim.fn.system("git log -1 --oneline"), vim.fn.system("git status --short"),
-                vim.fn.system("git diff --staged"))
-            end,
-          },
         },
       },
       ["Add documentation to the selected code"] = {
@@ -364,7 +324,7 @@ Here are the staged changes:
         },
         prompts = {
           {
-            role = "system",
+            role = constants.SYSTEM_ROLE,
             content = [[
                 When asked to add documentation, follow these steps:
                 1. **Identify Key Points**: Carefully read the provided code to understand its functionality.
@@ -383,7 +343,7 @@ Here are the staged changes:
             },
           },
           {
-            role = "user",
+            role = constants.USER_ROLE,
             content = function(context)
               local code = require("codecompanion.helpers.actions").get_code(context.start_line, context.end_line)
 
@@ -414,7 +374,7 @@ Here are the staged changes:
         },
         prompts = {
           {
-            role = "system",
+            role = constants.SYSTEM_ROLE,
             content = [[
                 When asked to optimize code, follow these steps:
                 1. **Analyze the Code**: Understand the functionality and identify potential bottlenecks.
@@ -428,35 +388,18 @@ Here are the staged changes:
                   - Is formatted correctly.
 
                 Use Markdown formatting and include the programming language name at the start of the code block.]],
-            opts = {
-              visible = false,
-            },
           },
           {
-            role = "user",
+            role = constants.USER_ROLE,
             content = function(context)
               local code = require("codecompanion.helpers.actions").get_code(context.start_line, context.end_line)
               return string.format([[
-When asked to optimize code, follow these steps:
-1. **Analyze the Code**: Understand the functionality and identify potential bottlenecks.
-2. **Implement the Optimization**: Apply the optimizations including best practices to the code.
-3. **Shorten the code**: Remove unnecessary code and refactor the code to be more concise.
-4. **Refactor**: Make sure the code is better at readability.
-5. **Review the Optimized Code**: Ensure the code is optimized for performance and readability. Ensure the code:
-- Maintains the original functionality.
-- Is more efficient in terms of time and space complexity.
-- Follows best practices for readability and maintainability.
-- Is formatted correctly.
+                  Please optimize the selected code:
 
-Use Markdown formatting and include the programming language name at the start of the code block.
-Please optimize the selected code:
+                  ```%s
 
-```
-File type: %s
-
-%s
-```
-"
+                  %s
+                  ```
               ]], context.filetype, code)
             end,
             opts = {
@@ -480,7 +423,7 @@ File type: %s
         },
         prompts = {
           {
-            role = "user",
+            role = constants.USER_ROLE,
             contains_code = true,
             content = function()
               local number = vim.fn.input("How many commit you want to check?\nLeave empty to review current change ") or
@@ -545,7 +488,7 @@ Here are the diff changes:
         },
         prompts = {
           {
-            role = "user",
+            role = constants.USER_ROLE,
             contains_code = true,
             content = function()
               return string.format([[
@@ -570,7 +513,7 @@ Here are the diff changes:
         },
         prompts = {
           {
-            role = "user",
+            role = constants.USER_ROLE,
             contains_code = false,
             content = function(context)
               local text = require("codecompanion.helpers.actions").get_code(context.start_line, context.end_line)
@@ -592,7 +535,7 @@ Here are the diff changes:
         },
         prompts = {
           {
-            role = "user",
+            role = constants.USER_ROLE,
             content = function(context)
               local code = require("codecompanion.helpers.actions").get_code(context.start_line, context.end_line)
 
@@ -619,7 +562,7 @@ Here are the diff changes:
         },
         prompts = {
           {
-            role = "user",
+            role = constants.USER_ROLE,
             content = [[
 You are a specialized mind map generator that creates markmap-compatible markdown output. Your task is to analyze the provided text and create a hierarchical mind map structure using markdown syntax.
 
@@ -661,14 +604,14 @@ Generate a markmap-compatible mind map for the provided text. Also provided this
         },
         prompts = {
           {
-            role = "user",
+            role = constants.USER_ROLE,
             content = [[
-Explain to me like I'm five years old.
-You are an expert at breaking down complex topics into simple, easy-to-understand explanations.
-Your explanations should be clear, concise, and engaging, using simple language and relatable examples.
-Avoid jargon, technical terms, and complex concepts.
-Focus on the main points and use analogies, stories, and visual aids to help simplify the topic.
-]],
+              You are an expert at breaking down complex topics into simple, easy-to-understand explanations.
+              Your explanations should be clear, concise, and engaging, using simple language and relatable examples.
+              Avoid jargon, technical terms, and complex concepts.
+              Focus on the main points and use analogies, stories, and visual aids to help simplify the topic.
+              Explain to me like I'm five years old.
+            ]],
             opts = {
               visible = false,
             },
@@ -686,7 +629,7 @@ Focus on the main points and use analogies, stories, and visual aids to help sim
         },
         prompts = {
           {
-            role = "user",
+            role = constants.USER_ROLE,
             content =
             [[ Analyze the given content, suggest and generate chart/diagram/flow using mermaid.js. At the end, provide the url mermaid.live ]],
             opts = {
@@ -706,9 +649,6 @@ Focus on the main points and use analogies, stories, and visual aids to help sim
         },
         prompts = {
           {
-            -- We can group prompts together to make a workflow
-            -- This is the first prompt in the workflow
-            -- Everything in this group is added to the chat buffer in one batch
             {
               role = constants.SYSTEM_ROLE,
               content = function(context)
@@ -729,7 +669,6 @@ Focus on the main points and use analogies, stories, and visual aids to help sim
               },
             },
           },
-          -- This is the second group of prompts
           {
             {
               role = constants.USER_ROLE,
@@ -740,7 +679,6 @@ Focus on the main points and use analogies, stories, and visual aids to help sim
               },
             },
           },
-          -- This is the final group of prompts
           {
             {
               role = constants.USER_ROLE,
@@ -752,6 +690,33 @@ Focus on the main points and use analogies, stories, and visual aids to help sim
           },
         },
       },
+      ["context"] = {
+        strategy = "chat",
+        description = "Chat with context files",
+        opts = {
+          -- ...
+        },
+        prompts = {
+          {
+            role = "user",
+            opts = {
+              contains_code = true,
+            },
+            content = function(context)
+              local ctx = require("contextfiles.extensions.codecompanion")
+
+              local ctx_opts = {
+                -- ...
+              }
+              local format_opts = {
+                -- ...
+              }
+
+              return ctx.get(context.filename, ctx_opts, format_opts)
+            end,
+          },
+        },
+      }
     },
   },
 }
