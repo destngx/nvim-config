@@ -1,13 +1,13 @@
 return {
   'philosofonusus/ecolog.nvim',
-  keys = {
-    { '<leader>el', '<Cmd>EcologShelterLinePeek<cr>', desc = 'Ecolog peek line' },
-    { '<leader>eh', '<Cmd>EcologShellToggle<cr>',     desc = 'Toggle shell variables' },
-    { '<leader>ge', '<cmd>EcologGoto<cr>',            desc = 'Go to env file' },
-    { '<leader>ec', '<cmd>EcologSnacks<cr>',          desc = 'Open a picker' },
-    { '<leader>eS', '<cmd>EcologSelect<cr>',          desc = 'Switch env file' },
-    { '<leader>es', '<cmd>EcologShelterToggle<cr>',   desc = 'Ecolog shelter toggle' },
-  },
+  -- keys = {
+  --   { '<leader>el', '<Cmd>EcologShelterLinePeek<cr>', desc = 'Ecolog peek line' },
+  --   { '<leader>eh', '<Cmd>EcologShellToggle<cr>',     desc = 'Toggle shell variables' },
+  --   { '<leader>ge', '<cmd>EcologGoto<cr>',            desc = 'Go to env file' },
+  --   { '<leader>ec', '<cmd>EcologSnacks<cr>',          desc = 'Open a picker' },
+  --   { '<leader>eS', '<cmd>EcologSelect<cr>',          desc = 'Switch env file' },
+  --   { '<leader>es', '<cmd>EcologShelterToggle<cr>',   desc = 'Ecolog shelter toggle' },
+  -- },
   lazy = false,
   opts = {
     preferred_environment = 'local',
