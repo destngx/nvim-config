@@ -32,21 +32,10 @@ return {
   },
   {
     "rachartier/tiny-inline-diagnostic.nvim",
+    enabled = false,
     event = "LspAttach", -- Or `VeryLazy`
     priority = 1000,     -- needs to be loaded in first
     config = function()
-      vim.diagnostic.config({
-        virtual_text = DestNgxVim.lsp.virtual_text,
-        underline = true,
-        update_in_insert = false,
-        virtual_lines = {
-          enabled = true,
-          current_line = true,
-          severity = {
-            min = vim.diagnostic.severity.ERROR
-          }
-        }
-      })
       require('tiny-inline-diagnostic').setup({
         preset = 'simple',
         options = {
