@@ -3,27 +3,27 @@
 local codes = {
   -- Lua
   no_matching_function = {
-    message = " Can't find a matching function",
+    message = DestNgxVim.icons.telescope .. " Can't find a matching function",
     "redundant-parameter",
     "ovl_no_viable_function_in_call",
   },
   empty_block = {
-    message = " That shouldn't be empty here",
+    message = DestNgxVim.icons.forbidden .. " That shouldn't be empty here",
     "empty-block",
   },
   missing_symbol = {
-    message = " Here should be a symbol",
+    message = DestNgxVim.icons.forbidden .. " Here should be a symbol",
     "miss-symbol",
   },
   expected_semi_colon = {
-    message = " Please put the `;` or `,`",
+    message = DestNgxVim.icons.comment .. " Please put the `;` or `,`",
     "expected_semi_declaration",
     "miss-sep-in-table",
     "invalid_token_after_toplevel_declarator",
   },
   redefinition = {
-    message = " That variable was defined before",
-    icon = " ",
+    message = DestNgxVim.icons.warningCircle .. " That variable was defined before",
+    icon = DestNgxVim.icons.warningCircle,
     "redefinition",
     "redefined-local",
     "no-duplicate-imports",
@@ -31,83 +31,91 @@ local codes = {
     "import/no-duplicates"
   },
   no_matching_variable = {
-    message = " Can't find that variable",
+    message = DestNgxVim.icons.telescope .. " Can't find that variable",
     "undefined-global",
     "reportUndefinedVariable",
   },
   trailing_whitespace = {
-    message = "  Whitespaces are useless",
+      message = DestNgxVim.icons.forbidden .. " Whitespaces are useless",
     "trailing-whitespace",
     "trailing-space",
   },
   unused_variable = {
-    message = "  Don't define variables you don't use",
-    icon = "  ",
+    message = DestNgxVim.icons.forbidden .. " Don't define variables you don't use",
+    icon = DestNgxVim.icons.forbidden .. " ",
     "unused-local",
     "@typescript-eslint/no-unused-vars",
     "no-unused-vars"
   },
   unused_function = {
-    message = "  Don't define functions you don't use",
+    message = DestNgxVim.icons.forbidden .. " Don't define functions you don't use",
     "unused-function",
   },
   useless_symbols = {
-    message = " Remove that useless symbols",
+    message = DestNgxVim.icons.trash .. " Remove that useless symbols",
     "unknown-symbol",
   },
   wrong_type = {
-    message = " Try to use the correct types",
+    message = DestNgxVim.icons.warningTriangle .. " Try to use the correct types",
     "init_conversion_failed",
   },
   undeclared_variable = {
-    message = " Have you delcared that variable somewhere?",
+    message = DestNgxVim.icons.questionCircle .. " Have you delcared that variable somewhere?",
     "undeclared_var_use",
   },
   lowercase_global = {
-    message = " Should that be a global? (if so make it uppercase)",
+    message = DestNgxVim.icons.questionCircle .. " Should that be a global? (if so make it uppercase)",
     "lowercase-global",
   },
   -- Typescript
   no_console = {
-    icon = "  ",
+    icon = DestNgxVim.icons.forbidden,
     "no-console",
   },
   -- Prettier
   prettier = {
-    icon = "  ",
+    icon = DestNgxVim.icons.paint,
     "prettier/prettier"
   }
 }
+local function format_diagnostic(diagnostic)
+  local code = diagnostic and diagnostic.user_data and diagnostic.user_data.lsp.code
 
+  if not diagnostic.source or not code then
+    return string.format('%s', diagnostic.message)
+  end
+
+  if diagnostic.source == 'eslint' then
+    for _, table in pairs(codes) do
+      if vim.tbl_contains(table, code) then
+        return string.format('%s [%s]', table.icon .. diagnostic.message, code)
+      end
+    end
+
+    return string.format('%s [%s]', diagnostic.message, code)
+  end
+
+  for _, table in pairs(codes) do
+    if vim.tbl_contains(table, code) then
+      return table.message
+    end
+  end
+
+  return string.format('%s [%s]', diagnostic.message, diagnostic.source)
+end
+local virtual_lines = {
+  current_line = true,
+  severity = {
+    min = vim.diagnostic.severity.HINT,
+    max = vim.diagnostic.severity.ERROR,
+  },
+  format = format_diagnostic
+}
 -- Diagnostic config
-vim.diagnostic.config({
+local diagnostic_config = {
   float = {
     source = false,
-    format = function(diagnostic)
-      local code = diagnostic and diagnostic.user_data and diagnostic.user_data.lsp.code
-
-      if not diagnostic.source or not code then
-        return string.format('%s', diagnostic.message)
-      end
-
-      if diagnostic.source == 'eslint' then
-        for _, table in pairs(codes) do
-          if vim.tbl_contains(table, code) then
-            return string.format('%s [%s]', table.icon .. diagnostic.message, code)
-          end
-        end
-
-        return string.format('%s [%s]', diagnostic.message, code)
-      end
-
-      for _, table in pairs(codes) do
-        if vim.tbl_contains(table, code) then
-          return table.message
-        end
-      end
-
-      return string.format('%s [%s]', diagnostic.message, diagnostic.source)
-    end
+    format = format_diagnostic
   },
   severity_sort = true,
   signs = {
@@ -123,39 +131,19 @@ vim.diagnostic.config({
   virtual_text = DestNgxVim.lsp.virtual_text and {
     prefix = DestNgxVim.icons.circle,
   } or false,
-  virtual_lines = {
-    enabled = true,
-    current_line = true,
-    severity = {
-      min = vim.diagnostic.severity.HINT,
-      max = vim.diagnostic.severity.ERROR,
-    },
-    format = function(diagnostic)
-      local code = diagnostic and diagnostic.user_data and diagnostic.user_data.lsp.code
+}
 
-      if not diagnostic.source or not code then
-        return string.format('%s', diagnostic.message)
-      end
-
-      if diagnostic.source == 'eslint' then
-        for _, table in pairs(codes) do
-          if vim.tbl_contains(table, code) then
-            return string.format('%s [%s]', table.icon .. diagnostic.message, code)
-          end
-        end
-
-        return string.format('%s [%s]', diagnostic.message, code)
-      end
-
-      for _, table in pairs(codes) do
-        if vim.tbl_contains(table, code) then
-          return table.message
-        end
-      end
-
-      return string.format('%s [%s]', diagnostic.message, diagnostic.source)
+vim.diagnostic.config(diagnostic_config)
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function()
+    local config = vim.deepcopy(diagnostic_config)
+    if vim.bo.filetype ~= "markdown" then
+      config.virtual_lines = virtual_lines
+    else
+      config.virtual_lines = false
     end
-  }
+    vim.diagnostic.config(config)
+  end
 })
 -- Default Codelens command
 -- Each LSP client can override this function to provide custom codelens
