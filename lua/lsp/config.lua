@@ -123,6 +123,39 @@ vim.diagnostic.config({
   virtual_text = DestNgxVim.lsp.virtual_text and {
     prefix = DestNgxVim.icons.circle,
   } or false,
+  virtual_lines = {
+    enabled = true,
+    current_line = true,
+    severity = {
+      min = vim.diagnostic.severity.HINT,
+      max = vim.diagnostic.severity.ERROR,
+    },
+    format = function(diagnostic)
+      local code = diagnostic and diagnostic.user_data and diagnostic.user_data.lsp.code
+
+      if not diagnostic.source or not code then
+        return string.format('%s', diagnostic.message)
+      end
+
+      if diagnostic.source == 'eslint' then
+        for _, table in pairs(codes) do
+          if vim.tbl_contains(table, code) then
+            return string.format('%s [%s]', table.icon .. diagnostic.message, code)
+          end
+        end
+
+        return string.format('%s [%s]', diagnostic.message, code)
+      end
+
+      for _, table in pairs(codes) do
+        if vim.tbl_contains(table, code) then
+          return table.message
+        end
+      end
+
+      return string.format('%s [%s]', diagnostic.message, diagnostic.source)
+    end
+  }
 })
 -- Default Codelens command
 -- Each LSP client can override this function to provide custom codelens
