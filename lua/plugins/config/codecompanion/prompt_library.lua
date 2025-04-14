@@ -114,7 +114,7 @@ Here are the diff:
       {
         {
           role = constants.USER_ROLE,
-          content = "Using @cmd_runner to stage and commit the files with the result of the method ",
+          content = "Using @cmd_runner to stage and commit the files with the result of the method (default is multiple commits) ",
           opts = {
             auto_submit = false,
           },
