@@ -37,6 +37,8 @@ return {
     config = function()
       vim.diagnostic.config({
         virtual_text = DestNgxVim.lsp.virtual_text,
+        underline = true,
+        update_in_insert = false,
         virtual_lines = {
           enabled = true,
           current_line = true,
