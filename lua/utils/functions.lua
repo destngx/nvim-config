@@ -220,5 +220,9 @@ M.always = function(value)
   end
 end
 
+M.is_obsidian_note = function()
+  return vim.bo.filetype == "markdown"
+      and vim.api.nvim_buf_get_name(0):match('^/Users/destnguyxn/projects/obsidian%-vaults/.+%.md$')
+end
 
 return M
