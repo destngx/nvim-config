@@ -10,14 +10,13 @@ return {
   },
   {
     "3rd/image.nvim",
-    enabled = DestNgxVim.snacks.image,
     ft = { "markdown", "vimwiki" },
     dependencies = { "luarocks.nvim" },
     opts = {
       backend = "kitty",
       integrations = {
         markdown = {
-          enabled = true,
+          enabled = not DestNgxVim.snacks.image,
           clear_in_insert_mode = false,
           download_remote_images = true,
           only_render_image_at_cursor = false,
