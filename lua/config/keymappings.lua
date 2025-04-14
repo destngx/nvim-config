@@ -265,4 +265,4 @@ keymap('v', '<leader>ap', '<cmd>CodeCompanionActions<CR>', { desc = 'AI Actions 
 keymap('v', '<leader>ad', '<cmd>CodeCompanionChat Add<CR>', { desc = 'AI Chat Add Selected', silent = true })
 -- Security
 -- Ecolog
-keymap('n', '<leader>cp', '<cmd>EcologPeek<CR>', { desc = 'Peek Mask Variable', silent = true })
+keymap('n', '<leader>cp', '<cmd>EcologShelterToggle<CR>', { desc = 'Peek Mask Variable', silent = true })
