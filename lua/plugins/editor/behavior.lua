@@ -1,5 +1,15 @@
+local common_filetypes = {
+  "lua",
+  "javascript",
+  "typescript",
+  "javascriptreact",
+  "typescriptreact",
+  "html",
+  "css",
+  "python",
+}
 return {
-  { "David-Kunz/markid", event = "BufReadPre" },
+  { "David-Kunz/markid", ft = common_filetypes, },
   {
     "andymass/vim-matchup",
     event = "BufReadPre",
@@ -9,29 +19,20 @@ return {
   },
   {
     "windwp/nvim-ts-autotag",
+    ft = common_filetypes,
     event = "InsertEnter",
   },
   {
     "windwp/nvim-autopairs",
-    event = "InsertEnter",
+    ft = common_filetypes,
     config = function()
       require("plugins.config.autopairs")
     end,
   },
   {
     "NvChad/nvim-colorizer.lua",
-    event = "BufReadPre",
+    ft = common_filetypes,
     opts = {
-      filetypes = {
-        'html',
-        'css',
-        'javascript',
-        'typescript',
-        'typescriptreact',
-        'javascriptreact',
-        'lua',
-        'python',
-      },
       user_default_options = {
         mode = "background",
         tailwind = true, -- Enable tailwind colors
@@ -40,7 +41,6 @@ return {
   },
   {
     "numToStr/Comment.nvim",
-    event = "BufReadPre",
     dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
     config = function()
       require("plugins.config.comment")
@@ -48,7 +48,7 @@ return {
   },
   {
     "Wansmer/treesj",
-    event = "BufEnter",
+    ft = common_filetypes,
     cmd = { "TSJToggle", "TSJSplit", "TSJJoin" },
     keys = {
       { "gJ", "<cmd>TSJToggle<CR>", desc = "Toggle Split/Join" },
@@ -92,14 +92,7 @@ return {
   { 'taybart/b64.nvim' },
   {
     "rareitems/printer.nvim",
-    event = "BufEnter",
-    ft = {
-      "lua",
-      "javascript",
-      "typescript",
-      "javascriptreact",
-      "typescriptreact",
-    },
+    ft = common_filetypes,
     opts = {
       keymap = "gp",             -- Plugin doesn't have any keymaps by default
       behavior = "insert_below", -- how operator should behave
