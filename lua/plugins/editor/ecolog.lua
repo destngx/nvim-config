@@ -8,7 +8,7 @@ return {
   --   { '<leader>eS', '<cmd>EcologSelect<cr>',          desc = 'Switch env file' },
   --   { '<leader>es', '<cmd>EcologShelterToggle<cr>',   desc = 'Ecolog shelter toggle' },
   -- },
-  lazy = false,
+  event = 'VeryLazy',
   opts = {
     preferred_environment = 'local',
     types = true,
