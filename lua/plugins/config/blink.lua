@@ -177,20 +177,22 @@ require("blink.cmp").setup({
       },
       copilot = {
         name = "copilot",
-        module = "blink-cmp-copilot",
+        module = "blink-copilot",
         min_keyword_length = 0,
         score_offset = 100,
         async = true,
+
+
         -- set position for copilot suggestions at first row
-        transform_items = function(_, items)
-          local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
-          local kind_idx = #CompletionItemKind + 1
-          CompletionItemKind[kind_idx] = copilot_kind
-          for _, item in ipairs(items) do
-            item.kind = kind_idx
-          end
-          return items
-        end,
+        -- transform_items = function(_, items)
+        --   local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+        --   local kind_idx = #CompletionItemKind + 1
+        --   CompletionItemKind[kind_idx] = copilot_kind
+        --   for _, item in ipairs(items) do
+        --     item.kind = kind_idx
+        --   end
+        --   return items
+        -- end,
       },
       lsp = {
         min_keyword_length = 1, -- Number of characters to trigger porvider

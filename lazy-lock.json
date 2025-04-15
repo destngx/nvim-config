@@ -5,7 +5,7 @@
   "b64.nvim": { "branch": "main", "commit": "e93d1a7e065f6eaf5d3bae9efb9bc2c30907f471" },
   "better-escape.nvim": { "branch": "master", "commit": "9738a470d93e2e52815bc46b4042372ca198cbd6" },
   "blame.nvim": { "branch": "main", "commit": "39bb4cda9e658d053a43919b10ca52c0a4d738e1" },
-  "blink-cmp-copilot": { "branch": "main", "commit": "439cff78780c033aa23cf061d7315314b347e3c1" },
+  "blink-copilot": { "branch": "main", "commit": "71102fe2fa1616353f8cb315bb8b85db0812a218" },
   "blink.cmp": { "branch": "main", "commit": "cb5e346d9e0efa7a3eee7fd4da0b690c48d2a98e" },
   "blink.compat": { "branch": "main", "commit": "2ed6d9a28b07fa6f3bface818470605f8896408c" },
   "cmp-calc": { "branch": "main", "commit": "5947b412da67306c5b68698a02a846760059be2e" },

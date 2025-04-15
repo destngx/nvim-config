@@ -10,7 +10,8 @@ return {
     dependencies = {
       "rafamadriz/friendly-snippets",
       "onsails/lspkind.nvim",
-      "giuxtaposition/blink-cmp-copilot",
+      -- "giuxtaposition/blink-cmp-copilot",
+      "fang2hou/blink-copilot",
       "hrsh7th/cmp-calc",
       "petertriho/cmp-git",
       "David-Kunz/cmp-npm",
