@@ -5,11 +5,11 @@ vim.opt.list = true
 -- vim.opt.listchars:append("eol:↴")
 -- local highlight = {
 -- }
-local exclude_ft = { "help", "git", "markdown", "snippets", "text", "gitconfig", "alpha", "dashboard" }
+local exclude_ft = { "help", "git", "markdown", "snippets", "text", "gitconfig", "alpha", "dashboard", "buffer" }
 require("ibl").setup {
   exclude = {
     filetypes = exclude_ft,
-    buftypes = { "terminal", "nofile", "telescope" },
+    buftypes = { "terminal", "nofile", "telescope", "bigfile" },
   },
   indent = {
     char = "│",
