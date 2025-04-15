@@ -19,7 +19,6 @@ return {
   },
   {
     "sindrets/diffview.nvim",
-    event = "BufRead",
     config = function()
       require("plugins.config.git.diffview")
     end,
@@ -30,7 +29,6 @@ return {
   },
   {
     "akinsho/git-conflict.nvim",
-    event = "BufRead",
     config = function()
       require("plugins.config.git.conflict")
     end,
@@ -43,30 +41,12 @@ return {
     }
   },
   {
-    "ThePrimeagen/git-worktree.nvim",
-    keys = {
-      "<Leader>gwc",
-      "<Leader>gww",
-    },
+    'polarmutex/git-worktree.nvim',
+    version = '^2',
     config = function()
       require("plugins.config.git.worktree")
     end,
   },
-  -- {
-  --   "kdheepak/lazygit.nvim",
-  --   cmd = {
-  --     "LazyGit",
-  --     "LazyGitCurrentFile",
-  --     "LazyGitFilterCurrentFile",
-  --     "LazyGitFilter",
-  --   },
-  --   config = function()
-  --     vim.g.lazygit_floating_window_scaling_factor = 0.9
-  --   end,
-  --   keys = {
-  --     { "<Leader>gg", "<cmd>LazyGit<CR>", desc = "lazygit" },
-  --   },
-  -- },
   {
     "FabijanZulj/blame.nvim",
     config = function()
