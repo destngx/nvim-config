@@ -134,7 +134,7 @@ local diagnostic_config = {
 }
 
 vim.diagnostic.config(diagnostic_config)
-vim.api.nvim_create_autocmd("FileType", {
+vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
     local config = vim.deepcopy(diagnostic_config)
     if vim.bo.filetype ~= "markdown" then
