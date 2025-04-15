@@ -1,6 +1,6 @@
 return {
   'rasulomaroff/reactive.nvim',
-  event = 'BufReadPre',
+  event = 'BufEnter',
   config = function()
     require('reactive').setup {
       builtin = {
