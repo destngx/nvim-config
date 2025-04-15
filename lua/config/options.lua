@@ -66,6 +66,8 @@ vim.opt.fillchars:append('fold: ');
 vim.opt.fillchars:append('foldopen: ');
 vim.opt.fillchars:append('foldsep: ');
 vim.opt.fillchars:append('foldclose:');
+vim.opt.fillchars:append('vert:▕');
+vim.opt.fillchars:append('vertleft:▕');
 
 for k, v in pairs(options) do
   vim.opt[k] = v
