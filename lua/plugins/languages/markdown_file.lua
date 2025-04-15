@@ -81,7 +81,6 @@ return {
   {
     "epwalsh/obsidian.nvim",
     version = "*", -- recommended, use latest release instead of latest commit
-    lazy = false,
     event = function()
       if vim.fn.has('macunix') == 1 then
         return {
@@ -181,7 +180,6 @@ return {
   {
     "andrewferrier/wrapping.nvim",
     ft = { "markdown" },
-    event = "BufReadPre",
     opts = {
       softener = { markdown = true },
       create_keymaps = false,

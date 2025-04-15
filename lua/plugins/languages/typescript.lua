@@ -1,7 +1,6 @@
 return {
   {
     "yioneko/nvim-vtsls",
-    event = { "BufReadPre", "BufNewFile" },
     ft = {
       "javascript",
       "javascriptreact",
@@ -17,13 +16,11 @@ return {
   },
   {
     "dmmulroy/ts-error-translator.nvim",
-    event = "BufRead",
     ft = "javascript,typescript,typescriptreact,svelte",
     config = true,
   },
   {
     "razak17/tailwind-fold.nvim",
-    event = "BufRead",
     opts = {
       min_chars = 50,
     },
@@ -33,7 +30,6 @@ return {
   {
     "MaximilianLloyd/tw-values.nvim",
     ft = { "typescriptreact" },
-    event = "BufRead",
     keys = {
       { "<Leader>cv", "<CMD>TWValues<CR>", desc = "Tailwind CSS values" },
     },
@@ -45,7 +41,6 @@ return {
   {
     "laytan/tailwind-sorter.nvim",
     ft = { "typescriptreact" },
-    event = "BufRead",
     cmd = {
       "TailwindSort",
       "TailwindSortOnSaveToggle"
@@ -58,10 +53,8 @@ return {
     build = "cd formatter && bun i && bun run build",
     config = true,
   },
-
   {
     "axelvc/template-string.nvim",
-    event = "InsertEnter",
     ft = {
       "javascript",
       "typescript",
@@ -70,25 +63,18 @@ return {
     },
     config = true, -- run require("template-string").setup()
   },
-
   {
     "dmmulroy/tsc.nvim",
     ft = { "typescript", "typescriptreact" },
-    event = "BufRead",
     cmd = { "TSC" },
     config = true,
   },
-
-
   {
     "artemave/workspace-diagnostics.nvim",
     ft = { "typescript", "typescriptreact" },
-    event = "BufRead",
-    lazy = false,
   },
   {
     "vuki656/package-info.nvim",
-    event = "BufRead",
     ft = { "json", "typescript", "typescriptreact" },
     config = true,
   },
