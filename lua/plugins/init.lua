@@ -67,7 +67,6 @@ return {
   },
   {
     "kevinhwang91/nvim-bqf",
-    event = "BufEnter",
     ft = "qf",
     init = function()
       require('plugins.config.bqf-init')
