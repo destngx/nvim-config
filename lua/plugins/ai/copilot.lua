@@ -19,6 +19,7 @@ return {
         markdown = true,
         typescript = true,
         yaml = true,
+        bigfile = false,
       },
     },
     dependencies = { 'AndreM222/copilot-lualine' }
