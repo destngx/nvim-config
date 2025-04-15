@@ -268,6 +268,7 @@ return {
         -- Excluded filetypes and custom window filters
         ----@type (string|fun(win:window))[]
         exclude = {
+          "bigfile",
           "notify",
           "cmp_menu",
           "noice",
