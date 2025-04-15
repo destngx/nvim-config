@@ -1,9 +1,52 @@
+--- Set window-local options.
+---@param win number
+---@param wo vim.wo|{}|{winhighlight: string|table<string, string>}
+local function set_window_local_options(win, wo)
+  for k, v in pairs(wo or {}) do
+    if k == "winhighlight" and type(v) == "table" then
+      local parts = {} ---@type string[]
+      for kk, vv in pairs(v) do
+        if vv ~= "" then
+          parts[#parts + 1] = ("%s:%s"):format(kk, vv)
+        end
+      end
+      v = table.concat(parts, ",")
+    end
+    vim.api.nvim_set_option_value(k, v, { scope = "local", win = win })
+  end
+end
 return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
   opts = {
-    bigfile = { enabled = true },
+    bigfile = {
+      notify = true,            -- show notification when big file detected
+      size = 0.1 * 1024 * 1024, -- 0.5MB
+      line_length = 1000,       -- average line length (useful for minified files)
+      -- Enable or disable features when big file detected
+      ---@param ctx {buf: number, ft:string}
+      setup = function(ctx)
+        if vim.fn.exists(":NoMatchParen") ~= 0 then
+          vim.cmd([[NoMatchParen]])
+        end
+        if vim.fn.exists(":SmearCursorToggle") ~= 0 then
+          vim.cmd([[SmearCursorToggle]])
+        end
+        if vim.fn.exists(":ReactiveStop") ~= 0 then
+          vim.cmd([[ReactiveStop]])
+        end
+        vim.g.snacks_scroll = false
+
+        set_window_local_options(0, { foldmethod = "manual", statuscolumn = "", conceallevel = 0 })
+        -- vim.b.minianimate_disable = true
+        vim.schedule(function()
+          if vim.api.nvim_buf_is_valid(ctx.buf) then
+            vim.bo[ctx.buf].syntax = ctx.ft
+          end
+        end)
+      end,
+    },
     dashboard = {
       preset = {
         header = [[
@@ -78,7 +121,7 @@ return {
     --     return vim.g.snacks_scroll ~= false and vim.b[buf].snacks_scroll ~= false and buftype ~= "terminal"
     --   end,
     -- },
-    scroll = {enabled = true},
+    scroll = { enabled = true },
     statuscolumn = { enabled = false },
     words = { enabled = false }, -- highlight words under cursor, already have a manual function
   },
