@@ -48,7 +48,7 @@ local settings = {
     implementationCodeLens = { enabled = true },
     referencesCodeLens = { enabled = true, showOnAllFunctions = true },
     tsserver = {
-      maxTsServerMemory = 8192,
+      maxTsServerMemory = vim.fn.has('macunix') == 1 and 8192 or 16384,
     },
     updateImportsOnFileMove = { enabled = "always" },
     inlayHints = {
