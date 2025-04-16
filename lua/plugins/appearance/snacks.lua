@@ -22,7 +22,7 @@ return {
   opts = {
     bigfile = {
       notify = true,            -- show notification when big file detected
-      size = 0.1 * 1024 * 1024, -- 0.1MB
+      size = 0.05 * 1024 * 1024, -- 0.05MB, at this point, most LSP server performance will be affected
       line_length = 1000,       -- average line length (useful for minified files)
       -- Enable or disable features when big file detected
       ---@param ctx {buf: number, ft:string}
