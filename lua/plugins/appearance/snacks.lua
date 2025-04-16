@@ -22,7 +22,7 @@ return {
   opts = {
     bigfile = {
       notify = true,            -- show notification when big file detected
-      size = 0.1 * 1024 * 1024, -- 0.5MB
+      size = 0.1 * 1024 * 1024, -- 0.1MB
       line_length = 1000,       -- average line length (useful for minified files)
       -- Enable or disable features when big file detected
       ---@param ctx {buf: number, ft:string}
@@ -31,14 +31,14 @@ return {
           vim.cmd([[NoMatchParen]])
         end
         if vim.fn.exists(":SmearCursorToggle") ~= 0 then
-          vim.cmd([[SmearCursorToggle]])
+          vim.cmd("SmearCursorToggle")
         end
         if vim.fn.exists(":ReactiveStop") ~= 0 then
-          vim.cmd([[ReactiveStop]])
+          vim.cmd("ReactiveStop")
         end
         vim.g.snacks_scroll = false
 
-        set_window_local_options(0, { foldmethod = "manual", statuscolumn = "", conceallevel = 0 })
+        set_window_local_options(0, { snacks_scroll = false, foldmethod = "manual", statuscolumn = "", conceallevel = 0 })
         -- vim.b.minianimate_disable = true
         vim.schedule(function()
           if vim.api.nvim_buf_is_valid(ctx.buf) then

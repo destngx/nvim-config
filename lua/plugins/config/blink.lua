@@ -184,19 +184,20 @@ require("blink.cmp").setup({
 
 
         -- set position for copilot suggestions at first row
-        -- transform_items = function(_, items)
-        --   local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
-        --   local kind_idx = #CompletionItemKind + 1
-        --   CompletionItemKind[kind_idx] = copilot_kind
-        --   for _, item in ipairs(items) do
-        --     item.kind = kind_idx
-        --   end
-        --   return items
-        -- end,
+        transform_items = function(_, items)
+          local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+          local kind_idx = #CompletionItemKind + 1
+          CompletionItemKind[kind_idx] = copilot_kind
+          for _, item in ipairs(items) do
+            item.kind = kind_idx
+          end
+          return items
+        end,
       },
       lsp = {
         min_keyword_length = 1, -- Number of characters to trigger porvider
         score_offset = 0,       -- Boost/penalize the score of the items
+        async = true,
       },
       path = {
         min_keyword_length = 1,
