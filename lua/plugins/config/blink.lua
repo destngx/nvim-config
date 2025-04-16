@@ -197,7 +197,6 @@ require("blink.cmp").setup({
       lsp = {
         min_keyword_length = 1, -- Number of characters to trigger porvider
         score_offset = 0,       -- Boost/penalize the score of the items
-        async = true,
       },
       path = {
         min_keyword_length = 1,
