@@ -1,6 +1,6 @@
 require('config.DestNgxVim')
 
-require('utils.globals')
+-- require('utils.globals')
 require('utils.functions')
 
 require('config.options')

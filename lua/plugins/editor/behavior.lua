@@ -1,4 +1,5 @@
 local common_filetypes = {
+  "markdown",
   "lua",
   "javascript",
   "typescript",
@@ -66,12 +67,12 @@ return {
       require("textcase").setup(
         {
           default_keymappings_enabled = true,
-          prefix = "gu",
+          prefix = "gt",
           substitude_command_name = nil,
         }
       )
     end,
-    keys = { "gu" }
+    keys = { "gt.", require("plugins.config.text-case").select() , mode = { "n", "x" } }
   },
   {
     "echasnovski/mini.align",
