@@ -62,7 +62,6 @@ return {
   },
   {
     "johmsalas/text-case.nvim",
-    event = "BufEnter",
     config = function()
       require("textcase").setup(
         {
@@ -72,7 +71,17 @@ return {
         }
       )
     end,
-    keys = { "gt.", require("plugins.config.text-case").select() , mode = { "n", "x" } }
+    keys = {
+      { "gt" },
+      {
+        "gt.",
+        function()
+          require("plugins.config.text-case").select()
+        end,
+        { desc = "Modify Text Case" },
+        mode = { "n", "x" }
+      },
+    }
   },
   {
     "echasnovski/mini.align",
