@@ -144,13 +144,13 @@ require("blink.cmp").setup({
     providers = {
       ecolog  = { name = 'ecolog', module = 'ecolog.integrations.cmp.blink_cmp' },
       obsidian = {
-        score_offset = 101,
+        score_offset = 111,
         name = "obsidian",
         module = "blink.compat.source",
         min_keyword_length = 1,
       },
       obsidian_new = {
-        score_offset = 101,
+        score_offset = 151,
         name = "obsidian_new",
         module = "blink.compat.source",
         min_keyword_length = 1,
