@@ -144,16 +144,19 @@ require("blink.cmp").setup({
     providers = {
       ecolog  = { name = 'ecolog', module = 'ecolog.integrations.cmp.blink_cmp' },
       obsidian = {
+        score_offset = 101,
         name = "obsidian",
         module = "blink.compat.source",
         min_keyword_length = 1,
       },
       obsidian_new = {
+        score_offset = 101,
         name = "obsidian_new",
         module = "blink.compat.source",
         min_keyword_length = 1,
       },
       obsidian_tags = {
+        score_offset = 101,
         name = "obsidian_tags",
         module = "blink.compat.source",
         min_keyword_length = 1,
@@ -179,11 +182,8 @@ require("blink.cmp").setup({
         name = "copilot",
         module = "blink-copilot",
         min_keyword_length = 0,
-        score_offset = 100,
+        score_offset = 100,-- set position for copilot suggestions at higher row
         async = true,
-
-
-        -- set position for copilot suggestions at first row
         transform_items = function(_, items)
           local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
           local kind_idx = #CompletionItemKind + 1
