@@ -79,7 +79,8 @@ return {
     },
   },
   {
-    "epwalsh/obsidian.nvim",
+    -- "epwalsh/obsidian.nvim", -- not use due to inactive development
+    "obsidian-nvim/obsidian.nvim",
     version = "*", -- recommended, use latest release instead of latest commit
     event = function()
       if vim.fn.has('macunix') == 1 then
@@ -109,8 +110,26 @@ return {
         },
         notes_subdir = "Zettelkasten",
         completion = {
-          -- TODO: update config for blink.cmp
           nvim_cmp = false,
+          blink = true,
+        },
+        picker = {
+          -- Set your preferred picker. Can be one of 'telescope.nvim', 'fzf-lua', 'mini.pick' or 'snacks.pick'.
+          name = "fzf-lua",
+          -- Optional, configure key mappings for the picker. These are the defaults.
+          -- Not all pickers support all mappings.
+          note_mappings = {
+            -- Create a new note from your query.
+            new = "<C-x>",
+            -- Insert a link to the selected note.
+            insert_link = "<C-l>",
+          },
+          tag_mappings = {
+            -- Add tag(s) to current note.
+            tag_note = "<C-x>",
+            -- Insert a tag at the current location.
+            insert_tag = "<C-l>",
+          },
         },
         new_notes_location = "notes_subdir",
         templates = {
@@ -138,6 +157,13 @@ return {
             end,
             opts = { noremap = false, expr = true, buffer = true },
           },
+          -- Smart action depending on context: follow link, show notes with tag, or toggle checkbox.
+          ["<cr>"] = {
+            action = function()
+              return require("obsidian").util.smart_action()
+            end,
+            opts = { buffer = true, expr = true },
+          }
         },
         note_id_func = function(title)
           -- Create note IDs in a Zettelkasten format with a timestamp and a suffix.
@@ -169,12 +195,6 @@ return {
           return out
         end,
       })
-
-      -- HACK: fix error, disable completion.nvim_cmp option, manually register sources
-      local cmp = require("cmp")
-      cmp.register_source("obsidian", require("cmp_obsidian").new())
-      cmp.register_source("obsidian_new", require("cmp_obsidian_new").new())
-      cmp.register_source("obsidian_tags", require("cmp_obsidian_tags").new())
     end,
   },
   {

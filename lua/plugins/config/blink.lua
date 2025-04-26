@@ -1,7 +1,3 @@
-local function is_obsidian_note()
-  return vim.bo.filetype == "markdown"
-      and vim.api.nvim_buf_get_name(0):match('^/Users/destnguyxn/projects/obsidian%-vaults/.+%.md$')
-end
 local copilot_kind = "Copilot"
 local keymap = {
   preset = 'super-tab',
@@ -138,29 +134,10 @@ require("blink.cmp").setup({
   sources = {
     default = function()
       local default_source = { "lsp", "path", "snippets", "buffer", "copilot", "codecompanion", "calc", "git", "npm", "ecolog" }
-      return is_obsidian_note() and
-          vim.list_extend(default_source, { "obsidian", "obsidian_new", "obsidian_tags" }) or default_source
+      return default_source
     end,
     providers = {
       ecolog  = { name = 'ecolog', module = 'ecolog.integrations.cmp.blink_cmp' },
-      obsidian = {
-        score_offset = 111,
-        name = "obsidian",
-        module = "blink.compat.source",
-        min_keyword_length = 1,
-      },
-      obsidian_new = {
-        score_offset = 151,
-        name = "obsidian_new",
-        module = "blink.compat.source",
-        min_keyword_length = 1,
-      },
-      obsidian_tags = {
-        score_offset = 101,
-        name = "obsidian_tags",
-        module = "blink.compat.source",
-        min_keyword_length = 1,
-      },
       calc = { name = "calc", module = "blink.compat.source", min_keyword_length = 3 },
       git = { name = "git", module = "blink.compat.source" },
       npm = {
