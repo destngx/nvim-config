@@ -161,6 +161,9 @@ require("neo-tree").setup({
       },
       always_show_by_pattern = { -- uses glob style patterns
         ".env*",
+        ".zsh*",
+        ".zim*",
+        ".terraform*",
       },
       never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
         --".DS_Store",

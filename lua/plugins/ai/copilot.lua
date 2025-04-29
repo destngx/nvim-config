@@ -19,6 +19,7 @@ return {
         markdown = true,
         typescript = true,
         yaml = true,
+        shell = true,
         bigfile = false,
       },
     },

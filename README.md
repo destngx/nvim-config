@@ -50,6 +50,8 @@ Feel free to use it and modify it to your liking. And starred my repo if you lik
 - Have wget, curl, unzip, git, make, pip, python, npm, node, luarocks, fd, ripgrep and cargo installed on your system. You can check if you are missing anything with :checkhealth command.
 - Have any nerd font installed. Fira Code has been used in screenshots. You can download it from nerdfonts.com.
 
+- pokemon-colorscripts for beaufiful snacks dashboard
+
 Try install script if it works for you.
 ``` sh
 cd .install
