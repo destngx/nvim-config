@@ -44,7 +44,7 @@ require("blink.cmp").setup({
     nerd_font_variant = "mono",
   },
 
-  cmdline = { enabled = false },
+  cmdline = { completion = { ghost_text = { enabled = true } } },
   completion = {
     accept = { auto_brackets = { enabled = true } },
 
@@ -133,14 +133,15 @@ require("blink.cmp").setup({
 
   sources = {
     default = function()
-      local default_source = { "lsp", "path", "snippets", "buffer", "copilot", "codecompanion", "calc", "git", "npm", "ecolog" }
+      local default_source = { "lsp", "path", "snippets", "buffer", "copilot", "codecompanion", "calc", "git", "npm",
+        "ecolog" }
       return default_source
     end,
     providers = {
-      ecolog  = { name = 'ecolog', module = 'ecolog.integrations.cmp.blink_cmp' },
-      calc = { name = "calc", module = "blink.compat.source", min_keyword_length = 3 },
-      git = { name = "git", module = "blink.compat.source" },
-      npm = {
+      ecolog        = { name = 'ecolog', module = 'ecolog.integrations.cmp.blink_cmp' },
+      calc          = { name = "calc", module = "blink.compat.source", min_keyword_length = 3 },
+      git           = { name = "git", module = "blink.compat.source" },
+      npm           = {
         name = "npm",
         module = "blink.compat.source",
         opts = {
@@ -155,11 +156,11 @@ require("blink.cmp").setup({
         min_keyword_length = 0,
         score_offset = 100,
       },
-      copilot = {
+      copilot       = {
         name = "copilot",
         module = "blink-copilot",
         min_keyword_length = 0,
-        score_offset = 100,-- set position for copilot suggestions at higher row
+        score_offset = 100, -- set position for copilot suggestions at higher row
         async = true,
         transform_items = function(_, items)
           local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
@@ -171,17 +172,17 @@ require("blink.cmp").setup({
           return items
         end,
       },
-      lsp = {
+      lsp           = {
         min_keyword_length = 1, -- Number of characters to trigger porvider
         score_offset = 0,       -- Boost/penalize the score of the items
       },
-      path = {
+      path          = {
         min_keyword_length = 1,
       },
-      snippets = {
+      snippets      = {
         min_keyword_length = 2,
       },
-      buffer = {
+      buffer        = {
         min_keyword_length = 1,
         max_items = 5,
       },
