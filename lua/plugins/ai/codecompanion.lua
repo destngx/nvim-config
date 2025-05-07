@@ -20,9 +20,7 @@ return {
   opts = {
     display = {
       action_palette = {
-        width = 95,
-        height = 10,
-        prompt = "Actions: ", -- Prompt used for interactive LLM calls
+        provider = "default",
       },
       chat = {
         -- show_settings = true,
