@@ -70,99 +70,106 @@ capabilities.textDocument.foldingRange = {
   lineFoldingOnly = true,
 }
 
-require("mason-lspconfig").setup_handlers {
-  function(server_name)
-    require("lspconfig")[server_name].setup {
-      on_attach = on_attach,
-      capabilities = capabilities,
-      handlers = handlers,
-    }
-  end,
-  ["vtsls"] = function()
-    require("lspconfig.configs").vtsls = require("vtsls").lspconfig
+vim.lsp.config("*", {
+  capabilities = capabilities,
+  handlers = handlers,
+  on_attach = on_attach,
+})
 
-    lspconfig.vtsls.setup({
-      capabilities = capabilities,
-      handlers = require("lsp.servers.vtsls").handlers,
-      on_attach = require("lsp.servers.vtsls").on_attach,
-      settings = require("lsp.servers.vtsls").settings,
-    })
-  end,
-  ["ts_ls"] = function()
-    -- skip to use vtsls
-    return true
-  end,
-  ["tailwindcss"] = function()
-    lspconfig.tailwindcss.setup({
-      capabilities = require("lsp.servers.tailwindcss").capabilities,
-      filetypes = require("lsp.servers.tailwindcss").filetypes,
-      handlers = handlers,
-      init_options = require("lsp.servers.tailwindcss").init_options,
-      on_attach = require("lsp.servers.tailwindcss").on_attach,
-      settings = require("lsp.servers.tailwindcss").settings,
-    })
-  end,
-  ["cssls"] = function()
-    lspconfig.cssls.setup({
-      capabilities = capabilities,
-      handlers = handlers,
-      on_attach = require("lsp.servers.cssls").on_attach,
-      settings = require("lsp.servers.cssls").settings,
-    })
-  end,
-  ["eslint"] = function()
-    lspconfig.eslint.setup({
-      capabilities = capabilities,
-      filetypes = require("lsp.servers.eslint").filetypes,
-      handlers = handlers,
-      on_attach = require("lsp.servers.eslint").on_attach,
-      settings = require("lsp.servers.eslint").settings,
-    })
-  end,
-  ["jsonls"] = function()
-    lspconfig.jsonls.setup({
-      capabilities = capabilities,
-      handlers = handlers,
-      on_attach = on_attach,
-      settings = require("lsp.servers.jsonls").settings,
-    })
-  end,
-  ["lua_ls"] = function()
-    lspconfig.lua_ls.setup({
-      capabilities = capabilities,
-      handlers = handlers,
-      on_attach = on_attach,
-      settings = require("lsp.servers.lua_ls").settings,
-    })
-  end,
-  ["vuels"] = function()
-    lspconfig.vuels.setup({
-      filetypes = require("lsp.servers.vuels").filetypes,
-      handlers = handlers,
-      init_options = require("lsp.servers.vuels").init_options,
-      on_attach = require("lsp.servers.vuels").on_attach,
-      settings = require("lsp.servers.vuels").settings,
-    })
-  end,
-  ["pylsp"] = function()
-    lspconfig.pylsp.setup({
-      on_attach = on_attach,
-      settings = require("lsp.servers.python").settings,
-      flags = {
-        debounce_text_changes = 200,
-      },
-      capabilities = capabilities,
-    })
-  end,
-  ["yamlls"] = function()
-    lspconfig.yamlls.setup({
-      handlers = handlers,
-      on_attach = on_attach,
-      capabilities = capabilities,
-      settings = require("lsp.servers.yamlls").settings
-    })
-  end,
-}
+
+-- require("mason-lspconfig").setup_handlers {
+--   function(server_name)
+--     require("lspconfig")[server_name].setup {
+--       on_attach = on_attach,
+--       capabilities = capabilities,
+--       handlers = handlers,
+--     }
+--   end,
+--   ["vtsls"] = function()
+--     require("lspconfig.configs").vtsls = require("vtsls").lspconfig
+--
+--     lspconfig.vtsls.setup({
+--       capabilities = capabilities,
+--       handlers = require("lsp.servers.vtsls").handlers,
+--       on_attach = require("lsp.servers.vtsls").on_attach,
+--       settings = require("lsp.servers.vtsls").settings,
+--     })
+--   end,
+--   ["ts_ls"] = function()
+--     -- skip to use vtsls
+--     return true
+--   end,
+--   ["tailwindcss"] = function()
+--     lspconfig.tailwindcss.setup({
+--       capabilities = require("lsp.servers.tailwindcss").capabilities,
+--       filetypes = require("lsp.servers.tailwindcss").filetypes,
+--       handlers = handlers,
+--       init_options = require("lsp.servers.tailwindcss").init_options,
+--       on_attach = require("lsp.servers.tailwindcss").on_attach,
+--       settings = require("lsp.servers.tailwindcss").settings,
+--     })
+--   end,
+--   ["cssls"] = function()
+--     lspconfig.cssls.setup({
+--       capabilities = capabilities,
+--       handlers = handlers,
+--       on_attach = require("lsp.servers.cssls").on_attach,
+--       settings = require("lsp.servers.cssls").settings,
+--     })
+--   end,
+--   ["eslint"] = function()
+--     lspconfig.eslint.setup({
+--       capabilities = capabilities,
+--       filetypes = require("lsp.servers.eslint").filetypes,
+--       handlers = handlers,
+--       on_attach = require("lsp.servers.eslint").on_attach,
+--       settings = require("lsp.servers.eslint").settings,
+--     })
+--   end,
+--   ["jsonls"] = function()
+--     lspconfig.jsonls.setup({
+--       capabilities = capabilities,
+--       handlers = handlers,
+--       on_attach = on_attach,
+--       settings = require("lsp.servers.jsonls").settings,
+--     })
+--   end,
+--   ["lua_ls"] = function()
+--     lspconfig.lua_ls.setup({
+--       capabilities = capabilities,
+--       handlers = handlers,
+--       on_attach = on_attach,
+--       settings = require("lsp.servers.lua_ls").settings,
+--     })
+--   end,
+--   ["vuels"] = function()
+--     lspconfig.vuels.setup({
+--       filetypes = require("lsp.servers.vuels").filetypes,
+--       handlers = handlers,
+--       init_options = require("lsp.servers.vuels").init_options,
+--       on_attach = require("lsp.servers.vuels").on_attach,
+--       settings = require("lsp.servers.vuels").settings,
+--     })
+--   end,
+--   ["pylsp"] = function()
+--     lspconfig.pylsp.setup({
+--       on_attach = on_attach,
+--       settings = require("lsp.servers.python").settings,
+--       flags = {
+--         debounce_text_changes = 200,
+--       },
+--       capabilities = capabilities,
+--     })
+--   end,
+--   ["yamlls"] = function()
+--     lspconfig.yamlls.setup({
+--       handlers = handlers,
+--       on_attach = on_attach,
+--       capabilities = capabilities,
+--       settings = require("lsp.servers.yamlls").settings
+--     })
+--   end,
+-- }
 
 require("ufo").setup({
   fold_virt_text_handler = ufo_config_handler,

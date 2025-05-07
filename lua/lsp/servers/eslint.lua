@@ -40,4 +40,9 @@ M.settings = {
   }
 }
 
-return M
+vim.lsp.config.eslint = {
+  on_attach = M.on_attach,
+  filetypes = M.filetypes,
+  settings = M.settings,
+}
+vim.lsp.enable("eslint")

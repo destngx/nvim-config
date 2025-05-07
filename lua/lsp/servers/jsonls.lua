@@ -43,4 +43,7 @@ M.settings = {
   }
 }
 
-return M
+vim.lsp.config.json = {
+  settings = M.settings,
+}
+vim.lsp.enable("json")

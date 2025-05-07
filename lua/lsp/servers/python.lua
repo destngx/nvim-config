@@ -1,3 +1,4 @@
+vim.lsp.enable("python")
 local M = {}
 local settings = {
   pylsp = {

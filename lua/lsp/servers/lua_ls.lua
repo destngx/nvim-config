@@ -7,5 +7,8 @@ M.settings = {
     }
   }
 }
+vim.lsp.config.lua = {
+  settings = M.settings,
+}
 
-return M
+vim.lsp.enable("lua")

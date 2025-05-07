@@ -1,8 +1,3 @@
-local M = {}
-
-local present, _ = pcall(require, "which-key")
-if not present then return end
-
 local filter = require("lsp.utils.filter").filter
 local filterReactDTS = require("lsp.utils.filterReactDTS").filterReactDTS
 
@@ -139,8 +134,10 @@ local on_attach = function(client, bufnr)
   })
 end
 
-M.handlers = handlers
-M.settings = settings
-M.on_attach = on_attach
-
-return M
+vim.lsp.config.typescript = {
+  handlers = handlers,
+  on_attach = on_attach,
+  settings = settings,
+}
+vim.lsp.enable("vtsls")
+vim.lsp.enable("typescript")

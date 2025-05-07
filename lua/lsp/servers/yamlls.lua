@@ -18,4 +18,8 @@ M.settings = {
     }
   }
 }
-return M
+vim.lsp.config.yaml = {
+  on_attach = M.on_attach,
+  settings = M.settings,
+}
+vim.lsp.enable("yaml")
