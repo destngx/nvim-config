@@ -266,8 +266,3 @@ keymap('v', '<leader>ad', '<cmd>CodeCompanionChat Add<CR>', { desc = 'AI Chat Ad
 -- Security
 -- Ecolog
 keymap('n', '<leader>cp', '<cmd>EcologShelterToggle<CR>', { desc = 'Peek Mask Variable', silent = true })
--- Terraform
-keymap('n', '<leader>ti', ':!terraform init<CR>', { desc = 'Terraform Init', noremap = true, silent = true })
-keymap('n', '<leader>tv', ':!terraform validate<CR>', { desc = 'Terraform Validate', noremap = true, silent = true })
-keymap('n', '<leader>tp', ':!terraform plan<CR>', { desc = 'Terraform Plan', noremap = true, silent = true })
-keymap('n', '<leader>taa', ':!terraform apply -auto-approve<CR>', { desc = 'Terraform Apply', noremap = true, silent = true })
