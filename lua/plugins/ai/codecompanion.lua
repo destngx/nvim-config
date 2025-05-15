@@ -1,4 +1,4 @@
-local prompt_library = require("plugins.config.codecompanion.prompt_library")
+local prompt_library = require("plugins.config.codecompanion.prompt_library.prompt_library")
 local strategies = require("plugins.config.codecompanion.strategies")
 local constants = require("plugins.config.codecompanion.constants")
 local adapters = require("plugins.config.codecompanion.adapters")
