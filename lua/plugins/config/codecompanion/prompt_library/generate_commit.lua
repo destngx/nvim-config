@@ -77,7 +77,7 @@ Here are the diff:
           role = constants.USER_ROLE,
           content = "Using @cmd_runner to stage and commit the files, avoid duplicate add files with the result of the method (default is multiple commits) ",
           opts = {
-            auto_submit = true,
+            auto_submit = false,
           },
         },
       }

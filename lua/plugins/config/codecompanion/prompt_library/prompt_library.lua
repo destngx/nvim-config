@@ -12,10 +12,10 @@ return {
   ["Check Spelling, Correct grammar and reformulate"] = require(
   "plugins.config.codecompanion.prompt_library.check_spelling"),
   ["Naming"] = require("plugins.config.codecompanion.prompt_library.naming"),
-  ["Mindmap generate"] = require("plugins.config.codecompanion.prompt_library.mindmap_generate"),
-  ["Explain like I'm five year olds"] = require("plugins.config.codecompanion.prompt_library.explain_like_im_five"),
-  ["Generate Mermaid chart"] = require("plugins.config.codecompanion.prompt_library.generate_mermaid"),
-  ["Code workflow"] = require("plugins.config.codecompanion.prompt_library.code_workflow"),
-  ["Chat with context rules"] = require("plugins.config.codecompanion.prompt_library.chat_with_context"),
+  ["Mindmap generate"] = require("plugins.config.codecompanion.prompt_library.generate_mindmap"),
+  ["Explain like I'm five year olds"] = require("plugins.config.codecompanion.prompt_library.eli5"),
+  ["Generate Mermaid chart"] = require("plugins.config.codecompanion.prompt_library.generate_mermaid_chart"),
+  ["Code workflow"] = require("plugins.config.codecompanion.prompt_library.code_with_workflow"),
+  ["Chat with context rules"] = require("plugins.config.codecompanion.prompt_library.chat_with_context_file"),
   ["Review Project Structure"] = require("plugins.config.codecompanion.prompt_library.review_project_structure"),
 }
