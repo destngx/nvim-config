@@ -420,3 +420,8 @@ Kibana
 IPC
 Infastructure
 BDD
+kubernetes
+Sigstore
+OpenTelemetry
+Prequisites
+Promtail
