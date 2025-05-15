@@ -99,6 +99,16 @@ return {
 
     dependencies = {
       "nvim-lua/plenary.nvim",
+      {
+        "OXY2DEV/markview.nvim",
+        ft = { "markdown", "codecompanion" },
+        opts = {
+          preview = {
+            filetypes = { "markdown", "codecompanion" },
+            ignore_buftypes = {},
+          },
+        },
+      },
     },
     config = function()
       require("obsidian").setup({
