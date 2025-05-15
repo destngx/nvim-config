@@ -102,7 +102,7 @@ autocmd("FileType", {
 })
 
 autocmd("BufEnter", {
-  pattern = "codecompanion",
+  pattern = "CodeCompanion",
   callback = function()
     vim.opt_local.relativenumber = false
     vim.opt_local.number = false
