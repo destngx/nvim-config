@@ -50,7 +50,9 @@ kanagawa.setup({
       StatusLineNC = { bg = "none" },
       lualine_c_normal = { bg = "none" },
       MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
-      Visual = { bg = "#3a3a3a", fg = colors.palette.bg, }
+      Visual = { bg = "#3a3a3a", fg = colors.palette.bg, },
+      CodeCompanionChatVariable = { bg = "#3a3a3a", fg = "#e6c384", },
+      CodeCompanionChatToolGroup = { bg = "#3a3a3a", fg = "#ffa066", }
     }
   end,
 })
