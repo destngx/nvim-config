@@ -52,6 +52,7 @@ kanagawa.setup({
       MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
       Visual = { bg = "#3a3a3a", fg = colors.palette.bg, },
       CodeCompanionChatVariable = { bg = "#3a3a3a", fg = "#e6c384", },
+      CodeCompanionChatTool = { bg = "#3a3a3a", fg = "#7fb4ca", },
       CodeCompanionChatToolGroup = { bg = "#3a3a3a", fg = "#ffa066", }
     }
   end,
