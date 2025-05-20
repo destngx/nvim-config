@@ -436,3 +436,5 @@ EKS
 ingesters
 Ingester
 deduplication
+K8s
+Keyspace
