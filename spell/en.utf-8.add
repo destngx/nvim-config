@@ -438,3 +438,12 @@ Ingester
 deduplication
 K8s
 Keyspace
+OTel
+GitOps
+ArgoCD
+CRDs
+finalizer
+PromQL
+Gappy
+RBAC
+OSI

@@ -1,3 +1,4 @@
+local fn = vim.fn
 local utils = require('utils')
 
 local async_present, async = pcall(require, "plenary.async")
@@ -223,6 +224,13 @@ end
 M.is_obsidian_note = function()
   return vim.bo.filetype == "markdown"
       and vim.api.nvim_buf_get_name(0):match('^/Users/destnguyxn/projects/obsidian%-vaults/.+%.md$')
+end
+
+--- Check if an executable exists
+--- @param name string An executable name/path
+--- @return boolean
+function M.executable(name)
+  return fn.executable(name) > 0
 end
 
 return M
