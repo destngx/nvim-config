@@ -1,6 +1,8 @@
-vim.lsp.enable("bash")
-local M = {}
+local M = {
+  cmd = { "bash-language-server", "start" },
+  filetypes = { "sh", "bash", "zsh" },
+  ignoredRootPaths = { "~" }
+}
 
-M.settings = {}
 
 return M

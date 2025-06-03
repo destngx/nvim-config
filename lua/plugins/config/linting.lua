@@ -5,6 +5,8 @@ local mason_ensure_installed_linter = {
   "hadolint",
   "tflint",
   "vale",
+  "eslint_d",
+  "shellcheck",
 }
 
 if mason_registry_ok then
@@ -32,4 +34,5 @@ lint.linters_by_ft = {
   terraform = { "tflint" },
   tf = { "tflint" },
   hcl = { "terraform_validate" },
+  sh = { "shellcheck" },
 }

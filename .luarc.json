@@ -1,6 +1,7 @@
 {
-    "diagnostics.disable": [
-        "deprecated",
-        "different-requires"
-    ]
+  "diagnostics.disable": [
+    "deprecated",
+    "different-requires",
+        "unused-function"
+  ]
 }

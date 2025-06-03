@@ -1,5 +1,5 @@
-local filter = require("lsp.utils.filter").filter
-local filterReactDTS = require("lsp.utils.filterReactDTS").filterReactDTS
+local filter = require("utils.filter").filter
+local filterReactDTS = require("utils.filterReactDTS").filterReactDTS
 
 local handlers = {
   ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
@@ -12,7 +12,7 @@ local handlers = {
   ),
   ["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
     require("ts-error-translator").translate_diagnostics(err, result, ctx, config)
-    vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
+    vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx)
   end,
   -- ["textDocument/publishDiagnostics"] = vim.lsp.with(
   --   vim.lsp.diagnostic.on_publish_diagnostics,
@@ -64,14 +64,7 @@ settings.javascript =
     vim.tbl_deep_extend("force", {}, settings.typescript, settings.javascript or {})
 
 local on_attach = function(client, bufnr)
-  client.commands["editor.action.showReferences"] = function(command, ctx)
-    local locations = command.arguments[3]
-    if locations and #locations > 0 then
-      local items = vim.lsp.util.locations_to_items(locations, client.offset_encoding)
-      vim.fn.setloclist(0, {}, " ", { title = "References", items = items, context = ctx })
-      vim.api.nvim_command("lopen")
-    end
-  end
+  
   client.commands["_typescript.moveToFileRefactoring"] = function(command, ctx)
     print(ctx.bufnr)
     local action, uri, range = unpack(command.arguments)
@@ -134,10 +127,13 @@ local on_attach = function(client, bufnr)
   })
 end
 
-vim.lsp.config.typescript = {
+local M = {
+  filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+  root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
+  cmd = { 'vtsls', '--stdio' },
+  workspace_required = true,
   handlers = handlers,
   on_attach = on_attach,
   settings = settings,
 }
-vim.lsp.enable("vtsls")
-vim.lsp.enable("typescript")
+return M

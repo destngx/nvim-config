@@ -5,54 +5,35 @@ return {
     lazy = false,
     opts = {
       ui = {
-    -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
-    border = DestNgxVim.ui.float.border or "rounded",
+        -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
+        border = DestNgxVim.ui.float.border or "rounded",
       },
     }
-    -- keys = {
-    --   { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" },
-    -- },
   },
   {
     'mason-org/mason-lspconfig.nvim',
     dependencies = { 'neovim/nvim-lspconfig' },
     opts = {
-  ensure_installed = {
-   "lua_ls",
-    "vtsls",
-    "dockerls",
-    "docker_compose_language_service",
-    "terraformls",
-    "vale_ls",
-    "helm_ls",
-    -- "makrdownlint-cli2",
-    -- "markdown-toc",
-    -- "bashls",
-    -- "cssls",
-    -- "eslint",
-    -- "html",
-    -- "markdown",
-    -- "markdown_inline",
-    -- "markman",
-    -- "jsonls",
-    -- "tailwindcss",
-    -- "pylsp",
+      ensure_installed = {
 
-  },
-  automatic_installation = true,
+        "lua_ls",
+        "vtsls",
+        "dockerls",
+        "docker_compose_language_service",
+        "terraformls",
+        "helm_ls",
+        "bashls",
+        "eslint",
+        "jsonls",
+        "shfmt",
+        -- "vale_ls",
+        -- "makrdownlint-cli2",
+        -- "markdown-toc","yamlls",
+
+      },
+      automatic_installation = true,
     }
   },
-  -- {
-  --   "neovim/nvim-lspconfig",
-  --   version = "*",
-  --   lazy = false,
-  --   dependencies = {
-  --     "mason.nvim",
-  --     "williamboman/mason-lspconfig.nvim",
-  --     "saghen/blink.cmp",
-  --   },
-  --   servers = nil,
-  -- },
   {
     "antosha417/nvim-lsp-file-operations",
     event = "LspAttach",
