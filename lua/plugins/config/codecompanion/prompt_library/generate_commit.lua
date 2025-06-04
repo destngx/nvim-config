@@ -38,7 +38,7 @@ Think step-by-step and consider the following when generating messages:
   - Is there a consistent pattern across files?
   - Summarize repetitive actions (e.g., multiple small doc updates = one docs commit).
   - Avoid over-specificity unless it's important.
-  - Include a meaningful scope, if applicable.
+  - Include a meaningful scope, based on the files changed.
 
 ✍️ Commit Message Format
 Follow the commitizen style:
@@ -68,14 +68,14 @@ Here are the diff:
       role = constants.USER_ROLE,
       content = "Now generate commmit messages",
       opts = {
-        auto_submit = false,
+        auto_submit = true,
       },
     }, },
     {
       {
         role = constants.USER_ROLE,
         content =
-        "Using @cmd_runner to run a single command that stage and commit the files based on the results, avoid duplicate add files with the result of the method multiple commits. ",
+        "Using @cmd_runner to run a single command that using the result of the method multiple commits (if it not available, fallback to single commit method) to stage and commit the files based on the results, avoid adding duplicate files ",
         opts = {
           auto_submit = false,
         },
