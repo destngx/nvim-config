@@ -8,6 +8,7 @@ vim.filetype.add {
     ejs = "html",
     eslintrc = "jsonc",
     mdx = "markdown.mdx",
+    mdc = "markdown",
     tf = "terraform",
   },
 }
