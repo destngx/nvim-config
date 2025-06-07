@@ -36,5 +36,17 @@ return {
     adapters = adapters.COPILOT,
     strategies = strategies,
     prompt_library = prompt_library,
+    extensions = {
+      contextfiles = {
+        opts = {}
+      },
+      vectorcode = {
+        opts = {
+          add_tool = true,
+          add_slash_commands = true,
+          tool_opts = {}
+        },
+      }
+    },
   },
 }

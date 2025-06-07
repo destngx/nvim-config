@@ -7,7 +7,7 @@ return {
     copilot = function()
       return require("codecompanion.adapters").extend("copilot", {
         schema = {
-          model = is_obsidian_note() and { default = "gpt-4.1"} or { default = "claude-3.7-sonnet" },
+          model = is_obsidian_note() and { default = "gpt-4.1"} or { default = "claude-sonnet-4" },
         },
       })
     end,

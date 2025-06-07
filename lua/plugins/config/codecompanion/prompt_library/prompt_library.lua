@@ -1,5 +1,3 @@
-local constants = require("plugins.config.codecompanion.constants")
-
 return {
   -- Custom the default prompt
   ["Explain"] = require("plugins.config.codecompanion.prompt_library.explain"),
@@ -18,4 +16,5 @@ return {
   ["Code workflow"] = require("plugins.config.codecompanion.prompt_library.code_with_workflow"),
   ["Chat with context rules"] = require("plugins.config.codecompanion.prompt_library.chat_with_context_file"),
   ["Review Project Structure"] = require("plugins.config.codecompanion.prompt_library.review_project_structure"),
+  ["Brainstorm"] = require("plugins.config.codecompanion.prompt_library.brainstorm"),
 }

@@ -4,6 +4,8 @@ return {
   strategy = "chat",
   description = "Chat with context files",
   opts = {
+    is_slash_cmd = true,
+    short_name = "context_file",
     index = 1,
   },
   prompts = {
@@ -11,9 +13,10 @@ return {
       role = constants.USER_ROLE,
       opts = {
         contains_code = true,
+        auto_submit = true,
       },
       content = function(context)
-        local ctx = require("contextfiles.extensions.codecompanion")
+        local ctx = require("codecompanion").extensions.contextfiles
         -- You can check example context rules at https://cursor.directory/rules
 
         local ctx_opts = {

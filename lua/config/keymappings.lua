@@ -257,7 +257,8 @@ keymap('n', '<leader><leader>l', require('smart-splits').swap_buf_right, { desc 
 
 -- AI
 -- CodeCompanion
-keymap('n', '<leader>aa', '<cmd>CodeCompanionChat<CR>', { desc = 'AI Chat Panel Open', silent = true })
+keymap('n', '<leader>aa', '<cmd>CodeCompanion /context_file<CR>', { desc = 'AI Chat With Context', silent = true })
+keymap('n', '<leader>ac', '<cmd>CodeCompanionChat<CR>', { desc = 'AI Empty Chat Panel', silent = true })
 keymap('n', '<leader>aq', '<cmd>CodeCompanion<CR>', { desc = 'AI Inline Quickchat', silent = true })
 keymap('v', '<leader>aq', '<cmd>CodeCompanion<CR>', { desc = 'AI Inline Quickchat', silent = true })
 keymap('n', '<leader>ap', '<cmd>CodeCompanionActions<CR>', { desc = 'AI Actions Selected', silent = true })

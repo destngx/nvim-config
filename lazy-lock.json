@@ -1,6 +1,7 @@
 {
   "AdvancedNewFile.nvim": { "branch": "main", "commit": "9b4576dcf916d848148241e7269c9cd78f299b22" },
   "Comment.nvim": { "branch": "master", "commit": "e30b7f2008e52442154b66f7c519bfd2f1e32acb" },
+  "VectorCode": { "branch": "main", "commit": "9d742b5e0929a6d442137f7ca377ccc157a17c73" },
   "autosave.nvim": { "branch": "main", "commit": "348f72cf0241e3e736e3396c4834def2f8ef8d10" },
   "b64.nvim": { "branch": "main", "commit": "e93d1a7e065f6eaf5d3bae9efb9bc2c30907f471" },
   "better-escape.nvim": { "branch": "master", "commit": "19a38aab94961016430905ebec30d272a01e9742" },

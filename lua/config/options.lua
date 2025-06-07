@@ -51,9 +51,10 @@ local options = {
 }
 
 local globals = {
-  mapleader               = ' ', --- Map leader key to SPC
-  maplocalleader          = ',', --- Map local leader key to comma
-  speeddating_no_mappings = 1,   --- Disable default mappings for speeddating
+  mapleader                    = ' ',  --- Map leader key to SPC
+  maplocalleader               = ',',  --- Map local leader key to comma
+  speeddating_no_mappings      = 1,    --- Disable default mappings for speeddating
+  codecompanion_auto_tool_mode = true, --- Enable auto tool mode for code companion
 }
 
 vim.opt.shortmess:append('c');
