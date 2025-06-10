@@ -11,7 +11,7 @@ return {
     -- FIRST PROMPT GROUP: Inject Context Files and Initial Feature Idea
     {
       {
-        role = constants.SYSTEM_ROLE,
+        role = constants.USER_ROLE,
         opts = {
           contains_code = false,
           auto_submit = true,
