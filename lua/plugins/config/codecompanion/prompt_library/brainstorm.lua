@@ -21,18 +21,7 @@ return {
           "You are a full stack developer, you can run terminal commands, CRUD files and edit current buffer. You have the tool @full_stack_dev that can do all of these things. You can search the web to check new documents or searching for extra knowledge using the tool @web_search."
         end,
       },
-      {
-        role = constants.USER_ROLE,
-        opts = {
-          contains_code = false,
-          auto_submit = true,
-        },
-        content = function(context)
-          return
-              "\n\nCurrent file content #buffer and path: " ..
-              context.filename
-        end,
-      },
+
       {
         role = constants.SYSTEM_ROLE, -- Use SYSTEM_ROLE for context to the LLM
         content = function(context)
@@ -44,7 +33,8 @@ return {
             -- enable_local = true, -- Enable local rules in the current project
           }
           local format_opts = {
-            prefix = "\n\nFollow the below rules, and extra contexts for you, separated by ---. Use this to inform your plan:\n\n---",
+            prefix =
+            "\n\nFollow the below rules, and extra contexts for you, separated by ---. Use this to inform your plan:\n\n---",
             suffix = "\n\n---\n\n",
             -- separator = "\n\n---\n\n",
           }
@@ -66,26 +56,38 @@ GUIDELINES:
 5.  **Be Truthful:** If you're unsure about my requirements, ask specific questions to clarify before proceeding. If you think my ideas is not correct, please say so. If you do not know the answer, please say so, never guessing.
 
 
-%s -- This inserts the context files content
+%s -- This inserts the `contextfiles` content
           ]], context_content)
         end,
         opts = {
-          visible = false,     -- Keep this system prompt hidden from the user in chat
+          visible = false,    -- Keep this system prompt hidden from the user in chat
           auto_submit = true, -- Important: Set this to false for the initial user input
         },
       },
+
       {
         role = constants.USER_ROLE,
         content =
         [[
-
-Get file list in the contextfiles, then get the content of those files as context.
+Get file from list in the `contextfiles`, then get the content of those files as context.
 Before we proceed, can you confirm which project files or parts of the codebase you've received as context for this conversation? Please list them briefly or describe the main areas.
 ]],
         opts = {
           auto_submit = true,
           visible = true, -- Make this prompt visible so you see the question
         },
+      },
+      {
+        role = constants.USER_ROLE,
+        opts = {
+          contains_code = false,
+          auto_submit = true,
+        },
+        content = function(context)
+          return
+              "\n\nCurrent file content #buffer and path: " ..
+              context.filename
+        end,
       },
       {
         role = constants.USER_ROLE,

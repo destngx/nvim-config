@@ -21,21 +21,9 @@ return {
       end,
     },
     {
-      role = constants.USER_ROLE,
-      opts = {
-        contains_code = false,
-        auto_submit = true,
-      },
-      content = function(context)
-        return
-            "\n\nCurrent file content #buffer and path: " ..
-            context.filename
-      end,
-    },
-    {
       role = constants.SYSTEM_ROLE,
       opts = {
-        contains_code = true,
+        contains_code = false,
         auto_submit = true,
         visible = false,
       },
@@ -72,7 +60,7 @@ GUIDELINES:
 5.  **Be Truthful:** If you're unsure about my requirements, ask specific questions to clarify before proceeding. If you think my ideas is not correct, please say so. If you do not know the answer, please say so, never guessing.
 
 
-%s -- This inserts the context files content
+%s -- This inserts the "contextfiles" content
           ]], context_content)
       end,
     },
@@ -80,12 +68,39 @@ GUIDELINES:
       role = constants.USER_ROLE,
       content =
       [[
-Get file list in the contextfiles if there are any, then using the content of those files as extra context.
-Before we proceed, can you confirm which project files or parts of the codebase you've received as context for this conversation? Please list them briefly or describe the main areas.
+List all files that have been referenced in "contextfiles" for this conversation using your tool.
+If context files are available, get their content as additional background information for our discussion.
+
+Before we begin, please confirm what project files or codebase sections you have access to. Provide a brief overview of:
+- File names and their purposes
+- Main functional areas covered
+- Key components or modules included
+
+This will help establish the scope of our conversation and ensure we're working with the same understanding of the available context.
 ]],
       opts = {
         auto_submit = true,
         visible = true,
+      },
+    },
+    {
+      role = constants.USER_ROLE,
+      opts = {
+        contains_code = false,
+        auto_submit = true,
+      },
+      content = function(context)
+        return
+            "\n\nI will give you extra context with current file content #buffer and path: `" ..
+            context.filename .. "`"
+      end,
+    },
+    {
+      role = constants.USER_ROLE,
+      content =
+      "My request is: \n\n > ",
+      opts = {
+        auto_submit = false, -- User types their initial request
       },
     },
   },
