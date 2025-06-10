@@ -43,7 +43,7 @@ return {
       vectorcode = {
         opts = {
           add_tool = true,
-          add_slash_commands = true,
+          add_slash_commands = false,
           tool_opts = {}
         },
       }

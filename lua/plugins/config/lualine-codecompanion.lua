@@ -9,6 +9,7 @@ local spinner_symbols = {
   "(  " .. DestNgxVim.icons.copilotUnknown .. "  )",
   "(   " .. DestNgxVim.icons.copilotWarning .. " )",
   "(    " .. DestNgxVim.icons.copilotSleep .. ")",
+  "(    " .. DestNgxVim.icons.copilotSleep .. ")",
   "(   " .. DestNgxVim.icons.copilotWarning .. " )",
   "(  " .. DestNgxVim.icons.copilotUnknown .. "  )",
   "( " .. DestNgxVim.icons.copilotEnabled .. "   )",

@@ -36,18 +36,18 @@ return {
     slash_commands = {
       ["help"] = {
         opts = {
-          provider = "fzf_lua",     -- default|telescope|mini_pick|fzf_lua
+          provider = "fzf_lua", -- default|telescope|mini_pick|fzf_lua
         },
       },
       ["symbols"] = {
         opts = {
-          provider = "fzf_lua",     -- default|telescope|mini_pick|fzf_lua
+          provider = "fzf_lua", -- default|telescope|mini_pick|fzf_lua
         },
       },
       ["buffer"] = {
         opts = {
           contains_code = true,
-          provider = "fzf_lua",     -- default|telescope|mini_pick|fzf_lua
+          provider = "fzf_lua", -- default|telescope|mini_pick|fzf_lua
           has_params = true,
         },
       },
@@ -55,7 +55,7 @@ return {
         opts = {
           contains_code = true,
           max_lines = 1000,
-          provider = "fzf_lua",     -- telescope|mini_pick|fzf_lua
+          provider = "fzf_lua", -- telescope|mini_pick|fzf_lua
         },
       },
     },
@@ -64,6 +64,16 @@ return {
         opts = {
           default_params = "watch",
         }
+      }
+    },
+    tools = {
+      ["next_edit_suggestion"] = {
+        opts = {
+          --- the default is to open in a new tab, and reuse existing tabs
+          --- where possible
+          ---@type string|fun(path: string):integer?
+          jump_action = 'tabnew',
+        },
       }
     }
   },
