@@ -75,9 +75,17 @@ Here are the diff:
       {
         role = constants.USER_ROLE,
         content =
-        "Using @cmd_runner to run a single command that using the result of the method multiple commits (if it not available, fallback to single commit method) to stage and commit the files based on the results, avoid adding duplicate files ",
+        "Using @cmd_runner to run a single command that using the result of the method multiple commits (if it not available, fallback to single commit method) to stage and commit the files based on the results, avoid adding duplicate files. After finish, run `git log --oneline <number-of-commits>` to verify the commits.",
         opts = {
           auto_submit = false,
+        },
+      },
+      {
+        role = constants.USER_ROLE,
+        content =
+        "Run `git log --oneline <number-of-commits>` to verify the commits ",
+        opts = {
+          auto_submit = true,
         },
       },
     }
