@@ -44,7 +44,11 @@ return {
         }
 
         -- Get the context from contextfiles.nvim based on the current file
-        local context_content = ctx.get(context.filename, ctx_opts, format_opts)
+        -- Handle error case - return empty string if context cannot be fetched
+        local success, context_content = pcall(ctx.get, context.filename, ctx_opts, format_opts)
+        if not success or not context_content then
+          context_content = "\n\n--- No additional project context available ---\n\n"
+        end
 
         -- Combine context with the LLM's system instructions for brainstorming
         return string.format([[
@@ -91,7 +95,7 @@ This will help establish the scope of our conversation and ensure we're working 
       },
       content = function(context)
         return
-            "\n\nI will give you extra context with current file content #buffer and path: `" ..
+            "\n\nI will give you extra context with current file content #buffer{watch} and path: `" ..
             context.filename .. "`"
       end,
     },
