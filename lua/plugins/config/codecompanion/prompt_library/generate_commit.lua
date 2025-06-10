@@ -79,16 +79,7 @@ Here are the diff:
         opts = {
           auto_submit = false,
         },
-      },
-      {
-        role = constants.USER_ROLE,
-        content =
-        "Run `git log --oneline <number-of-commits>` to verify the commits ",
-        opts = {
-          auto_submit = true,
-        },
-      },
+      }
     }
-
   },
 }
