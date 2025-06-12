@@ -39,6 +39,7 @@ Think step-by-step and consider the following when generating messages:
   - Summarize repetitive actions (e.g., multiple small doc updates = one docs commit).
   - Avoid over-specificity unless it's important.
   - Include a meaningful scope, based on the files changed.
+  - Each file must in only 1 commit.
 
 ✍️ Commit Message Format
 Follow the commitizen style:
@@ -75,7 +76,10 @@ Here are the diff:
       {
         role = constants.USER_ROLE,
         content =
-        "Using @cmd_runner to run a single command that using the result of the method multiple commits (if it not available, fallback to single commit method) to stage and commit the files based on the results, avoid adding duplicate files. After finish, run `git log --oneline <number-of-commits>` to verify the commits.",
+          [[
+Using @cmd_runner to run a single command that using the result of the method multiple commits (if it not available, fallback to single commit method) to stage and commit the files based on the results
+After finish, run `git log --oneline <number-of-commits>` to verify the commits.
+          ]],
         opts = {
           auto_submit = false,
         },
