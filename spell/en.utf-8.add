@@ -449,3 +449,6 @@ RBAC
 OSI
 Supabase
 onboarding
+Route53
+nginx
+LoadBalancer

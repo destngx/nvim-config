@@ -10,12 +10,12 @@ return {
   },
   prompts = {
     {
-      role = constants.SYSTEM_ROLE,
+      role = constants.USER_ROLE,
       opts = {
         contains_code = false,
         auto_submit = true,
       },
-      content = function(context)
+      content = function()
         return
         "You are a full stack developer, you can run terminal commands, CRUD files and edit current buffer. You have the tool @full_stack_dev that can do all of these things. You can search the web to check new documents or searching for extra knowledge using the tool @web_search."
       end,
