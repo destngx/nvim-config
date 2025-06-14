@@ -7,6 +7,7 @@ local mason_ensure_installed_linter = {
   "vale",
   "eslint_d",
   "shellcheck",
+  "sqlfluff",
 }
 
 if mason_registry_ok then
@@ -35,4 +36,5 @@ lint.linters_by_ft = {
   tf = { "tflint" },
   hcl = { "terraform_validate" },
   sh = { "shellcheck" },
+  sql = { "sqlfluff" },
 }

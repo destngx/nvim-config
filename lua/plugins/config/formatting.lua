@@ -2,7 +2,7 @@ local conform = require("conform")
 local mason_registry_ok, mason_registry = pcall(require, "mason-registry")
 
 local mason_ensure_installed_formatter = {
-  "terraform_fmt"
+  "terraform_fmt",
 }
 if mason_registry_ok then
   for _, formatter in ipairs(mason_ensure_installed_formatter) do
