@@ -12,12 +12,15 @@ return {
     { {
       role = constants.SYSTEM_ROLE,
       content = function()
-        local is_staged_only = vim.fn.input(
-          "Do you want to only generate commit for staged files?\n(default is no): ") or ""
-
-        local diff_content = vim.fn.system("git diff HEAD --no-ext-diff")
-        if is_staged_only == "y" or is_staged_only == "yes" then
+        local is_all = vim.fn.input(
+          "Do you want to only generate commit for all files?\n(default is yes, enter n or no if you do not want): ") or ""
+        local diff_content = ""
+        if is_all == "n" or is_all == "no" then
+          vim.fn.system("git add .")
           diff_content = vim.fn.system("git diff --staged") .. "\n\n-- SHOWING STAGED CHANGES ONLY --"
+        else
+          vim.fn.system("git add .")
+          diff_content = vim.fn.system("git diff HEAD --no-ext-diff")
         end
 
         return string.format([[
@@ -35,9 +38,9 @@ A commit message consists of a header, body, and footer.
 
 &lt;type>(&lt;scope>): &lt;subject>
 
-[optional body: explain the 'what' and 'why' of the change]
+[body: explain the 'what' and 'why' of the change]
 
-[optional footer: reference issues, e.g., 'Closes #123' or list 'BREAKING CHANGE: ...']
+[footer: reference issues, e.g., 'Closes #123' or list 'BREAKING CHANGE: ...']
 
 
 **b. Allowed Types:**
@@ -55,6 +58,9 @@ You must use one of the following `<type>` values:
 
 **c. Style Matching:**
 Analyze the `10 latest git commit message` provided as context. Match their tense, style, and `<scope>` conventions to ensure consistency with the repository's history.
+
+If the content is from Zettelkasten note, do not use "zettelkasten" as scope.
+The scope must be a short, lowercase identifier that describes the area of the code affected by the change (e.g., `utils`, `api`, `ui`, etc.) base on the specific changes content.
 
 ---
 ### 2. 💡 One-Shot Example
@@ -135,6 +141,10 @@ Before generating the output, think step-by-step:
 
     If the provided diff is empty, contains no meaningful changes, or is too ambiguous to interpret, do not generate a commit message. Instead, return a message stating the problem (e.g., "Error: The provided diff is empty or contains no substantive changes.").
     As an AI, you may lack the full business context for these changes. Acknowledge this by appending a brief note if the intent of a change is highly ambiguous.Here is the 10 latest git commit message:
+
+## 📥 Input Data
+
+Here is the 10 latest git commit message:
 ```diff
 %s
 ```
@@ -166,7 +176,27 @@ Here are the diff:
         role = constants.USER_ROLE,
         content =
           [[
-Using @cmd_runner to run a single command that using the result of the method multiple commits (if it not available, fallback to single commit method) to stage and commit the files based on the results
+Generate a single commands for each commit method that will stage and commit the files. No file should be add more than once.
+
+For example:
+```sh
+# single commit
+git add . && git commit -m "feat(scope): add new feature" 
+# multiple commits
+git add <file1> <file2> && git commit -m "feat(scope): add new feature" && git add <file3> <file4> && git commit -m "feat(scope): add new feature2" ...  
+```
+          ]],
+        opts = {
+          auto_submit = false,
+        },
+      }
+    },
+    {
+      {
+        role = constants.USER_ROLE,
+        content =
+          [[
+Using the @cmd_runner to run commands for method multiple commits.
 After finish, run `git log --oneline <number-of-commits>` to verify the commits.
           ]],
         opts = {
