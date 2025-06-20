@@ -44,7 +44,9 @@ return {
         opts = {
           add_tool = true,
           add_slash_commands = false,
-          tool_opts = {}
+          tool_opts = {
+            chunk_mode = true,
+          }
         },
       }
     },
