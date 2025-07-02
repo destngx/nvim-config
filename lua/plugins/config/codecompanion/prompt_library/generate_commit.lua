@@ -178,6 +178,8 @@ Here are the diff:
           [[
 Generate a single commands for each commit method that will stage and commit the files. No file should be add more than once.
 
+If files are already stage, you can choose to unstage them or continue to commit base on the commit plan.
+
 For example:
 ```sh
 # single commit
