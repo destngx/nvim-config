@@ -36,7 +36,7 @@ local settings = {
     autoUseWorkspaceTsdk = true,
     experimental = {
       completion = {
-        enableServerSideFuzzyMatch = false,
+        enableServerSideFuzzyMatch = true,
       },
     },
   },
