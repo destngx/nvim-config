@@ -12,10 +12,10 @@ return {
     "nvim-treesitter/nvim-treesitter",
     "j-hui/fidget.nvim",
     "banjo/contextfiles.nvim",
+    { "franco-ruggeri/codecompanion-spinner.nvim", opts = {} }
   },
   init = function()
     vim.cmd([[cab cc CodeCompanion]])
-    require("plugins.config.codecompanion.fidget-spinner"):init()
   end,
   opts = {
     display = {

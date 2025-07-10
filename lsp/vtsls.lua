@@ -1,5 +1,6 @@
 local filter = require("utils.filter").filter
 local filterReactDTS = require("utils.filterReactDTS").filterReactDTS
+local errorTranslator = require("ts-error-translator")
 
 local handlers = {
   ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
@@ -11,7 +12,7 @@ local handlers = {
     { border = DestNgxVim.ui.float.border }
   ),
   ["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
-    require("ts-error-translator").translate_diagnostics(err, result, ctx, config)
+    errorTranslator.translate_diagnostics(err, result, ctx, config)
     vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx)
   end,
   -- ["textDocument/publishDiagnostics"] = vim.lsp.with(
@@ -35,13 +36,13 @@ local settings = {
     autoUseWorkspaceTsdk = true,
     experimental = {
       completion = {
-        enableServerSideFuzzyMatch = true,
+        enableServerSideFuzzyMatch = false,
       },
     },
   },
   typescript = {
     implementationCodeLens = { enabled = true },
-    referencesCodeLens = { enabled = true, showOnAllFunctions = true },
+    referencesCodeLens = { enabled = true, showOnAllFunctions = false },
     tsserver = {
       maxTsServerMemory = vim.fn.has('macunix') == 1 and 8192 or 16384,
     },
@@ -64,7 +65,6 @@ settings.javascript =
     vim.tbl_deep_extend("force", {}, settings.typescript, settings.javascript or {})
 
 local on_attach = function(client, bufnr)
-  
   client.commands["_typescript.moveToFileRefactoring"] = function(command, ctx)
     print(ctx.bufnr)
     local action, uri, range = unpack(command.arguments)

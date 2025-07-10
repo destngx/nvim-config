@@ -198,7 +198,7 @@ git add <file1> <file2> && git commit -m "feat(scope): add new feature" && git a
         role = constants.USER_ROLE,
         content =
           [[
-Using the @cmd_runner to run commands for method multiple commits.
+Using the @{cmd_runner} to run commands for method single commits.
 After finish, run `git log --oneline <number-of-commits>` to verify the commits.
           ]],
         opts = {
