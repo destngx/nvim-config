@@ -1,13 +1,13 @@
 local autocmd = vim.api.nvim_create_autocmd
 -- Auto sync plugins on save of plugins.lua
-autocmd("BufWritePost", {
-  pattern = { "plugins.lua", "plugins/*/*.lua", "plugins/*.lua" },
-  command = "source <afile> | Lazy sync"
-})
+-- autocmd("BufWritePost", {
+--   pattern = { "plugins.lua", "plugins/*/*.lua", "plugins/*.lua" },
+--   command = "source <afile> | Lazy sync"
+-- })
 -- Disable tabline
-autocmd("BufWinEnter", {
-  command = "set showtabline=0"
-})
+-- autocmd("BufWinEnter", {
+--   command = "set showtabline=0"
+-- })
 -- Use fzf-lua for vim.ui.select
 -- BufWinEnter will slow at first time, but it's fine
 -- autocmd("VimEnter", {

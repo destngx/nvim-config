@@ -29,7 +29,7 @@ require('Comment').setup({
   ---@type table
   toggler = {
     ---line-comment keymap
-    line = 'gcc',
+    line = 'gc',
     ---block-comment keymap
     -- block = 'gbc',
   },

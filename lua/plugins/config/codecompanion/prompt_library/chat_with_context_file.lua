@@ -17,7 +17,7 @@ return {
       },
       content = function()
         return
-        "You are a full stack developer, you can run terminal commands, CRUD files and edit current buffer. You have the tool @{full_stack_dev} that can do all of these things. You can search the web to check new documents or searching for extra knowledge using the tool @{web_search}"
+        "You have the tools @{full_stack_dev} @{web_search} @{vectorcode_toolbox} @{mcp} so you can run terminal commands, CRUD files and edit current buffer. You can search the web to check new documents or searching for extra knowledge using the tool @{web_search}. You can also use the tool @{vectorcode_toolbox} to vectorise and search for code snippets in your codebase. With MCP you can search newest documents using Context7, Do sequential thinking. "
       end,
     },
     {

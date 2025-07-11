@@ -208,13 +208,4 @@ return {
       })
     end,
   },
-  {
-    "andrewferrier/wrapping.nvim",
-    ft = { "markdown" },
-    opts = {
-      softener = { markdown = true },
-      create_keymaps = false,
-      notify_on_switch = false
-    }
-  }
 }

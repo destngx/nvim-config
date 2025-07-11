@@ -66,15 +66,15 @@ return {
       require("textcase").setup(
         {
           default_keymappings_enabled = true,
-          prefix = "gt",
+          prefix = "gT",
           substitude_command_name = nil,
         }
       )
     end,
     keys = {
-      { "gt" },
+      { "gT" },
       {
-        "gt.",
+        "gT.",
         function()
           require("plugins.config.text-case").select()
         end,
