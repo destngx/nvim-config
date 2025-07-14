@@ -12,6 +12,7 @@
   "cmp-calc": { "branch": "main", "commit": "5947b412da67306c5b68698a02a846760059be2e" },
   "cmp-git": { "branch": "main", "commit": "b24309c386c9666c549a1abaedd4956541676d06" },
   "cmp-npm": { "branch": "main", "commit": "2337f109f51a09297596dd6b538b70ccba92b4e4" },
+  "codecompanion-history.nvim": { "branch": "main", "commit": "284e062a91fadb180b8362b6e079227a0229860c" },
   "codecompanion-spinner.nvim": { "branch": "main", "commit": "cf10084c27a3feb41833a10a9239760034e605c5" },
   "codecompanion.nvim": { "branch": "main", "commit": "118e1638232868ced2898098264bbed47015f10b" },
   "colorful-menu.nvim": { "branch": "master", "commit": "bc3e82609f2fcf7dad7ca87c20e65e51d5d9d87c" },
