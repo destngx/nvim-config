@@ -40,7 +40,7 @@ DestNgxVim = {
       enabled = true,
     },
     experimental_cursor = {
-      enabled = true,
+      enabled = false,
     },
     -- Enables moving by subwords and skips significant punctuation with w, e, b motions
     jump_by_subwords = {
