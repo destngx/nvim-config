@@ -522,3 +522,17 @@ Vite
 TypeScript
 md
 tailwindcss
+POSIX
+linux
+GWLB
+NLB
+CLB
+WebSocket
+ELSs
+ECS
+Has port mapping, so we can redirect to a dynamic port in ECS
+IDPS
+GENEVE
+AWSALBTG
+AWSALPAPP
+AWSALB

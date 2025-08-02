@@ -76,7 +76,7 @@ keymap("v", "<A-`>", "U", silent)
 
 keymap("n", "<leader>//", "<cmd>Dashboard<CR>", silent)
 -- New file by CTRL-N
-keymap("n", "<C-n>", "<cmd>AdvancedNewFile<CR>", silent)
+-- keymap("n", "<C-n>", "<cmd>AdvancedNewFile<CR>", silent)
 
 keymap("n", "<leader>lt", ":Neotree reveal toggle<CR>",
   { desc = "toggle file tree", silent = true })
@@ -84,10 +84,12 @@ keymap("n", "<leader>lt", ":Neotree reveal toggle<CR>",
 keymap("n", "<leader>ls", "<cmd>Neotree document_symbols toggle<CR>",
   { desc = "Symbol Outline", silent = true })
 -- fzflua
-keymap("n", "<S-p>", "<CMD>lua require('fzf-lua').live_grep({resume=true}) <CR>", { desc = "Search keywords", silent = true })
+keymap("n", "<S-p>", "<CMD>lua require('fzf-lua').live_grep({resume=true}) <CR>",
+  { desc = "Search keywords", silent = true })
 keymap("n", "<C-p>", "<CMD>lua require('fzf-lua').files()<CR>", { desc = "Search files", silent = true })
 keymap("n", "<leader>sb", "<CMD>lua require('fzf-lua').buffers()<CR>", { desc = "Search buffers", silent = true })
-keymap("n", "<leader>ss", "<CMD>lua require('fzf-lua').lsp_document_symbols()<CR>", { desc = "Search lsp_document_symbols", silent = true })
+keymap("n", "<leader>ss", "<CMD>lua require('fzf-lua').lsp_document_symbols()<CR>",
+  { desc = "Search lsp_document_symbols", silent = true })
 keymap("n", '<leader>s"', "<CMD>lua require('fzf-lua').registers()<CR>",
   { desc = "Show registers content", silent = true })
 keymap("n", '<leader>sm', "<CMD>lua require('fzf-lua').marks()<CR>", { desc = "Show marks", silent = true })
