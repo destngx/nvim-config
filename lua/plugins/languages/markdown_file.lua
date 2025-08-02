@@ -159,27 +159,6 @@ return {
             return string.format("![[%s]]", path.name)
           end,
         },
-        mappings = {
-          ["<C-p>"] = {
-            action = function()
-              return "<CMD>ObsidianSearch<CR>"
-            end,
-            opts = { noremap = false, expr = true, buffer = true },
-          },
-          ["gd"] = {
-            action = function()
-              return require("obsidian").util.gf_passthrough()
-            end,
-            opts = { noremap = false, expr = true, buffer = true },
-          },
-          -- Smart action depending on context: follow link, show notes with tag, or toggle checkbox.
-          ["<cr>"] = {
-            action = function()
-              return require("obsidian").util.smart_action()
-            end,
-            opts = { buffer = true, expr = true },
-          }
-        },
         note_id_func = function(title)
           -- Create note IDs in a Zettelkasten format with a timestamp and a suffix.
           -- In this case a note with the title 'My new note' will be given an ID that looks
