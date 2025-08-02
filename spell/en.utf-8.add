@@ -517,3 +517,8 @@ Goss
 ServerSpec
 InSpec
 Prefilled
+ESLint
+Vite
+TypeScript
+md
+tailwindcss
