@@ -1,17 +1,11 @@
--- local nvim_notify = require("notify")
---
--- nvim_notify.setup({
---   background_colour = "#000000",
---   render = "wrapped-compact",
--- })
---
--- vim.notify = nvim_notify
-
+if DestNgxVim.plugins.notification.engine ~= 'fidget' then
+  return
+end
 local fidget = require("fidget")
 
 fidget.setup({
   notification = {
-    window = { winblend = 0, relative = "editor", max_height = 5 },
+    window = { winblend = 0, relative = "editor", max_height = 55 },
   },
 })
 

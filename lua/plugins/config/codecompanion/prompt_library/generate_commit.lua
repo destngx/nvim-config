@@ -12,21 +12,23 @@ return {
     { {
       role = constants.SYSTEM_ROLE,
       content = function()
-        local is_all = vim.fn.input(
-          "Do you want to only generate commit for all files?\n(default is yes, enter n or no if you do not want): ") or ""
-        local diff_content = ""
-        if is_all == "n" or is_all == "no" then
-          vim.fn.system("git add .")
-          diff_content = vim.fn.system("git diff --staged") .. "\n\n-- SHOWING STAGED CHANGES ONLY --"
-        else
-          vim.fn.system("git add .")
-          diff_content = vim.fn.system("git diff HEAD --no-ext-diff")
-        end
+        -- local is_all = vim.fn.input(
+        --   "Do you want to only generate commit for all files?\n(default is yes, enter n or no if you do not want): ") or ""
+        -- local diff_content = ""
+        -- NOTE: after long time using this, I notice that most of the time I will generate commits for all current file changes
+        -- if is_all == "n" or is_all == "no" then
+        --   vim.fn.system("git add .")
+        --   diff_content = vim.fn.system("git diff --staged") .. "\n\n-- SHOWING STAGED CHANGES ONLY --"
+        -- else
+        --   vim.fn.system("git add .")
+        --   diff_content = vim.fn.system("git diff HEAD --no-ext-diff")
+        -- end
 
+        local  diff_content = vim.fn.system("git diff HEAD --no-ext-diff")
         return string.format([[
 You are an expert in interpreting code changes according to the Conventional Commits specification and generating high-quality commit messages.
 
-Your task is to analyze the provided `git diff` and generate conventional commit messages. You will propose two ways of structuring the commits: as a single, comprehensive commit and as several smaller, logical commits.
+Your task is to analyze the provided `git diff` and generate conventional commit messages. You will propose a structuring the commits: as a single, comprehensive commit
 
 ---
 ### 1. ✍️ Commit Message Format & Rules
@@ -88,20 +90,10 @@ Here is an example of a good response for a given diff.
 +export { helper };
 
 Example Expected Output:
-Markdown
 
-### 1. Multiple Commits
-Here is a logical breakdown of the changes into multiple commits:
+Markdown block
 
-- **Commit 1:**
-  - **Files:** `src/utils.js`
-  - **Message:** `refactor(utils): improve helper function implementation`
-
-- **Commit 2:**
-  - **Files:** `README.md`
-  - **Message:** `docs(readme): link to contributing guide for test info`
-
-### 2. Single Commit
+### Single Commit
 Here is a single message for all changes:
 
 - **Message:** `refactor(utils): improve helper function and update docs`
@@ -110,23 +102,10 @@ Here is a single message for all changes:
 
 Return two methods for structuring the commit messages.
 
-a. Multiple Commits:
+- Single Commit:
+  - If all changes can be grouped into one logical unit, generate a single, comprehensive commit message.
+  - If a body include, wrap your commit text into a markdown block
 
-    Suggest how the changes can be logically broken down into multiple, atomic commits.
-    For each proposed commit, list the associated files and provide a complete commit message.
-    Constraint: Each file must belong to only one commit.
-
-b. Single Commit:
-
-    If all changes can be grouped into one logical unit, generate a single, comprehensive commit message.
-
-c. Output Rule:
-
-    If the "Multiple Commits" breakdown results in only one commit, then return only the "Single Commit" section.
-
-d. Optional Format:
-
-    You may return the output as a single JSON object with the keys multipleCommits and singleCommit if it simplifies parsing.
 
 4. 🧠 Thought Process & Final Review
 
@@ -176,16 +155,12 @@ Here are the diff:
         role = constants.USER_ROLE,
         content =
           [[
-Generate a single commands for each commit method that will stage and commit the files. No file should be add more than once.
-
-If files are already stage, you can choose to unstage them or continue to commit base on the commit plan.
+Generate a commands that can be run to commit.
 
 For example:
 ```sh
 # single commit
 git add . && git commit -m "feat(scope): add new feature" 
-# multiple commits
-git add <file1> <file2> && git commit -m "feat(scope): add new feature" && git add <file3> <file4> && git commit -m "feat(scope): add new feature2" ...  
 ```
           ]],
         opts = {

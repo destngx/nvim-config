@@ -113,7 +113,6 @@ return {
 
     dependencies = {
       "nvim-lua/plenary.nvim",
-
     },
     config = function()
       require("obsidian").setup({

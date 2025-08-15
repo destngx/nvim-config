@@ -95,7 +95,7 @@ return {
     input = { relative = "cursor", },
     image = { enabled = DestNgxVim.snacks.image },
     picker = { enabled = false },
-    notifier = { enabled = false },
+    notifier = { enabled = DestNgxVim.plugins.notification.engine == "snacks" },
     quickfile = { enabled = true },
     lazygit = {},
     scope = { enabled = false },

@@ -46,6 +46,9 @@ DestNgxVim = {
     jump_by_subwords = {
       enabled = true,
     },
+    notification = {
+      engine = "fidget" -- fidget or snacks
+    },
   },
   icons = icons,
   -- Status line configuration
