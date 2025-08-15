@@ -21,9 +21,9 @@ return {
   lazy = false,
   opts = {
     bigfile = {
-      notify = true,            -- show notification when big file detected
+      notify = true,             -- show notification when big file detected
       size = 0.08 * 1024 * 1024, -- 0.05MB, at this point, most LSP server performance will be affected
-      line_length = 8000,       -- average line length (useful for minified files)
+      line_length = 8000,        -- average line length (useful for minified files)
       -- Enable or disable features when big file detected
       ---@param ctx {buf: number, ft:string}
       setup = function(ctx)
@@ -93,7 +93,13 @@ return {
     explorer = { enabled = false },
     indent = { enabled = false },
     input = { relative = "cursor", },
-    image = { enabled = DestNgxVim.snacks.image },
+    image = {
+      enabled = DestNgxVim.snacks.image,
+      doc = {
+        inline = false,
+        float = false,
+      },
+    },
     picker = { enabled = false },
     notifier = { enabled = DestNgxVim.plugins.notification.engine == "snacks" },
     quickfile = { enabled = true },

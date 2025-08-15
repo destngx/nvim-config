@@ -214,6 +214,16 @@ keymap({ "v" }, "<leader>cf", function()
   })
 end, { desc = "format selection" })
 
+-- Image Snacks
+keymap("n", "<leader>i", function()
+  local snacks = require "snacks"
+  snacks.image.hover()
+  keymap("n", "<Esc>", function()
+    vim.cmd "noh"
+    snacks.image.doc.hover_close()
+    keymap("n", "<Esc>", "<cmd>noh<CR>", { buffer = 0, desc = "general clear highlights" })
+  end, { buffer = 0, nowait = true, silent = true })
+end, { desc = "Show image under cursor" })
 -- Markdown
 keymap('n', '<leader>mp', '<cmd>PasteImage<CR>', { desc = 'Paste Image in to Makrdown buffer', silent = true })
 -- Obsidian

@@ -15,7 +15,6 @@ local icons = {
   calendar            = "  ",
   caretRight          = "",
   checkSquare         = "  ",
-  codeium             = "",
   exit                = " 󰗼 ",
   chevronDown         = "",
   chevronRight        = "",

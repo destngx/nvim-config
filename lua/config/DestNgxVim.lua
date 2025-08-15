@@ -31,8 +31,6 @@ DestNgxVim = {
       enabled = false, -- sync after change
     },
     ai = {
-      codeium = { enabled = os.getenv "COPILOT" == nil },
-      parrot = { enabled = false },
       copilot = { enabled = os.getenv "COPILOT" ~= nil and os.getenv('COPILOT') },
       chatgpt = { enabled = true }
     },
