@@ -226,9 +226,27 @@ return {
   },
   {
     "shortcuts/no-neck-pain.nvim",
-    opts = {
-      width = no_nect_pain_calculate_with(),
-    },
+    config = function()
+      require("no-neck-pain").setup({
+        width = no_nect_pain_calculate_with(),
+        integrations = {
+          NeoTree = {
+            -- The position of the tree.
+            ---@type "left"|"right"
+            position = "left",
+            -- When `true`, if the tree was opened before enabling the plugin, we will reopen it.
+            reopen = true,
+          },
+          dashboard = {
+            -- When `true`, debounce will be applied to the init method, leaving time for the dashboard to open.
+            enabled = true,
+            -- if a dashboard that you use isn't supported, you can use this field to set a matching filetype, also don't hesitate to open a pull-request with the edited list (DASHBOARDS) found in lua/no-neck-pain/util/constants.lua.
+            ---@type string[]|nil
+            filetypes = { "snacks" },
+          },
+        }
+      })
+    end,
     enabled = not DestNgxVim.plugins.zen.enabled,
     keys = {
       -- add <leader>cz to enter zen mode

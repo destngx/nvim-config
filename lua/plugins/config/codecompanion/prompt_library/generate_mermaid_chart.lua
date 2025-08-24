@@ -15,7 +15,10 @@ return {
         content = [[
 Analyze the provided [specify content format],
 identify key components and their relationships, and generate a [specify diagram type, e.g., flowchart] using Mermaid.js syntax.
-Present the Mermaid.js code snippet, and provide a link to visualize the diagram using mermaid.live.
+
+Do not use `()` char
+
+Present the Mermaid.js code snippet.
 ]],
         opts = {
           visible = true,
