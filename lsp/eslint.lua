@@ -1,4 +1,39 @@
+local util = require('lspconfig.util')
 local M = {
+  root_dir = function(fname)
+    local root = util.root_pattern(
+      ".eslintrc",
+      ".eslintrc.cjs",
+      ".eslintrc.js",
+      ".eslintrc.json",
+      ".eslintrc.yaml",
+      ".eslintrc.yml",
+      "eslint.config.cjs",
+      "eslint.config.cts",
+      "eslint.config.js",
+      "eslint.config.mjs",
+      "eslint.config.mts",
+      "eslint.config.ts"
+    )(fname)
+
+    if not root then
+      return nil
+    end
+
+    -- Additional check if package.json has eslintConfig field
+    local pkg_file = util.path.join(root, 'package.json')
+    if vim.fn.filereadable(pkg_file) == 1 then
+      local content = vim.fn.readfile(pkg_file)
+      local content_str = table.concat(content, "\n")
+      if content_str:match('"eslintConfig"') then
+        return root
+      elseif not util.path.exists(util.path.join(root, '.eslintrc')) then
+        return nil
+      end
+    end
+
+    return root
+  end,
   cmd = {
     "vscode-eslint-language-server",
     "--stdio",

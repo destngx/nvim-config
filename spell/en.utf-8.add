@@ -673,3 +673,6 @@ Reusability
 runtimes
 ARN
 CodeGuru
+RCU
+WCU
+ProvisionedThroughputExceedException
