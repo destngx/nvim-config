@@ -36,7 +36,7 @@ local eslint_d = function(fname)
   )(fname)
 
   if not root then
-    return nil
+    return {}
   end
 
   -- Additional check if package.json has eslintConfig field
@@ -45,22 +45,29 @@ local eslint_d = function(fname)
     local content = vim.fn.readfile(pkg_file)
     local content_str = table.concat(content, "\n")
     if content_str:match('"eslintConfig"') then
-      return "eslint_d"
+      return { "eslint_d" }
     elseif not util.path.exists(util.path.join(root, '.eslintrc')) then
-      return nil
+      return {}
     end
   end
 
-  return "eslint_d"
+  return { "eslint_d" }
+end
+
+local markdown = function()
+  if vim.bo.filetype == "codecompanion" then
+    return {}
+  end
+  return { "markdownlint-cli2", "vale" }
 end
 lint.linters_by_ft = {
-  javascript = { eslint_d() },
-  typescript = { eslint_d() },
-  javascriptreact = { eslint_d() },
-  typescriptreact = { eslint_d() },
-  svelte = { eslint_d() },
+  javascript = eslint_d(),
+  typescript = eslint_d(),
+  javascriptreact = eslint_d(),
+  typescriptreact = eslint_d(),
+  svelte = eslint_d(),
   python = { "pylint" },
-  makrdown = { "markdownlint-cli2", "vale" },
+  makrdown = markdown(),
   dockerfile = { "hadolint" },
   terraform = { "tflint" },
   tf = { "tflint" },
