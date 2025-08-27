@@ -11,14 +11,26 @@ local handlers = {
     vim.lsp.handlers.signature_help,
     { border = DestNgxVim.ui.float.border }
   ),
+  -- NOTE: Old virtual_text handler, keep for reference
+  -- ["textDocument/publishDiagnostics"] = vim.lsp.with(
+  --   vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = DestNgxVim.lsp.virtual_text }
+  -- ),
   ["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
+    if result.diagnostics ~= nil then
+      local idx = 1
+      while idx <= #result.diagnostics do
+        -- NOTE: Disable "File is a CommonJS module; it may be converted to an ES module." suggestion
+        if result.diagnostics[idx].code == 80001 then
+          table.remove(result.diagnostics, idx)
+        else
+          idx = idx + 1
+        end
+      end
+    end
     errorTranslator.translate_diagnostics(err, result, ctx, config)
     vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx)
   end,
-  -- ["textDocument/publishDiagnostics"] = vim.lsp.with(
-  --   vim.lsp.diagnostic.on_publish_diagnostics,
-  --   { virtual_text = DestNgxVim.lsp.virtual_text }
-  -- ),
+
   ["textDocument/definition"] = function(err, result, method, ...)
     if vim.islist(result) and #result > 1 then
       local filtered_result = filter(result, filterReactDTS)

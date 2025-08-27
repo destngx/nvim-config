@@ -1,4 +1,5 @@
 local autocmd = vim.api.nvim_create_autocmd
+
 -- Auto sync plugins on save of plugins.lua
 -- autocmd("BufWritePost", {
 --   pattern = { "plugins.lua", "plugins/*/*.lua", "plugins/*.lua" },
@@ -18,10 +19,12 @@ local autocmd = vim.api.nvim_create_autocmd
 --     end, 200)
 --   end,
 -- })
+
 -- auto lint on save
 local autosave = require('autosave')
 autosave.hook_after_saving = function()
   require("lint").try_lint()
+  vim.notify("Try Auto Linting", vim.log.levels.INFO, { title = "Lint" })
 end
 -- desc = "jump to the last position when reopening a file",
 autocmd("BufWinEnter", {

@@ -1,21 +1,30 @@
+local ts_filetypes = {
+  "javascript",
+  "javascriptreact",
+  "javascript.jsx",
+  "typescript",
+  "typescriptreact",
+  "typescript.tsx",
+}
+local react_filetypes = {
+  "javascriptreact",
+  "typescriptreact",
+  "typescript.tsx",
+  "javascript.jsx",
+}
+
 return {
   {
     "yioneko/nvim-vtsls",
-    ft = {
-      "javascript",
-      "javascriptreact",
-      "javascript.jsx",
-      "typescript",
-      "typescriptreact",
-      "typescript.tsx",
-    },
+    ft = ts_filetypes,
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
   },
   {
     "dmmulroy/ts-error-translator.nvim",
-    ft = "javascript,typescript,typescriptreact,svelte",
+    event = "LspAttach",
+    ft = ts_filetypes,
     config = true,
   },
   {
@@ -24,11 +33,11 @@ return {
       min_chars = 50,
     },
     dependencies = { "nvim-treesitter/nvim-treesitter" },
-    ft = { "html", "svelte", "astro", "vue", "typescriptreact" },
+    ft = react_filetypes,
   },
   {
     "MaximilianLloyd/tw-values.nvim",
-    ft = { "typescriptreact" },
+    ft = react_filetypes,
     keys = {
       { "<Leader>cv", "<CMD>TWValues<CR>", desc = "Tailwind CSS values" },
     },
@@ -39,7 +48,7 @@ return {
   },
   {
     "laytan/tailwind-sorter.nvim",
-    ft = { "typescriptreact" },
+    ft = react_filetypes,
     cmd = {
       "TailwindSort",
       "TailwindSortOnSaveToggle"
@@ -54,27 +63,22 @@ return {
   },
   {
     "axelvc/template-string.nvim",
-    ft = {
-      "javascript",
-      "typescript",
-      "javascriptreact",
-      "typescriptreact",
-    },
+    ft = ts_filetypes,
     config = true, -- run require("template-string").setup()
   },
   {
     "dmmulroy/tsc.nvim",
-    ft = { "typescript", "typescriptreact" },
+    ft = ts_filetypes,
     cmd = { "TSC" },
     config = true,
   },
   {
     "artemave/workspace-diagnostics.nvim",
-    ft = { "typescript", "typescriptreact" },
+    ft = ts_filetypes,
   },
   {
     "vuki656/package-info.nvim",
-    ft = { "json", "typescript", "typescriptreact" },
+    ft = ts_filetypes,
     config = true,
   },
   -- {
