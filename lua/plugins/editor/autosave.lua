@@ -5,7 +5,7 @@ return {
     require("autosave").setup {
       enabled = true,
       conditions = {
-        filetype_is_not = { "gitcommit", "oil", "alpha", "bigfile" },
+        filetype_is_not = { "gitcommit", "oil", "alpha", "bigfile", "codecompanion" },
       },
     }
   end,

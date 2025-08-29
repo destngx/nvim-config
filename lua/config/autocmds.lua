@@ -23,6 +23,9 @@ local autocmd = vim.api.nvim_create_autocmd
 -- auto lint on save
 local autosave = require('autosave')
 autosave.hook_after_saving = function()
+  if vim.bo.filetype == "codecompanion" then
+    return
+  end
   require("lint").try_lint()
   vim.notify("Try Auto Linting", vim.log.levels.INFO, { title = "Lint" })
 end
