@@ -765,3 +765,7 @@ ElasticBeanstalk
 wildcard
 Alexa
 Bool
+toset
+tomap
+Terraform's
+UUID

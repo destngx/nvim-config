@@ -81,6 +81,9 @@ Before we begin, please confirm what project files or codebase sections you have
 - Key components or modules included
 
 This will help establish the scope of our conversation and ensure we're working with the same understanding of the available context.
+
+Then proceed with my request below.
+Do not start writing code yet, we first need to brainstorm and review or you need explain to me.
 ]],
       opts = {
         auto_submit = true,
