@@ -1,4 +1,4 @@
-local util = require('lspconfig.util')
+local util = require('utils.lspconfig')
 local M = {
   root_dir = function(fname)
     local root = util.root_pattern(
@@ -138,11 +138,11 @@ local M = {
       return 4 -- approved
     end,
     ["eslint/probeFailed"] = function()
-      vim.notify("[lspconfig] ESLint probe failed.", vim.log.levels.WARN)
+      vim.notify("ESLint probe failed.", vim.log.levels.WARN)
       return {}
     end,
     ["eslint/noLibrary"] = function()
-      vim.notify("[lspconfig] Unable to find ESLint library.", vim.log.levels.WARN)
+      vim.notify("Unable to find ESLint library.", vim.log.levels.WARN)
       return {}
     end,
   },

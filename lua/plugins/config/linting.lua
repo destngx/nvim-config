@@ -23,7 +23,7 @@ if mason_registry_ok then
   end
 end
 
-local util = require('lspconfig.util')
+local util = require('utils.lspconfig')
 local eslint_d = function(fname)
   local root = util.root_pattern(
     '.eslintrc',

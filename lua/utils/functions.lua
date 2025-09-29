@@ -26,18 +26,6 @@ end
 
 M.first_DestNgxVim_run()
 
-local present, win = pcall(require, "lspconfig.ui.windows")
-if not present then
-  return
-end
-
-local _default_opts = win.default_opts
-win.default_opts = function(options)
-  local opts = _default_opts(options)
-  opts.border = DestNgxVim.ui.float.border
-  return opts
-end
-
 M.git_root = function()
   local git_path = vim.fn.finddir(".git", ".;")
   return vim.fn.fnamemodify(git_path, ":h")

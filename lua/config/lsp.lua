@@ -208,10 +208,3 @@ vim.api.nvim_create_autocmd({ "LspAttach", "BufEnter", "BufWritePost", "InsertLe
   callback = vim.lsp.codelens.refresh,
 })
 
--- UI
-local lspui_ok, lspui = pcall(require, 'lspconfig.ui.windows')
-if not lspui_ok then
-  return
-end
-
-lspui.default_options.border = DestNgxVim.ui.float.border or 'rounded'
