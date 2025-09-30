@@ -809,3 +809,12 @@ RWX
 ReadWriteMany
 UID
 NodeAffinity
+ClusterRole
+AmazonEKSWorkerNodePolicy
+AmazonEKS
+AmazonEC2ContainerRegistryReadOnly
+ConfigMap
+ClusterRoleBinding
+RoleBinding
+yamlencode
+isn

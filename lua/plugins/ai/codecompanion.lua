@@ -11,7 +11,7 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
     "j-hui/fidget.nvim",
-    "banjo/contextfiles.nvim",
+    -- "banjo/contextfiles.nvim",
     "ravitemer/codecompanion-history.nvim",
     { "franco-ruggeri/codecompanion-spinner.nvim", opts = {} }
   },
@@ -34,13 +34,22 @@ return {
       log_level = "DEBUG",
       system_prompt = constants.SYSTEM_PROMPT,
     },
-    adapters = adapters.COPILOT,
+    adapters = {
+      http = adapters.COPILOT,
+    },
     strategies = strategies,
     prompt_library = prompt_library,
+    memory = {
+      opts = {
+        chat = {
+          enabled = true,
+        }
+      }
+    },
     extensions = {
-      contextfiles = {
-        opts = {}
-      },
+      -- contextfiles = {
+      --   opts = {}
+      -- },
       vectorcode = {
         opts = {
           add_tool = true,
@@ -70,9 +79,9 @@ return {
           -- Number of days after which chats are automatically deleted (0 to disable)
           expiration_days = 30,
           -- Picker interface (auto resolved to a valid picker)
-          picker = "fzf-lua",       --- ("telescope", "snacks", "fzf-lua", or "default")
+          picker = "fzf-lua", --- ("telescope", "snacks", "fzf-lua", or "default")
           ---Optional filter function to control which chats are shown when browsing
-          chat_filter = nil,          -- function(chat_data) return boolean end
+          chat_filter = nil,  -- function(chat_data) return boolean end
           -- Customize picker keymaps (optional)
           picker_keymaps = {
             rename = { n = "r", i = "<M-r>" },
@@ -83,11 +92,11 @@ return {
           auto_generate_title = true,
           title_generation_opts = {
             ---Adapter for generating titles (defaults to current chat adapter)
-            adapter = nil,                       -- "copilot"
+            adapter = nil,               -- "copilot"
             ---Model for generating titles (defaults to current chat model)
-            model = nil,                         -- "gpt-4o"
+            model = nil,                 -- "gpt-4o"
             ---Number of user prompts after which to refresh the title (0 to disable)
-            refresh_every_n_prompts = 0,         -- e.g., 3 to refresh after every 3rd user prompt
+            refresh_every_n_prompts = 0, -- e.g., 3 to refresh after every 3rd user prompt
             ---Maximum number of times to refresh the title (default: 3)
             max_refreshes = 3,
             format_title = function(original_title)
@@ -113,13 +122,13 @@ return {
             browse_summaries_keymap = "gbs",
 
             generation_opts = {
-              adapter = nil,                         -- defaults to current chat adapter
-              model = nil,                           -- defaults to current chat model
-              context_size = 90000,                  -- max tokens that the model supports
-              include_references = true,             -- include slash command content
-              include_tool_outputs = true,           -- include tool execution results
-              system_prompt = nil,                   -- custom system prompt (string or function)
-              format_summary = nil,                  -- custom function to format generated summary e.g to remove <think/> tags from summary
+              adapter = nil,               -- defaults to current chat adapter
+              model = nil,                 -- defaults to current chat model
+              context_size = 90000,        -- max tokens that the model supports
+              include_references = true,   -- include slash command content
+              include_tool_outputs = true, -- include tool execution results
+              system_prompt = nil,         -- custom system prompt (string or function)
+              format_summary = nil,        -- custom function to format generated summary e.g to remove <think/> tags from summary
             },
           },
 
