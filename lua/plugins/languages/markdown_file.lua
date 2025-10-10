@@ -11,7 +11,8 @@ return {
   },
   {
     "vhyrro/luarocks.nvim",
-    enabled = os.getenv "IS_WSL" ~= "true",
+    -- enabled = os.getenv "IS_WSL" ~= "true",
+    enabled = false,
     lazy = false,
     priority = 1001, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
     opts = {
@@ -20,6 +21,7 @@ return {
   },
   {
     "3rd/image.nvim",
+    enabled = false,
     ft = { "markdown", "vimwiki" },
     dependencies = { "luarocks.nvim" },
     opts = {

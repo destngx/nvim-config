@@ -26,7 +26,15 @@ return {
     local img_previewer ---@type string[]?
     for _, v in ipairs({
       { cmd = "ueberzug", args = {} },
-      { cmd = "chafa",    args = { "{file}", "--format=symbols" } },
+      { cmd = "chafa", args = {
+        "{file}",
+        -- "--colors=full",
+        -- "--color-space=din99d",
+        -- "--dither=bayer",
+        -- "--dither-grain=1",
+        -- "--dither-intensity=0.5",
+        -- "--fill=braille"
+      } },
       { cmd = "viu",      args = { "-b" } },
     }) do
       if vim.fn.executable(v.cmd) == 1 then
@@ -44,7 +52,8 @@ return {
             ["gif"] = img_previewer,
             ["webp"] = img_previewer,
           },
-          ueberzug_scaler = "fit_contain",
+          snacks_image = { enabled = false }, -- disable snacks image previewer for binary like pdf since it causes lags
+          -- ueberzug_scaler = "fit_contain",
         },
       },
       winopts = {
@@ -55,6 +64,7 @@ return {
         preview = {
           layout = "flex",
           scrollchars = { "┃", "" },
+          delay = 300,
         },
         backdrop = 60,
       },

@@ -9,7 +9,7 @@ return {
         schema = {
           -- set gpt-4.1 as default model for since github copilot count premium token claims for claude-sonnet-4
           -- model = is_obsidian_note() and { default = "gpt-4.1"} or { default = "claude-sonnet-4" },
-          model = { default = "gpt-4.1"},
+          model = { default = "claude-sonnet-4.5"},
         },
       })
     end,
