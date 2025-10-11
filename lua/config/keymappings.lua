@@ -96,6 +96,7 @@ keymap("n", '<leader>sm', "<CMD>lua require('fzf-lua').marks()<CR>", { desc = "S
 keymap("n", '<leader>so', "<CMD>lua require('fzf-lua').oldfiles()<CR>", { desc = "Show recent files", silent = true })
 -- Remove highlights
 keymap("n", "<CR>", ":noh<CR><CR>", silent)
+keymap("n", "<Esc><Esc>", ':let @/ = ""<CR>', silent)
 
 -- Buffers
 -- keymap("n", "gn", ":bn<CR>", silent)

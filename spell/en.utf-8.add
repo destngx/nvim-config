@@ -852,3 +852,8 @@ IGW
 Hypervisor
 TGW
 L2
+GeoIP
+dns
+params
+api
+Elasticache
