@@ -15,9 +15,10 @@ if mason_registry_ok then
     if not mason_registry.is_installed(linter) and mason_registry.has_package(linter) then
       vim.notify("Missing install " .. linter .. " linter")
       -- custom hadolint version because latest stable macos version is not working on ARM
-      if linter == "hadolint" then
-        linter = "hadolint@v2.12.1-beta"
-      end
+      -- fixed
+      -- if linter == "hadolint" then
+      --   linter = "hadolint@v2.12.1-beta"
+      -- end
       vim.cmd("MasonInstall " .. linter)
     end
   end
