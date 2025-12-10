@@ -32,7 +32,8 @@ DestNgxVim = {
     },
     ai = {
       copilot = { enabled = os.getenv "COPILOT" ~= nil and os.getenv('COPILOT') },
-      chatgpt = { enabled = true }
+      chatgpt = { enabled = true },
+      vectorcode = { enabled = false }
     },
     experimental_noice = {
       enabled = true,

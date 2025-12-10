@@ -18,47 +18,11 @@ return {
   init = function()
     vim.cmd([[cab cc CodeCompanion]])
   end,
-  opts = {
-    display = {
-      action_palette = {
-        provider = "default",
-      },
-      chat = {
-        -- show_settings = true,
-        render_headers = true,
-        show_references = true,
-        start_in_insert_mode = true,
-      },
-    },
-    opts = {
-      log_level = "DEBUG",
-      system_prompt = constants.SYSTEM_PROMPT,
-    },
-    adapters = {
-      http = adapters.COPILOT,
-    },
-    strategies = strategies,
-    prompt_library = prompt_library,
-    memory = {
-      opts = {
-        chat = {
-          enabled = true,
-        }
-      }
-    },
-    extensions = {
+  opts = function()
+    local extensions = {
       -- contextfiles = {
       --   opts = {}
       -- },
-      vectorcode = {
-        opts = {
-          add_tool = true,
-          add_slash_commands = false,
-          tool_opts = {
-            chunk_mode = true,
-          }
-        },
-      },
       mcphub = {
         callback = "mcphub.extensions.codecompanion",
         opts = {
@@ -151,6 +115,50 @@ return {
           },
         }
       }
-    },
-  },
+    }
+
+    -- Conditionally add vectorcode extension if enabled
+    if DestNgxVim.plugins.ai.vectorcode.enabled then
+      extensions.vectorcode = {
+        opts = {
+          add_tool = true,
+          add_slash_commands = false,
+          tool_opts = {
+            chunk_mode = true,
+          }
+        },
+      }
+    end
+
+    return {
+      display = {
+        action_palette = {
+          provider = "default",
+        },
+        chat = {
+          -- show_settings = true,
+          render_headers = true,
+          show_references = true,
+          start_in_insert_mode = true,
+        },
+      },
+      opts = {
+        log_level = "DEBUG",
+        system_prompt = constants.SYSTEM_PROMPT,
+      },
+      adapters = {
+        http = adapters.COPILOT,
+      },
+      strategies = strategies,
+      prompt_library = prompt_library,
+      memory = {
+        opts = {
+          chat = {
+            enabled = true,
+          }
+        }
+      },
+      extensions = extensions,
+    }
+  end,
 }
