@@ -1,9 +1,7 @@
 local conform = require("conform")
 local mason_registry_ok, mason_registry = pcall(require, "mason-registry")
 
-local mason_ensure_installed_formatter = {
-  "terraform_fmt",
-}
+local mason_ensure_installed_formatter = {}
 if mason_registry_ok then
   for _, formatter in ipairs(mason_ensure_installed_formatter) do
     if not mason_registry.is_installed(formatter) and mason_registry.has_package(formatter) then
@@ -66,14 +64,38 @@ local filetypes_with_dynamic_formatter = {
   "yaml",
   "graphql",
   "handlebars",
-  "hcl",
-  "terraform",
-  "tf",
-  terraform = { "terraform_fmt" },
-  tf = { "terraform_fmt" },
-  ["terraform-vars"] = { "terraform_fmt" },
 }
+
+-- Check if tofu or terraform CLI is available
+local tofu_available = vim.fn.executable("tofu") == 1
+local terraform_available = vim.fn.executable("terraform") == 1
+
+local formatters_config = {}
+local terraform_formatters = {}
+
+if tofu_available then
+  formatters_config.tofu_fmt = {
+    command = "tofu",
+    args = { "fmt", "-" },
+    stdin = true,
+  }
+  terraform_formatters = { "tofu_fmt" }
+elseif terraform_available then
+  formatters_config.terraform_fmt = {
+    command = "terraform",
+    args = { "fmt", "-" },
+    stdin = true,
+  }
+  terraform_formatters = { "terraform_fmt" }
+else
+  vim.notify(
+    "Neither OpenTofu (tofu) nor Terraform (terraform) is available in PATH. Terraform formatting will be disabled.",
+    vim.log.levels.WARN
+  )
+end
+
 conform.setup({
+  formatters = formatters_config,
   formatters_by_ft = (function()
     local result = {}
     for _, ft in ipairs(filetypes_with_dynamic_formatter) do
@@ -83,9 +105,14 @@ conform.setup({
       if ft == "markdown" or ft == "markdown.mdx" then
         result[ft] = { "markdown-toc", "markdownlint-cli2" }
       end
-      if ft == "terraform" or ft == "terraform-vars" or ft == "tf" then
-        result[ft] = { "terraform_fmt" }
-      end
+    end
+
+    -- Terraform/OpenTofu formatters (only if tofu or terraform is available)
+    if #terraform_formatters > 0 then
+      result["terraform"] = terraform_formatters
+      result["tf"] = terraform_formatters
+      result["terraform-vars"] = terraform_formatters
+      result["hcl"] = terraform_formatters
     end
 
     return result

@@ -26,7 +26,19 @@ vim.lsp.enable("vtsls")
 vim.lsp.enable("eslint")
 vim.lsp.enable("jsonls")
 vim.lsp.enable("yamlls")
-vim.lsp.enable("terraformls")
+
+-- Enable tofu-ls if available, otherwise fallback to terraform-ls
+if vim.fn.executable("tofu-ls") == 1 then
+  vim.lsp.enable("tofuls")
+elseif vim.fn.executable("terraform-ls") == 1 then
+  vim.lsp.enable("terraformls")
+else
+  vim.notify(
+    "Neither tofu-ls nor terraform-ls is available in PATH. Terraform LSP will be disabled.",
+    vim.log.levels.WARN
+  )
+end
+
 -- vim.lsp.enable("python")
 -- vim.lsp.enable("tailwindcss")
 -- vim.lsp.enable("vuels")
