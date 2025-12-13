@@ -14,8 +14,13 @@ return {
   {
     "andymass/vim-matchup",
     event = "BufReadPre",
-    setup = function()
+    init = function()
       vim.g.matchup_matchparen_offscreen = { method = "popup" }
+      -- Disable for problematic filetypes
+      vim.g.matchup_matchparen_enabled = 1
+      vim.g.matchup_matchparen_deferred = 1
+      vim.g.matchup_matchparen_timeout = 100
+      vim.g.matchup_matchparen_insert_timeout = 30
     end,
   },
   {

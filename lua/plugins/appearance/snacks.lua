@@ -27,22 +27,37 @@ return {
       -- Enable or disable features when big file detected
       ---@param ctx {buf: number, ft:string}
       setup = function(ctx)
-        if vim.fn.exists(":NoMatchParen") ~= 0 then
-          vim.cmd([[NoMatchParen]])
-        end
-        if vim.fn.exists(":SmearCursorToggle") ~= 0 then
-          vim.cmd("SmearCursorToggle")
-        end
-        if vim.fn.exists(":ReactiveStop") ~= 0 then
-          vim.cmd("ReactiveStop")
-        end
-        vim.g.snacks_scroll = false
-
-        set_window_local_options(0, { snacks_scroll = false, foldmethod = "manual", statuscolumn = "", conceallevel = 0 })
-        -- vim.b.minianimate_disable = true
+        -- Disable plugins that slow down big files
         vim.schedule(function()
-          if vim.api.nvim_buf_is_valid(ctx.buf) then
-            vim.bo[ctx.buf].syntax = ctx.ft
+          if vim.fn.exists(":NoMatchParen") ~= 0 then
+            vim.cmd([[NoMatchParen]])
+          end
+          if vim.fn.exists(":SmearCursorToggle") ~= 0 then
+            vim.cmd("SmearCursorToggle")
+          end
+          if vim.fn.exists(":ReactiveStop") ~= 0 then
+            vim.cmd("ReactiveStop")
+          end
+        end)
+
+        -- Disable scroll animations
+        vim.g.snacks_scroll = false
+        vim.b.snacks_scroll = false
+
+        -- Set buffer-local options
+        vim.bo[ctx.buf].syntax = ctx.ft
+        vim.bo[ctx.buf].swapfile = false
+        vim.bo[ctx.buf].undofile = false
+
+        -- Set window-local options safely
+        vim.schedule(function()
+          local win = vim.fn.bufwinid(ctx.buf)
+          if win ~= -1 then
+            pcall(set_window_local_options, win, { 
+              foldmethod = "manual", 
+              statuscolumn = "", 
+              conceallevel = 0 
+            })
           end
         end)
       end,

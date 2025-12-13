@@ -43,6 +43,7 @@ return {
 
         matchup = {
           enable = true,
+          disable = { "latex", "tex" }, -- Disable for LaTeX files that have query issues
         },
         autotag = {
           enable = true

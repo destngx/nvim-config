@@ -15,13 +15,13 @@ keymap("i", "<c-t>", "<Esc>b~lea")
 keymap("n", "<leader>e", "<cmd>Oil --float<CR>", { noremap = true, silent = true, desc = "File Explorer" })
 
 -- Shortcut for faster save
-keymap("n", "<c-s>", "<cmd>update<cr>", { silent = true, desc = "save current buffer" })
+keymap("n", "<c-s>", "<cmd>update<cr>", { silent = true, desc = "Save current buffer" })
 
 -- Saves the file if modified and quit
-keymap("n", "<leader>q", "<cmd>x<cr>", { silent = true, desc = "quit current window" })
+keymap("n", "<leader>q", "<cmd>x<cr>", { silent = true, desc = "Quit current window" })
 
 -- Quit all opened buffers
-keymap("n", "<leader>Q", "<cmd>qa!<cr>", { silent = true, desc = "quit nvim" })
+keymap("n", "<leader>Q", "<cmd>qa!<cr>", { silent = true, desc = "Quit nvim" })
 
 -- Paste non-linewise text above or below current line, see https://stackoverflow.com/a/1346777/6064933
 -- keymap("n", "<leader>P", "m`o<ESC>p``", { desc = "paste below current line and keep cursor position" })
@@ -30,12 +30,6 @@ keymap("n", "<leader>Q", "<cmd>qa!<cr>", { silent = true, desc = "quit nvim" })
 -- Center the screen on the next/prev search result with n/N
 keymap("n", "n", "nzzzv")
 keymap("n", "N", "Nzzzv")
-
--- Better window movement
-keymap("n", "<C-h>", "<C-w>h", silent)
-keymap("n", "<C-j>", "<C-w>j", silent)
-keymap("n", "<C-k>", "<C-w>k", silent)
-keymap("n", "<C-l>", "<C-w>l", silent)
 
 ---- Go to start or end of line easier
 keymap({ "n", "x" }, "H", "^")
@@ -47,7 +41,7 @@ keymap("i", "<C-E>", "<END>")
 keymap("c", "<C-A>", "<HOME>")
 -- Do not move my cursor when joining lines.
 keymap("n", "J", "", {
-  desc = "join line",
+  desc = "Join line",
   callback = function()
     vim.cmd([[
       normal! mzJ`z
@@ -79,7 +73,7 @@ keymap("n", "<leader>//", "<cmd>Dashboard<CR>", silent)
 -- keymap("n", "<C-n>", "<cmd>AdvancedNewFile<CR>", silent)
 
 keymap("n", "<leader>lt", ":Neotree reveal toggle<CR>",
-  { desc = "toggle file tree", silent = true })
+  { desc = "Toggle file tree", silent = true })
 -- keymap("n", "<leader>ls", "<cmd>Trouble lsp_document_symbols toggle win.position=left focus=false<CR>",
 keymap("n", "<leader>ls", "<cmd>Neotree document_symbols toggle<CR>",
   { desc = "Symbol Outline", silent = true })
@@ -95,7 +89,6 @@ keymap("n", '<leader>s"', "<CMD>lua require('fzf-lua').registers()<CR>",
 keymap("n", '<leader>sm', "<CMD>lua require('fzf-lua').marks()<CR>", { desc = "Show marks", silent = true })
 keymap("n", '<leader>so', "<CMD>lua require('fzf-lua').oldfiles()<CR>", { desc = "Show recent files", silent = true })
 -- Remove highlights
-keymap("n", "<CR>", ":noh<CR><CR>", silent)
 keymap("n", "<Esc><Esc>", ':let @/ = ""<CR>', silent)
 
 -- Buffers
@@ -113,7 +106,7 @@ keymap("v", "X", '"_X', silent)
 keymap("v", "p", '"_dP', silent)
 
 -- Copy entire buffer.
-keymap("n", "<leader>y", "<cmd>%yank<cr>", { desc = "yank entire buffer" })
+keymap("n", "<leader>y", "<cmd>%yank<cr>", { desc = "Yank entire buffer" })
 
 -- Avoid issues because of remapping <c-a> and <c-x> below
 vim.cmd([[
@@ -155,11 +148,10 @@ keymap("n", "gd", "<cmd>FzfLua lsp_definitions     jump_to_single_result=true ig
 keymap("n", "gr", "<cmd>FzfLua lsp_references      jump_to_single_result=true ignore_current_line=true<cr>",
   { desc = "References", nowait = true, silent = true })
 keymap("n", "<C-Space>", vim.lsp.codelens.run, { desc = "Run CodeLens", silent = true })
-keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", silent)
-keymap("v", "<leader>ca", "<cmd>'<,'>lua vim.lsp.buf.code_action()<CR>", silent)
-keymap("n", "<leader>ce", "<cmd>TSC<CR>", { desc = "workspace error", silent = true })
+keymap({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action", silent = true })
+keymap("n", "<leader>ce", "<cmd>TSC<CR>", { desc = "Workspace error", silent = true })
 keymap("n", "<leader>cd", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>",
-  { desc = "current file diagnostics", silent = true })
+  { desc = "Current file diagnostics", silent = true })
 keymap("n", "<leader>cD", function()
   for _, client in pairs(vim.lsp.buf_get_clients()) do
     require("workspace-diagnostics").populate_workspace_diagnostics(client, 0)
@@ -168,7 +160,7 @@ keymap("n", "<leader>cD", function()
   vim.defer_fn(function()
     require("trouble").open({ mode = "diagnostics" })
   end, 1000)
-end, { desc = "workspace diagnostics" })
+end, { desc = "Workspace diagnostics" })
 -- refactor symbol
 -- keymap("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<CR>", silent)
 keymap("n", "<leader>cr", function()
@@ -182,6 +174,7 @@ keymap("n", "K", function()
   -- Use custom wrapper around MacOS dictionary as keyword look-up
   if vim.bo.filetype == "markdown" then
     local word = vim.fn.expand("<cword>"):gsub("[^%w%s-]", "")
+    vim.notify("Looking up: " .. word, vim.log.levels.INFO, { title = "Dictionary" })
     local success, _ = pcall(vim.fn.system, "open dict://" .. word)
     if not success then
       vim.notify("Dictionary lookup failed", vim.log.levels.WARN)
@@ -194,18 +187,18 @@ keymap("n", "K", function()
   if not peek_window then
     vim.lsp.buf.hover()
   end
-end)
+end, { desc = "Hover documentation or dictionary lookup" })
 -- lint
 keymap("n", "<leader>cL", function()
   require("lint").try_lint()
-end, { desc = "lint file" })
+end, { desc = "Lint file" })
 keymap({ "n" }, "<leader>cf", function()
   require("conform").format({
     lsp_fallback = true,
     async = false,
     timeout_ms = 500,
   })
-end, { desc = "format file" })
+end, { desc = "Format file" })
 
 keymap({ "v" }, "<leader>cf", function()
   require("conform").format({
@@ -213,7 +206,7 @@ keymap({ "v" }, "<leader>cf", function()
     async = false,
     timeout_ms = 500,
   })
-end, { desc = "format selection" })
+end, { desc = "Format selection" })
 
 -- Image Snacks
 keymap("n", "<leader>i", function()
@@ -244,8 +237,8 @@ keymap('n', '<leader>gg', '<cmd>lua Snacks.lazygit()<cr>', silent)
 -- keymap("n", "]t", function() require("todo-comments").jump_next() end, { desc = "Next todo comment" })
 -- keymap("n", "[t", function() require("todo-comments").jump_prev() end, { desc = "Previous todo comment" })
 -- split
-keymap('n', '<leader>v', '<C-w>v', { desc = '<cmd>split right<CR>', silent = true })
-keymap('n', '<leader>V', '<C-w>s', { desc = '<cmd>split below<CR>', silent = true })
+keymap('n', '<leader>v', '<C-w>v', { desc = 'Split right', silent = true })
+keymap('n', '<leader>V', '<C-w>s', { desc = 'Split below', silent = true })
 -- resizing splits
 -- these keymaps will also accept a range,
 -- for example `10<A-h>` will `resize_left` by `(10 * config.default_amount)`

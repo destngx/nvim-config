@@ -118,3 +118,84 @@ autocmd("BufEnter", {
   end,
 })
 
+-- Auto-save on focus lost
+autocmd("FocusLost", {
+  pattern = "*",
+  callback = function()
+    if vim.bo.modified and not vim.bo.readonly and vim.fn.expand("%") ~= "" and vim.bo.buftype == "" then
+      vim.cmd("silent! update")
+    end
+  end,
+  desc = "Auto-save on focus lost"
+})
+
+-- Disable matchup for certain filetypes to prevent treesitter query errors
+autocmd("FileType", {
+  pattern = { "latex", "tex", "terraform", "hcl" },
+  callback = function()
+    vim.b.matchup_matchparen_enabled = 0
+  end,
+  desc = "Disable matchup for problematic filetypes"
+})
+
+-- Handle external file changes with prominent popup dialog
+autocmd("FileChangedShellPost", {
+  pattern = "*",
+  callback = function()
+    local filename = vim.fn.expand("%:t")
+    local fullpath = vim.fn.expand("%:p")
+    
+    vim.schedule(function()
+      local choice = vim.fn.confirm(
+        string.format(
+          "File has been changed outside of Neovim:\n\n%s\n\nWhat do you want to do?",
+          fullpath
+        ),
+        "&Load\n&Ignore\n&Compare",
+        1,
+        "Warning"
+      )
+      
+      if choice == 1 then
+        -- Load/reload the file
+        vim.cmd("edit!")
+        vim.notify(string.format("Reloaded: %s", filename), vim.log.levels.INFO)
+      elseif choice == 2 then
+        -- Ignore - keep current buffer
+        vim.notify(string.format("Keeping local version: %s", filename), vim.log.levels.WARN)
+      elseif choice == 3 then
+        -- Compare with DiffviewOpen
+        local has_diffview = pcall(require, "diffview")
+        if has_diffview then
+          vim.cmd("DiffviewOpen HEAD -- " .. vim.fn.expand("%"))
+        else
+          -- Fallback to vimdiff
+          vim.cmd("diffthis")
+          vim.cmd("vsplit | edit! | diffthis")
+        end
+      end
+    end)
+  end,
+  desc = "Prompt for external file changes"
+})
+
+-- Check for file changes when focus gained
+autocmd("FocusGained", {
+  pattern = "*",
+  callback = function()
+    if vim.fn.getcmdwintype() == "" then
+      vim.cmd("checktime")
+    end
+  end,
+  desc = "Check for file changes when focus gained"
+})
+
+-- Check for file changes after shell command
+autocmd("ShellCmdPost", {
+  pattern = "*",
+  callback = function()
+    vim.cmd("checktime")
+  end,
+  desc = "Check for file changes after shell command"
+})
+
