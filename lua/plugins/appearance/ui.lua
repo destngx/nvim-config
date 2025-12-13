@@ -171,6 +171,33 @@ return {
             max_height = oil_max_height(),
           },
           keymaps = {
+            ["<CR>"] = {
+              desc = "Open file with window picker",
+              callback = function()
+                local oil = require("oil")
+                local entry = oil.get_cursor_entry()
+
+                if not entry then
+                  return
+                end
+
+                -- If it's a directory, enter it (default behavior)
+                if entry.type == "directory" then
+                  require("oil.actions").select.callback()
+                  return
+                end
+
+                -- For files, use the smart window picker
+                local dir = oil.get_current_dir()
+                if not dir then
+                  return
+                end
+
+                local file_path = dir .. entry.name
+                local window_picker = require("utils.window_picker")
+                window_picker.open_file_smart(file_path, "edit")
+              end,
+            },
             ["<C-s>"] = {
               desc = "Save all changes",
               callback = function()

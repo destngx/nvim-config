@@ -6,6 +6,23 @@ return {
     require("fzf-lua").setup(opts)
     local actions = require("fzf-lua.actions")
     local config = require("fzf-lua.config")
+    local window_picker = require("utils.window_picker")
+
+    -- Custom action that uses Snacks window picker
+    local function file_edit_with_picker(selected, opts_inner)
+      if not selected or #selected == 0 then
+        return
+      end
+
+      local entry = require("fzf-lua.path").entry_to_file(selected[1], opts_inner)
+      local file_path = entry.path or entry.file
+
+      if not file_path then
+        return
+      end
+
+      window_picker.open_file_smart(file_path, "edit")
+    end
 
     require("fzf-lua").register_ui_select(function(_, items)
       local min_h, max_h = 0.15, 0.70
@@ -110,6 +127,7 @@ return {
         formatter = "path.filename_first",
         git_icons = true,
         actions = {
+          ["default"] = file_edit_with_picker,
           ["alt-i"] = { actions.toggle_ignore },
           ["alt-h"] = { actions.toggle_hidden },
         },
@@ -132,6 +150,7 @@ return {
           },
         },
         actions = {
+          ["default"] = file_edit_with_picker,
           ["alt-i"] = { actions.toggle_ignore },
           ["alt-h"] = { actions.toggle_hidden },
         },
@@ -149,6 +168,7 @@ return {
         no_header = false,
         cwd_header = true,
         actions = {
+          ["default"] = file_edit_with_picker,
           ["alt-i"] = { actions.toggle_ignore },
           ["alt-h"] = { actions.toggle_hidden },
         },
@@ -177,6 +197,9 @@ return {
         },
         no_header = true,
         fzf_opts = { ["--delimiter"] = " ", ["--with-nth"] = "-1.." },
+        actions = {
+          ["default"] = file_edit_with_picker,
+        },
       },
       helptags = {
         prompt = "💡: ",

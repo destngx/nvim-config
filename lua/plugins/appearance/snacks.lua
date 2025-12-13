@@ -100,7 +100,7 @@ return {
         float = false,
       },
     },
-    picker = { enabled = false },
+    picker = { enabled = true },
     notifier = { enabled = DestNgxVim.plugins.notification.engine == "snacks" },
     quickfile = { enabled = true },
     lazygit = {},

@@ -68,7 +68,25 @@ require("neo-tree").setup({
   -- A list of functions, each representing a global custom command
   -- that will be available in all sources (if not overridden in `opts[source_name].commands`)
   -- see `:h neo-tree-custom-commands-global`
-  commands = {},
+  commands = {
+    open_with_snacks_picker = function(state)
+      local node = state.tree:get_node()
+      if node.type == "message" then
+        return
+      end
+
+      -- If it's a directory, toggle it (don't use window picker)
+      if node.type == "directory" then
+        local fs = require("neo-tree.sources.filesystem")
+        fs.toggle_directory(state, node)
+        return
+      end
+
+      -- For files, use the smart window picker
+      local window_picker = require("utils.window_picker")
+      window_picker.open_file_smart(node:get_id(), "edit")
+    end,
+  },
   window = {
     position = "left",
     width = 40,
@@ -82,7 +100,7 @@ require("neo-tree").setup({
         nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
       },
       ["<2-LeftMouse>"] = "open",
-      ["<cr>"] = "open",
+      ["<cr>"] = "open_with_snacks_picker",
       ["<esc>"] = "cancel", -- close preview or floating neo-tree window
       ["P"] = { "toggle_preview", config = { use_float = true, use_image_nvim = false } },
       -- Read `# Preview Mode` for more information
