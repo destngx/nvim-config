@@ -77,14 +77,45 @@ return {
       },
       sections = {
         { section = "header" },
-        {
-          section = "terminal",
-          cmd = "pokemon-colorscripts -r --no-title; sleep .1",
-          random = 10,
-          pane = 2,
-          indent = 4,
-          height = 20,
-        },
+        (function()
+          -- Check if pokemon-colorscripts is installed
+          if vim.fn.executable("pokemon-colorscripts") == 1 then
+            return {
+              section = "terminal",
+              cmd = "pokemon-colorscripts -r --no-title; sleep .1",
+              random = 10,
+              pane = 2,
+              indent = 4,
+              height = 20,
+            }
+          else
+            -- Show notification about missing pokemon-colorscripts
+            vim.schedule(function()
+              vim.notify(
+                "pokemon-colorscripts not installed\nInstall: brew install pokemon-colorscripts",
+                vim.log.levels.WARN,
+                { title = "Dashboard" }
+              )
+            end)
+            -- Return placeholder section
+            return {
+              pane = 2,
+              section = "terminal",
+              cmd = [[echo "
+   ╭─────────────────────────────────────╮
+   │                                     │
+   │   🎨 Pokemon ASCII Art Missing      │
+   │                                     │
+   │   Install pokemon-colorscripts:     │
+   │   brew install pokemon-colorscripts │
+   │                                     │
+   ╰─────────────────────────────────────╯
+"]],
+              indent = 4,
+              height = 10,
+            }
+          end
+        end)(),
         { icon = DestNgxVim.icons.history,    title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
         { icon = DestNgxVim.icons.folderOpen, title = "Projects",     section = "projects",     indent = 2, padding = 1 },
         {

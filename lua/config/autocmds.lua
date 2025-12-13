@@ -199,3 +199,23 @@ autocmd("ShellCmdPost", {
   desc = "Check for file changes after shell command"
 })
 
+-- Auto-create directories when saving file
+autocmd("BufWritePre", {
+  callback = function(event)
+    if event.match:match("^%w%w+://") then
+      return
+    end
+    local file = vim.loop.fs_realpath(event.match) or event.match
+    vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
+  end,
+  desc = "Auto-create directories"
+})
+
+-- Auto-resize windows when vim is resized
+autocmd("VimResized", {
+  callback = function()
+    vim.cmd("wincmd =")
+  end,
+  desc = "Auto-resize windows"
+})
+
