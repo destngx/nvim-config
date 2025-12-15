@@ -138,13 +138,26 @@ autocmd("FileType", {
   desc = "Disable matchup for problematic filetypes"
 })
 
+local function restart_treesitter(bufnr)
+  if not vim.treesitter then
+    return
+  end
+
+  if not vim.api.nvim_buf_is_valid(bufnr) then
+    return
+  end
+
+  pcall(vim.treesitter.stop, bufnr)
+  pcall(vim.treesitter.start, bufnr)
+end
+
 -- Handle external file changes with prominent popup dialog
 autocmd("FileChangedShellPost", {
   pattern = "*",
   callback = function()
     local filename = vim.fn.expand("%:t")
     local fullpath = vim.fn.expand("%:p")
-    
+
     vim.schedule(function()
       local choice = vim.fn.confirm(
         string.format(
@@ -155,10 +168,12 @@ autocmd("FileChangedShellPost", {
         1,
         "Warning"
       )
-      
+
       if choice == 1 then
         -- Load/reload the file
         vim.cmd("edit!")
+        restart_treesitter(vim.api.nvim_get_current_buf())
+        vim.cmd("redraw!")
         vim.notify(string.format("Reloaded: %s", filename), vim.log.levels.INFO)
       elseif choice == 2 then
         -- Ignore - keep current buffer

@@ -12,10 +12,6 @@ local function is_empty_buffer(buf)
     return false
   end
 
-  if not vim.bo[buf].buflisted then
-    return false
-  end
-
   if vim.api.nvim_buf_get_name(buf) ~= "" then
     return false
   end
@@ -49,6 +45,22 @@ local EXCLUDED_FILETYPES = {
   "fzf",
 }
 
+--- Some dashboards are intentionally `buflisted = false`, but we still want
+--- to reuse their window instead of creating splits.
+local ALLOW_UNLISTED_FILETYPES = {
+  alpha = true,
+  dashboard = true,
+  snacks = true,
+  snacks_dashboard = true,
+}
+
+---@param bufnr number
+---@return boolean
+local function is_allowed_unlisted(bufnr)
+  local ft = vim.bo[bufnr].filetype
+  return ALLOW_UNLISTED_FILETYPES[ft] == true
+end
+
 --- Pick a window using Snacks picker
 --- Returns: window ID, false (no windows available), or nil (user cancelled)
 ---@return number|false|nil
@@ -81,25 +93,28 @@ function M.pick_window()
     local is_special = bt ~= ""
     local is_unlisted = not bl
     local is_current = win == current_win
+    local is_dashboard_target = is_allowed_unlisted(buf)
+    local should_exclude_unlisted = is_unlisted and not is_dashboard_target
+    local should_exclude_special = is_special and not is_dashboard_target
 
     -- Include current window only if it's NOT an excluded filetype
     -- (for fzf-lua, neo-tree, oil - exclude current; for normal buffers - include current)
     local should_exclude_current = is_current and vim.tbl_contains(EXCLUDED_FILETYPES, current_ft)
 
-    if is_normal and not is_excluded and not is_special and not is_unlisted and not should_exclude_current then
+    if is_normal and not is_excluded and not should_exclude_special and not should_exclude_unlisted and not should_exclude_current then
       table.insert(available_wins, win)
 
-      if not is_empty_buffer(buf) then
-        table.insert(available_non_empty_wins, win)
-      end
+       if not is_empty_buffer(buf) and not is_allowed_unlisted(buf) then
+         table.insert(available_non_empty_wins, win)
+       end
     end
   end
 
-  -- Prefer non-empty panes when available
-  local prefer_non_empty = #available_non_empty_wins > 0
-  if prefer_non_empty then
-    available_wins = available_non_empty_wins
-  end
+    -- Prefer non-empty panes when available (but allow dashboards)
+    local prefer_non_empty = #available_non_empty_wins > 0
+    if prefer_non_empty then
+      available_wins = available_non_empty_wins
+    end
 
   -- No suitable windows available
   if #available_wins == 0 then
@@ -118,12 +133,14 @@ function M.pick_window()
       local bt = vim.bo[buf].buftype
       local bl = vim.bo[buf].buflisted
 
-      -- Exclude special/unlisted buffers
-      if bt ~= "" then
+      -- Exclude special/unlisted buffers (allow dashboards)
+      local is_dashboard_target = is_allowed_unlisted(buf)
+
+      if bt ~= "" and not is_dashboard_target then
         return false
       end
 
-      if not bl then
+      if not bl and not is_dashboard_target then
         return false
       end
 
