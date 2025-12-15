@@ -26,6 +26,7 @@ return {
         "eslint",
         "jsonls",
         "shfmt",
+        "gopls",
         -- "vale_ls",
         -- "makrdownlint-cli2",
         -- "markdown-toc","yamlls",

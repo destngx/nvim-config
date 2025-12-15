@@ -114,6 +114,9 @@ conform.setup({
       result["terraform-vars"] = terraform_formatters
       result["hcl"] = terraform_formatters
     end
+    
+    -- Go formatters
+    result["go"] = { "goimports", "gofmt" }
 
     return result
   end)(),
