@@ -1,17 +1,17 @@
 local constants = require("plugins.config.codecompanion.constants")
 
 return {
-  strategy = "chat",
+  interaction = "chat",
   description = "Explain how code in a buffer works",
   opts = {
     index = 4,
     default_prompt = true,
     modes = { "v" },
-    short_name = "explain",
+    alias = "explain",
     auto_submit = true,
     user_prompt = false,
     stop_context_insertion = true,
-    adapters = {
+    adapter = {
       name = "copilot",
       model = "claude-3.7-sonnet-thought",
     }

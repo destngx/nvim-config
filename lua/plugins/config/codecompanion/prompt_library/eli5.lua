@@ -1,11 +1,11 @@
 local constants = require("plugins.config.codecompanion.constants")
 
 return {
-    strategy = "chat",
+    interaction = "chat",
     description = "Explain the topic in a simple way.",
     opts = {
       index = 11,
-      short_name = "eli5",
+      alias = "eli5",
       is_slash_cmd = true,
       auto_submit = true,
     },

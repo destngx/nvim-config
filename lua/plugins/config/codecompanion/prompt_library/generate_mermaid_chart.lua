@@ -1,11 +1,11 @@
 local constants = require("plugins.config.codecompanion.constants")
 
 return {
-    strategy = "chat",
+    interaction = "chat",
     description = "Generate mermaid chart/diagram/flow from content",
     opts = {
       index = 12,
-      short_name = "mermaid",
+      alias = "mermaid",
       is_slash_cmd = true,
       auto_submit = true,
     },

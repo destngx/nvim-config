@@ -1,17 +1,17 @@
 local constants = require("plugins.config.codecompanion.constants")
 
 return {
-    strategy = "chat",
+    interaction = "chat",
     description = "Refactor the selected code",
     opts = {
       index = 12,
       modes = { "v" },
-      short_name = "refactor",
+      alias = "refactor",
       is_slash_cmd = true,
       auto_submit = true,
       user_prompt = true,
       stop_context_insertion = true,
-      adapters = {
+      adapter = {
         name = "copilot",
         model = "o3-mini-2025-01-31",
       },

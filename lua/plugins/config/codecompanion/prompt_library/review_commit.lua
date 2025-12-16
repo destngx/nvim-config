@@ -1,14 +1,14 @@
 local constants = require("plugins.config.codecompanion.constants")
 
 return {
-    strategy = "chat",
+    interaction = "chat",
     description = "Review your code",
     opts = {
       index = 13,
-      short_name = "review",
+      alias = "review",
       is_slash_cmd = true,
       auto_submit = true,
-      adapters = {
+      adapter = {
         name = "copilot",
         model = "o3-mini-2025-01-31",
       }
@@ -17,12 +17,18 @@ return {
       {
         role = constants.USER_ROLE,
         contains_code = true,
-        content = function()
-          local number = vim.fn.input("How many commit you want to check?\nLeave empty to review current change ") or
-              ""
-          local git_history_cmd = string.format("git log --oneline -n %s", number)
-          local git_diff_cmd = string.format("git diff HEAD~%s", number)
-          return string.format([[
+      content = function()
+        local number = vim.fn.input("How many commit you want to check?\nLeave empty to review current change ") or ""
+        
+        -- Get git root directory
+        local git_root = vim.fn.system("git rev-parse --show-toplevel 2>/dev/null"):gsub("\n", "")
+        if vim.v.shell_error ~= 0 then
+          return "Error: Not in a git repository"
+        end
+        
+        local git_history_cmd = string.format("cd '%s' && git log --oneline -n %s", git_root, number)
+        local git_diff_cmd = string.format("cd '%s' && git diff HEAD~%s", git_root, number)
+        return string.format([[
 You are a senior developer and an expert in code review, code cleaning, and coding conventions.
 Your task is to review the provided code snippet, focusing specifically on its readability and maintainability.
 Identify any issues related to:

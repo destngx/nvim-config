@@ -1,11 +1,12 @@
 local constants = require("plugins.config.codecompanion.constants")
 
 return {
-  strategy = "workflow", -- This must be 'workflow'
+  interaction = "chat", -- This must be 'workflow'
   description = "Start a feature development brainstorming session with project context.",
   opts = {
     index = 1,
-    short_name = "brainstorm",
+      is_workflow = true,
+    alias = "brainstorm",
   },
   prompts = {
     -- FIRST PROMPT GROUP: Inject Context Files and Initial Feature Idea

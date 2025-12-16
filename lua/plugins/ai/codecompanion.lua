@@ -1,5 +1,6 @@
 local prompt_library = require("plugins.config.codecompanion.prompt_library.prompt_library")
-local strategies = require("plugins.config.codecompanion.strategies")
+local interactions = require("plugins.config.codecompanion.interactions")
+
 local constants = require("plugins.config.codecompanion.constants")
 local adapters = require("plugins.config.codecompanion.adapters")
 
@@ -130,6 +131,11 @@ return {
       }
     end
 
+    interactions.chat = interactions.chat or {}
+    interactions.chat.opts = vim.tbl_deep_extend("force", interactions.chat.opts or {}, {
+      system_prompt = constants.SYSTEM_PROMPT,
+    })
+
     return {
       display = {
         action_palette = {
@@ -144,19 +150,18 @@ return {
       },
       opts = {
         log_level = "DEBUG",
-        system_prompt = constants.SYSTEM_PROMPT,
       },
       adapters = {
         http = adapters.COPILOT,
       },
-      strategies = strategies,
+      interactions = interactions,
       prompt_library = prompt_library,
-      memory = {
+      rules = {
         opts = {
           chat = {
             enabled = true,
-          }
-        }
+          },
+        },
       },
       extensions = extensions,
     }

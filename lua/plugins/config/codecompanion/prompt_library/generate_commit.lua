@@ -1,30 +1,30 @@
 local constants = require("plugins.config.codecompanion.constants")
 
 return {
-  strategy = "workflow",
+  interaction = "chat",
   description = "Generate a Commit Message for All Changed Files",
   opts = {
     index = 10,
-    short_name = "commit",
+    is_workflow = true,
+    alias = "commit",
     is_default = true,
   },
   prompts = {
     { {
       role = constants.SYSTEM_ROLE,
-      content = function()
-        -- local is_all = vim.fn.input(
-        --   "Do you want to only generate commit for all files?\n(default is yes, enter n or no if you do not want): ") or ""
-        -- local diff_content = ""
-        -- NOTE: after long time using this, I notice that most of the time I will generate commits for all current file changes
-        -- if is_all == "n" or is_all == "no" then
-        --   vim.fn.system("git add .")
-        --   diff_content = vim.fn.system("git diff --staged") .. "\n\n-- SHOWING STAGED CHANGES ONLY --"
-        -- else
-        --   vim.fn.system("git add .")
-        --   diff_content = vim.fn.system("git diff HEAD --no-ext-diff")
-        -- end
-
-        local  diff_content = vim.fn.system("git diff HEAD --no-ext-diff")
+      content = function(context)
+        -- Get git root directory
+        local git_root_output = vim.fn.system("git rev-parse --show-toplevel 2>/dev/null")
+        if vim.v.shell_error ~= 0 then
+          return "Error: Not in a git repository. Please run this command from within a git repository."
+        end
+        local git_root = git_root_output:gsub("%s+$", "")
+        
+        -- Run git commands from git root
+        local diff_content = vim.fn.system(string.format("cd '%s' && git diff HEAD --no-ext-diff 2>&1", git_root))
+        local git_log = vim.fn.system(string.format("cd '%s' && git log -10 --oneline 2>&1", git_root))
+        local git_status = vim.fn.system(string.format("cd '%s' && git status --short 2>&1", git_root))
+        
         return string.format([[
 You are an expert in interpreting code changes according to the Conventional Commits specification and generating high-quality commit messages.
 
@@ -38,7 +38,7 @@ You **must** follow these rules precisely.
 **a. Structure:**
 A commit message consists of a header, body, and footer.
 
-&lt;type>(&lt;scope>): &lt;subject>
+<type>(<scope>): <subject>
 
 [body: explain the 'what' and 'why' of the change]
 
@@ -119,7 +119,7 @@ Before generating the output, think step-by-step:
 5. ⚠️ Error Handling & Limitations
 
     If the provided diff is empty, contains no meaningful changes, or is too ambiguous to interpret, do not generate a commit message. Instead, return a message stating the problem (e.g., "Error: The provided diff is empty or contains no substantive changes.").
-    As an AI, you may lack the full business context for these changes. Acknowledge this by appending a brief note if the intent of a change is highly ambiguous.Here is the 10 latest git commit message:
+    As an AI, you may lack the full business context for these changes. Acknowledge this by appending a brief note if the intent of a change is highly ambiguous.
 
 ## 📥 Input Data
 
@@ -136,8 +136,8 @@ Here are the diff:
 %s
 ```
                 ]],
-          vim.fn.system("git log -10 --oneline"),
-          vim.fn.system("git status --short"),
+          git_log,
+          git_status,
           diff_content)
       end,
       opts = {

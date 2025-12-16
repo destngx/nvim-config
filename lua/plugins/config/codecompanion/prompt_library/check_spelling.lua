@@ -1,12 +1,12 @@
 local constants = require("plugins.config.codecompanion.constants")
 
 return {
-  strategy = "inline",
+  interaction = "inline",
   description = "",
   opts = {
     index = 14,
     default_prompt = true,
-    slash_cmd = "spell",
+    alias = "spell",
     auto_submit = true,
   },
   prompts = {

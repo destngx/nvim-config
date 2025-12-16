@@ -1,3 +1,6 @@
+-- VectorCode plugin disabled - user no longer uses it
+-- Kept for reference if needed in the future
+--[[
 return {
   "Davidyz/VectorCode",
   version = "*",                        -- optional, depending on whether you're on nightly or release
@@ -21,3 +24,6 @@ return {
     }
   end
 }
+--]]
+
+return {}

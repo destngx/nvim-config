@@ -1,7 +1,7 @@
 local constants = require("plugins.config.codecompanion.constants")
 
 return {
-    strategy = "inline",
+    interaction = "inline",
     description = "",
     opts = {
       index = 11,

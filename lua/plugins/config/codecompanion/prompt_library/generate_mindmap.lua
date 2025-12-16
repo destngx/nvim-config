@@ -1,11 +1,11 @@
 local constants = require("plugins.config.codecompanion.constants")
 
 return {
-    strategy = "chat",
+    interaction = "chat",
     description = "Generate mindmap from the provided context.",
     opts = {
       index = 10,
-      short_name = "mindmap",
+      alias = "mindmap",
       is_slash_cmd = true,
       auto_submit = true,
     },

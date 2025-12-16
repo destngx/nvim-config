@@ -1,12 +1,13 @@
 local constants = require("plugins.config.codecompanion.constants")
 
 return {
-    strategy = "workflow",
+    interaction = "chat",
     description = "Use a workflow to guide an LLM in writing code",
     opts = {
       index = 13,
+      is_workflow = true,
       _default = true,
-      short_name = "cw",
+      alias = "cw",
       is_slash_cmd = true,
     },
     prompts = {

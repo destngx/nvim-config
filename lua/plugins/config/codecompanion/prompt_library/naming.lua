@@ -1,12 +1,12 @@
 local constants = require("plugins.config.codecompanion.constants")
 
 return {
-  strategy = "inline",
-  description = "Give betting naming for the provided code snippet.",
+  interaction = "inline",
+  description = "Give better naming for the provided code snippet.",
   opts = {
     index = 12,
     modes = { "v" },
-    short_name = "naming",
+    alias = "naming",
     auto_submit = true,
     user_prompt = false,
     stop_context_insertion = true,
