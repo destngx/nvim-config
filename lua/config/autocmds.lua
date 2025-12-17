@@ -151,6 +151,45 @@ local function restart_treesitter(bufnr)
   pcall(vim.treesitter.start, bufnr)
 end
 
+local function hard_reload_current_buffer()
+  local winid = vim.api.nvim_get_current_win()
+  local bufnr = vim.api.nvim_get_current_buf()
+
+  if not vim.api.nvim_buf_is_valid(bufnr) then
+    return
+  end
+
+  local name = vim.api.nvim_buf_get_name(bufnr)
+  local buftype = vim.bo[bufnr].buftype
+
+  if name == "" or buftype ~= "" then
+    vim.cmd("edit!")
+    return
+  end
+
+  local view = vim.fn.winsaveview()
+
+  pcall(vim.api.nvim_buf_delete, bufnr, { force = true })
+
+  if vim.api.nvim_win_is_valid(winid) then
+    vim.api.nvim_set_current_win(winid)
+  end
+
+  vim.cmd("edit " .. vim.fn.fnameescape(name))
+  pcall(vim.fn.winrestview, view)
+end
+
+local function refresh_syntax_and_highlights(bufnr)
+  if not vim.api.nvim_buf_is_valid(bufnr) then
+    return
+  end
+
+  pcall(vim.cmd, "silent! filetype detect")
+  restart_treesitter(bufnr)
+  pcall(vim.cmd, "silent! syntax sync fromstart")
+  pcall(vim.cmd, "redraw!")
+end
+
 -- Handle external file changes with prominent popup dialog
 autocmd("FileChangedShellPost", {
   pattern = "*",
@@ -171,9 +210,9 @@ autocmd("FileChangedShellPost", {
 
       if choice == 1 then
         -- Load/reload the file
-        vim.cmd("edit!")
-        restart_treesitter(vim.api.nvim_get_current_buf())
-        vim.cmd("redraw!")
+        hard_reload_current_buffer()
+        local bufnr = vim.api.nvim_get_current_buf()
+        refresh_syntax_and_highlights(bufnr)
         vim.notify(string.format("Reloaded: %s", filename), vim.log.levels.INFO)
       elseif choice == 2 then
         -- Ignore - keep current buffer
