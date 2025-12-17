@@ -190,48 +190,7 @@ local function refresh_syntax_and_highlights(bufnr)
   pcall(vim.cmd, "redraw!")
 end
 
--- Helper function to show file change prompt safely
-local function show_file_change_prompt(filename, fullpath)
-  -- Ensure we're in a stable state
-  if vim.fn.mode() ~= "n" then
-    vim.cmd("stopinsert")
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
-    vim.wait(50, function() return vim.fn.mode() == "n" end)
-  end
-
-  local choice = vim.fn.confirm(
-    string.format(
-      "File has been changed outside of Neovim:\n\n%s\n\nWhat do you want to do?",
-      fullpath
-    ),
-    "&Load\n&Ignore\n&Compare",
-    1,
-    "Warning"
-  )
-
-  if choice == 1 then
-    -- Load/reload the file
-    hard_reload_current_buffer()
-    local bufnr = vim.api.nvim_get_current_buf()
-    refresh_syntax_and_highlights(bufnr)
-    vim.notify(string.format("Reloaded: %s", filename), vim.log.levels.INFO)
-  elseif choice == 2 then
-    -- Ignore - keep current buffer
-    vim.notify(string.format("Keeping local version: %s", filename), vim.log.levels.WARN)
-  elseif choice == 3 then
-    -- Compare with DiffviewOpen
-    local has_diffview = pcall(require, "diffview")
-    if has_diffview then
-      vim.cmd("DiffviewOpen HEAD -- " .. vim.fn.fnameescape(vim.fn.expand("%")))
-    else
-      -- Fallback to vimdiff
-      vim.cmd("diffthis")
-      vim.cmd("vsplit | edit! | diffthis")
-    end
-  end
-end
-
--- Handle external file changes with prominent popup dialog
+-- Handle external file changes with non-blocking select dialog
 autocmd("FileChangedShellPost", {
   pattern = "*",
   callback = function()
@@ -239,7 +198,42 @@ autocmd("FileChangedShellPost", {
     local fullpath = vim.fn.expand("%:p")
 
     vim.schedule(function()
-      pcall(show_file_change_prompt, filename, fullpath)
+      -- Use vim.ui.select instead of vim.fn.confirm for safer non-blocking UI
+      vim.ui.select(
+        { "Load", "Ignore", "Compare" },
+        {
+          prompt = string.format("File changed externally: %s", filename),
+          format_item = function(item)
+            return item
+          end,
+        },
+        function(choice)
+          if not choice then
+            return
+          end
+
+          if choice == "Load" then
+            -- Load/reload the file
+            hard_reload_current_buffer()
+            local bufnr = vim.api.nvim_get_current_buf()
+            refresh_syntax_and_highlights(bufnr)
+            vim.notify(string.format("Reloaded: %s", filename), vim.log.levels.INFO)
+          elseif choice == "Ignore" then
+            -- Ignore - keep current buffer
+            vim.notify(string.format("Keeping local version: %s", filename), vim.log.levels.WARN)
+          elseif choice == "Compare" then
+            -- Compare with DiffviewOpen
+            local has_diffview = pcall(require, "diffview")
+            if has_diffview then
+              vim.cmd("DiffviewOpen HEAD -- " .. vim.fn.fnameescape(fullpath))
+            else
+              -- Fallback to vimdiff
+              vim.cmd("diffthis")
+              vim.cmd("vsplit | edit! | diffthis")
+            end
+          end
+        end
+      )
     end)
   end,
   desc = "Prompt for external file changes"
