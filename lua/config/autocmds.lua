@@ -163,19 +163,29 @@ local function hard_reload_current_buffer()
   local buftype = vim.bo[bufnr].buftype
 
   if name == "" or buftype ~= "" then
-    vim.cmd("edit!")
+    pcall(vim.cmd, "edit!")
     return
   end
 
+  -- Save view before reloading
   local view = vim.fn.winsaveview()
-
-  pcall(vim.api.nvim_buf_delete, bufnr, { force = true })
-
-  if vim.api.nvim_win_is_valid(winid) then
-    vim.api.nvim_set_current_win(winid)
+  
+  -- Use safer :edit! instead of buffer deletion to avoid crashes
+  -- especially when buffer was opened via pickers like FzfLua
+  local ok, err = pcall(vim.cmd, "edit! " .. vim.fn.fnameescape(name))
+  
+  if not ok then
+    -- Fallback: try alternative reload method
+    pcall(vim.cmd, "silent! checktime")
+    vim.notify(
+      string.format("Warning: Could not reload buffer: %s", err),
+      vim.log.levels.WARN,
+      { title = "File Reload" }
+    )
+    return
   end
 
-  vim.cmd("edit " .. vim.fn.fnameescape(name))
+  -- Restore view
   pcall(vim.fn.winrestview, view)
 end
 
@@ -194,13 +204,24 @@ end
 autocmd("FileChangedShellPost", {
   pattern = "*",
   callback = function()
-    local filename = vim.fn.expand("%:t")
-    local fullpath = vim.fn.expand("%:p")
-    
+    -- Defer handling to avoid conflicts with pickers/floating windows
     vim.schedule(function()
-      -- Check if buffer has unsaved changes
       local bufnr = vim.api.nvim_get_current_buf()
+      
+      -- Safety check: ensure buffer is still valid
+      if not vim.api.nvim_buf_is_valid(bufnr) then
+        return
+      end
+      
+      local filename = vim.fn.expand("%:t")
+      local fullpath = vim.fn.expand("%:p")
       local modified = vim.bo[bufnr].modified
+      local buftype = vim.bo[bufnr].buftype
+      
+      -- Skip special buffers (fzf, terminal, etc.)
+      if buftype ~= "" then
+        return
+      end
       
       if modified then
         -- Buffer has unsaved changes - show warning and keep local version
@@ -214,7 +235,7 @@ autocmd("FileChangedShellPost", {
         )
       else
         -- Auto-reload without prompting for unmodified buffers
-        pcall(function()
+        local ok = pcall(function()
           hard_reload_current_buffer()
           local current_bufnr = vim.api.nvim_get_current_buf()
           refresh_syntax_and_highlights(current_bufnr)
@@ -224,6 +245,11 @@ autocmd("FileChangedShellPost", {
             { title = "File Changed" }
           )
         end)
+        
+        if not ok then
+          -- Silent fallback if reload fails
+          pcall(vim.cmd, "silent! checktime")
+        end
       end
     end)
   end,
