@@ -1,5 +1,7 @@
 require("neo-tree").setup({
   sources = { "filesystem", "buffers", "git_status", "document_symbols" },
+  async_directory_scan = "auto", -- "auto", "always", "never" or "true"/"false"
+  git_status_async = true,       -- run git status asynchronously (improves performance)
   source_selector = {
     winbar = true,
     statusline = false,
@@ -161,6 +163,7 @@ require("neo-tree").setup({
   },
   nesting_rules = {},
   filesystem = {
+    scan_mode = "deep",
     filtered_items = {
       visible = false, -- when true, they will just be displayed differently than normal items
       hide_dotfiles = true,
