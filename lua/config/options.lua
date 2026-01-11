@@ -94,7 +94,15 @@ for k, v in pairs(globals) do
   vim.g[k] = v
 end
 
-if os.getenv("SSH_TTY") then
+local function is_remote_session()
+  return os.getenv("SSH_TTY") ~= nil
+    or os.getenv("SSH_CLIENT") ~= nil
+    or os.getenv("SSH_CONNECTION") ~= nil
+    or os.getenv("MOSH") ~= nil
+    or (os.getenv("TERM_PROGRAM") == nil and os.getenv("TMUX") ~= nil)
+end
+
+if is_remote_session() then
   vim.g.clipboard = {
     name = 'OSC 52',
     copy = {
