@@ -103,7 +103,7 @@ keymap("v", "x", '"_x', silent)
 keymap("v", "X", '"_X', silent)
 
 -- Don't yank on visual paste
-keymap("v", "p", '"_dP', silent)
+keymap("x", "p", '"_c<C-r><C-o>"<Esc>', silent)
 
 -- Copy entire buffer.
 keymap("n", "<leader>y", "<cmd>%yank<cr>", { desc = "Yank entire buffer" })
