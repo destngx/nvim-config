@@ -142,6 +142,7 @@ return {
         'stevearc/oil.nvim',
         event = "VimEnter",
         opts = {
+          columns = {},
           experimental_watch_for_changes = false,
 
           view_options = {
