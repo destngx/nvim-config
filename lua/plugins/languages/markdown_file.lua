@@ -124,7 +124,7 @@ return {
             path = "~/projects/obsidian-vaults/Persona",
           },
         },
-        notes_subdir = "Zettelkasten",
+        notes_subdir = "30_atoms",
         completion = {
           nvim_cmp = false,
           blink = true,
@@ -154,7 +154,7 @@ return {
           time_format = "%H:%m",
         },
         attachments = {
-          img_folder = "Zettelkasten/Attachments",
+          img_folder = "_attachments",
           img_text_func = function(client, path)
             path = client:vault_relative_path(path) or path
             return string.format("![[%s]]", path.name)

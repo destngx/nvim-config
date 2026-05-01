@@ -262,15 +262,15 @@ keymap('n', '<leader><leader>l', require('smart-splits').swap_buf_right, { desc 
 
 -- AI
 -- CodeCompanion
-keymap('n', '<leader>aa', '<cmd>CodeCompanion /context_file<CR>', { desc = 'AI Chat', silent = true })
--- keymap('n', '<leader>ac', '<cmd>CodeCompanionChat<CR>', { desc = 'AI Empty Chat Panel', silent = true })
-keymap('n', '<leader>aq', '<cmd>CodeCompanion<CR>', { desc = 'AI Inline Quickchat', silent = true })
-keymap('v', '<leader>aq', '<cmd>CodeCompanion<CR>', { desc = 'AI Inline Quickchat', silent = true })
-keymap('n', '<leader>ap', '<cmd>CodeCompanionActions<CR>', { desc = 'AI Actions Selected', silent = true })
-keymap('v', '<leader>ap', '<cmd>CodeCompanionActions<CR>', { desc = 'AI Actions Selected', silent = true })
-keymap('v', '<leader>ad', '<cmd>CodeCompanionChat Add<CR>', { desc = 'AI Chat Add Selected', silent = true })
--- MCP Hub
-keymap('n', '<leader>am', '<cmd>MCPHub<CR>', { desc = 'MCP Hub', silent = true })
+-- keymap('n', '<leader>aa', '<cmd>CodeCompanion /context_file<CR>', { desc = 'AI Chat', silent = true })
+-- -- keymap('n', '<leader>ac', '<cmd>CodeCompanionChat<CR>', { desc = 'AI Empty Chat Panel', silent = true })
+-- keymap('n', '<leader>aq', '<cmd>CodeCompanion<CR>', { desc = 'AI Inline Quickchat', silent = true })
+-- keymap('v', '<leader>aq', '<cmd>CodeCompanion<CR>', { desc = 'AI Inline Quickchat', silent = true })
+-- keymap('n', '<leader>ap', '<cmd>CodeCompanionActions<CR>', { desc = 'AI Actions Selected', silent = true })
+-- keymap('v', '<leader>ap', '<cmd>CodeCompanionActions<CR>', { desc = 'AI Actions Selected', silent = true })
+-- keymap('v', '<leader>ad', '<cmd>CodeCompanionChat Add<CR>', { desc = 'AI Chat Add Selected', silent = true })
+-- -- MCP Hub
+-- keymap('n', '<leader>am', '<cmd>MCPHub<CR>', { desc = 'MCP Hub', silent = true })
 -- Security
 -- Ecolog
 keymap('n', '<leader>cp', '<cmd>EcologShelterToggle<CR>', { desc = 'Peek Mask Variable', silent = true })

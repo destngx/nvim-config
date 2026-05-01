@@ -1,6 +1,6 @@
 return {
   "ravitemer/mcphub.nvim",
-  enabled = DestNgxVim.plugins.ai.copilot.enabled,
+  enabled = DestNgxVim.plugins.ai.mcphub.enabled,
   event = "VeryLazy",
   dependencies = {
     "nvim-lua/plenary.nvim",

@@ -6,7 +6,7 @@ local adapters = require("plugins.config.codecompanion.adapters")
 
 return {
   "olimorris/codecompanion.nvim",
-  enabled = DestNgxVim.plugins.ai.copilot.enabled,
+  enabled = DestNgxVim.plugins.ai.codecompanion.enabled,
   event = "VeryLazy",
   dependencies = {
     "nvim-lua/plenary.nvim",
