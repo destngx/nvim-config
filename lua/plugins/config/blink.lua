@@ -133,15 +133,16 @@ require("blink.cmp").setup({
 
   sources = {
     default = function()
-      local default_source = { "lsp", "path", "snippets", "buffer", "copilot", "codecompanion", "calc", "git", "npm",
+      -- local default_source = { "lsp", "path", "snippets", "buffer", "copilot", "codecompanion", "calc", "git", "npm",
+      local default_source = { "lsp", "path", "snippets", "buffer", "copilot", "calc", "git", "npm",
         "ecolog" }
       return default_source
     end,
     providers = {
-      ecolog        = { name = 'ecolog', module = 'ecolog.integrations.cmp.blink_cmp' },
-      calc          = { name = "calc", module = "blink.compat.source", min_keyword_length = 3 },
-      git           = { name = "git", module = "blink.compat.source" },
-      npm           = {
+      ecolog   = { name = 'ecolog', module = 'ecolog.integrations.cmp.blink_cmp' },
+      calc     = { name = "calc", module = "blink.compat.source", min_keyword_length = 3 },
+      git      = { name = "git", module = "blink.compat.source" },
+      npm      = {
         name = "npm",
         module = "blink.compat.source",
         opts = {
@@ -149,14 +150,14 @@ require("blink.cmp").setup({
           only_semantic_versions = true,
         }
       },
-      codecompanion = {
-        name = "CodeCompanion",
-        module = "codecompanion.providers.completion.blink",
-        enabled = true,
-        min_keyword_length = 0,
-        score_offset = 100,
-      },
-      copilot       = {
+      -- codecompanion = {
+      --   name = "CodeCompanion",
+      --   module = "codecompanion.providers.completion.blink",
+      --   enabled = DestNgxVim.plugins.ai.codecompanion.enabled,
+      --   min_keyword_length = 0,
+      --   score_offset = 100,
+      -- },
+      copilot  = {
         name = "copilot",
         module = "blink-copilot",
         min_keyword_length = 0,
@@ -172,17 +173,17 @@ require("blink.cmp").setup({
           return items
         end,
       },
-      lsp           = {
+      lsp      = {
         min_keyword_length = 1, -- Number of characters to trigger porvider
         score_offset = 0,       -- Boost/penalize the score of the items
       },
-      path          = {
+      path     = {
         min_keyword_length = 1,
       },
-      snippets      = {
+      snippets = {
         min_keyword_length = 2,
       },
-      buffer        = {
+      buffer   = {
         min_keyword_length = 1,
         max_items = 5,
       },

@@ -149,7 +149,7 @@ return {
         },
         new_notes_location = "notes_subdir",
         templates = {
-          subdir = "Templates",
+          subdir = "90_meta/01_templates",
           date_format = "%d-%m-%Y",
           time_format = "%H:%m",
         },

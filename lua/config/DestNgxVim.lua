@@ -31,8 +31,8 @@ DestNgxVim = {
       enabled = false, -- sync after change
     },
     ai = {
-      -- copilot = { enabled = os.getenv "COPILOT" ~= nil and os.getenv('COPILOT') },
-      copilot = { enabled = false },
+      copilot = { enabled = os.getenv "COPILOT" ~= nil and os.getenv('COPILOT') },
+      -- copilot = { enabled = false },
       chatgpt = { enabled = false },
       vectorcode = { enabled = false },
       codecompanion = { enabled = false },
