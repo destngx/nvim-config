@@ -101,13 +101,17 @@ return {
     event = function()
       if vim.fn.has('macunix') == 1 then
         return {
-          "BufReadPre /Users/destnguyxn/projects/obsidian-vaults/**.md",
-          "BufNewFile /Users/destnguyxn/projects/obsidian-vaults/**.md",
+          "BufReadPre /Users/destnguyxn/projects/obsidian-vaults/Persona/30_atoms/**.md",
+          "BufNewFile /Users/destnguyxn/projects/obsidian-vaults/Persona/30_atoms/**.md",
+          "BufReadPre /Users/destnguyxn/projects/obsidian-vaults/Persona/20_incubator/**.md",
+          "BufNewFile /Users/destnguyxn/projects/obsidian-vaults/Persona/20_incubator/**.md",
         }
       else
         return {
-          "BufReadPre /home/destnguyxn/projects/obsidian-vaults/**.md",
-          "BufNewFile /home/destnguyxn/projects/obsidian-vaults/**.md",
+          "BufReadPre /home/destnguyxn/projects/obsidian-vaults/Persona/30_atoms/**.md",
+          "BufNewFile /home/destnguyxn/projects/obsidian-vaults/Persona/30_atoms/**.md",
+          "BufReadPre /home/destnguyxn/projects/obsidian-vaults/Persona/20_incubator/**.md",
+          "BufNewFile /home/destnguyxn/projects/obsidian-vaults/Persona/20_incubator/**.md",
         }
       end
     end

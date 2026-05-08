@@ -99,19 +99,36 @@ local function is_remote_session()
     or os.getenv("SSH_CLIENT") ~= nil
     or os.getenv("SSH_CONNECTION") ~= nil
     or os.getenv("MOSH") ~= nil
-    or (os.getenv("TERM_PROGRAM") == nil and os.getenv("TMUX") ~= nil)
+    or os.getenv("TMUX") ~= nil  -- Enable OSC 52 in tmux regardless of TERM_PROGRAM
 end
 
 if is_remote_session() then
-  vim.g.clipboard = {
-    name = 'OSC 52',
-    copy = {
-      ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
-      ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
-    },
-    paste = {
-      ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
-      ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
-    },
-  }
+  -- For tmux on macOS: pipe through pbcopy for system clipboard
+  if os.getenv("TMUX") then
+    vim.g.clipboard = {
+      name = 'tmux + pbcopy',
+      copy = {
+        ['+'] = { 'sh', '-c', 'cat | pbcopy' },
+        ['*'] = { 'sh', '-c', 'cat | pbcopy' },
+      },
+      paste = {
+        ['+'] = { 'pbpaste' },
+        ['*'] = { 'pbpaste' },
+      },
+    }
+  else
+    -- SSH/Mosh: use OSC 52
+    vim.g.clipboard = {
+      name = 'OSC 52',
+      copy = {
+        ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+        ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+      },
+      paste = {
+        ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+        ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+      },
+    }
+  end
 end
+
