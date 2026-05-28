@@ -117,23 +117,23 @@ return {
 --           end
 --         end)(),
         { icon = DestNgxVim.icons.history,    title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-        { icon = DestNgxVim.icons.folderOpen, title = "Projects",     section = "projects",     indent = 2, padding = 1 },
-        {
-          icon = DestNgxVim.icons.git,
-          title = "Git Status",
-          section = "terminal",
-          enabled = function()
-            local Snacks = require("snacks")
-            return Snacks.git.get_root() ~= nil
-          end,
-          cmd = "git status --short --branch --renames",
-          height = 5,
-          padding = 1,
-          ttl = 5 * 60,
-          indent = 3,
-        },
+        -- { icon = DestNgxVim.icons.folderOpen, title = "Projects",     section = "projects",     indent = 2, padding = 1 },
+        -- {
+        --   icon = DestNgxVim.icons.git,
+        --   title = "Git Status",
+        --   section = "terminal",
+        --   enabled = function()
+        --     local Snacks = require("snacks")
+        --     return Snacks.git.get_root() ~= nil
+        --   end,
+        --   cmd = "git status --short --branch --renames",
+        --   height = 5,
+        --   padding = 1,
+        --   ttl = 5 * 60,
+        --   indent = 3,
+        -- },
         { section = "startup" },
-        { pane = 2,           section = "keys", gap = 1, padding = 1 },
+        { pane = 1,           section = "keys", gap = 1, padding = 1 },
       },
     },
     explorer = { enabled = false },
