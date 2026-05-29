@@ -58,7 +58,7 @@ return {
 
     },
     dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-lua/plenary.nvim" },
-    build = "cd formatter && bun i && bun run build",
+    build = "cd formatter && pnpm install && pnpm run build",
     config = true,
   },
   {
