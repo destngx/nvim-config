@@ -107,6 +107,8 @@ keymap("x", "p", '"_c<C-r><C-o>"<Esc>', silent)
 
 -- Copy entire buffer.
 keymap("n", "<leader>y", "<cmd>%yank<cr>", { desc = "Yank entire buffer" })
+-- Copy the absolute path.
+keymap("n", "<leader>Yp", "<cmd>let @+ = expand('%:p')<cr>", { desc = "Yank absolute path of buffer file" })
 
 -- Avoid issues because of remapping <c-a> and <c-x> below
 vim.cmd([[
