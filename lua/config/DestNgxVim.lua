@@ -63,6 +63,10 @@ DestNgxVim = {
   },
   snacks = {
     image = true,
-    header = "finger", -- blackhole,fire,lights,finger
+    header = {
+      custom = true, -- if false use default blackhole,fire,lights,finger
+      splash = "plugins.appearance.milli.splashes.frames", -- custom path 
+    },
+
   }
 }

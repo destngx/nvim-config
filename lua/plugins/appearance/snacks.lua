@@ -22,7 +22,16 @@ return
   dependencies = { "amansingh-afk/milli.nvim" },
   lazy = false,
   opts = function()
-    local splash = require("milli").load({ splash = DestNgxVim.snacks.header })
+    local splash
+    if DestNgxVim.snacks.header.custom then
+      splash = require("milli").load({
+        module = DestNgxVim.snacks.header.splash,
+      })
+    else
+      splash = require("milli").load({
+        splash = DestNgxVim.snacks.header.splash,
+      })
+    end
     return {
       bigfile = {
         notify = true,             -- show notification when big file detected
@@ -69,16 +78,16 @@ return
       dashboard = {
         preset = {
           header = table.concat(splash.frames[1], "\n")
-  --         header = [[
-  -- ████████▄     ▄████████    ▄████████     ███     ███▄▄▄▄      ▄██████▄  ▀████    ▐████▀
-  -- ███   ▀███   ███    ███   ███    ███ ▀█████████▄ ███▀▀▀██▄   ███    ███   ███▌   ████▀
-  -- ███    ███   ███    █▀    ███    █▀     ▀███▀▀██ ███   ███   ███    █▀     ███  ▐███
-  -- ███    ███  ▄███▄▄▄       ███            ███   ▀ ███   ███  ▄███           ▀███▄███▀
-  -- ███    ███ ▀▀███▀▀▀     ▀███████████     ███     ███   ███ ▀▀███ ████▄     ████▀██▄
-  -- ███    ███   ███    █▄           ███     ███     ███   ███   ███    ███   ▐███  ▀███
-  -- ███   ▄███   ███    ███    ▄█    ███     ███     ███   ███   ███    ███  ▄███     ███▄
-  -- ████████▀    ██████████  ▄████████▀     ▄████▀    ▀█   █▀    ████████▀  ████       ███▄
-  --         ]]
+          --         header = [[
+          -- ████████▄     ▄████████    ▄████████     ███     ███▄▄▄▄      ▄██████▄  ▀████    ▐████▀
+          -- ███   ▀███   ███    ███   ███    ███ ▀█████████▄ ███▀▀▀██▄   ███    ███   ███▌   ████▀
+          -- ███    ███   ███    █▀    ███    █▀     ▀███▀▀██ ███   ███   ███    █▀     ███  ▐███
+          -- ███    ███  ▄███▄▄▄       ███            ███   ▀ ███   ███  ▄███           ▀███▄███▀
+          -- ███    ███ ▀▀███▀▀▀     ▀███████████     ███     ███   ███ ▀▀███ ████▄     ████▀██▄
+          -- ███    ███   ███    █▄           ███     ███     ███   ███   ███    ███   ▐███  ▀███
+          -- ███   ▄███   ███    ███    ▄█    ███     ███     ███   ███   ███    ███  ▄███     ███▄
+          -- ████████▀    ██████████  ▄████████▀     ▄████▀    ▀█   █▀    ████████▀  ████       ███▄
+          --         ]]
         },
         sections = {
           { section = "header" },
@@ -111,6 +120,10 @@ return
   end,
   config = function(_, opts)
     require("snacks").setup(opts)
-    require("milli").snacks({ splash = DestNgxVim.snacks.header, loop = true })
+    if DestNgxVim.snacks.header.custom then
+      require("milli").snacks({ module = DestNgxVim.snacks.header.splash, loop = true })
+    else
+      require("milli").snacks({ splash = DestNgxVim.snacks.header.splash, loop = true })
+    end
   end,
 }
