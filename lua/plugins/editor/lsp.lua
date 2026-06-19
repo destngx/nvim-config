@@ -27,6 +27,7 @@ return {
         "jsonls",
         "shfmt",
         "gopls",
+        "obsidian_ls",
         -- "vale_ls",
         -- "makrdownlint-cli2",
         -- "markdown-toc","yamlls",

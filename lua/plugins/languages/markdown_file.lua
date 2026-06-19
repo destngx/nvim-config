@@ -130,10 +130,6 @@ return {
           },
         },
         notes_subdir = "30_atoms",
-        completion = {
-          nvim_cmp = false,
-          blink = true,
-        },
         picker = {
           -- Set your preferred picker. Can be one of 'telescope.nvim', 'fzf-lua', 'mini.pick' or 'snacks.pick'.
           name = "fzf-lua",

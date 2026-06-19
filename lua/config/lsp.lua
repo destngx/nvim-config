@@ -26,6 +26,7 @@ vim.lsp.enable("vtsls")
 vim.lsp.enable("eslint")
 vim.lsp.enable("jsonls")
 vim.lsp.enable("yamlls")
+vim.lsp.enable("obsidian_ls")
 
 -- Enable tofu-ls if available, otherwise fallback to terraform-ls
 if vim.fn.executable("tofu-ls") == 1 then
