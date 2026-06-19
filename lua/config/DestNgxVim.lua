@@ -63,5 +63,6 @@ DestNgxVim = {
   },
   snacks = {
     image = true,
+    header = "finger", -- blackhole,fire,lights,finger
   }
 }
