@@ -1,3 +1,9 @@
+-- Build the Nix output first so sqlite.lua can load the library from an existing path.
+local sqlite_path = vim.fn.trim(vim.fn.system("nix build --no-link --print-out-paths nixpkgs#sqlite.out"))
+if vim.v.shell_error == 0 then
+  vim.g.sqlite_clib_path = sqlite_path .. "/lib/libsqlite3.dylib"
+end
+
 local options = {
   clipboard      = "unnamed,unnamedplus",   --- Copy-paste between vim and everything else
   cmdheight      = 0,                       --- Give more space for displaying messages

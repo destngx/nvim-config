@@ -3,6 +3,20 @@ return {
     "nvim-treesitter/nvim-treesitter",
     event = "BufReadPre",
     config = function()
+      -- Neovim query captures are node lists; this directive reads the first node.
+      local query = vim.treesitter.query
+      query.add_directive("set-lang-from-info-string!", function(match, _, bufnr, pred, metadata)
+        local nodes = match[pred[2]]
+        local node = nodes and nodes[1]
+        if not node then
+          return
+        end
+
+        local alias = vim.treesitter.get_node_text(node, bufnr):lower()
+        local aliases = { ex = "elixir", pl = "perl", sh = "bash", ts = "typescript", uxn = "uxntal" }
+        metadata["injection.language"] = vim.filetype.match({ filename = "a." .. alias }) or aliases[alias] or alias
+      end, { force = true })
+
       require("nvim-treesitter.configs").setup {
         ensure_installed = {
           "typescript",
