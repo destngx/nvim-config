@@ -168,10 +168,12 @@ return {
             signcolumn = "yes:2",
           },
           float = {
+            border = DestNgxVim.ui.float.border,
             max_width = 120,
             max_height = oil_max_height(),
           },
           keymaps = {
+            ["<BS>"] = "actions.parent",
             ["<CR>"] = {
               desc = "Open file with window picker",
               callback = function()
@@ -205,6 +207,7 @@ return {
                 require("oil").save({ confirm = false })
               end,
             },
+            ["g?"] = "actions.show_help",
             ["<leader>p"] = function()
               local oil = require("oil")
               local filename = oil.get_cursor_entry().name
