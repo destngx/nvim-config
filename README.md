@@ -1,3 +1,5 @@
+> **Optional environment setup:** For the Nix and system configuration used with this Neovim setup, see [destngx/dotfiles](https://github.com/destngx/dotfiles).
+
 <div align="center">
 <p>
     <a>
