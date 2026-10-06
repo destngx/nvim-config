@@ -1,16 +1,29 @@
 local ufo_config_handler = require("utils._ufo").handler
 local capabilities = require("utils.lsp").get_default_capabilities()
 
-local handlers = {
-  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+local function hover_handler(err, result, ctx)
+  return vim.lsp.handlers.hover(err, result, ctx, {
     silent = true,
     border = DestNgxVim.ui.float.border,
-  }),
-  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = DestNgxVim.ui.float.border }),
-  ["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics,
-    { virtual_text = DestNgxVim.lsp.virtual_text }
-  ),
+  })
+end
+
+local function signature_help_handler(err, result, ctx)
+  return vim.lsp.handlers.signature_help(err, result, ctx, {
+    border = DestNgxVim.ui.float.border,
+  })
+end
+
+local function diagnostics_handler(err, result, ctx)
+  return vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, {
+    virtual_text = DestNgxVim.lsp.virtual_text,
+  })
+end
+
+local handlers = {
+  ["textDocument/hover"] = hover_handler,
+  ["textDocument/signatureHelp"] = signature_help_handler,
+  ["textDocument/publishDiagnostics"] = diagnostics_handler,
 }
 vim.lsp.config("*", {
   capabilities = capabilities,
@@ -218,6 +231,8 @@ vim.lsp.commands["editor.action.showReferences"] = function(command, ctx)
   end
 end
 vim.api.nvim_create_autocmd({ "LspAttach", "BufEnter", "BufWritePost", "InsertLeave" }, {
-  callback = vim.lsp.codelens.refresh,
+  callback = function(args)
+    vim.lsp.codelens.enable(true, { bufnr = args.buf })
+  end,
 })
 

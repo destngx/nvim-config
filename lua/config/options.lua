@@ -1,7 +1,53 @@
--- Build the Nix output first so sqlite.lua can load the library from an existing path.
-local sqlite_path = vim.fn.trim(vim.fn.system("nix build --no-link --print-out-paths nixpkgs#sqlite.out"))
-if vim.v.shell_error == 0 then
-  vim.g.sqlite_clib_path = sqlite_path .. "/lib/libsqlite3.dylib"
+local sqlite_job_id
+local sqlite_job_done = false
+local sqlite_job_error
+local sqlite_enabled = vim.fn.executable("nix") == 1
+
+if sqlite_enabled then
+  vim.schedule(function()
+    sqlite_job_id = vim.fn.jobstart({
+      "nix",
+      "eval",
+      "--raw",
+      "nixpkgs#sqlite.out.outPath",
+      "--apply",
+      'p: p + "/lib/libsqlite3.dylib"',
+    }, {
+      stdout_buffered = true,
+      on_stdout = function(_, data)
+        local sqlite_path = data and data[1]
+        if sqlite_path and sqlite_path ~= "" then
+          vim.g.sqlite_clib_path = sqlite_path
+        end
+      end,
+      on_stderr = function(_, data)
+        local message = data and table.concat(data, "\n")
+        if message and message ~= "" then
+          sqlite_job_error = message
+        end
+      end,
+      on_exit = function(_, exit_code)
+        sqlite_job_done = true
+        if exit_code ~= 0 then
+          sqlite_job_error = sqlite_job_error or "nix eval failed"
+        end
+      end,
+    })
+  end)
+end
+
+vim.g.wait_for_sqlite_clib_path = function()
+  if not sqlite_enabled then
+    return
+  end
+  if not sqlite_job_done and sqlite_job_id and sqlite_job_id > 0 then
+    vim.wait(30000, function()
+      return sqlite_job_done
+    end, 10)
+  end
+  if not vim.g.sqlite_clib_path then
+    error(sqlite_job_error or "Could not resolve the Nix SQLite library path")
+  end
 end
 
 local options = {

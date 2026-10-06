@@ -3,18 +3,23 @@ local filterReactDTS = require("utils.filterReactDTS").filterReactDTS
 local errorTranslator = require("ts-error-translator")
 
 local handlers = {
-  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    silent = true,
-    border = DestNgxVim.ui.float.border,
-  }),
-  ["textDocument/signatureHelp"] = vim.lsp.with(
-    vim.lsp.handlers.signature_help,
-    { border = DestNgxVim.ui.float.border }
-  ),
+  ["textDocument/hover"] = function(err, result, ctx)
+    return vim.lsp.handlers.hover(err, result, ctx, {
+      silent = true,
+      border = DestNgxVim.ui.float.border,
+    })
+  end,
+  ["textDocument/signatureHelp"] = function(err, result, ctx)
+    return vim.lsp.handlers.signature_help(err, result, ctx, {
+      border = DestNgxVim.ui.float.border,
+    })
+  end,
   -- NOTE: Old virtual_text handler, keep for reference
-  -- ["textDocument/publishDiagnostics"] = vim.lsp.with(
-  --   vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = DestNgxVim.lsp.virtual_text }
-  -- ),
+  -- ["textDocument/publishDiagnostics"] = function(err, result, ctx)
+  --   return vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, {
+  --     virtual_text = DestNgxVim.lsp.virtual_text,
+  --   })
+  -- end,
   ["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
     if result.diagnostics ~= nil then
       local idx = 1
