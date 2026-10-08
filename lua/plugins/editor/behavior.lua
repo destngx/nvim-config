@@ -140,8 +140,8 @@ return {
           delay = 10,
         },
         indent = { enable = true },
-        line_num = { enable = true },
-        exclude_filetypes = { "help", "git", "markdown", "snippets", "text", "gitconfig", "alpha", "dashboard" },
+        line_num = { enable = false },
+        exclude_filetypes = { "help", "git", "markdown", "snippets", "text", "gitconfig", "alpha", "dashboard", "bigfile" },
       })
     end
   },

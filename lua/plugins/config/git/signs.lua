@@ -52,6 +52,10 @@ signs.setup {
     col = 1
   },
   on_attach                    = function(buf)
+    if vim.bo[buf].filetype == "bigfile" then
+      return false
+    end
+
     local gs = package.loaded.gitsigns
 
     local function map(mode, l, r, opts)

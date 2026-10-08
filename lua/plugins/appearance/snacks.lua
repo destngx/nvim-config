@@ -40,6 +40,11 @@ return
         -- Enable or disable features when big file detected
         ---@param ctx {buf: number, ft:string}
         setup = function(ctx)
+          vim.b[ctx.buf].completion = false
+          vim.b[ctx.buf].minianimate_disable = true
+          vim.b[ctx.buf].minihipatterns_disable = true
+          vim.b[ctx.buf].treesitter_context_disable = true
+
           -- Disable plugins that slow down big files
           vim.schedule(function()
             if vim.fn.exists(":NoMatchParen") ~= 0 then
@@ -58,18 +63,28 @@ return
           vim.b.snacks_scroll = false
 
           -- Set buffer-local options
-          vim.bo[ctx.buf].syntax = ctx.ft
           vim.bo[ctx.buf].swapfile = false
           vim.bo[ctx.buf].undofile = false
 
           -- Set window-local options safely
           vim.schedule(function()
+            if vim.api.nvim_buf_is_valid(ctx.buf) then
+              vim.bo[ctx.buf].syntax = ""
+              vim.b[ctx.buf].ts_highlight = false
+            end
             local win = vim.fn.bufwinid(ctx.buf)
             if win ~= -1 then
               pcall(set_window_local_options, win, {
                 foldmethod = "manual",
                 statuscolumn = "",
-                conceallevel = 0
+                conceallevel = 0,
+                cursorline = false,
+                cursorlineopt = "both",
+                number = false,
+                relativenumber = false,
+                signcolumn = "no",
+                spell = false,
+                winbar = "",
               })
             end
           end)

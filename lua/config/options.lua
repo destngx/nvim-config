@@ -8,16 +8,22 @@ if sqlite_enabled then
     sqlite_job_id = vim.fn.jobstart({
       "nix",
       "eval",
-      "--raw",
-      "nixpkgs#sqlite.out.outPath",
-      "--apply",
-      'p: p + "/lib/libsqlite3.dylib"',
+      "--impure",
+      "--expr",
+      'let flake = builtins.getFlake (builtins.getEnv "HOME" + "/projects/dotfiles"); pkgs = import flake.inputs.nixpkgs { system = builtins.currentSystem; }; in pkgs.sqlite.out.outPath + "/lib/libsqlite3.dylib"',
+      "--json",
     }, {
       stdout_buffered = true,
       on_stdout = function(_, data)
         local sqlite_path = data and data[1]
         if sqlite_path and sqlite_path ~= "" then
+          sqlite_path = vim.json.decode(sqlite_path)
+        end
+        if sqlite_path and vim.fn.filereadable(sqlite_path) == 1 then
           vim.g.sqlite_clib_path = sqlite_path
+        else
+          sqlite_job_error = "Nix resolved a SQLite library path that is unavailable: "
+            .. (sqlite_path or "")
         end
       end,
       on_stderr = function(_, data)
@@ -46,7 +52,7 @@ vim.g.wait_for_sqlite_clib_path = function()
     end, 10)
   end
   if not vim.g.sqlite_clib_path then
-    error(sqlite_job_error or "Could not resolve the Nix SQLite library path")
+    vim.notify(sqlite_job_error or "Could not resolve the Nix SQLite library path", vim.log.levels.ERROR)
   end
 end
 

@@ -11,6 +11,9 @@ local function disable_cursorword()
     ['NeogitStatus'] = true,
     ['text'] = true,
   }
+  if vim.bo.ft == 'bigfile' then
+    return
+  end
   if not disable_ft[vim.bo.ft] then
     return
   end
@@ -30,7 +33,7 @@ local function matchadd()
     ['dashboard'] = true,
     ['checkhealth'] = true,
   }
-  if disable_ft[vim.bo.ft] then
+  if vim.bo.ft == 'bigfile' or disable_ft[vim.bo.ft] then
     return
   end
   local fname_ext = string.lower(vim.fn.expand('%:e'))

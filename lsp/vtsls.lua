@@ -32,7 +32,12 @@ local handlers = {
         end
       end
     end
-    errorTranslator.translate_diagnostics(err, result, ctx, config)
+    for _, diagnostic in ipairs(result.diagnostics) do
+      local translated = errorTranslator.parse_errors(diagnostic.message)[1]
+      if translated and translated.improvedError then
+        diagnostic.message = translated.improvedError.body
+      end
+    end
     vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx)
   end,
 

@@ -130,6 +130,9 @@ return {
     config = function()
       require("treesitter-context").setup {
         max_lines = 4,
+        on_attach = function(buf)
+          return vim.bo[buf].filetype ~= "bigfile" and not vim.b[buf].treesitter_context_disable
+        end,
       }
     end,
   },

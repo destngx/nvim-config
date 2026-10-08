@@ -58,9 +58,14 @@ end
 -- vim.lsp.enable("vuels")
 -- vim.lsp.enable("html")
 -- vim.lsp.enable("css")
-
 require("ufo").setup({
   fold_virt_text_handler = ufo_config_handler,
+  provider_selector = function(_, filetype)
+    if filetype == "bigfile" then
+      return ""
+    end
+    return nil
+  end,
   close_fold_kinds_for_ft = {
     default = { "imports", "comment" },
     markdown = { "marker" },
