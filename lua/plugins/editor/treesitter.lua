@@ -2,6 +2,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     event = "BufReadPre",
+    build = ":TSUpdate", -- keep compiled parsers in sync with bundled queries
     config = function()
       -- Neovim query captures are node lists; this directive reads the first node.
       local query = vim.treesitter.query
@@ -16,6 +17,10 @@ return {
         local aliases = { ex = "elixir", pl = "perl", sh = "bash", ts = "typescript", uxn = "uxntal" }
         metadata["injection.language"] = vim.filetype.match({ filename = "a." .. alias }) or aliases[alias] or alias
       end, { force = true })
+
+      -- tree-sitter CLI >= 0.26 removed `--no-bindings` (generate no longer emits bindings),
+      -- but the frozen master branch still passes it, breaking grammar-generated parsers (latex, swift, ...).
+      require("nvim-treesitter.install").ts_generate_args = { "generate", "--abi", vim.treesitter.language_version }
 
       require("nvim-treesitter.configs").setup {
         ensure_installed = {
@@ -110,6 +115,12 @@ return {
           }
         },
       }
+
+      local ts_parsers = require("utils.treesitter_parsers")
+      vim.api.nvim_create_user_command("TSCheckParsers", ts_parsers.report, {
+        desc = "Report treesitter parsers out of sync with their queries",
+      })
+      vim.schedule(ts_parsers.warn_if_outdated)
     end,
     dependencies = {
       "hiphish/rainbow-delimiters.nvim",
