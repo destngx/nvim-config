@@ -131,6 +131,19 @@ return {
     "shellRaining/hlchunk.nvim", -- indent-blankline.nvim alternative
     event = { "BufReadPre", "BufNewFile" },
     config = function()
+      -- hlchunk reads excludes per mod as a map, merged into its built-in defaults
+      local exclude_filetypes = {
+        help = true,
+        git = true,
+        markdown = true,
+        snippets = true,
+        text = true,
+        gitconfig = true,
+        alpha = true,
+        dashboard = true,
+        bigfile = true,
+      }
+
       require("hlchunk").setup({
         chunk = {
           enable = true,
@@ -138,10 +151,10 @@ return {
           style = "#75A1FF",
           duration = 50,
           delay = 10,
+          exclude_filetypes = exclude_filetypes,
         },
-        indent = { enable = true },
-        line_num = { enable = false },
-        exclude_filetypes = { "help", "git", "markdown", "snippets", "text", "gitconfig", "alpha", "dashboard", "bigfile" },
+        indent = { enable = true, exclude_filetypes = exclude_filetypes },
+        line_num = { enable = true, exclude_filetypes = exclude_filetypes },
       })
     end
   },
