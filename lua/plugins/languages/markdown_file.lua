@@ -49,7 +49,7 @@ return {
   {
     "HakonHarnes/img-clip.nvim",
     enabled = os.getenv "IS_WSL" ~= "true",
-    ft = { "markdown" },
+    cmd = { "PasteImage" },
     opts = {
       default = {
         dir_path = "Attachments",

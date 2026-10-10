@@ -60,7 +60,6 @@ return {
       { 'ibhagwan/fzf-lua' },
     },
     config = function()
-      vim.g.wait_for_sqlite_clib_path()
       require('neoclip').setup({
         enable_persistent_history = true,
       })

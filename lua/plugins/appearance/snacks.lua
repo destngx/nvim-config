@@ -58,10 +58,6 @@ return
             end
           end)
 
-          -- Disable scroll animations
-          vim.g.snacks_scroll = false
-          vim.b.snacks_scroll = false
-
           -- Set buffer-local options
           vim.bo[ctx.buf].swapfile = false
           vim.bo[ctx.buf].undofile = false
@@ -128,7 +124,7 @@ return
       lazygit = {},
       scope = { enabled = false },
 
-      scroll = { enabled = true },
+      scroll = { enabled = false }, -- animated jumps feel laggy
       statuscolumn = { enabled = false },
       words = { enabled = false }, -- highlight words under cursor, already have a manual function
     }

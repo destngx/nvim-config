@@ -54,7 +54,6 @@ return {
   },
   {
     "Wansmer/treesj",
-    ft = common_filetypes,
     cmd = { "TSJToggle", "TSJSplit", "TSJJoin" },
     keys = {
       { "gJ", "<cmd>TSJToggle<CR>", desc = "Toggle Split/Join" },
@@ -107,7 +106,7 @@ return {
   { 'taybart/b64.nvim' },
   {
     "rareitems/printer.nvim",
-    ft = common_filetypes,
+    keys = { { "gp", mode = { "n", "x" }, desc = "Print debug statement" } },
     opts = {
       keymap = "gp",             -- Plugin doesn't have any keymaps by default
       behavior = "insert_below", -- how operator should behave
@@ -154,7 +153,9 @@ return {
           exclude_filetypes = exclude_filetypes,
         },
         indent = { enable = true, exclude_filetypes = exclude_filetypes },
-        line_num = { enable = true, exclude_filetypes = exclude_filetypes },
+        -- line_num repeats chunk's range search on every CursorMoved and only checks
+        -- exclude_filetypes afterwards, so it costs ~1ms per move in every buffer
+        line_num = { enable = false },
       })
     end
   },

@@ -225,7 +225,7 @@ return {
   },
   {
     "Mohammed-Taher/AdvancedNewFile.nvim",
-    event = "BufReadPre",
+    cmd = { "AdvancedNewFile" },
   },
   {
     "max397574/better-escape.nvim",

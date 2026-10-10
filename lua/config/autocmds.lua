@@ -52,23 +52,6 @@ autocmd({ "BufRead", "BufNewFile" }, {
   pattern = { "*.txt", "*.md", "*.json" },
   command = "setlocal conceallevel=2"
 })
--- disable cinnamon for specific filetypes
--- autocmd("FileType", {
---   pattern = { "help", "lazy", "Oil", "neo-tree", "dashboard", "packer", "startify", "fzf", "fugitive", "spectre_panel" },
---   callback = function() vim.b.cinnamon_disable = true end,
--- })
-
-autocmd("InsertEnter", {
-  callback = function()
-    vim.g.snacks_scroll = false
-  end,
-})
-
-autocmd("InsertLeave", {
-  callback = function()
-    vim.g.snacks_scroll = true
-  end,
-})
 local function augroup(name)
   return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
 end

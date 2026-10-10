@@ -33,11 +33,6 @@ Started from [EcoVim](https://github.com/ecosse3/nvim), with ideas from
 - Optional, picked up when on `PATH`: `lazygit`, `delta`, `tree-sitter` CLI,
   `tofu` / `terraform` (+ `tofu-ls` / `terraform-ls`), `trivy`, `checkov`
 
-> [!NOTE]
-> If `nix` is on `PATH`, the config reads the dotfiles flake at `~/projects/dotfiles` to locate
-> SQLite for nvim-neoclip history. Without that clone, neoclip reports an error on load.
-> Without Nix, this step is skipped.
-
 Run `:checkhealth` to see what is missing.
 
 ## Installation
