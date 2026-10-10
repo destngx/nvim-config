@@ -41,13 +41,6 @@ return {
     }
   },
   {
-    'polarmutex/git-worktree.nvim',
-    version = '^2',
-    config = function()
-      require("plugins.config.git.worktree")
-    end,
-  },
-  {
     "FabijanZulj/blame.nvim",
     config = function()
       require("blame").setup()

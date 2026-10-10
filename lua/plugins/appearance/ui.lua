@@ -561,6 +561,7 @@ return {
           { "<leader>c", group = "Code" },
           { "<leader>d", group = "Debug" },
           { "<leader>g", group = "Git" },
+          { "<leader>gw", group = "Worktree" },
           { "<leader>l", group = "List" },
           { "<leader>m", group = "Markdown" },
           { "<leader>o", group = "Obsidian" },
