@@ -150,6 +150,7 @@ local on_attach = function(client, bufnr)
 end
 
 local M = {
+  attach_mode = "autoattach",
   filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
   root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
   cmd = { 'vtsls', '--stdio' },

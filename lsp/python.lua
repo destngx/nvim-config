@@ -1,5 +1,4 @@
-vim.lsp.enable("python")
-local M = {}
+local M = { attach_mode = "disable" }
 local settings = {
   pylsp = {
     plugins = {

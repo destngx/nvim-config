@@ -1,5 +1,6 @@
 ---@type vim.lsp.Config
 return {
+  attach_mode = "autoattach",
   cmd = { "gopls" },
   filetypes = { "go", "gomod", "gowork", "gotmpl" },
   root_markers = { "go.work", "go.mod", ".git" },

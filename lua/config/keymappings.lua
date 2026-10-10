@@ -151,6 +151,9 @@ keymap("n", "gr", "<cmd>FzfLua lsp_references      jump_to_single_result=true ig
   { desc = "References", nowait = true, silent = true })
 keymap("n", "<C-Space>", vim.lsp.codelens.run, { desc = "Run CodeLens", silent = true })
 keymap({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action", silent = true })
+keymap("n", "<leader>cA", function()
+  require("utils.lsp_attach").attach()
+end, { desc = "Attach on-demand LSP", silent = true })
 keymap("n", "<leader>ce", "<cmd>TSC<CR>", { desc = "Workspace error", silent = true })
 keymap("n", "<leader>cd", "<cmd>Trouble diagnostics toggle filter.buf=0<CR>",
   { desc = "Current file diagnostics", silent = true })

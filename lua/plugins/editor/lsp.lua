@@ -34,6 +34,8 @@ return {
 
       },
       automatic_installation = true,
+      -- servers are enabled by each lsp/<name>.lua attach_mode instead
+      automatic_enable = false,
     }
   },
   {

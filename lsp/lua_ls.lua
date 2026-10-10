@@ -17,6 +17,7 @@ table.insert(library, '${3rd}/luv/library')
 
 --- @type vim.lsp.Config
 return {
+  attach_mode = "autoattach",
   cmd = { 'lua-language-server' },
   filetypes = { 'lua' },
   root_markers = {

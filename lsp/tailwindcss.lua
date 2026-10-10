@@ -1,4 +1,4 @@
-local M = {}
+local M = { attach_mode = "disable" }
 
 local capabilities = require("blink.cmp").get_lsp_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true

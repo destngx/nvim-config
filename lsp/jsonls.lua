@@ -1,6 +1,7 @@
 -- https://github.com/neovim/nvim-lspconfig/blob/master/lsp/jsonls.lua
 
 local M = {
+  attach_mode = "autoattach",
 	cmd = { "vscode-json-language-server", "--stdio", },
   filetypes = {
     "json",

@@ -33,31 +33,8 @@ vim.lsp.config("*", {
   },
 })
 
-vim.lsp.enable("lua_ls")
-vim.lsp.enable("bashls")
-vim.lsp.enable("vtsls")
-vim.lsp.enable("eslint")
-vim.lsp.enable("jsonls")
-vim.lsp.enable("yamlls")
-vim.lsp.enable("obsidian_ls")
-
--- Enable tofu-ls if available, otherwise fallback to terraform-ls
-if vim.fn.executable("tofu-ls") == 1 then
-  vim.lsp.enable("tofuls")
-elseif vim.fn.executable("terraform-ls") == 1 then
-  vim.lsp.enable("terraformls")
-else
-  vim.notify(
-    "Neither tofu-ls nor terraform-ls is available in PATH. Terraform LSP will be disabled.",
-    vim.log.levels.WARN
-  )
-end
-
--- vim.lsp.enable("python")
--- vim.lsp.enable("tailwindcss")
--- vim.lsp.enable("vuels")
--- vim.lsp.enable("html")
--- vim.lsp.enable("css")
+-- Every lsp/<name>.lua picks its own attach_mode (autoattach/ondemand/disable)
+require("utils.lsp_attach").setup()
 require("ufo").setup({
   fold_virt_text_handler = ufo_config_handler,
   provider_selector = function(_, filetype)

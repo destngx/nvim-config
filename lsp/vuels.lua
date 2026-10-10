@@ -1,4 +1,4 @@
-local M = {}
+local M = { attach_mode = "disable" }
 
 local on_attach = function(client, bufnr)
   client.resolved_capabilities.document_formatting = false
