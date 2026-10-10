@@ -1,15 +1,5 @@
 return {
   {
-    "OXY2DEV/markview.nvim",
-    ft = { "codecompanion" },
-    opts = {
-      preview = {
-        filetypes = { "codecompanion" },
-        ignore_buftypes = {},
-      },
-    },
-  },
-  {
     "vhyrro/luarocks.nvim",
     -- enabled = os.getenv "IS_WSL" ~= "true",
     enabled = false,

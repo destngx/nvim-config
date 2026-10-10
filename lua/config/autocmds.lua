@@ -23,9 +23,6 @@ local autocmd = vim.api.nvim_create_autocmd
 -- auto lint on save
 -- local autosave = require('autosave')
 -- autosave.hook_after_saving = function()
---   if vim.bo.filetype == "codecompanion" then
---     return
---   end
   -- require("lint").try_lint()
   -- vim.notify("Try Auto Linting", vim.log.levels.INFO, { title = "Lint" })
 -- end
@@ -95,7 +92,6 @@ autocmd("FileType", {
     "neotest-output-panel",
     "dbout",
     "gitsigns.blame",
-    "codecompanion",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
@@ -104,17 +100,6 @@ autocmd("FileType", {
       silent = true,
       desc = "Quit buffer",
     })
-  end,
-})
-
-autocmd("BufEnter", {
-  pattern = "CodeCompanion",
-  callback = function()
-    vim.opt_local.relativenumber = false
-    vim.opt_local.number = false
-
-    -- Get current filetype and set it to markdown if the current filetype is copilot-chat
-    vim.bo.filetype = "markdown"
   end,
 })
 

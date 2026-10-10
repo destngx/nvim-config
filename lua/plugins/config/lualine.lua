@@ -15,14 +15,6 @@ local conditions = {
     local gitdir = vim.fn.finddir('.git', filepath .. ';')
     return gitdir and #gitdir > 0 and #gitdir < #filepath
   end,
-  is_not_code_companion_buffer = function()
-    local ft = vim.bo.filetype
-    return ft ~= 'codecompanion'
-  end,
-  is_code_companion_buffer = function()
-    local ft = vim.bo.filetype
-    return ft == 'codecompanion'
-  end,
   is_markdown_file = function() return vim.bo.filetype == 'markdown' end,
   is_obsidian_vault = function()
     return string.find(vim.loop.cwd(), "obsidian%-vaults")
@@ -117,16 +109,7 @@ local copilot_component = {
   },
   show_colors = true,
   show_loading = true,
-  cond = conditions.is_not_code_companion_buffer
 }
--- for chat panel
-local lualine_codecompanion_component = require("plugins.config.lualine-codecompanion")
-
-local ai_components = {
-  { lualine_codecompanion_component, cond = conditions.is_code_companion_buffer(), show_colors = true },
-  copilot_component,
-}
-
 -- dap component
 local dap_status = function()
   if not package.loaded.dap then return false end
@@ -174,7 +157,6 @@ local sections = {
     { symbols.get, cond = symbols.has, padding = 0 }
   },
   lualine_x = {
-    { lualine_codecompanion_component, cond = conditions.is_code_companion_buffer, show_colors = true },
     copilot_component,
     unpack(conditions.is_obsidian_vault() and {} or {
       dap_component,

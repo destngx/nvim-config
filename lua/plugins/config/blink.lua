@@ -133,7 +133,6 @@ require("blink.cmp").setup({
 
   sources = {
     default = function()
-      -- local default_source = { "lsp", "path", "snippets", "buffer", "copilot", "codecompanion", "calc", "git", "npm",
       local default_source = { "lsp", "path", "snippets", "buffer", "copilot", "calc", "git", "npm",
         "ecolog" }
       return default_source
@@ -150,13 +149,6 @@ require("blink.cmp").setup({
           only_semantic_versions = true,
         }
       },
-      -- codecompanion = {
-      --   name = "CodeCompanion",
-      --   module = "codecompanion.providers.completion.blink",
-      --   enabled = DestNgxVim.plugins.ai.codecompanion.enabled,
-      --   min_keyword_length = 0,
-      --   score_offset = 100,
-      -- },
       copilot  = {
         name = "copilot",
         module = "blink-copilot",

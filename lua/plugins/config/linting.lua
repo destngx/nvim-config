@@ -57,12 +57,7 @@ local eslint_d = function(fname)
   return { "eslint_d" }
 end
 
-local markdown = function()
-  if vim.bo.filetype == "codecompanion" then
-    return {}
-  end
-  return { "markdownlint-cli2", "vale" }
-end
+local markdown = { "markdownlint-cli2", "vale" }
 
 local dockerfile_linters = function()
   local linters = { "hadolint" }

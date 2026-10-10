@@ -69,8 +69,8 @@ The Obsidian vault path is hardcoded in `lua/plugins/languages/markdown_file.lua
 - **Editing:** treesitter (+ textobjects, context), mini.ai, surround, treesj, ufo folds,
   autosave, neoclip, big file handling
 - **UI:** kanagawa, lualine, noice, which-key, snacks dashboard, zen-mode
-- **Notes:** markview, obsidian.nvim, img-clip, `K` for macOS Dictionary in Markdown
-- **AI (opt-in):** Copilot, CodeCompanion, MCP Hub, VectorCode
+- **Notes:** previm, obsidian.nvim, img-clip, `K` for macOS Dictionary in Markdown
+- **AI (opt-in):** Copilot
 
 Full pinned list: [`lazy-lock.json`](lazy-lock.json).
 
