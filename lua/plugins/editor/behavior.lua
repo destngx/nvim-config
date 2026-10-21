@@ -10,7 +10,6 @@ local common_filetypes = {
   "python",
 }
 return {
-  { "David-Kunz/markid", ft = common_filetypes, },
   {
     "andymass/vim-matchup",
     event = "BufReadPre",

@@ -68,10 +68,6 @@ return {
           enable = true
         },
 
-        markid = {
-          enable = true
-        },
-
         indent = {
           enable = true
         },

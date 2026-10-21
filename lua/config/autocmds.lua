@@ -106,122 +106,29 @@ autocmd("FileType", {
   desc = "Disable matchup for problematic filetypes"
 })
 
-local function restart_treesitter(bufnr)
-  if not vim.treesitter then
-    return
-  end
-
-  if not vim.api.nvim_buf_is_valid(bufnr) then
-    return
-  end
-
-  pcall(vim.treesitter.stop, bufnr)
-  pcall(vim.treesitter.start, bufnr)
-end
-
-local function hard_reload_current_buffer()
-  local winid = vim.api.nvim_get_current_win()
-  local bufnr = vim.api.nvim_get_current_buf()
-
-  if not vim.api.nvim_buf_is_valid(bufnr) then
-    return
-  end
-
-  local name = vim.api.nvim_buf_get_name(bufnr)
-  local buftype = vim.bo[bufnr].buftype
-
-  if name == "" or buftype ~= "" then
-    pcall(vim.cmd, "edit!")
-    return
-  end
-
-  -- Save view before reloading
-  local view = vim.fn.winsaveview()
-  
-  -- Use safer :edit! instead of buffer deletion to avoid crashes
-  -- especially when buffer was opened via pickers like FzfLua
-  local ok, err = pcall(vim.cmd, "edit! " .. vim.fn.fnameescape(name))
-  
-  if not ok then
-    -- Fallback: try alternative reload method
-    pcall(vim.cmd, "silent! checktime")
-    vim.notify(
-      string.format("Warning: Could not reload buffer: %s", err),
-      vim.log.levels.WARN,
-      { title = "File Reload" }
-    )
-    return
-  end
-
-  -- Restore view
-  pcall(vim.fn.winrestview, view)
-end
-
-local function refresh_syntax_and_highlights(bufnr)
-  if not vim.api.nvim_buf_is_valid(bufnr) then
-    return
-  end
-
-  pcall(vim.cmd, "silent! filetype detect")
-  restart_treesitter(bufnr)
-  pcall(vim.cmd, "silent! syntax sync fromstart")
-  pcall(vim.cmd, "redraw!")
-end
-
--- Handle external file changes by auto-reloading
+-- 'autoread' has already reloaded unmodified buffers by the time this fires.
 autocmd("FileChangedShellPost", {
   pattern = "*",
-  callback = function()
-    -- Defer handling to avoid conflicts with pickers/floating windows
-    vim.schedule(function()
-      local bufnr = vim.api.nvim_get_current_buf()
-      
-      -- Safety check: ensure buffer is still valid
-      if not vim.api.nvim_buf_is_valid(bufnr) then
-        return
-      end
-      
-      local filename = vim.fn.expand("%:t")
-      local fullpath = vim.fn.expand("%:p")
-      local modified = vim.bo[bufnr].modified
-      local buftype = vim.bo[bufnr].buftype
-      
-      -- Skip special buffers (fzf, terminal, etc.)
-      if buftype ~= "" then
-        return
-      end
-      
-      if modified then
-        -- Buffer has unsaved changes - show warning and keep local version
-        vim.notify(
-          string.format(
-            "Warning: %s changed externally but has unsaved local changes. Keeping local version.\nUse :e! to reload from disk.",
-            filename
-          ),
-          vim.log.levels.WARN,
-          { title = "File Changed" }
-        )
-      else
-        -- Auto-reload without prompting for unmodified buffers
-        local ok = pcall(function()
-          hard_reload_current_buffer()
-          local current_bufnr = vim.api.nvim_get_current_buf()
-          refresh_syntax_and_highlights(current_bufnr)
-          vim.notify(
-            string.format("Auto-reloaded: %s", filename),
-            vim.log.levels.INFO,
-            { title = "File Changed" }
-          )
-        end)
-        
-        if not ok then
-          -- Silent fallback if reload fails
-          pcall(vim.cmd, "silent! checktime")
-        end
-      end
-    end)
+  callback = function(ev)
+    if vim.bo[ev.buf].buftype ~= "" then
+      return
+    end
+
+    local filename = vim.fn.fnamemodify(ev.file, ":t")
+    if vim.bo[ev.buf].modified then
+      vim.notify(
+        string.format(
+          "Warning: %s changed externally but has unsaved local changes. Keeping local version.\nUse :e! to reload from disk.",
+          filename
+        ),
+        vim.log.levels.WARN,
+        { title = "File Changed" }
+      )
+    else
+      vim.notify(string.format("Auto-reloaded: %s", filename), vim.log.levels.INFO, { title = "File Changed" })
+    end
   end,
-  desc = "Auto-reload external file changes"
+  desc = "Report external file changes"
 })
 
 -- Check for file changes when focus gained
