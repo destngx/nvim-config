@@ -47,21 +47,6 @@ return {
     }
   },
   {
-    "laytan/tailwind-sorter.nvim",
-    ft = react_filetypes,
-    cmd = {
-      "TailwindSort",
-      "TailwindSortOnSaveToggle"
-    },
-    keys = {
-      { "<Leader>cS", "<CMD>TailwindSortOnSaveToggle<CR>", desc = "toggle Tailwind CSS classes sort on save" },
-
-    },
-    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-lua/plenary.nvim" },
-    build = "cd formatter && pnpm install && pnpm run build",
-    config = true,
-  },
-  {
     "axelvc/template-string.nvim",
     ft = ts_filetypes,
     config = true, -- run require("template-string").setup()
